@@ -34,6 +34,14 @@ class FirmwareActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware)
 
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                init()
+            }
+        }
+    }
+
+    private suspend fun init() = withContext(Dispatchers.IO) {
         val deviceNameTextView: TextView = findViewById(R.id.deviceNameTextView)
         val deviceIconTextView: ImageView = findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
@@ -54,9 +62,7 @@ class FirmwareActivity : AppCompatActivity() {
             appNameValue
         )
 
-        val firmwareResponse = runBlocking {
-            getFirmwareLinks(firmwareRequest)
-        }
+        val firmwareResponse = getFirmwareLinks(firmwareRequest)
 
         deviceNameTextView.text = deviceNameValue
 
@@ -67,11 +73,8 @@ class FirmwareActivity : AppCompatActivity() {
             deviceNameValue.contains("Zepp", true) -> {
                 deviceIconTextView.setImageResource(R.drawable.ic_zepp)
             }
-            deviceNameValue.contains("Amazfit", true) -> {
-                deviceIconTextView.setImageResource(R.drawable.ic_amazfit)
-            }
             else -> {
-                deviceIconTextView.setImageResource(R.mipmap.ic_launcher_round)
+                deviceIconTextView.setImageResource(R.drawable.ic_amazfit)
             }
         }
 
@@ -79,11 +82,16 @@ class FirmwareActivity : AppCompatActivity() {
             firmwareVersionTextView.text = firmwareResponse.getString(
                 "firmwareVersion"
             )
+        } else {
+            makeToast(getString(R.string.firmware_not_found))
+            finish()
         }
-        if (firmwareResponse.has("changeLog")) {
-            firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
+        firmwareChangelogTextView.text = if (firmwareResponse.has("changeLog")) {
+            StringUtils().getChangelogFixed(
                 firmwareResponse.getString("changeLog")
             )
+        } else {
+            getString(R.string.firmware_not_found)
         }
         if (firmwareResponse.has("lang")) {
             firmwareLanguagesTextView.text = Language().getName(
@@ -96,25 +104,31 @@ class FirmwareActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFirmware(
-        jsonObject: JSONObject,
-        context: Context,
-        deviceName: String
-    ) {
-        for (i in firmwareResponseLinksValuesArray) {
-            if (jsonObject.has(i)) {
-                val urlString = jsonObject.getString(i)
-                DozeRequest().getFirmwareFile(context, urlString, deviceName)
-            }
-        }
-        Toast.makeText(context, getString(R.string.firmware_downloading_toast), Toast.LENGTH_SHORT).show()
-    }
-
     private suspend fun getFirmwareLinks(request: Request): JSONObject {
         return withContext(Dispatchers.IO) {
             JSONObject(
                 OkHttpClient().newCall(request).execute().body()?.string().toString()
             )
         }
+    }
+
+    private fun getFirmware(
+        jsonObject: JSONObject,
+        context: Context,
+        deviceName: String,
+    ) {
+        Thread {
+            for (i in firmwareResponseLinksValuesArray) {
+                if (jsonObject.has(i)) {
+                    val urlString = jsonObject.getString(i)
+                    DozeRequest().getFirmwareFile(context, urlString, deviceName)
+                }
+            }
+        }.start()
+        makeToast(getString(R.string.firmware_downloading))
+    }
+
+    private fun makeToast(string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 }

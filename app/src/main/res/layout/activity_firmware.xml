@@ -13,6 +13,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -43,6 +44,7 @@
                             android:id="@+id/deviceNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="8pt"
                             android:textStyle="bold" />
 
                         <TextView
@@ -67,8 +69,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentPadding="20dp"
-            app:cardUseCompatPadding="true">
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,12 +82,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textStyle="bold"/>
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -93,8 +97,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentPadding="20dp"
-            app:cardUseCompatPadding="true">
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,12 +110,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textStyle="bold"/>
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
