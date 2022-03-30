@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Mi Doze</string>
+
+    <string name="amazfit" translatable="false">Amazfit</string>
+    <string name="miBand" translatable="false">Mi Band</string>
+    <string name="zepp" translatable="false">Zepp</string>
+
+    <string name="firmware_updated">Firmware updated</string>
+
+    <string name="firmware_get">Get</string>
+    <string name="firmware_changelog">Changelog</string>
+    <string name="firmware_languages">Languages</string>
+    <string name="firmware_downloading_toast">Downloading…</string>
+</resources>
