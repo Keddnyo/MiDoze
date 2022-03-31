@@ -1,15 +1,20 @@
 package io.github.keddnyo.midoze.utils.deviceList
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
+import java.util.*
 
-class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>() {
+class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
+    private var deviceListDataArrayFull = ArrayList<DeviceListData>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
@@ -43,5 +48,40 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     fun addDevice(deviceListData: DeviceListData) {
         deviceListDataArray.add(deviceListData)
+        deviceListDataArrayFull = ArrayList(deviceListDataArray)
+    }
+
+    override fun getFilter(): Filter {
+        return deviceFilter
+    }
+
+    private val deviceFilter: Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val filteredList: MutableList<DeviceListData> = ArrayList()
+            if (constraint.isEmpty()) {
+                filteredList.addAll(deviceListDataArrayFull)
+            } else {
+                val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+                for (item in deviceListDataArrayFull) {
+                    if (item.deviceName.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                        filteredList.add(item)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun publishResults(constraint: CharSequence, results: FilterResults) {
+            deviceListDataArray.clear()
+            deviceListDataArray.addAll(results.values as Collection<DeviceListData>)
+            notifyDataSetChanged()
+        }
+    }
+
+    fun getDeviceName(position: Int): String {
+        return deviceListDataArray[position].deviceName
     }
 }

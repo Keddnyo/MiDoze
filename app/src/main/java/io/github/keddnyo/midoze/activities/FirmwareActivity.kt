@@ -71,6 +71,7 @@ class FirmwareActivity : AppCompatActivity() {
 
         firmwareResponse = getFirmwareLinks(firmwareRequest)
 
+        title = deviceNameValue
         deviceNameTextView.text = deviceNameValue
 
         when {
@@ -90,7 +91,9 @@ class FirmwareActivity : AppCompatActivity() {
                 "firmwareVersion"
             )
         } else {
-            makeToast(getString(R.string.firmware_not_found))
+            runOnUiThread {
+                makeToast(getString(R.string.firmware_not_found))
+            }
             finish()
         }
         firmwareChangelogTextView.text = if (firmwareResponse.has("changeLog")) {

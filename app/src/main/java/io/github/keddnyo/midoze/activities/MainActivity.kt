@@ -1,9 +1,12 @@
 package io.github.keddnyo.midoze.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
@@ -20,7 +23,7 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     private val context = this@MainActivity
-    private val deviceListIndex = arrayListOf<Int>()
+    private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             deviceListAdapter.notifyItemInserted(i.toInt())
-            deviceListIndex.add(i.toInt())
+            deviceListIndex[deviceNameValue] = i.toInt()
         }
 
         deviceListRecyclerView.addOnItemTouchListener(
@@ -89,7 +92,8 @@ class MainActivity : AppCompatActivity() {
                 deviceListRecyclerView,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
-                        openFirmwareActivity(deviceListIndex[position])
+                        val deviceName = (deviceListRecyclerView.adapter as DeviceListAdapter).getDeviceName(position)
+                        deviceListIndex[deviceName]?.let { openFirmwareActivity(it) }
                     }
                 })
         )
@@ -134,5 +138,26 @@ class MainActivity : AppCompatActivity() {
             JSONObject.NULL -> null
             else -> value
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                deviceListAdapter.filter.filter(newText)
+                return false
+            }
+        })
+        return true
     }
 }
