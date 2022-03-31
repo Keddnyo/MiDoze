@@ -124,17 +124,19 @@ class FirmwareActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.shareFirmwareMenuItem -> {
-                val shareContent = arrayListOf<String>()
+                val firmwareLinks = arrayListOf<String>()
 
                 for (i in firmwareResponseLinksValuesArray) {
                     if (firmwareResponse.has(i)) {
-                        shareContent.add(firmwareResponse.getString(i))
+                        firmwareLinks.add(firmwareResponse.getString(i))
                     }
                 }
 
+                val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}"
+
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, shareContent.joinToString("\n"))
+                    putExtra(Intent.EXTRA_TEXT, shareContent)
                     type = "text/plain"
                 }
 
