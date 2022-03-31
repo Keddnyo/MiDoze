@@ -1,7 +1,10 @@
 package io.github.keddnyo.midoze.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -30,9 +33,13 @@ class FirmwareActivity : AppCompatActivity() {
 
     private val context = this@FirmwareActivity
 
+    private var firmwareResponse = JSONObject()
+    private var deviceNameValue: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         runBlocking {
             withContext(Dispatchers.IO) {
@@ -49,7 +56,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesTextView: TextView = findViewById(R.id.firmwareLanguagesTextView)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
-        val deviceNameValue = intent.getStringExtra("deviceName").toString()
+        deviceNameValue = intent.getStringExtra("deviceName").toString()
         val deviceSourceValue = intent.getIntExtra("deviceSource", 0).toString()
         val productionSourceValue = intent.getStringExtra("productionSource").toString()
         val appNameValue = intent.getStringExtra("appname").toString()
@@ -62,7 +69,7 @@ class FirmwareActivity : AppCompatActivity() {
             appNameValue
         )
 
-        val firmwareResponse = getFirmwareLinks(firmwareRequest)
+        firmwareResponse = getFirmwareLinks(firmwareRequest)
 
         deviceNameTextView.text = deviceNameValue
 
@@ -104,6 +111,40 @@ class FirmwareActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_firmware, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.shareFirmwareMenuItem -> {
+                val shareContent = arrayListOf<String>()
+
+                for (i in firmwareResponseLinksValuesArray) {
+                    if (firmwareResponse.has(i)) {
+                        shareContent.add(firmwareResponse.getString(i))
+                    }
+                }
+
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, shareContent.joinToString("\n"))
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
+                startActivity(shareIntent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private suspend fun getFirmwareLinks(request: Request): JSONObject {
         return withContext(Dispatchers.IO) {
             JSONObject(
@@ -117,14 +158,12 @@ class FirmwareActivity : AppCompatActivity() {
         context: Context,
         deviceName: String,
     ) {
-        Thread {
-            for (i in firmwareResponseLinksValuesArray) {
-                if (jsonObject.has(i)) {
-                    val urlString = jsonObject.getString(i)
-                    DozeRequest().getFirmwareFile(context, urlString, deviceName)
-                }
+        for (i in firmwareResponseLinksValuesArray) {
+            if (jsonObject.has(i)) {
+                val urlString = jsonObject.getString(i)
+                DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
-        }.start()
+        }
         makeToast(getString(R.string.firmware_downloading))
     }
 
