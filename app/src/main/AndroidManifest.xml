@@ -17,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
+            android:name=".activities.ExtrasResponseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ExtrasRequestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dialog" />
+        <activity
             android:name=".activities.FirmwareActivity"
             android:exported="false" />
         <activity

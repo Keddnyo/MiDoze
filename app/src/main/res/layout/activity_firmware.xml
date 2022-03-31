@@ -13,7 +13,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -70,7 +70,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -98,7 +98,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 

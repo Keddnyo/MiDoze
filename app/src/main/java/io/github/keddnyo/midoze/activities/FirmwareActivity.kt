@@ -14,6 +14,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.Language
 import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -62,14 +63,12 @@ class FirmwareActivity : AppCompatActivity() {
         val appNameValue = intent.getStringExtra("appname").toString()
         val appVersionValue = intent.getStringExtra("appVersion").toString()
 
-        val firmwareRequest = DozeRequest().getFirmwareLinks(
+        val firmwareResponse = DozeRequest().getFirmwareLinks(
             productionSourceValue,
             deviceSourceValue,
             appVersionValue,
             appNameValue
         )
-
-        firmwareResponse = getFirmwareLinks(firmwareRequest)
 
         title = deviceNameValue
         deviceNameTextView.text = deviceNameValue
@@ -92,7 +91,7 @@ class FirmwareActivity : AppCompatActivity() {
             )
         } else {
             runOnUiThread {
-                makeToast(getString(R.string.firmware_not_found))
+                UiUtils().makeToast(context, getString(R.string.firmware_not_found))
             }
             finish()
         }
@@ -150,14 +149,6 @@ class FirmwareActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private suspend fun getFirmwareLinks(request: Request): JSONObject {
-        return withContext(Dispatchers.IO) {
-            JSONObject(
-                OkHttpClient().newCall(request).execute().body()?.string().toString()
-            )
-        }
-    }
-
     private fun getFirmware(
         jsonObject: JSONObject,
         context: Context,
@@ -169,10 +160,6 @@ class FirmwareActivity : AppCompatActivity() {
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
         }
-        makeToast(getString(R.string.firmware_downloading))
-    }
-
-    private fun makeToast(string: String) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+        UiUtils().makeToast(context, getString(R.string.firmware_downloading))
     }
 }

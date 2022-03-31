@@ -6,4 +6,7 @@ class StringUtils {
         c = c.replace(";", "")
         return c
     }
+    fun getExtrasFixed(string: String): String {
+        return string.replace("\\/", "/")
+    }
 }

@@ -7,6 +7,8 @@
 
     <string name="firmware_updated">Firmware updated</string>
 
+    <string name="feed">Feed</string>
+    <string name="extras">Extras</string>
     <string name="search">Search</string>
 
     <string name="firmware_get">Get</string>
@@ -15,4 +17,9 @@
     <string name="firmware_downloading">Downloading…</string>
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_share">Share</string>
+    <string name="extrasDeviceSource">deviceSource</string>
+    <string name="extrasProductionSource">productionSource</string>
+    <string name="extrasAppName">appname</string>
+    <string name="extrasAppVersion">appVersion</string>
+    <string name="extrasImportButton">Import</string>
 </resources>

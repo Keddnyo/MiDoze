@@ -3,6 +3,7 @@ package io.github.keddnyo.midoze.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        title = getString(R.string.feed)
 
         val deviceNamesArray = arrayOf(
             getString(R.string.amazfit), getString(R.string.miBand), getString(R.string.zepp)
@@ -159,5 +161,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_extras -> {
+                startActivity(Intent(this, ExtrasRequestActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/extrasDeviceSourceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/extrasDeviceSource"
+        android:inputType="number"
+        android:maxLength="3"
+        android:minHeight="48dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/extrasProductionSourceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/extrasProductionSource"
+        android:inputType="number"
+        android:maxLength="3"
+        android:minHeight="48dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/extrasAppNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/extrasAppName"
+        android:inputType="text"
+        android:maxLength="20"
+        android:minHeight="48dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/extrasAppVersionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/extrasAppVersion"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLength="17"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/extrasSubmitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
+        android:text="@android:string/ok"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/extrasImportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
+        android:text="@string/extrasImportButton"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+</LinearLayout>

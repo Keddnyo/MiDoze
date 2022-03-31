@@ -10,7 +10,11 @@ import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import io.github.keddnyo.midoze.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONObject
 import java.net.URL
 
 class DozeRequest {
@@ -20,12 +24,12 @@ class DozeRequest {
     fun getApplicationValues(): String {
         return URL("https://schakal.ru/fw/dev_apps.json").readText()
     }
-    fun getFirmwareLinks(
+    suspend fun getFirmwareLinks(
         productionSource: String,
         deviceSource: String,
         appVersion: String,
         appName: String
-    ): Request {
+    ): JSONObject {
         val requestHost = "api-mifit-ru.huami.com"
 
         val uriBuilder: Uri.Builder = Uri.Builder()
@@ -64,7 +68,7 @@ class DozeRequest {
             .appendQueryParameter("gpsVersion", "0")
             .appendQueryParameter("baseResourceVersion", "0")
 
-        return Request.Builder()
+        val request =  Request.Builder()
             .url(uriBuilder.toString())
             .addHeader("hm-privacy-diagnostics", "false")
             .addHeader("country", "0")
@@ -84,6 +88,12 @@ class DozeRequest {
             .addHeader("accept-encoding", "gzip")
             .addHeader("accept", "*/*")
             .build()
+
+        return withContext(Dispatchers.IO) {
+            JSONObject(
+                OkHttpClient().newCall(request).execute().body()?.string().toString()
+            )
+        }
     }
     fun getFirmwareFile(
         context: Context,
