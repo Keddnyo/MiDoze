@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
@@ -18,8 +17,6 @@ import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.json.JSONObject
 
 class FirmwareActivity : AppCompatActivity() {

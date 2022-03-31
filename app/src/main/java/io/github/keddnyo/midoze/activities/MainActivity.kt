@@ -1,11 +1,13 @@
 package io.github.keddnyo.midoze.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +29,11 @@ class MainActivity : AppCompatActivity() {
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         title = getString(R.string.feed)
 
         val deviceNamesArray = arrayOf(
@@ -47,58 +51,62 @@ class MainActivity : AppCompatActivity() {
         deviceListRecyclerView.layoutManager = LinearLayoutManager(context)
         deviceListRecyclerView.adapter = deviceListAdapter
 
-        val deviceListJson = runBlocking {
-            withContext(Dispatchers.IO) {
-                getDeviceFirmwareLatestJson()
-            }
-        }
-        val responseParamsArray = deviceListJson.toMap()
-        val keys = responseParamsArray.keys
-
-        for (i in keys) {
-            val jsonObject = deviceListJson.getJSONObject(i)
-
-            val deviceNameValue = jsonObject.getString("name")
-            val deviceIconValue = when {
-                deviceNameValue.contains(deviceNamesArray[1], true) -> {
-                    deviceIconArray[1]
-                }
-                deviceNameValue.contains(deviceNamesArray[2], true) -> {
-                    deviceIconArray[2]
-                }
-                else -> {
-                    deviceIconArray[0]
+        if (DozeRequest().isOnline(context)) {
+            val deviceListJson = runBlocking {
+                withContext(Dispatchers.IO) {
+                    getDeviceFirmwareLatestJson()
                 }
             }
-            val firmwareVersionValue = jsonObject.getString("fw")
-            val firmwareReleaseDateValue = jsonObject.getString("date")
+            val responseParamsArray = deviceListJson.toMap()
+            val keys = responseParamsArray.keys
 
-            val firmwareUpdated = getString(R.string.firmware_updated)
-            val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
+            for (i in keys) {
+                val jsonObject = deviceListJson.getJSONObject(i)
 
-            deviceListAdapter.addDevice(
-                DeviceListData(
-                    deviceNameValue,
-                    deviceIconValue,
-                    firmwareVersionValue,
-                    firmwareReleaseDateValue,
-                    firmwareChangelogValue
-                )
-            )
-            deviceListAdapter.notifyItemInserted(i.toInt())
-            deviceListIndex[deviceNameValue] = i.toInt()
-        }
-
-        deviceListRecyclerView.addOnItemTouchListener(
-            RecyclerItemClickListener(
-                deviceListRecyclerView,
-                object : RecyclerItemClickListener.OnItemClickListener {
-                    override fun onItemClick(view: View, position: Int) {
-                        val deviceName = (deviceListRecyclerView.adapter as DeviceListAdapter).getDeviceName(position)
-                        deviceListIndex[deviceName]?.let { openFirmwareActivity(it) }
+                val deviceNameValue = jsonObject.getString("name")
+                val deviceIconValue = when {
+                    deviceNameValue.contains(deviceNamesArray[1], true) -> {
+                        deviceIconArray[1]
                     }
-                })
-        )
+                    deviceNameValue.contains(deviceNamesArray[2], true) -> {
+                        deviceIconArray[2]
+                    }
+                    else -> {
+                        deviceIconArray[0]
+                    }
+                }
+                val firmwareVersionValue = jsonObject.getString("fw")
+                val firmwareReleaseDateValue = jsonObject.getString("date")
+
+                val firmwareUpdated = getString(R.string.firmware_updated)
+                val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
+
+                deviceListAdapter.addDevice(
+                    DeviceListData(
+                        deviceNameValue,
+                        deviceIconValue,
+                        firmwareVersionValue,
+                        firmwareReleaseDateValue,
+                        firmwareChangelogValue
+                    )
+                )
+                deviceListAdapter.notifyItemInserted(i.toInt())
+                deviceListIndex[deviceNameValue] = i.toInt()
+            }
+
+            deviceListRecyclerView.addOnItemTouchListener(
+                RecyclerItemClickListener(
+                    deviceListRecyclerView,
+                    object : RecyclerItemClickListener.OnItemClickListener {
+                        override fun onItemClick(view: View, position: Int) {
+                            val deviceName = (deviceListRecyclerView.adapter as DeviceListAdapter).getDeviceName(position)
+                            deviceListIndex[deviceName]?.let { openFirmwareActivity(it) }
+                        }
+                    })
+            )
+        } else {
+            title = getString(R.string.firmware_not_found)
+        }
     }
 
     private fun openFirmwareActivity(deviceIndex: Int) {
