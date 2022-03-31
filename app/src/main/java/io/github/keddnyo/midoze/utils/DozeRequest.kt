@@ -24,11 +24,9 @@ class DozeRequest {
         productionSource: String,
         deviceSource: String,
         appVersion: String,
-        appname: String
+        appName: String
     ): Request {
         val requestHost = "api-mifit-ru.huami.com"
-        // val requestHost = "api-mifit-us2.huami.com"
-        // val requestHost = "api.amazfit.com"
 
         val uriBuilder: Uri.Builder = Uri.Builder()
         uriBuilder.scheme("https")
@@ -77,7 +75,7 @@ class DozeRequest {
             .addHeader("channel", "0")
             .addHeader("user-agent", "0")
             .addHeader("cv", "0")
-            .addHeader("appname", appname)
+            .addHeader("appname", appName)
             .addHeader("v", "0")
             .addHeader("apptoken", "0")
             .addHeader("lang", "0")

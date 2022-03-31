@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mi Doze</string>
+    <string name="app_name">MiDoze</string>
 
     <string name="amazfit" translatable="false">Amazfit</string>
     <string name="miBand" translatable="false">Mi Band</string>

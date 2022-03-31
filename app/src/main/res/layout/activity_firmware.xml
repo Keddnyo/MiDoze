@@ -44,7 +44,7 @@
                             android:id="@+id/deviceNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="8pt"
+                            android:textSize="10pt"
                             android:textStyle="bold" />
 
                         <TextView
@@ -60,6 +60,7 @@
                     android:id="@+id/firmwareDownloadButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="10pt"
                     android:text="@string/firmware_get" />
 
             </LinearLayout>
@@ -82,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="8pt"
+                    android:textSize="10pt"
                     android:textStyle="bold" />
 
                 <TextView
@@ -110,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="8pt"
+                    android:textSize="10pt"
                     android:textStyle="bold" />
 
                 <TextView
