@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">MiDoze</string>
 
-    <string name="amazfit" translatable="false">Amazfit</string>
-    <string name="miBand" translatable="false">Mi Band</string>
-    <string name="zepp" translatable="false">Zepp</string>
+    <string name="title_amazfit" translatable="false">Amazfit</string>
+    <string name="title_mi_band" translatable="false">Mi Band</string>
+    <string name="title_zepp" translatable="false">Zepp</string>
 
     <string name="firmware_updated">Firmware updated</string>
 
     <string name="feed">Feed</string>
-    <string name="extras">Extras</string>
     <string name="search">Search</string>
 
     <string name="firmware_get">Get</string>
@@ -17,9 +16,18 @@
     <string name="firmware_downloading">Downloading…</string>
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_share">Share</string>
-    <string name="extrasDeviceSource">deviceSource</string>
-    <string name="extrasProductionSource">productionSource</string>
-    <string name="extrasAppName">appname</string>
-    <string name="extrasAppVersion">appVersion</string>
-    <string name="extrasImportButton">Import</string>
+    <string name="extras_device_source">deviceSource</string>
+    <string name="extras_production_source">productionSource</string>
+    <string name="extras_app_name">appname</string>
+    <string name="extras_app_version">appVersion</string>
+    <string name="extras_import_button">Import</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_extras">Extras</string>
+    <string name="settings_custom_request">Custom request</string>
+
+    <string name="settings_about">About</string>
+    <string name="settings_keddnyo">Keddnyo</string>
+    <string name="settings_cloud_title">Cloud JSONs</string>
+    <string name="settings_schakal">Schakal</string>
 </resources>

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         title = getString(R.string.feed)
 
         val deviceNamesArray = arrayOf(
-            getString(R.string.amazfit), getString(R.string.miBand), getString(R.string.zepp)
+            getString(R.string.title_amazfit), getString(R.string.title_mi_band), getString(R.string.title_zepp)
         )
 
         val deviceIconArray = arrayOf(
@@ -173,8 +173,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_extras -> {
-                startActivity(Intent(this, ExtrasRequestActivity::class.java))
+            R.id.action_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_title" />
+        <activity
             android:name=".activities.ExtrasResponseActivity"
             android:exported="false" />
         <activity

@@ -19,7 +19,7 @@ class ExtrasResponseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extras_response)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.extras)
+        title = getString(R.string.settings_extras)
 
         if (intent.hasExtra("json")) {
             val responseTextView: TextView = findViewById(R.id.responseTextView)
@@ -47,7 +47,7 @@ class ExtrasResponseActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.extras))
+                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.settings_extras))
                 startActivity(shareIntent)
             }
         }

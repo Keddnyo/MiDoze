@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="1dp">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/corner_radius"
         app:cardUseCompatPadding="true"
-        app:contentPadding="20dp">
+        app:contentPadding="20dp"
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
