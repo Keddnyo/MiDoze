@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="firmware_updated">Прошивка обновлена</string>
+
+    <string name="feed">Лента</string>
+    <string name="search">Поиск</string>
+
+    <string name="firmware_get">Скачать</string>
+    <string name="firmware_changelog">Список изменений</string>
+    <string name="firmware_languages">Языки</string>
+    <string name="firmware_downloading">Загрузка…</string>
+    <string name="firmware_not_found">Не найдено</string>
+    <string name="firmware_share">Поделиться</string>
+    <string name="extras_import_button">Импорт</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_extras">Экстра</string>
+    <string name="settings_custom_request">Настраиваемый запрос</string>
+
+    <string name="settings_about">О приложении</string>
+    <string name="settings_cloud_title">Облачные JSON</string>
+</resources>

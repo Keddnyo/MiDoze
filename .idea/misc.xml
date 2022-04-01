@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable-v24/ic_extras.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_cloud.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_cloud_sync.xml" value="0.2345" />
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_extras.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_info.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_search.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_settings.xml" value="0.2345" />
         <entry key="..\:/AndroidStudioProjects/MiDoze/app/src/main/res/drawable/ic_share.xml" value="0.25" />

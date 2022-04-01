@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MiDoze</string>
+    <string name="app_name" translatable="false">MiDoze</string>
 
     <string name="title_amazfit" translatable="false">Amazfit</string>
     <string name="title_mi_band" translatable="false">Mi Band</string>
@@ -16,10 +16,10 @@
     <string name="firmware_downloading">Downloading…</string>
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_share">Share</string>
-    <string name="extras_device_source">deviceSource</string>
-    <string name="extras_production_source">productionSource</string>
-    <string name="extras_app_name">appname</string>
-    <string name="extras_app_version">appVersion</string>
+    <string name="extras_device_source" translatable="false">deviceSource</string>
+    <string name="extras_production_source" translatable="false">productionSource</string>
+    <string name="extras_app_name" translatable="false">appname</string>
+    <string name="extras_app_version" translatable="false">appVersion</string>
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
@@ -27,7 +27,7 @@
     <string name="settings_custom_request">Custom request</string>
 
     <string name="settings_about">About</string>
-    <string name="settings_keddnyo">Keddnyo</string>
+    <string name="settings_keddnyo" translatable="false">Keddnyo</string>
     <string name="settings_cloud_title">Cloud JSONs</string>
-    <string name="settings_schakal">Schakal</string>
+    <string name="settings_schakal" translatable="false">Schakal</string>
 </resources>
