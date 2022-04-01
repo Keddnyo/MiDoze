@@ -108,6 +108,11 @@ class FirmwareActivity : AppCompatActivity() {
         firmwareDownloadButton.setOnClickListener {
             getFirmware(firmwareResponse, context, deviceNameValue)
         }
+
+        firmwareDownloadButton.setOnLongClickListener {
+            DozeRequest().getOldVersions(context, deviceSourceValue)
+            return@setOnLongClickListener true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

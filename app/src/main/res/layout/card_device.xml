@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/corner_radius"
+        app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="20dp"
-        app:cardElevation="3dp">
+        app:contentPadding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"

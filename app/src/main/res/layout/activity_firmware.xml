@@ -8,13 +8,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -62,8 +62,8 @@
                     android:id="@+id/firmwareDownloadButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="10pt"
-                    android:text="@string/firmware_get" />
+                    android:text="@string/firmware_get"
+                    android:textSize="10pt" />
 
             </LinearLayout>
 
@@ -73,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -101,6 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
