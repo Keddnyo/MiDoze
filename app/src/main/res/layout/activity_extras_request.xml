@@ -49,17 +49,13 @@
         android:id="@+id/extrasSubmitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:text="@android:string/ok"
-        android:textColor="@color/white" />
+        android:text="@android:string/ok" />
 
     <Button
         android:id="@+id/extrasImportButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
         android:text="@string/extras_import_button"
-        android:textColor="@color/white"
         android:visibility="gone" />
 
 </LinearLayout>

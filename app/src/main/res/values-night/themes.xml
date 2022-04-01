@@ -1,10 +1,5 @@
 <resources>
-    <style name="Theme.MiDoze" parent="Theme.Material3.Dark">
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/purple_200</item>
-    </style>
-
+    <style name="Theme.MiDoze" parent="Theme.Material3.Dark"/>
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
     </style>

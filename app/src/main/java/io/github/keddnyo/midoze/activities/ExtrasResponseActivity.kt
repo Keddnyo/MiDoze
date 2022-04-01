@@ -19,7 +19,7 @@ class ExtrasResponseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extras_response)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.settings_extras)
+        title = getString(R.string.settings_manual_request)
 
         if (intent.hasExtra("json")) {
             val responseTextView: TextView = findViewById(R.id.responseTextView)

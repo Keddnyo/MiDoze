@@ -5,7 +5,7 @@
         <Preference
             app:icon="@drawable/ic_cloud_sync"
             app:key="settings_custom_request"
-            app:title="@string/settings_custom_request" />
+            app:title="@string/settings_manual_request" />
 
     </PreferenceCategory>
 
@@ -21,7 +21,7 @@
             app:icon="@drawable/ic_cloud"
             app:key="settings_server_info"
             app:summary="@string/settings_schakal"
-            app:title="@string/settings_cloud_title" />
+            app:title="@string/settings_jsons_storage_title" />
 
     </PreferenceCategory>
 
