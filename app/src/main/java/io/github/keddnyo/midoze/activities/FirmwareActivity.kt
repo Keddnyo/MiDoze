@@ -60,7 +60,7 @@ class FirmwareActivity : AppCompatActivity() {
         val appNameValue = intent.getStringExtra("appname").toString()
         val appVersionValue = intent.getStringExtra("appVersion").toString()
 
-        val firmwareResponse = DozeRequest().getFirmwareLinks(
+        firmwareResponse = DozeRequest().getFirmwareLinks(
             productionSourceValue,
             deviceSourceValue,
             appVersionValue,
