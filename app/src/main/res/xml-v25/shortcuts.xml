@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_cloud"
+        android:shortcutId="Feed"
+        android:shortcutShortLabel="@string/feed">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
+            android:targetPackage="io.github.keddnyo.midoze" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_cloud_sync"
+        android:shortcutId="CustomRequest"
+        android:shortcutShortLabel="@string/settings_custom_request">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="io.github.keddnyo.midoze.activities.ExtrasRequestActivity"
+            android:targetPackage="io.github.keddnyo.midoze" />
+    </shortcut>
+</shortcuts>

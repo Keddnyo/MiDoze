@@ -15,7 +15,7 @@
 
     <string name="settings_title">Настройки</string>
     <string name="settings_extras">Экстра</string>
-    <string name="settings_manual_request">Ручной запрос</string>
+    <string name="settings_custom_request">Ручной запрос</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_jsons_storage_title">Хранилище JSON</string>

@@ -10,10 +10,12 @@ import android.view.inputmethod.EditorInfo
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.utils.UiUtils
 import io.github.keddnyo.midoze.utils.deviceList.DeviceListAdapter
 import io.github.keddnyo.midoze.utils.deviceList.DeviceListData
 import io.github.keddnyo.midoze.utils.deviceList.RecyclerItemClickListener
@@ -48,10 +50,13 @@ class MainActivity : AppCompatActivity() {
 
         val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceListRecyclerView)
 
-        deviceListRecyclerView.layoutManager = LinearLayoutManager(context)
+        deviceListRecyclerView.layoutManager = GridLayoutManager(context, UiUtils().getRecyclerSpanCount(context))
         deviceListRecyclerView.adapter = deviceListAdapter
 
-        if (DozeRequest().isOnline(context)) {
+        while (!DozeRequest().isOnline(context)) {
+            title = getString(R.string.firmware_not_found)
+        }
+        while (DozeRequest().isOnline(context)) {
             val deviceListJson = runBlocking {
                 withContext(Dispatchers.IO) {
                     getDeviceFirmwareLatestJson()
@@ -104,8 +109,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
             )
-        } else {
-            title = getString(R.string.firmware_not_found)
         }
     }
 

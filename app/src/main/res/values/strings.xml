@@ -24,7 +24,7 @@
 
     <string name="settings_title">Settings</string>
     <string name="settings_extras">Extras</string>
-    <string name="settings_manual_request">Custom request</string>
+    <string name="settings_custom_request">Custom request</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>

@@ -2,10 +2,12 @@
 The easiest way to download firmwares for Xiaomi wearables
 
 ## Features
-* English and Russian GUI languages
+* Android 5.0+ supported
 * User-friendly GUI
+* English and Russian GUI languages
 * Light and dark themes
 * Explore firmwares feed
+* Search for needed device with SearchView in toolbar
 * Create custom requests with Extras "Custom request"
 * Full languages names in response
 * Built-in download provider

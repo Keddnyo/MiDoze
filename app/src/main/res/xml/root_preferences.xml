@@ -5,7 +5,7 @@
         <Preference
             app:icon="@drawable/ic_cloud_sync"
             app:key="settings_custom_request"
-            app:title="@string/settings_manual_request" />
+            app:title="@string/settings_custom_request" />
 
     </PreferenceCategory>
 
