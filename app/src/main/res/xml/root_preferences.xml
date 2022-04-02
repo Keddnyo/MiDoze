@@ -3,7 +3,7 @@
     <PreferenceCategory app:title="@string/settings_extras">
 
         <Preference
-            app:icon="@drawable/ic_cloud_sync"
+            app:icon="@drawable/ic_custom_request"
             app:key="settings_custom_request"
             app:title="@string/settings_custom_request" />
 

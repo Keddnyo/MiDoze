@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.runBlocking
 
 class ExtrasRequestActivity : AppCompatActivity() {
@@ -20,13 +21,13 @@ class ExtrasRequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_extras_request)
         title = getString(R.string.settings_custom_request)
 
-        val extrasDeviceSourceEditText: EditText = findViewById(R.id.extrasDeviceSourceEditText)
-        val extrasProductionSourceEditText: EditText =
+        val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
+        val extrasProductionSourceEditText: TextInputEditText =
             findViewById(R.id.extrasProductionSourceEditText)
-        val extrasAppNameEditText: EditText = findViewById(R.id.extrasAppNameEditText)
-        val extrasAppVersionEditText: EditText = findViewById(R.id.extrasAppVersionEditText)
-        val submitButton: Button = findViewById(R.id.extrasSubmitButton)
-        val importButton: Button = findViewById(R.id.extrasImportButton)
+        val extrasAppNameEditText: TextInputEditText = findViewById(R.id.extrasAppNameEditText)
+        val extrasAppVersionEditText: TextInputEditText = findViewById(R.id.extrasAppVersionEditText)
+        val submitButton: MaterialButton = findViewById(R.id.extrasSubmitButton)
+        val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
 
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(this)
@@ -49,19 +50,23 @@ class ExtrasRequestActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-            val firmwareResponse =
-                runBlocking {
-                    DozeRequest().getFirmwareLinks(
-                        extrasProductionSourceEditText.text.toString(),
-                        extrasDeviceSourceEditText.text.toString(),
-                        extrasAppVersionEditText.text.toString(),
-                        extrasAppNameEditText.text.toString()
-                    )
-                }
+            if (DozeRequest().isOnline(context)) {
+                val firmwareResponse =
+                    runBlocking {
+                        DozeRequest().getFirmwareLinks(
+                            extrasProductionSourceEditText.text.toString(),
+                            extrasDeviceSourceEditText.text.toString(),
+                            extrasAppVersionEditText.text.toString(),
+                            extrasAppNameEditText.text.toString()
+                        )
+                    }
 
-            val intent = Intent(context, ExtrasResponseActivity::class.java)
-            intent.putExtra("json", firmwareResponse.toString())
-            startActivity(intent)
+                val intent = Intent(context, ExtrasResponseActivity::class.java)
+                intent.putExtra("json", firmwareResponse.toString())
+                startActivity(intent)
+            } else {
+                UiUtils().makeToast(context, getString(R.string.firmware_connectivity_error))
+            }
         }
 
         submitButton.setOnLongClickListener {

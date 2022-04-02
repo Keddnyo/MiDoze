@@ -10,11 +10,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="@dimen/corner_radius"
-            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -46,8 +44,7 @@
                             android:id="@+id/deviceNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
+                            android:textSize="10pt" />
 
                         <TextView
                             android:id="@+id/firmwareVersionTextView"
@@ -58,8 +55,9 @@
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/firmwareDownloadButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_get"
@@ -67,13 +65,11 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/corner_radius"
-            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -86,8 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="10pt"
-                    android:textStyle="bold" />
+                    android:textSize="10pt" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
@@ -96,13 +91,11 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/corner_radius"
-            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -115,8 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="10pt"
-                    android:textStyle="bold" />
+                    android:textSize="10pt" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
@@ -125,7 +117,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

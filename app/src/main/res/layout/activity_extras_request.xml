@@ -1,61 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp">
 
-    <EditText
-        android:id="@+id/extrasDeviceSourceEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/extras_device_source"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minHeight="48dp"
-        android:importantForAutofill="no" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/extrasProductionSourceEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/extras_production_source"
-        android:inputType="number"
-        android:maxLength="3"
-        android:minHeight="48dp"
-        android:importantForAutofill="no" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/extras_device_source">
 
-    <EditText
-        android:id="@+id/extrasAppNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/extras_app_name"
-        android:inputType="text"
-        android:maxLength="20"
-        android:minHeight="48dp"
-        android:importantForAutofill="no" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/extrasDeviceSourceEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3" />
 
-    <EditText
-        android:id="@+id/extrasAppVersionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/extras_app_version"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:maxLength="17"
-        android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/extrasSubmitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@android:string/ok" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/extras_production_source">
 
-    <Button
-        android:id="@+id/extrasImportButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/extras_import_button"
-        android:visibility="gone" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/extrasProductionSourceEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3" />
 
-</LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/extras_app_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/extrasAppNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/extras_app_version">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/extrasAppVersionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="17" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/extrasSubmitButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@android:string/ok" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/extrasImportButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/extras_import_button"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>

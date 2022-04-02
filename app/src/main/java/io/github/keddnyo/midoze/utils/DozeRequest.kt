@@ -7,13 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.webkit.URLUtil
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import io.github.keddnyo.midoze.R
 import kotlinx.coroutines.Dispatchers

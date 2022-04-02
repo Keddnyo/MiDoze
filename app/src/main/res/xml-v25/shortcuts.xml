@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_cloud"
+        android:icon="@drawable/ic_feed_shortcut"
         android:shortcutId="Feed"
         android:shortcutShortLabel="@string/feed">
         <intent
@@ -12,7 +12,7 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_cloud_sync"
+        android:icon="@drawable/ic_custom_request_shortcut"
         android:shortcutId="CustomRequest"
         android:shortcutShortLabel="@string/settings_custom_request">
         <intent
