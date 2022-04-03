@@ -212,6 +212,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle(R.string.firmware_connectivity_error)
             .setMessage(R.string.firmware_connectivity_error_message)
             .setIcon(R.drawable.ic_info)
+            .setCancelable(false)
 
         builder.setNegativeButton(R.string.firmware_connectivity_error_refresh) { _: DialogInterface?, _: Int ->
             builder.show().dismiss()
