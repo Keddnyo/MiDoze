@@ -11,6 +11,9 @@
     <string name="firmware_downloading">Загрузка…</string>
     <string name="firmware_not_found">Не найдено</string>
     <string name="firmware_connectivity_error">Ошибка подключения</string>
+    <string name="firmware_connectivity_error_message">Проверьте подключение к интернету!</string>
+    <string name="firmware_connectivity_error_refresh">Обновить</string>
+    <string name="firmware_connectivity_error_close">Закрыть</string>
     <string name="firmware_share">Поделиться</string>
     <string name="extras_import_button">Импорт</string>
 

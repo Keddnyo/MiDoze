@@ -13,7 +13,7 @@ class UiUtils {
             2
         }
     }
-    fun makeToast(context: Context, string: String) {
+    fun showToast(context: Context, string: String) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 }

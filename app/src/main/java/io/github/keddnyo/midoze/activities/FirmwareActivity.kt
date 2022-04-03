@@ -88,7 +88,7 @@ class FirmwareActivity : AppCompatActivity() {
             )
         } else {
             runOnUiThread {
-                UiUtils().makeToast(context, getString(R.string.firmware_not_found))
+                UiUtils().showToast(context, getString(R.string.firmware_not_found))
             }
             finish()
         }
@@ -162,6 +162,6 @@ class FirmwareActivity : AppCompatActivity() {
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
         }
-        UiUtils().makeToast(context, getString(R.string.firmware_downloading))
+        UiUtils().showToast(context, getString(R.string.firmware_downloading))
     }
 }

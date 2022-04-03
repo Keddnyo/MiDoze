@@ -27,7 +27,7 @@ class ExtrasResponseActivity : AppCompatActivity() {
             responseTextView.text = json
         } else {
             runOnUiThread {
-                UiUtils().makeToast(context, getString(R.string.firmware_not_found))
+                UiUtils().showToast(context, getString(R.string.firmware_not_found))
             }
             finish()
         }

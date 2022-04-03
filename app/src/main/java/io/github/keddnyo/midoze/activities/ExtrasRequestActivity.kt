@@ -65,7 +65,7 @@ class ExtrasRequestActivity : AppCompatActivity() {
                 intent.putExtra("json", firmwareResponse.toString())
                 startActivity(intent)
             } else {
-                UiUtils().makeToast(context, getString(R.string.firmware_connectivity_error))
+                UiUtils().showToast(context, getString(R.string.firmware_connectivity_error))
             }
         }
 

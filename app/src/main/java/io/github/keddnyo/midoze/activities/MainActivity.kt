@@ -1,11 +1,14 @@
 package io.github.keddnyo.midoze.activities
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        init()
+    }
+
+    private fun init() {
         title = getString(R.string.feed)
 
         val deviceNamesArray = arrayOf(
@@ -109,7 +116,8 @@ class MainActivity : AppCompatActivity() {
                                         deviceListIndex[deviceName]?.let { openFirmwareActivity(it) }
                                     }
                                     false -> {
-                                        UiUtils().makeToast(context, getString(R.string.firmware_connectivity_error))
+                                        title = getString(R.string.firmware_connectivity_error)
+                                        showConnectivityErrorDialog(context)
                                     }
                                 }
 
@@ -119,6 +127,7 @@ class MainActivity : AppCompatActivity() {
             }
             false -> {
                 title = getString(R.string.firmware_connectivity_error)
+                showConnectivityErrorDialog(context)
             }
         }
     }
@@ -196,5 +205,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showConnectivityErrorDialog(context: Context) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            .setTitle(R.string.firmware_connectivity_error)
+            .setMessage(R.string.firmware_connectivity_error_message)
+            .setIcon(R.drawable.ic_info)
+
+        builder.setNegativeButton(R.string.firmware_connectivity_error_refresh) { _: DialogInterface?, _: Int ->
+            builder.show().dismiss()
+            init()
+        }
+        builder.setPositiveButton(R.string.firmware_connectivity_error_close) { _: DialogInterface?, _: Int ->
+            builder.show().dismiss()
+            finish()
+        }
+        builder.show()
     }
 }
