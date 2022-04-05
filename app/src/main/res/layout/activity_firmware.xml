@@ -13,6 +13,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -44,7 +45,8 @@
                             android:id="@+id/deviceNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="10pt" />
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/firmwareVersionTextView"
@@ -57,11 +59,10 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/firmwareDownloadButton"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_get"
-                    android:textSize="10pt" />
+                    android:textSize="10pt"/>
 
             </LinearLayout>
 
@@ -70,6 +71,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -82,7 +84,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="10pt" />
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
@@ -96,6 +99,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="20dp">
 
@@ -108,7 +112,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="10pt" />
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"

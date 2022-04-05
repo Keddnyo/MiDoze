@@ -9,6 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="20dp">
 
@@ -39,7 +40,8 @@
                     <TextView
                         android:id="@+id/deviceNameTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/firmwareVersionTextView"

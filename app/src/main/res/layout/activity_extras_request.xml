@@ -72,14 +72,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extrasSubmitButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@android:string/ok" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extrasImportButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/extras_import_button"

@@ -10,16 +10,18 @@
     <string name="feed">Feed</string>
     <string name="search">Search</string>
 
+    <string name="firmware_connectivity_error">Connectivity error</string>
+    <string name="firmware_connectivity_error_message">Check your internet connection!</string>
+    <string name="firmware_connectivity_error_refresh">Refresh</string>
+    <string name="firmware_connectivity_error_close">Close</string>
+
     <string name="firmware_get">Get</string>
     <string name="firmware_changelog">Changelog</string>
     <string name="firmware_languages">Languages</string>
     <string name="firmware_downloading">Downloading…</string>
     <string name="firmware_not_found">Not found</string>
-    <string name="firmware_connectivity_error">Connectivity error</string>
-    <string name="firmware_connectivity_error_message">Check your internet connection!</string>
-    <string name="firmware_connectivity_error_refresh">Refresh</string>
-    <string name="firmware_connectivity_error_close">Close</string>
     <string name="firmware_share">Share</string>
+    <string name="changelog_not_specified">Changelog not specified</string>
     <string name="extras_device_source" translatable="false">deviceSource</string>
     <string name="extras_production_source" translatable="false">productionSource</string>
     <string name="extras_app_name" translatable="false">appname</string>

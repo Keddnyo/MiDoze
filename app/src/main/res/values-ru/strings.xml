@@ -5,16 +5,18 @@
     <string name="feed">Лента</string>
     <string name="search">Поиск</string>
 
+    <string name="firmware_connectivity_error">Ошибка подключения</string>
+    <string name="firmware_connectivity_error_message">Проверьте подключение к интернету!</string>
+    <string name="firmware_connectivity_error_refresh">Обновить</string>
+    <string name="firmware_connectivity_error_close">Закрыть</string>
+
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>
     <string name="firmware_languages">Языки</string>
     <string name="firmware_downloading">Загрузка…</string>
     <string name="firmware_not_found">Не найдено</string>
-    <string name="firmware_connectivity_error">Ошибка подключения</string>
-    <string name="firmware_connectivity_error_message">Проверьте подключение к интернету!</string>
-    <string name="firmware_connectivity_error_refresh">Обновить</string>
-    <string name="firmware_connectivity_error_close">Закрыть</string>
     <string name="firmware_share">Поделиться</string>
+    <string name="changelog_not_specified">Изменения не указаны</string>
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>

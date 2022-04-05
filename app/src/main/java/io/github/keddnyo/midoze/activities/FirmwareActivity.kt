@@ -97,7 +97,7 @@ class FirmwareActivity : AppCompatActivity() {
                 firmwareResponse.getString("changeLog")
             )
         } else {
-            getString(R.string.firmware_not_found)
+            getString(R.string.changelog_not_specified)
         }
         if (firmwareResponse.has("lang")) {
             firmwareLanguagesTextView.text = Language().getName(
