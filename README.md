@@ -1,6 +1,10 @@
 # MiDoze
 The easiest way to download firmwares for Xiaomi wearables
 
+<a href="https://github.com/Keddnyo/MiDoze/blob/master/LICENSE"><img src="https://img.shields.io/github/license/keddnyo/midoze?style=for-the-badge"></a>
+<a href="https://github.com/Keddnyo/MiDoze/releases/latest"><img src="https://img.shields.io/github/v/release/keddnyo/midoze?style=for-the-badge"></a>
+<a href="https://github.com/Keddnyo/MiDoze/releases"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/total?style=for-the-badge"></a>
+
 ## Features
 * Android 5.0+
 * User-friendly GUI
