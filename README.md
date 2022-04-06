@@ -24,13 +24,13 @@ The easiest way to download firmwares for Xiaomi wearables
 
 ## Screenshots
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/65981689/161429057-29f4127d-466b-4c31-ab41-fc2a0cfbe61c.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429059-58abb373-1d74-4495-8768-240e172dd076.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429060-bf641c3c-c28a-4e38-bfa6-e5ba4b1b7fc8.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429061-8d37d8e1-280c-4b1f-8f13-e0e1d3ce72a5.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429062-bdf8f2fb-8700-49dc-af71-37780cf4799b.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429063-dbaaee17-84db-4a23-aafa-19086ebc18b8.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161429064-95c2228a-36a6-4340-809d-cd3f303e920e.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893108-f40c792f-354c-4408-84d6-9e050759d185.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893116-083d2ead-3c96-4646-bac9-a340ec0e6b91.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893119-868d087f-f203-4ecb-921f-6029c335b027.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893121-7cf83dff-0427-4d3e-9068-e12e855945be.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893123-b64737a0-ae7b-4633-a984-f6a1c5e906b2.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893125-69a5e347-7c9e-4ceb-b441-994373d77ae7.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/161893126-8a3b0703-4ac6-45d0-9c8a-4282ce996dad.jpg" width="33%" height="33%">
 </p>
 
 ## Credits
