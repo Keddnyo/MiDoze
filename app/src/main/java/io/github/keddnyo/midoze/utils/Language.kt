@@ -18,7 +18,9 @@ class Language {
             )
         }
 
-        return arrayOfLanguageNames.toString()
+        val languageString =  arrayOfLanguageNames.toString()
             .substring(1,arrayOfLanguageNames.toString().length -1)
+
+        return languageString.replace(", pt-br", "")
     }
 }
