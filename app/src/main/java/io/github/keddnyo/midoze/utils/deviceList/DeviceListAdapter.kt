@@ -2,20 +2,28 @@ package io.github.keddnyo.midoze.utils.deviceList
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import java.util.*
-import android.content.SharedPreferences
+import io.github.keddnyo.midoze.activities.FirmwareActivity
 import io.github.keddnyo.midoze.activities.MainActivity
-
+import io.github.keddnyo.midoze.utils.DozeRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.util.*
 
 class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
     private var deviceListDataArrayFull = ArrayList<DeviceListData>()
+    private var deviceLikeBoolean: Boolean = false
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
@@ -31,11 +39,11 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
         val shareIcon: ImageView = itemView.findViewById(R.id.shareIcon)
-        val customIcon: ImageView = itemView.findViewById(R.id.customIcon)
+        val downloadIcon: ImageView = itemView.findViewById(R.id.downloadIcon)
 
         val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
         val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
-        val customLayout: LinearLayout = itemView.findViewById(R.id.customLayout)
+        val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -44,8 +52,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        val prefs: SharedPreferences =
-            MainActivity().getSharedPreferences("Preference_reference", Context.MODE_PRIVATE)
+        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
         val editor = prefs.edit()
 
         holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
@@ -54,18 +61,41 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         holder.firmwareReleaseDateTextView.text = deviceListDataArray[position].firmwareReleaseDate
         holder.firmwareChangelogTextView.text = deviceListDataArray[position].firmwareChangelog
 
+        if (prefs.getBoolean(position.toString(), false)) {
+            holder.likeIcon.setImageResource(R.drawable.ic_heart)
+        } else {
+            holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
+        }
+
         holder.likeLayout.setOnClickListener {
-            if (!prefs.getBoolean(position.toString(), true)) {
-                holder.likeLayout.visibility = View.GONE
-                editor.putBoolean(position.toString(), true)
-                editor.apply()
-            } else {
-                holder.likeLayout.visibility = View.VISIBLE
+            deviceLikeBoolean = if (prefs.getBoolean(position.toString(), false)) {
+                holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
                 editor.putBoolean(position.toString(), false)
                 editor.apply()
+                false
+            } else {
+                holder.likeIcon.setImageResource(R.drawable.ic_heart)
+                editor.putBoolean(position.toString(), true)
+                editor.apply()
+                true
             }
         }
 
+        holder.downloadLayout.setOnClickListener {
+            when (DozeRequest().isOnline(holder.downloadLayout.context)) {
+                true -> {
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context)
+                }
+                else -> {
+                    // TODO: something
+                }
+            }
+        }
+
+    }
+
+    fun getLike(): Boolean {
+        return deviceLikeBoolean
     }
 
     override fun getItemCount(): Int {
@@ -79,6 +109,11 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     override fun getFilter(): Filter {
         return deviceFilter
+    }
+
+    fun clear() {
+        deviceListDataArray.clear()
+        deviceListDataArrayFull.clear()
     }
 
     private val deviceFilter: Filter = object : Filter() {
@@ -109,5 +144,32 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     fun getDeviceName(position: Int): String {
         return deviceListDataArray[position].deviceName
+    }
+
+    private fun openFirmwareActivity(deviceIndex: Int, context: Context) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                val jsonObject = JSONObject(DozeRequest().getApplicationValues())
+
+                val deviceNameValue =
+                    jsonObject.getJSONObject(deviceIndex.toString()).getString("name")
+                val productionSourceValue =
+                    jsonObject.getJSONObject(deviceIndex.toString()).getString("productionSource")
+                val appNameValue =
+                    jsonObject.getJSONObject(deviceIndex.toString()).getString("appname")
+                val appVersionValue =
+                    jsonObject.getJSONObject(deviceIndex.toString()).getString("appVersion")
+
+                val intent = Intent(context, FirmwareActivity::class.java)
+
+                intent.putExtra("deviceName", deviceNameValue)
+                intent.putExtra("productionSource", productionSourceValue)
+                intent.putExtra("deviceSource", deviceIndex)
+                intent.putExtra("appname", appNameValue)
+                intent.putExtra("appVersion", appVersionValue)
+
+                context.startActivity(intent)
+            }
+        }
     }
 }

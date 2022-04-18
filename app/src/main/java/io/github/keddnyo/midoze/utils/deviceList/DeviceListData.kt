@@ -6,4 +6,5 @@ data class DeviceListData(
     val firmwareVersion: String,
     val firmwareReleaseDate: String,
     val firmwareChangelog: String,
+    val deviceIndex: Int
 )
