@@ -1,16 +1,17 @@
 package io.github.keddnyo.midoze.utils.deviceList
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import java.util.*
+import android.content.SharedPreferences
+import io.github.keddnyo.midoze.activities.MainActivity
+
 
 class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
@@ -27,6 +28,14 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             itemView.findViewById(R.id.firmwareReleaseDateTextView)
         val firmwareChangelogTextView: TextView =
             itemView.findViewById(R.id.firmwareChangelogTextView)
+
+        val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
+        val shareIcon: ImageView = itemView.findViewById(R.id.shareIcon)
+        val customIcon: ImageView = itemView.findViewById(R.id.customIcon)
+
+        val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
+        val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
+        val customLayout: LinearLayout = itemView.findViewById(R.id.customLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -35,11 +44,28 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
+        val prefs: SharedPreferences =
+            MainActivity().getSharedPreferences("Preference_reference", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+
         holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
         holder.deviceIconImageView.setImageResource(deviceListDataArray[position].deviceIcon)
         holder.firmwareVersionTextView.text = deviceListDataArray[position].firmwareVersion
         holder.firmwareReleaseDateTextView.text = deviceListDataArray[position].firmwareReleaseDate
         holder.firmwareChangelogTextView.text = deviceListDataArray[position].firmwareChangelog
+
+        holder.likeLayout.setOnClickListener {
+            if (!prefs.getBoolean(position.toString(), true)) {
+                holder.likeLayout.visibility = View.GONE
+                editor.putBoolean(position.toString(), true)
+                editor.apply()
+            } else {
+                holder.likeLayout.visibility = View.VISIBLE
+                editor.putBoolean(position.toString(), false)
+                editor.apply()
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
