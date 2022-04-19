@@ -19,27 +19,25 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
+import kotlin.properties.Delegates
 
 class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
     private var deviceListDataArrayFull = ArrayList<DeviceListData>()
-    private var deviceLikeBoolean: Boolean = false
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
             itemView.findViewById(R.id.deviceNameTextView)
         val deviceIconImageView: ImageView =
             itemView.findViewById(R.id.deviceIconImageView)
-        val firmwareVersionTextView: TextView =
-            itemView.findViewById(R.id.firmwareVersionTextView)
         val firmwareReleaseDateTextView: TextView =
             itemView.findViewById(R.id.firmwareReleaseDateTextView)
         val firmwareChangelogTextView: TextView =
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
+        val likeText: TextView = itemView.findViewById(R.id.likeTextView)
         val shareIcon: ImageView = itemView.findViewById(R.id.shareIcon)
-        val downloadIcon: ImageView = itemView.findViewById(R.id.downloadIcon)
 
         val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
         val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
@@ -57,27 +55,24 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
         holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
         holder.deviceIconImageView.setImageResource(deviceListDataArray[position].deviceIcon)
-        holder.firmwareVersionTextView.text = deviceListDataArray[position].firmwareVersion
         holder.firmwareReleaseDateTextView.text = deviceListDataArray[position].firmwareReleaseDate
         holder.firmwareChangelogTextView.text = deviceListDataArray[position].firmwareChangelog
 
-        if (prefs.getBoolean(position.toString(), false)) {
+        if (prefs.getBoolean(deviceListDataArray[position].deviceIndex.toString(), false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_heart)
         } else {
             holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
         }
 
         holder.likeLayout.setOnClickListener {
-            deviceLikeBoolean = if (prefs.getBoolean(position.toString(), false)) {
+            if (prefs.getBoolean(deviceListDataArray[position].deviceIndex.toString(), false)) {
                 holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
-                editor.putBoolean(position.toString(), false)
+                editor.putBoolean(deviceListDataArray[position].deviceIndex.toString(), false)
                 editor.apply()
-                false
             } else {
                 holder.likeIcon.setImageResource(R.drawable.ic_heart)
-                editor.putBoolean(position.toString(), true)
+                editor.putBoolean(deviceListDataArray[position].deviceIndex.toString(), true)
                 editor.apply()
-                true
             }
         }
 
@@ -92,10 +87,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             }
         }
 
-    }
-
-    fun getLike(): Boolean {
-        return deviceLikeBoolean
     }
 
     override fun getItemCount(): Int {

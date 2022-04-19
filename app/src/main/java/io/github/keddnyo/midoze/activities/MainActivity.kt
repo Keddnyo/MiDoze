@@ -95,28 +95,14 @@ class MainActivity : AppCompatActivity() {
                     val firmwareUpdated = getString(R.string.firmware_updated)
                     val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
 
-                    val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-                    if (!prefs.getBoolean("show_favourites", false)) {
-                        deviceListAdapter.addDevice(
-                            DeviceListData(
-                                deviceNameValue,
-                                deviceIconValue,
-                                firmwareVersionValue,
-                                firmwareReleaseDateValue,
-                                firmwareChangelogValue,
-                                i.toInt()
-                            )
-                        )
-                        deviceListAdapter.notifyItemInserted(i.toInt())
-                        deviceListIndex[deviceNameValue] = i.toInt()
-                    } else {
-                        if (deviceListAdapter.getLike()) {
+                    if (prefs.getBoolean("show_favourites", false)) {
+                        if (prefs.getBoolean(i, false)) {
                             deviceListAdapter.addDevice(
                                 DeviceListData(
                                     deviceNameValue,
                                     deviceIconValue,
-                                    firmwareVersionValue,
                                     firmwareReleaseDateValue,
                                     firmwareChangelogValue,
                                     i.toInt()
@@ -126,6 +112,18 @@ class MainActivity : AppCompatActivity() {
                             deviceListAdapter.notifyItemInserted(i.toInt())
                             deviceListIndex[deviceNameValue] = i.toInt()
                         }
+                    } else {
+                        deviceListAdapter.addDevice(
+                            DeviceListData(
+                                deviceNameValue,
+                                deviceIconValue,
+                                firmwareReleaseDateValue,
+                                firmwareChangelogValue,
+                                i.toInt()
+                            )
+                        )
+                        deviceListAdapter.notifyItemInserted(i.toInt())
+                        deviceListIndex[deviceNameValue] = i.toInt()
                     }
                 }
 
