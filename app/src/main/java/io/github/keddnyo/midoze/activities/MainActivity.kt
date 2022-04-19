@@ -98,6 +98,8 @@ class MainActivity : AppCompatActivity() {
                     val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
                     if (prefs.getBoolean("show_favourites", false)) {
+                        title = "Favourites" // TODO: replace by string value
+
                         if (prefs.getBoolean(i, false)) {
                             deviceListAdapter.addDevice(
                                 DeviceListData(
@@ -113,6 +115,8 @@ class MainActivity : AppCompatActivity() {
                             deviceListIndex[deviceNameValue] = i.toInt()
                         }
                     } else {
+                        title = getString(R.string.feed)
+
                         deviceListAdapter.addDevice(
                             DeviceListData(
                                 deviceNameValue,

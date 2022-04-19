@@ -128,24 +128,7 @@ class FirmwareActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.shareFirmwareMenuItem -> {
-                val firmwareLinks = arrayListOf<String>()
-
-                for (i in firmwareResponseLinksValuesArray) {
-                    if (firmwareResponse.has(i)) {
-                        firmwareLinks.add(firmwareResponse.getString(i))
-                    }
-                }
-
-                val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}"
-
-                val sendIntent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, shareContent)
-                    type = "text/plain"
-                }
-
-                val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
-                startActivity(shareIntent)
+                shareFirmware()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -163,5 +146,26 @@ class FirmwareActivity : AppCompatActivity() {
             }
         }
         UiUtils().showToast(context, getString(R.string.firmware_downloading))
+    }
+
+    private fun shareFirmware() {
+        val firmwareLinks = arrayListOf<String>()
+
+        for (i in firmwareResponseLinksValuesArray) {
+            if (firmwareResponse.has(i)) {
+                firmwareLinks.add(firmwareResponse.getString(i))
+            }
+        }
+
+        val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}"
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareContent)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
+        startActivity(shareIntent)
     }
 }

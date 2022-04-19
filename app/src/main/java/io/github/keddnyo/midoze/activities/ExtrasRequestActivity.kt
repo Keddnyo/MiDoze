@@ -2,9 +2,9 @@ package io.github.keddnyo.midoze.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
@@ -30,7 +30,7 @@ class ExtrasRequestActivity : AppCompatActivity() {
         val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
 
         val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(this)
+            PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPreferences.edit()
 
         if ((sharedPreferences.getString(
@@ -47,6 +47,19 @@ class ExtrasRequestActivity : AppCompatActivity() {
             importButton.visibility = View.VISIBLE
         } else {
             importButton.visibility = View.GONE
+        }
+
+        // Get Intent
+        if (intent.getIntExtra("deviceSource", 0) != 0) {
+            val deviceSourceValue = intent.getIntExtra("deviceSource", 0).toString()
+            val productionSourceValue = intent.getStringExtra("productionSource").toString()
+            val appNameValue = intent.getStringExtra("appname").toString()
+            val appVersionValue = intent.getStringExtra("appVersion").toString()
+
+            extrasDeviceSourceEditText.setText(deviceSourceValue)
+            extrasProductionSourceEditText.setText(productionSourceValue)
+            extrasAppNameEditText.setText(appNameValue)
+            extrasAppVersionEditText.setText(appVersionValue)
         }
 
         submitButton.setOnClickListener {

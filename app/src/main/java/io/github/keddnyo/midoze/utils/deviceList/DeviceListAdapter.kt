@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
 import io.github.keddnyo.midoze.activities.MainActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
@@ -42,6 +43,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
         val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
         val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
+        val customLayout: LinearLayout = itemView.findViewById(R.id.customLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -58,28 +60,18 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         holder.firmwareReleaseDateTextView.text = deviceListDataArray[position].firmwareReleaseDate
         holder.firmwareChangelogTextView.text = deviceListDataArray[position].firmwareChangelog
 
-        if (prefs.getBoolean(deviceListDataArray[position].deviceIndex.toString(), false)) {
+        val deviceIndex = deviceListDataArray[position].deviceIndex.toString()
+
+        if (prefs.getBoolean(deviceIndex, false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_heart)
         } else {
             holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
         }
 
-        holder.likeLayout.setOnClickListener {
-            if (prefs.getBoolean(deviceListDataArray[position].deviceIndex.toString(), false)) {
-                holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
-                editor.putBoolean(deviceListDataArray[position].deviceIndex.toString(), false)
-                editor.apply()
-            } else {
-                holder.likeIcon.setImageResource(R.drawable.ic_heart)
-                editor.putBoolean(deviceListDataArray[position].deviceIndex.toString(), true)
-                editor.apply()
-            }
-        }
-
         holder.downloadLayout.setOnClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context)
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context, false)
                 }
                 else -> {
                     // TODO: something
@@ -87,6 +79,39 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             }
         }
 
+        holder.likeLayout.setOnClickListener {
+            if (prefs.getBoolean(deviceIndex, false)) {
+                holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
+                editor.putBoolean(deviceIndex, false)
+                editor.apply()
+            } else {
+                holder.likeIcon.setImageResource(R.drawable.ic_heart)
+                editor.putBoolean(deviceIndex, true)
+                editor.apply()
+            }
+        }
+
+        holder.shareLayout.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "https://schakal.ru/fw/firmwares_list.htm?device=$deviceIndex")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, holder.deviceNameTextView.text)
+            holder.shareLayout.context.startActivity(shareIntent)
+        }
+
+        holder.customLayout.setOnClickListener {
+            when (DozeRequest().isOnline(holder.customLayout.context)) {
+                true -> {
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customLayout.context, true)
+                }
+                else -> {
+                    // TODO: something
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -137,7 +162,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         return deviceListDataArray[position].deviceName
     }
 
-    private fun openFirmwareActivity(deviceIndex: Int, context: Context) {
+    private fun openFirmwareActivity(deviceIndex: Int, context: Context, custom: Boolean) {
         runBlocking {
             withContext(Dispatchers.IO) {
                 val jsonObject = JSONObject(DozeRequest().getApplicationValues())
@@ -151,7 +176,11 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                 val appVersionValue =
                     jsonObject.getJSONObject(deviceIndex.toString()).getString("appVersion")
 
-                val intent = Intent(context, FirmwareActivity::class.java)
+                val intent = if (custom) {
+                    Intent(context, ExtrasRequestActivity::class.java)
+                } else {
+                    Intent(context, FirmwareActivity::class.java)
+                }
 
                 intent.putExtra("deviceName", deviceNameValue)
                 intent.putExtra("productionSource", productionSourceValue)
