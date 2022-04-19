@@ -13,14 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
-import io.github.keddnyo.midoze.activities.MainActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
-import kotlin.properties.Delegates
 
 class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
@@ -125,11 +123,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         return deviceFilter
     }
 
-    fun clear() {
-        deviceListDataArray.clear()
-        deviceListDataArrayFull.clear()
-    }
-
     private val deviceFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
             val filteredList: MutableList<DeviceListData> = ArrayList()
@@ -150,14 +143,10 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
         @SuppressLint("NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
-            deviceListDataArray.clear()
+            clear()
             deviceListDataArray.addAll(results.values as Collection<DeviceListData>)
             notifyDataSetChanged()
         }
-    }
-
-    fun getDeviceName(position: Int): String {
-        return deviceListDataArray[position].deviceName
     }
 
     private fun openFirmwareActivity(deviceIndex: Int, context: Context, custom: Boolean) {
@@ -189,5 +178,9 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                 context.startActivity(intent)
             }
         }
+    }
+
+    fun clear() {
+        deviceListDataArray.clear()
     }
 }

@@ -35,6 +35,9 @@ class FavoriteFragment : Fragment() {
     override fun onResume() = with(requireActivity()) {
         super.onResume()
 
+        deviceListIndex.clear()
+        deviceListAdapter.clear()
+
         val deviceNamesArray = arrayOf(
             getString(R.string.title_amazfit),
             getString(R.string.title_mi_band),

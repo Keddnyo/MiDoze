@@ -3,12 +3,9 @@
     <string name="firmware_updated">Прошивка обновлена</string>
 
     <string name="feed">Лента</string>
-    <string name="search">Поиск</string>
+    <string name="favorites">Избранное</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
-    <string name="firmware_connectivity_error_message">Проверьте подключение к интернету!</string>
-    <string name="firmware_connectivity_error_refresh">Обновить</string>
-    <string name="firmware_connectivity_error_close">Закрыть</string>
 
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>

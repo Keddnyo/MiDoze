@@ -101,7 +101,6 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/customIcon"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:src="@drawable/ic_custom_request" />
@@ -116,7 +115,6 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/shareIcon"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:src="@drawable/ic_forward" />

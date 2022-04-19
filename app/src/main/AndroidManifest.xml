@@ -16,11 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
-            android:name=".activities.SettingsActivity"
-            android:exported="false"
-            android:label="@string/settings_title"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".activities.ExtrasResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
