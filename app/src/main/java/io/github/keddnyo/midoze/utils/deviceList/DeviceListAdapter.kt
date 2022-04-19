@@ -37,8 +37,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
-        val likeText: TextView = itemView.findViewById(R.id.likeTextView)
-        val shareIcon: ImageView = itemView.findViewById(R.id.shareIcon)
 
         val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
         val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
@@ -63,9 +61,9 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val deviceIndex = deviceListDataArray[position].deviceIndex.toString()
 
         if (prefs.getBoolean(deviceIndex, false)) {
-            holder.likeIcon.setImageResource(R.drawable.ic_heart)
+            holder.likeIcon.setImageResource(R.drawable.ic_favorite)
         } else {
-            holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
+            holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
         }
 
         holder.downloadLayout.setOnClickListener {
@@ -81,11 +79,11 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
         holder.likeLayout.setOnClickListener {
             if (prefs.getBoolean(deviceIndex, false)) {
-                holder.likeIcon.setImageResource(R.drawable.ic_heart_outline)
+                holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
                 editor.putBoolean(deviceIndex, false)
                 editor.apply()
             } else {
-                holder.likeIcon.setImageResource(R.drawable.ic_heart)
+                holder.likeIcon.setImageResource(R.drawable.ic_favorite)
                 editor.putBoolean(deviceIndex, true)
                 editor.apply()
             }

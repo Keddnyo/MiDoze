@@ -1,14 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/settings_extras">
-
-        <Preference
-            app:icon="@drawable/ic_custom_request"
-            app:key="settings_custom_request"
-            app:title="@string/settings_custom_request" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/settings_about">
 
         <Preference

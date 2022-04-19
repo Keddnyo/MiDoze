@@ -32,8 +32,8 @@ class DozeRequest {
         }
         return false
     }
-    fun getFirmwareLatest(): String {
-        return URL("https://schakal.ru/fw/latest.json").readText()
+    fun getFirmwareLatest(): JSONObject {
+        return JSONObject(URL("https://schakal.ru/fw/latest.json").readText())
     }
     fun getApplicationValues(): String {
         return URL("https://schakal.ru/fw/dev_apps.json").readText()
@@ -85,7 +85,7 @@ class DozeRequest {
         val request =  Request.Builder()
             .url(uriBuilder.toString())
             .addHeader("hm-privacy-diagnostics", "false")
-            .addHeader("country", "0")
+            .addHeader("country", "CH")
             .addHeader("appplatform", "android_phone")
             .addHeader("hm-privacy-ceip", "0")
             .addHeader("x-request-id", "0")
@@ -96,7 +96,7 @@ class DozeRequest {
             .addHeader("appname", appName)
             .addHeader("v", "0")
             .addHeader("apptoken", "0")
-            .addHeader("lang", "0")
+            .addHeader("lang", "zh_CH")
             .addHeader("Host", requestHost)
             .addHeader("Connection", "Keep-Alive")
             .addHeader("accept-encoding", "gzip")

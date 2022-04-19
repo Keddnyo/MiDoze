@@ -127,7 +127,7 @@ class FirmwareActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.shareFirmwareMenuItem -> {
+            R.id.action_share_firmware -> {
                 shareFirmware()
             }
         }

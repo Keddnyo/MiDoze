@@ -36,4 +36,6 @@
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
     <string name="settings_jsons_storage_title">JSONs storage</string>
     <string name="settings_schakal" translatable="false">Schakal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

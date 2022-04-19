@@ -3,22 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
-        android:id="@+id/action_fav"
-        android:icon="@drawable/ic_heart"
-        android:title="Favourites"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings_title"
-        app:showAsAction="never" />
+        android:id="@+id/action_custom_request"
+        android:icon="@drawable/ic_custom_request"
+        android:title="@string/settings_custom_request"
+        app:showAsAction="ifRoom" />
 
 </menu>
