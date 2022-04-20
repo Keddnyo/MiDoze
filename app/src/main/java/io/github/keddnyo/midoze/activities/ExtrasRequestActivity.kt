@@ -70,7 +70,8 @@ class ExtrasRequestActivity : AppCompatActivity() {
                             extrasProductionSourceEditText.text.toString(),
                             extrasDeviceSourceEditText.text.toString(),
                             extrasAppVersionEditText.text.toString(),
-                            extrasAppNameEditText.text.toString()
+                            extrasAppNameEditText.text.toString(),
+                            context
                         )
                     }
 

@@ -26,6 +26,8 @@
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
+    <string name="settings_server_interaction">Server interaction</string>
+    <string name="settings_request_region">Request region</string>
     <string name="settings_dashboard">Dashboard</string>
     <string name="settings_downloads">Downloads</string>
     <string name="settings_shares">Shares</string>
@@ -39,4 +41,13 @@
     <string name="settings_json_storage_title">JSONs storage</string>
     <string name="settings_schakal" translatable="false">Schakal</string>
     <string name="settings_app_github_page">App\'s GitHub repo</string>
+
+    <string-array name="request_region_entries">
+        <item>USA</item>
+        <item>China</item>
+    </string-array>
+    <string-array name="request_region_selector_entryValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

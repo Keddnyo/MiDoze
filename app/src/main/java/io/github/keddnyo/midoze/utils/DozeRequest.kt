@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -12,6 +13,7 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
+import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -42,8 +44,29 @@ class DozeRequest {
         productionSource: String,
         deviceSource: String,
         appVersion: String,
-        appName: String
+        appName: String,
+        context: Context
     ): JSONObject {
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
+
+        val country = when (prefs.getString("settings_request_region", "1")) {
+            "2" -> {
+                "CH"
+            }
+            else -> {
+                "US"
+            }
+        }
+        val lang = when (prefs.getString("settings_request_region", "1")) {
+            "2" -> {
+                "zh_CH"
+            }
+            else -> {
+                "en_US"
+            }
+        }
+
         val requestHost = "api-mifit-ru.huami.com"
 
         val uriBuilder: Uri.Builder = Uri.Builder()
@@ -85,7 +108,7 @@ class DozeRequest {
         val request =  Request.Builder()
             .url(uriBuilder.toString())
             .addHeader("hm-privacy-diagnostics", "false")
-            .addHeader("country", "CH")
+            .addHeader("country", country)
             .addHeader("appplatform", "android_phone")
             .addHeader("hm-privacy-ceip", "0")
             .addHeader("x-request-id", "0")
@@ -96,7 +119,7 @@ class DozeRequest {
             .addHeader("appname", appName)
             .addHeader("v", "0")
             .addHeader("apptoken", "0")
-            .addHeader("lang", "zh_CH")
+            .addHeader("lang", lang)
             .addHeader("Host", requestHost)
             .addHeader("Connection", "Keep-Alive")
             .addHeader("accept-encoding", "gzip")

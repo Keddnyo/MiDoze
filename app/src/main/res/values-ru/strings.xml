@@ -17,6 +17,8 @@
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
+    <string name="settings_server_interaction">Взаимодействие с сервером</string>
+    <string name="settings_request_region">Регион запроса</string>
     <string name="settings_dashboard">Статистика</string>
     <string name="settings_downloads">Загрузки</string>
     <string name="settings_shares">Отправления</string>
@@ -28,4 +30,9 @@
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
+
+    <string-array name="request_region_entries">
+        <item>США</item>
+        <item>Китай</item>
+    </string-array>
 </resources>

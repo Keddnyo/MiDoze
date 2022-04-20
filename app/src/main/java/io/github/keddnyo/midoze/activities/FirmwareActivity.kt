@@ -66,7 +66,8 @@ class FirmwareActivity : AppCompatActivity() {
             productionSourceValue,
             deviceSourceValue,
             appVersionValue,
-            appNameValue
+            appNameValue,
+            context
         )
 
         title = deviceNameValue
