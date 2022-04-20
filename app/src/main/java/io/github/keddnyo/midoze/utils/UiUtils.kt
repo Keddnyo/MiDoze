@@ -8,6 +8,7 @@ import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 
 class UiUtils {
@@ -35,6 +36,8 @@ class UiUtils {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                } else {
+                    (context as Activity).window.statusBarColor = ContextCompat.getColor(context, android.R.color.black)
                 }
             }
         }
