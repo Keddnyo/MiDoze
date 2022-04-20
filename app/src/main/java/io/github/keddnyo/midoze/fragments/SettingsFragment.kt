@@ -21,22 +21,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         requireActivity().title = getString(R.string.settings_title)
 
-        val favorites = findPreference<Preference>("settings_favorites")
-        val downloads = findPreference<Preference>("settings_downloads")
-        val shares = findPreference<Preference>("settings_shares")
-
         val about = findPreference<Preference>("settings_app_info")
         val cloud = findPreference<Preference>("settings_server_info")
         val github = findPreference<Preference>("settings_app_github_page")
 
-        if (favorites != null && downloads != null && shares != null && about != null && cloud != null && github != null) {
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(requireActivity())
-
-            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.settings_items)}"
-            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.settings_times)}"
-            shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.settings_times)}"
-
+        if (about != null && cloud != null && github != null) {
             about.title = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
 
             about.setOnPreferenceClickListener {

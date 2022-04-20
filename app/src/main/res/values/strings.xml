@@ -29,6 +29,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_server_interaction">Server interaction</string>
     <string name="settings_request_region">Request region</string>
+    <string name="settings_request_host">Request host</string>
     <string name="settings_dashboard">Dashboard</string>
     <string name="settings_downloads">Downloads</string>
     <string name="settings_shares">Shares</string>
@@ -44,6 +45,21 @@
     <string name="settings_app_github_page">App\'s GitHub repo</string>
     <string name="settings_app_github_page_summary">Visit app\'s GitHub repo</string>
     <string name="open_in_browser">In browser</string>
+
+    <string name="request_host_first" translatable="false">api.amazfit.com</string>
+    <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
+    <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
+
+    <string-array name="request_host_entries">
+        <item>@string/request_host_first</item>
+        <item>@string/request_host_second</item>
+        <item>@string/request_host_third</item>
+    </string-array>
+    <string-array name="request_host_selector_entryValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
     <string-array name="request_region_entries">
         <item>China</item>

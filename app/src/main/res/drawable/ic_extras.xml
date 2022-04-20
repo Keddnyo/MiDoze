@@ -7,9 +7,9 @@
     <path
         android:fillAlpha="0.3"
         android:fillColor="@android:color/white"
-        android:pathData="M13,9V5h-2v6H9.83L12,13.17 14.17,11H13z"
+        android:pathData="M5,5h4v4L5,9zM15,15h4v4h-4zM5,15h4v4L5,19zM16.66,4.52l-2.83,2.82 2.83,2.83 2.83,-2.83z"
         android:strokeAlpha="0.3" />
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M15,9L15,3L9,3v6L5,9l7,7 7,-7h-4zM12,13.17L9.83,11L11,11L11,5h2v6h1.17L12,13.17zM5,18h14v2L5,20z" />
+        android:pathData="M16.66,1.69L11,7.34 16.66,13l5.66,-5.66 -5.66,-5.65zM13.83,7.34l2.83,-2.83 2.83,2.83 -2.83,2.83 -2.83,-2.83zM3,3v8h8L11,3L3,3zM9,9L5,9L5,5h4v4zM3,21h8v-8L3,13v8zM5,15h4v4L5,19v-4zM13,13v8h8v-8h-8zM19,19h-4v-4h4v4z" />
 </vector>

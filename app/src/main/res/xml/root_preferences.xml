@@ -4,31 +4,21 @@
 
         <ListPreference
             app:defaultValue="1"
+            app:entries="@array/request_host_entries"
+            app:entryValues="@array/request_host_selector_entryValues"
+            app:icon="@drawable/ic_request_host"
+            app:key="settings_request_host"
+            app:title="@string/settings_request_host"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="1"
             app:entries="@array/request_region_entries"
             app:entryValues="@array/request_region_selector_entryValues"
-            app:icon="@drawable/ic_custom_request"
+            app:icon="@drawable/ic_request_region"
             app:key="settings_request_region"
             app:title="@string/settings_request_region"
             app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/settings_dashboard">
-
-        <Preference
-            app:icon="@drawable/ic_favorite"
-            app:key="settings_favorites"
-            app:title="@string/favorites" />
-
-        <Preference
-            app:icon="@drawable/ic_download"
-            app:key="settings_downloads"
-            app:title="@string/settings_downloads" />
-
-        <Preference
-            app:icon="@drawable/ic_share"
-            app:key="settings_shares"
-            app:title="@string/settings_shares" />
 
     </PreferenceCategory>
 

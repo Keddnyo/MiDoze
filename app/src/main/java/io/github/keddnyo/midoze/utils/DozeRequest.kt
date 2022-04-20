@@ -73,7 +73,17 @@ class DozeRequest {
             }
         }
 
-        val requestHost = "api-mifit-ru.huami.com"
+        val requestHost = when (prefs.getString("settings_request_host", "1")) {
+            "2" -> {
+                context.getString(R.string.request_host_second)
+            }
+            "3" -> {
+                context.getString(R.string.request_host_third)
+            }
+            else -> {
+                context.getString(R.string.request_host_first)
+            }
+        }
 
         val uriBuilder: Uri.Builder = Uri.Builder()
         uriBuilder.scheme("https")

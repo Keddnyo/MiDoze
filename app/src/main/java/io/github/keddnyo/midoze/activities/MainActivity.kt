@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.fragments.ExtrasFragment
 import io.github.keddnyo.midoze.fragments.FavoriteFragment
 import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private val feedFragment = FeedFragment()
     private val favFragment = FavoriteFragment()
+    private val extrasFragment = ExtrasFragment()
     private val settingsFragment = SettingsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_fav -> {
                     replaceFragment(favFragment)
                 }
+                R.id.action_extras -> {
+                    replaceFragment(extrasFragment)
+                }
                 R.id.action_settings -> {
                     replaceFragment(settingsFragment)
                 }
@@ -49,11 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         changeBadge(bottomBar)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -69,15 +69,6 @@ class MainActivity : AppCompatActivity() {
             PreferenceManager.getDefaultSharedPreferences(this)
 
         bottomBar.getOrCreateBadge(R.id.action_fav).number = prefs.getInt("favoriteCount", 0)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_custom_request -> {
-                startActivity(Intent(this, ExtrasRequestActivity::class.java))
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {

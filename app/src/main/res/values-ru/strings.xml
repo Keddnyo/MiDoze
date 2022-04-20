@@ -20,6 +20,7 @@
     <string name="settings_title">Настройки</string>
     <string name="settings_server_interaction">Взаимодействие с сервером</string>
     <string name="settings_request_region">Регион запроса</string>
+    <string name="settings_request_host">Хост запроса</string>
     <string name="settings_dashboard">Статистика</string>
     <string name="settings_downloads">Загрузки</string>
     <string name="settings_shares">Отправления</string>
