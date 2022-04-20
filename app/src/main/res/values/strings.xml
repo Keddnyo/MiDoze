@@ -79,10 +79,12 @@
         <item>China</item>
         <item>Russia</item>
         <item>USA</item>
+        <item>UAE</item>
     </string-array>
     <string-array name="request_region_selector_entryValues">
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 </resources>

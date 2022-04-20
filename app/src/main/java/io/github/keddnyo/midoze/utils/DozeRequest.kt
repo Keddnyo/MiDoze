@@ -57,6 +57,9 @@ class DozeRequest {
             "3" -> {
                 "US"
             }
+            "4" -> {
+                "AR"
+            }
             else -> {
                 "CH"
             }
@@ -67,6 +70,9 @@ class DozeRequest {
             }
             "3" -> {
                 "en_US"
+            }
+            "4" -> {
+                "ar_AR"
             }
             else -> {
                 "zh_CH"
