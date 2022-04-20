@@ -27,16 +27,19 @@
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_app_theme">App theme</string>
     <string name="settings_server_interaction">Server interaction</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
+
+    <string name="settings_extras">Extras</string>
+    <string name="settings_custom_request">Custom request</string>
     <string name="settings_dashboard">Dashboard</string>
     <string name="settings_downloads">Downloads</string>
     <string name="settings_shares">Shares</string>
-    <string name="settings_extras">Extras</string>
     <string name="settings_items">item(-s)</string>
     <string name="settings_times">time(-s)</string>
-    <string name="settings_custom_request">Custom request</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
@@ -49,6 +52,17 @@
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
     <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
+
+    <string-array name="app_theme_entries">
+        <item>Auto</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="app_theme_entryValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
     <string-array name="request_host_entries">
         <item>@string/request_host_first</item>

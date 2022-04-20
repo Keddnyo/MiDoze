@@ -18,22 +18,31 @@
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
+    <string name="settings_appearance">Оформление</string>
+    <string name="settings_app_theme">Тема приложения</string>
     <string name="settings_server_interaction">Взаимодействие с сервером</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
+
+    <string name="settings_extras">Экстра</string>
+    <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_dashboard">Статистика</string>
     <string name="settings_downloads">Загрузки</string>
     <string name="settings_shares">Отправления</string>
     <string name="settings_items">элемента(-ов)</string>
     <string name="settings_times">раз(-а)</string>
-    <string name="settings_extras">Экстра</string>
-    <string name="settings_custom_request">Ручной запрос</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
     <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
     <string name="open_in_browser">В браузере</string>
+
+    <string-array name="app_theme_entries">
+        <item>Авто</item>
+        <item>Светлая тема</item>
+        <item>Тёмная тема</item>
+    </string-array>
 
     <string-array name="request_region_entries">
         <item>Китай</item>
