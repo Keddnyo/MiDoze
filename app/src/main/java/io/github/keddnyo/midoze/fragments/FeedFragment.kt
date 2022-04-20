@@ -1,11 +1,13 @@
 package io.github.keddnyo.midoze.fragments
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
@@ -22,6 +24,8 @@ class FeedFragment : Fragment() {
 
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
+    private lateinit var deviceListRecyclerView: RecyclerView
+    private var state: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +53,16 @@ class FeedFragment : Fragment() {
         )
 
         if (view != null) {
-            val deviceListRecyclerView: RecyclerView = findViewById(R.id.device_list_recycler_view)
+            deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
             deviceListRecyclerView.layoutManager =
                 GridLayoutManager(context, UiUtils().getRecyclerSpanCount(this))
-            deviceListRecyclerView.adapter = deviceListAdapter
+
+            val adapter = deviceListAdapter
+            deviceListRecyclerView.adapter = adapter
+
+            // adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
+
 
             when (DozeRequest().isOnline(this)) {
                 true -> {
@@ -99,12 +109,22 @@ class FeedFragment : Fragment() {
                         deviceListAdapter.notifyItemInserted(i.toInt())
                         deviceListIndex[deviceNameValue] = i.toInt()
                     }
+
+                    if (state != null) {
+                        deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+                    }
                 }
                 false -> {
 
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
