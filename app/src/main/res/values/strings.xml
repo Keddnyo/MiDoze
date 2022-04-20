@@ -26,7 +26,12 @@
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
+    <string name="settings_dashboard">Dashboard</string>
+    <string name="settings_downloads">Downloads</string>
+    <string name="settings_shares">Shares</string>
     <string name="settings_extras">Extras</string>
+    <string name="settings_items">item(-s)</string>
+    <string name="settings_times">time(-s)</string>
     <string name="settings_custom_request">Custom request</string>
 
     <string name="settings_about">About</string>

@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.Language
@@ -107,6 +109,16 @@ class FirmwareActivity : AppCompatActivity() {
 
         firmwareDownloadButton.setOnClickListener {
             getFirmware(firmwareResponse, context, deviceNameValue)
+
+            val prefs: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = prefs.edit()
+
+            var counter = prefs.getInt("downloadCount", 0)
+            counter++
+
+            editor.putInt("downloadCount", counter)
+            editor.apply()
         }
 
         firmwareDownloadButton.setOnLongClickListener {
@@ -167,5 +179,15 @@ class FirmwareActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
         startActivity(shareIntent)
+
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = prefs.edit()
+
+        var counter = prefs.getInt("shareCount", 0)
+        counter++
+
+        editor.putInt("shareCount", counter)
+        editor.apply()
     }
 }

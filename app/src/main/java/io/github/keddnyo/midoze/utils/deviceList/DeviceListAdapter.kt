@@ -38,7 +38,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
 
         val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
-        val shareLayout: LinearLayout = itemView.findViewById(R.id.shareLayout)
         val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
         val customLayout: LinearLayout = itemView.findViewById(R.id.customLayout)
     }
@@ -94,17 +93,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                 editor.putInt("favoriteCount", counter)
                 editor.apply()
             }
-        }
-
-        holder.shareLayout.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "https://schakal.ru/fw/firmwares_list.htm?device=$deviceIndex")
-                type = "text/plain"
-            }
-
-            val shareIntent = Intent.createChooser(sendIntent, holder.deviceNameTextView.text)
-            holder.shareLayout.context.startActivity(shareIntent)
         }
 
         holder.customLayout.setOnClickListener {

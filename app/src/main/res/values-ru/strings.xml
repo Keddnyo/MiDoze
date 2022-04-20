@@ -17,6 +17,11 @@
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
+    <string name="settings_dashboard">Статистика</string>
+    <string name="settings_downloads">Загрузки</string>
+    <string name="settings_shares">Отправления</string>
+    <string name="settings_items">элемента(-ов)</string>
+    <string name="settings_times">раз(-а)</string>
     <string name="settings_extras">Экстра</string>
     <string name="settings_custom_request">Ручной запрос</string>
 

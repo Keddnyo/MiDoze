@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="end">
+                android:gravity="center">
 
                 <LinearLayout
                     android:id="@+id/likeLayout"
@@ -91,13 +91,22 @@
                         android:layout_height="28dp"
                         android:src="@drawable/ic_favorite_border" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Like"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="10pt"
+                        android:paddingStart="5dp"/>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/customLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="50dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -105,19 +114,14 @@
                         android:layout_height="28dp"
                         android:src="@drawable/ic_custom_request" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/shareLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_forward" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Custom"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="10pt"
+                        android:paddingStart="5dp"/>
 
                 </LinearLayout>
 
