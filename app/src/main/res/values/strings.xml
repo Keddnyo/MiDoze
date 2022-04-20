@@ -36,7 +36,7 @@
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
-    <string name="settings_jsons_storage_title">JSONs storage</string>
+    <string name="settings_json_storage_title">JSONs storage</string>
     <string name="settings_schakal" translatable="false">Schakal</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="settings_app_github_page">App\'s GitHub repo</string>
 </resources>

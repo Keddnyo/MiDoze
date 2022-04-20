@@ -26,5 +26,6 @@
     <string name="settings_custom_request">Ручной запрос</string>
 
     <string name="settings_about">О приложении</string>
-    <string name="settings_jsons_storage_title">Хранилище JSON</string>
+    <string name="settings_json_storage_title">Хранилище JSON</string>
+    <string name="settings_app_github_page">Страница проекта на GitHub</string>
 </resources>

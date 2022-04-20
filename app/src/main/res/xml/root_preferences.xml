@@ -31,7 +31,12 @@
             app:icon="@drawable/ic_cloud"
             app:key="settings_server_info"
             app:summary="@string/settings_schakal"
-            app:title="@string/settings_jsons_storage_title" />
+            app:title="@string/settings_json_storage_title" />
+
+        <Preference
+            app:icon="@drawable/ic_info"
+            app:key="settings_app_github_page"
+            app:title="@string/settings_app_github_page" />
 
     </PreferenceCategory>
 

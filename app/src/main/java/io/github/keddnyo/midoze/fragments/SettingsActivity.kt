@@ -27,8 +27,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val about = findPreference<Preference>("settings_app_info")
         val cloud = findPreference<Preference>("settings_server_info")
+        val github = findPreference<Preference>("settings_app_github_page")
 
-        if (favorites != null && downloads != null && shares != null && about != null && cloud != null) {
+        if (favorites != null && downloads != null && shares != null && about != null && cloud != null && github != null) {
             val prefs: SharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
@@ -48,6 +49,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
             cloud.setOnPreferenceClickListener {
                 startActivity(
                     Intent(Intent.ACTION_VIEW, Uri.parse("https://4pda.to/forum/index.php?showuser=243484"))
+                )
+                true
+            }
+
+            github.setOnPreferenceClickListener {
+                startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
                 )
                 true
             }
