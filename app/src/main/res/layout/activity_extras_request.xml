@@ -25,10 +25,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_production_source">
+            android:hint="@string/extras_production_source"
+            android:paddingTop="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasProductionSourceEditText"
@@ -40,10 +40,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_name">
+            android:hint="@string/extras_app_name"
+            android:paddingTop="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasAppNameEditText"
@@ -55,11 +55,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_version">
+            android:hint="@string/extras_app_version"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasAppVersionEditText"

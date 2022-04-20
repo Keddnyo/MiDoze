@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,6 +56,7 @@ class FavoriteFragment : Fragment() {
 
         if (view != null) {
             deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
+            val emptyListTextView: TextView = findViewById(R.id.empty_list_text_view)
             deviceListRecyclerView.layoutManager =
                 GridLayoutManager(context, UiUtils().getRecyclerSpanCount(this))
 
@@ -63,6 +65,9 @@ class FavoriteFragment : Fragment() {
 
             when (DozeRequest().isOnline(this)) {
                 true -> {
+                    deviceListRecyclerView.visibility = View.VISIBLE
+                    emptyListTextView.visibility = View.GONE
+
                     val deviceListJson = runBlocking {
                         withContext(Dispatchers.IO) {
                             DozeRequest().getFirmwareLatest()
@@ -95,7 +100,15 @@ class FavoriteFragment : Fragment() {
                         val prefs: SharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(this)
 
-                        title = "Favorites" // TODO: Replace by string value
+                        title = getString(R.string.favorites)
+
+                        if (prefs.getInt("favoriteCount", 0) == 0) {
+                            deviceListRecyclerView.visibility = View.GONE
+                            emptyListTextView.visibility = View.VISIBLE
+                        } else {
+                            deviceListRecyclerView.visibility = View.VISIBLE
+                            emptyListTextView.visibility = View.GONE
+                        }
 
                         if (prefs.getBoolean(i, false)) {
                             deviceListAdapter.addDevice(
@@ -117,7 +130,6 @@ class FavoriteFragment : Fragment() {
                     }
                 }
                 false -> {
-
                 }
             }
         }

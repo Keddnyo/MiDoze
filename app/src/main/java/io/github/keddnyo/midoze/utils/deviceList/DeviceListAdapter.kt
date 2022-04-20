@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
-import io.github.keddnyo.midoze.activities.MainActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -36,10 +35,9 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
+        val customRequestIcon: ImageView = itemView.findViewById(R.id.customRequestIcon)
 
-        val likeLayout: LinearLayout = itemView.findViewById(R.id.likeLayout)
         val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
-        val customLayout: LinearLayout = itemView.findViewById(R.id.customLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -70,12 +68,11 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                     openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context, false)
                 }
                 else -> {
-                    // TODO: something
                 }
             }
         }
 
-        holder.likeLayout.setOnClickListener {
+        holder.likeIcon.setOnClickListener {
             var counter = prefs.getInt("favoriteCount", 0)
 
             if (prefs.getBoolean(deviceIndex, false)) {
@@ -95,13 +92,12 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             }
         }
 
-        holder.customLayout.setOnClickListener {
-            when (DozeRequest().isOnline(holder.customLayout.context)) {
+        holder.customRequestIcon.setOnClickListener {
+            when (DozeRequest().isOnline(holder.customRequestIcon.context)) {
                 true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customLayout.context, true)
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customRequestIcon.context, true)
                 }
                 else -> {
-                    // TODO: something
                 }
             }
         }

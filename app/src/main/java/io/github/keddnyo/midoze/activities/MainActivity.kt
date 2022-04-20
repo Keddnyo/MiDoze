@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun changeBadge(bottomBar: BottomNavigationView) {
+    private fun changeBadge(bottomBar: BottomNavigationView) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(this)
 

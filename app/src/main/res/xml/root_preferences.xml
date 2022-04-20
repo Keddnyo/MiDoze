@@ -3,13 +3,13 @@
     <PreferenceCategory app:title="@string/settings_server_interaction">
 
         <ListPreference
+            app:defaultValue="1"
             app:entries="@array/request_region_entries"
             app:entryValues="@array/request_region_selector_entryValues"
             app:icon="@drawable/ic_custom_request"
             app:key="settings_request_region"
-            app:defaultValue="1"
-            app:useSimpleSummaryProvider="true"
-            app:title="@string/settings_request_region" />
+            app:title="@string/settings_request_region"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
@@ -49,6 +49,7 @@
         <Preference
             app:icon="@drawable/ic_info"
             app:key="settings_app_github_page"
+            app:summary="@string/settings_app_github_page_summary"
             app:title="@string/settings_app_github_page" />
 
     </PreferenceCategory>

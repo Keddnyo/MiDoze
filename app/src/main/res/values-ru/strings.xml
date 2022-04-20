@@ -6,6 +6,7 @@
     <string name="favorites">Избранное</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
+    <string name="empty">Здесь пока нет ни одного элемента</string>
 
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>
@@ -30,6 +31,7 @@
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
+    <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
 
     <string-array name="request_region_entries">
         <item>США</item>

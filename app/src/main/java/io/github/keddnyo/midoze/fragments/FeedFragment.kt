@@ -2,10 +2,12 @@ package io.github.keddnyo.midoze.fragments
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
@@ -52,6 +54,7 @@ class FeedFragment : Fragment() {
 
         if (view != null) {
             deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
+            val emptyListTextView: TextView = findViewById(R.id.empty_list_text_view)
             deviceListRecyclerView.layoutManager =
                 GridLayoutManager(context, UiUtils().getRecyclerSpanCount(this))
 
@@ -60,6 +63,9 @@ class FeedFragment : Fragment() {
 
             when (DozeRequest().isOnline(this)) {
                 true -> {
+                    deviceListRecyclerView.visibility = View.VISIBLE
+                    emptyListTextView.visibility = View.GONE
+
                     val deviceListJson = runBlocking {
                         withContext(Dispatchers.IO) {
                             DozeRequest().getFirmwareLatest()
@@ -109,7 +115,8 @@ class FeedFragment : Fragment() {
                     }
                 }
                 false -> {
-
+                    deviceListRecyclerView.visibility = View.GONE
+                    emptyListTextView.visibility = View.VISIBLE
                 }
             }
         }
