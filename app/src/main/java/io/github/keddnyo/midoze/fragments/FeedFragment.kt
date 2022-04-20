@@ -60,10 +60,6 @@ class FeedFragment : Fragment() {
             val adapter = deviceListAdapter
             deviceListRecyclerView.adapter = adapter
 
-            // adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-
-
-
             when (DozeRequest().isOnline(this)) {
                 true -> {
                     val deviceListJson = runBlocking {

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
+import io.github.keddnyo.midoze.activities.MainActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -76,13 +77,21 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         }
 
         holder.likeLayout.setOnClickListener {
+            var counter = prefs.getInt("favoriteCount", 0)
+
             if (prefs.getBoolean(deviceIndex, false)) {
+                counter--
+
                 holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
                 editor.putBoolean(deviceIndex, false)
+                editor.putInt("favoriteCount", counter)
                 editor.apply()
             } else {
+                counter++
+
                 holder.likeIcon.setImageResource(R.drawable.ic_favorite)
                 editor.putBoolean(deviceIndex, true)
+                editor.putInt("favoriteCount", counter)
                 editor.apply()
             }
         }

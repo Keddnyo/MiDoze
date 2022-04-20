@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,8 @@ class FavoriteFragment : Fragment() {
 
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
+    private lateinit var deviceListRecyclerView: RecyclerView
+    private var state: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +54,12 @@ class FavoriteFragment : Fragment() {
         )
 
         if (view != null) {
-            val deviceListRecyclerView: RecyclerView = findViewById(R.id.device_list_recycler_view)
+            deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
             deviceListRecyclerView.layoutManager =
                 GridLayoutManager(context, UiUtils().getRecyclerSpanCount(this))
-            deviceListRecyclerView.adapter = deviceListAdapter
+
+            val adapter = deviceListAdapter
+            deviceListRecyclerView.adapter = adapter
 
             when (DozeRequest().isOnline(this)) {
                 true -> {
@@ -106,12 +111,22 @@ class FavoriteFragment : Fragment() {
                             deviceListIndex[deviceNameValue] = i.toInt()
                         }
                     }
+
+                    if (state != null) {
+                        deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+                    }
                 }
                 false -> {
 
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->

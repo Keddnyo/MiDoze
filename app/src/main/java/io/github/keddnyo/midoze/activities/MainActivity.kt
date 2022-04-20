@@ -1,11 +1,13 @@
 package io.github.keddnyo.midoze.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.fragments.FavoriteFragment
@@ -22,9 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
-
         replaceFragment(feedFragment)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -38,8 +44,11 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(settingsFragment)
                 }
             }
+            changeBadge(bottomBar)
             true
         }
+
+        changeBadge(bottomBar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,6 +64,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun changeBadge(bottomBar: BottomNavigationView) {
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(this)
+
+        bottomBar.getOrCreateBadge(R.id.action_fav).number = prefs.getInt("favoriteCount", 0)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_custom_request -> {
@@ -65,10 +81,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
+        finish()
     }
 }
