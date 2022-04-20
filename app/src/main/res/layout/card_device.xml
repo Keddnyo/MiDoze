@@ -90,21 +90,21 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/customRequestButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/settings_custom_request"
-                    tools:ignore="ButtonStyle" />
-
-                <Button
                     android:id="@+id/openBrowserButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:text="@string/open_in_browser"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/customRequestButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="@string/settings_custom_request"
                     tools:ignore="ButtonStyle" />
 
             </LinearLayout>

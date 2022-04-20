@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.utils.Dashboard
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
 
@@ -49,6 +50,8 @@ class ExtrasResponseActivity : AppCompatActivity() {
 
                 val shareIntent = Intent.createChooser(sendIntent, getString(R.string.settings_extras))
                 startActivity(shareIntent)
+
+                Dashboard().setShareCount(context)
             }
         }
         return super.onOptionsItemSelected(item)

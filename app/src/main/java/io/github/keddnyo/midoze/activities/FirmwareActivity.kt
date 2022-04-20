@@ -12,10 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
-import io.github.keddnyo.midoze.utils.Language
-import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -110,16 +107,7 @@ class FirmwareActivity : AppCompatActivity() {
 
         firmwareDownloadButton.setOnClickListener {
             getFirmware(firmwareResponse, context, deviceNameValue)
-
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
-            val editor = prefs.edit()
-
-            var counter = prefs.getInt("downloadCount", 0)
-            counter++
-
-            editor.putInt("downloadCount", counter)
-            editor.apply()
+            Dashboard().setDownloadCount(context)
         }
 
         firmwareDownloadButton.setOnLongClickListener {
@@ -181,14 +169,6 @@ class FirmwareActivity : AppCompatActivity() {
         val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
         startActivity(shareIntent)
 
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
-        val editor = prefs.edit()
-
-        var counter = prefs.getInt("shareCount", 0)
-        counter++
-
-        editor.putInt("shareCount", counter)
-        editor.apply()
+        Dashboard().setShareCount(context)
     }
 }
