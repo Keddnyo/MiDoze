@@ -43,13 +43,16 @@
     <string name="settings_schakal" translatable="false">Schakal</string>
     <string name="settings_app_github_page">App\'s GitHub repo</string>
     <string name="settings_app_github_page_summary">Visit app\'s GitHub repo</string>
+    <string name="open_in_browser">In browser</string>
 
     <string-array name="request_region_entries">
-        <item>USA</item>
         <item>China</item>
+        <item>Russia</item>
+        <item>USA</item>
     </string-array>
     <string-array name="request_region_selector_entryValues">
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>

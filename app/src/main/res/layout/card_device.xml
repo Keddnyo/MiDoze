@@ -9,7 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="4dp"
+        app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="20dp">
 
@@ -26,7 +26,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -37,10 +38,11 @@
                         tools:ignore="ContentDescription" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -55,6 +57,14 @@
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/likeIcon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_margin="5dp"
+                        android:foregroundGravity="right"
+                        android:src="@drawable/ic_favorite_border" />
 
                 </LinearLayout>
 
@@ -79,19 +89,21 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/likeIcon"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_margin="15dp"
-                    android:src="@drawable/ic_favorite_border" />
+                <Button
+                    android:id="@+id/customRequestButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="@string/settings_custom_request" />
 
-                <ImageView
-                    android:id="@+id/customRequestIcon"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_margin="15dp"
-                    android:src="@drawable/ic_custom_request" />
+                <Button
+                    android:id="@+id/openBrowserButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="@string/open_in_browser" />
 
             </LinearLayout>
 

@@ -35,7 +35,8 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
-        val customRequestIcon: ImageView = itemView.findViewById(R.id.customRequestIcon)
+        val customRequestButton: Button = itemView.findViewById(R.id.customRequestButton)
+        val openBrowserButton: Button = itemView.findViewById(R.id.openBrowserButton)
 
         val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
     }
@@ -92,10 +93,20 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             }
         }
 
-        holder.customRequestIcon.setOnClickListener {
-            when (DozeRequest().isOnline(holder.customRequestIcon.context)) {
+        holder.customRequestButton.setOnClickListener {
+            when (DozeRequest().isOnline(holder.customRequestButton.context)) {
                 true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customRequestIcon.context, true)
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customRequestButton.context, true)
+                }
+                else -> {
+                }
+            }
+        }
+
+        holder.openBrowserButton.setOnClickListener {
+            when (DozeRequest().isOnline(holder.openBrowserButton.context)) {
+                true -> {
+                    DozeRequest().getOldVersions(holder.openBrowserButton.context, deviceIndex)
                 }
                 else -> {
                 }

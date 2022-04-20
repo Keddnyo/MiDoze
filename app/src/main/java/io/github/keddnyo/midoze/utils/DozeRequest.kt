@@ -52,18 +52,24 @@ class DozeRequest {
 
         val country = when (prefs.getString("settings_request_region", "1")) {
             "2" -> {
-                "CH"
+                "RU"
+            }
+            "3" -> {
+                "US"
             }
             else -> {
-                "US"
+                "CH"
             }
         }
         val lang = when (prefs.getString("settings_request_region", "1")) {
             "2" -> {
-                "zh_CH"
+                "ru_RU"
+            }
+            "3" -> {
+                "en_US"
             }
             else -> {
-                "en_US"
+                "zh_CH"
             }
         }
 

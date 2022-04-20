@@ -32,9 +32,11 @@
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
     <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
+    <string name="open_in_browser">В браузере</string>
 
     <string-array name="request_region_entries">
-        <item>США</item>
         <item>Китай</item>
+        <item>Россия</item>
+        <item>США</item>
     </string-array>
 </resources>
