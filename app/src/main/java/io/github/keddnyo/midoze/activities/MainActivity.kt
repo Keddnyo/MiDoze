@@ -29,18 +29,6 @@ class MainActivity : AppCompatActivity() {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(this)
 
-        when (prefs.getString("settings_default_tab", "1")) {
-            "2" -> {
-                replaceFragment(favFragment)
-            }
-            "3" -> {
-                replaceFragment(extrasFragment)
-            }
-            else -> {
-                replaceFragment(feedFragment)
-            }
-        }
-
         val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         fun changeBadge() {
@@ -48,6 +36,35 @@ class MainActivity : AppCompatActivity() {
         }
 
         changeBadge()
+
+        fun openFragment(index: Int) {
+            when (index) {
+                1 -> {
+                    replaceFragment(feedFragment)
+                    bottomBar.selectedItemId = R.id.action_feed
+                }
+                2 -> {
+                    replaceFragment(favFragment)
+                    bottomBar.selectedItemId = R.id.action_fav
+                }
+                3 -> {
+                    replaceFragment(extrasFragment)
+                    bottomBar.selectedItemId = R.id.action_extras
+                }
+            }
+        }
+
+        when (prefs.getString("settings_default_tab", "1")) {
+            "2" -> {
+                openFragment(2)
+            }
+            "3" -> {
+                openFragment(3)
+            }
+            else -> {
+                openFragment(1)
+            }
+        }
 
         bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -70,16 +87,13 @@ class MainActivity : AppCompatActivity() {
 
         when (intent.action.toString()) {
             "FEED_SHORTCUT" -> {
-                replaceFragment(feedFragment)
-                bottomBar.selectedItemId = R.id.action_feed
+                openFragment(1)
             }
             "FAVORITE_SHORTCUT" -> {
-                replaceFragment(favFragment)
-                bottomBar.selectedItemId = R.id.action_fav
+                openFragment(2)
             }
             "EXTRAS_SHORTCUT" -> {
-                replaceFragment(extrasFragment)
-                bottomBar.selectedItemId = R.id.action_extras
+                openFragment(3)
             }
         }
     }
