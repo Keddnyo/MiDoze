@@ -22,5 +22,6 @@ class Language {
             .substring(1,arrayOfLanguageNames.toString().length -1)
 
         return languageString.replace(", pt-br", "")
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 }
