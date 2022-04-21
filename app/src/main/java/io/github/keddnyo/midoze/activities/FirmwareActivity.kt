@@ -89,6 +89,7 @@ class FirmwareActivity : AppCompatActivity() {
         } else {
             runOnUiThread {
                 UiUtils().showToast(context, getString(R.string.firmware_not_found))
+                UiUtils().showToast(context, getString(R.string.firmware_try_switch_region))
             }
             finish()
         }

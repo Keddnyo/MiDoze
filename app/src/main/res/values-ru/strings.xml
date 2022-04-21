@@ -16,6 +16,7 @@
     <string name="firmware_languages">Языки</string>
     <string name="firmware_downloading">Загрузка…</string>
     <string name="firmware_not_found">Не найдено</string>
+    <string name="firmware_try_switch_region">Попробуйте сменить регион</string>
     <string name="firmware_share">Поделиться</string>
     <string name="changelog_not_specified">Изменения не указаны</string>
     <string name="extras_import_button">Импорт</string>
