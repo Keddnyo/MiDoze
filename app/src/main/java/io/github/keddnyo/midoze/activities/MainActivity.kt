@@ -31,12 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        fun changeBadge() {
-            bottomBar.getOrCreateBadge(R.id.action_fav).number = prefs.getInt("favoriteCount", 0)
-        }
-
-        changeBadge()
-
         fun openFragment(index: Int) {
             when (index) {
                 1 -> {
@@ -81,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(settingsFragment)
                 }
             }
-            changeBadge()
             true
         }
 

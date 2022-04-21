@@ -3,6 +3,7 @@ package io.github.keddnyo.midoze.fragments
 import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
@@ -200,6 +201,12 @@ class FavoriteFragment : Fragment() {
 
         editor.putInt("favoriteCount", 0)
         editor.apply()
+
+        reloadFragment()
+    }
+
+    private fun reloadFragment() {
+        fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FeedFragment())?.commit()
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
