@@ -1,13 +1,14 @@
 package io.github.keddnyo.midoze.fragments
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onResume() = with(requireActivity()) {
         super.onResume()
+        setHasOptionsMenu(true)
 
         deviceListIndex.clear()
         deviceListAdapter.clear()
@@ -143,6 +145,61 @@ class FavoriteFragment : Fragment() {
         super.onPause()
 
         state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_favorite, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_clear_favorites -> {
+                showClearDialog(requireContext())
+            }
+        }
+        return false
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        if (prefs.getInt("favoriteCount",0) < 1) {
+            menu.findItem(R.id.action_clear_favorites)?.isVisible = false
+        }
+
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    private fun showClearDialog(context: Context) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+            .setTitle(R.string.favorites_clear)
+            .setMessage(R.string.favorites_clear_summary)
+            .setIcon(R.drawable.ic_clear)
+            .setCancelable(false)
+
+        builder.setNegativeButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
+            clearFavorites()
+            builder.show().dismiss()
+        }
+        builder.setPositiveButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
+            builder.show().dismiss()
+        }
+        builder.show()
+    }
+    
+    private fun clearFavorites() {
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor = prefs.edit()
+        
+        for (i in 0..1000) {
+            editor.putBoolean(i.toString(), false)
+            editor.apply()
+        }
+
+        editor.putInt("favoriteCount", 0)
+        editor.apply()
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->

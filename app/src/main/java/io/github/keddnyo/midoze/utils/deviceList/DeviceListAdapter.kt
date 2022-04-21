@@ -49,7 +49,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
-        val editor = prefs.edit()
 
         holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
         holder.deviceIconImageView.setImageResource(deviceListDataArray[position].deviceIcon)

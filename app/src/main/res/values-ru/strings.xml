@@ -4,6 +4,8 @@
 
     <string name="feed_title">Лента</string>
     <string name="favorites_title">Избранное</string>
+    <string name="favorites_clear">Очистить</string>
+    <string name="favorites_clear_summary">Вы точно хотите очистить Избранное?</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
     <string name="check_connectivity">Проверьте подключение к интернету</string>

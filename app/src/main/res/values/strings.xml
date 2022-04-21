@@ -9,6 +9,8 @@
 
     <string name="feed_title">Feed</string>
     <string name="favorites_title">Favorites</string>
+    <string name="favorites_clear">Clear</string>
+    <string name="favorites_clear_summary">Are you sure you want to clear Favorites?</string>
 
     <string name="firmware_connectivity_error">Connectivity error</string>
     <string name="check_connectivity">Check internet connectivity</string>
