@@ -11,7 +11,8 @@
     <string name="favorites">Favorites</string>
 
     <string name="firmware_connectivity_error">Connectivity error</string>
-    <string name="empty">There are no items here</string>
+    <string name="check_connectivity">Check internet connectivity</string>
+    <string name="add_favorites">Click on Like icon to add device to favorites</string>
 
     <string name="firmware_get">Get</string>
     <string name="firmware_changelog">Changelog</string>

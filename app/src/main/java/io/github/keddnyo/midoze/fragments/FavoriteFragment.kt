@@ -105,6 +105,7 @@ class FavoriteFragment : Fragment() {
                         if (prefs.getInt("favoriteCount", 0) == 0) {
                             deviceListRecyclerView.visibility = View.GONE
                             emptyListTextView.visibility = View.VISIBLE
+                            emptyListTextView.text = getString(R.string.add_favorites)
                         } else {
                             deviceListRecyclerView.visibility = View.VISIBLE
                             emptyListTextView.visibility = View.GONE
@@ -130,6 +131,9 @@ class FavoriteFragment : Fragment() {
                     }
                 }
                 false -> {
+                    deviceListRecyclerView.visibility = View.GONE
+                    emptyListTextView.visibility = View.VISIBLE
+                    emptyListTextView.text = getString(R.string.check_connectivity)
                 }
             }
         }

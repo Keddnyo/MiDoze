@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         UiUtils().switchDarkMode(this)
         replaceFragment(feedFragment)
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
@@ -53,6 +49,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         changeBadge(bottomBar)
+
+        when (intent.action.toString()) {
+            "FEED_SHORTCUT" -> {
+                replaceFragment(feedFragment)
+                bottomBar.selectedItemId = R.id.action_feed
+            }
+            "FAVORITE_SHORTCUT" -> {
+                replaceFragment(favFragment)
+                bottomBar.selectedItemId = R.id.action_fav
+            }
+            "EXTRAS_SHORTCUT" -> {
+                replaceFragment(extrasFragment)
+                bottomBar.selectedItemId = R.id.action_extras
+            }
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

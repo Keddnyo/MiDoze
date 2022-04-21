@@ -117,6 +117,7 @@ class FeedFragment : Fragment() {
                 false -> {
                     deviceListRecyclerView.visibility = View.GONE
                     emptyListTextView.visibility = View.VISIBLE
+                    emptyListTextView.text = getString(R.string.check_connectivity)
                 }
             }
         }

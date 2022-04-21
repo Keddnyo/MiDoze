@@ -6,7 +6,27 @@
         android:shortcutId="Feed"
         android:shortcutShortLabel="@string/feed">
         <intent
-            android:action="android.intent.action.VIEW"
+            android:action="FEED_SHORTCUT"
+            android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
+            android:targetPackage="io.github.keddnyo.midoze" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_shortcut"
+        android:shortcutId="Favorite"
+        android:shortcutShortLabel="@string/favorites">
+        <intent
+            android:action="FAVORITE_SHORTCUT"
+            android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
+            android:targetPackage="io.github.keddnyo.midoze" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_extras_shortcut"
+        android:shortcutId="Extras"
+        android:shortcutShortLabel="@string/settings_extras">
+        <intent
+            android:action="EXTRAS_SHORTCUT"
             android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
             android:targetPackage="io.github.keddnyo.midoze" />
     </shortcut>

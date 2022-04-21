@@ -6,7 +6,8 @@
     <string name="favorites">Избранное</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
-    <string name="empty">Здесь пока нет ни одного элемента</string>
+    <string name="check_connectivity">Проверьте подключение к интернету</string>
+    <string name="add_favorites">Нажмите на значок сердечка чтобы добавить устройство в избранное</string>
 
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>
