@@ -18,10 +18,10 @@ class Language {
             )
         }
 
-        val languageString =  arrayOfLanguageNames.toString()
-            .substring(1,arrayOfLanguageNames.toString().length -1)
-
-        return languageString.replace(", pt-br", "")
-            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        return arrayOfLanguageNames.toString()
+            .substring(1, arrayOfLanguageNames.toString().length - 1)
+            .replace(", pt-br", "")
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } +
+                "."
     }
 }
