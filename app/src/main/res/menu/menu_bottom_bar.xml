@@ -5,19 +5,19 @@
     <item
         android:id="@+id/action_feed"
         android:icon="@drawable/ic_dashboard"
-        android:title="@string/feed"
+        android:title="@string/feed_title"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_fav"
         android:icon="@drawable/ic_favorite"
-        android:title="@string/favorites"
+        android:title="@string/favorites_title"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_extras"
         android:icon="@drawable/ic_extras"
-        android:title="@string/settings_extras"
+        android:title="@string/extras_title"
         app:showAsAction="ifRoom" />
 
     <item

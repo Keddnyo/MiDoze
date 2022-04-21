@@ -2,8 +2,8 @@
 <resources>
     <string name="firmware_updated">Прошивка обновлена</string>
 
-    <string name="feed">Лента</string>
-    <string name="favorites">Избранное</string>
+    <string name="feed_title">Лента</string>
+    <string name="favorites_title">Избранное</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
     <string name="check_connectivity">Проверьте подключение к интернету</string>
@@ -21,17 +21,18 @@
     <string name="settings_title">Настройки</string>
     <string name="settings_appearance">Оформление</string>
     <string name="settings_app_theme">Тема приложения</string>
-    <string name="settings_server_interaction">Взаимодействие с сервером</string>
+    <string name="settings_behaviour">Поведение</string>
+    <string name="settings_default_tab">Вкладка по умолчанию</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
 
-    <string name="settings_extras">Экстра</string>
-    <string name="settings_custom_request">Ручной запрос</string>
-    <string name="settings_dashboard">Статистика</string>
-    <string name="settings_downloads">Загрузки</string>
-    <string name="settings_shares">Отправления</string>
-    <string name="settings_items">элемента(-ов)</string>
-    <string name="settings_times">раз(-а)</string>
+    <string name="extras_title">Экстра</string>
+    <string name="extras_custom_request">Ручной запрос</string>
+    <string name="extras_dashboard">Статистика</string>
+    <string name="extras_downloads">Загрузки</string>
+    <string name="extras_shares">Отправления</string>
+    <string name="extras_items">элемента(-ов)</string>
+    <string name="extras_times">раз(-а)</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>

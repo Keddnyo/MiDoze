@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="@string/settings_custom_request"
+                    android:text="@string/extras_custom_request"
                     tools:ignore="ButtonStyle" />
 
             </LinearLayout>

@@ -95,7 +95,7 @@ class FeedFragment : Fragment() {
                         val firmwareUpdated = getString(R.string.firmware_updated)
                         val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
 
-                        title = getString(R.string.feed)
+                        title = getString(R.string.feed_title)
 
                         deviceListAdapter.addDevice(
                             DeviceListData(

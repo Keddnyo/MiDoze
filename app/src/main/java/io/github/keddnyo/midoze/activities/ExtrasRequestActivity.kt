@@ -19,7 +19,7 @@ class ExtrasRequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extras_request)
-        title = getString(R.string.settings_custom_request)
+        title = getString(R.string.extras_custom_request)
 
         val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =

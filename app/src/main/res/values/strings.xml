@@ -7,8 +7,8 @@
 
     <string name="firmware_updated">Firmware updated</string>
 
-    <string name="feed">Feed</string>
-    <string name="favorites">Favorites</string>
+    <string name="feed_title">Feed</string>
+    <string name="favorites_title">Favorites</string>
 
     <string name="firmware_connectivity_error">Connectivity error</string>
     <string name="check_connectivity">Check internet connectivity</string>
@@ -30,17 +30,18 @@
     <string name="settings_title">Settings</string>
     <string name="settings_appearance">Appearance</string>
     <string name="settings_app_theme">App theme</string>
-    <string name="settings_server_interaction">Server interaction</string>
+    <string name="settings_behaviour">Behaviour</string>
+    <string name="settings_default_tab">Default tab</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
 
-    <string name="settings_extras">Extras</string>
-    <string name="settings_custom_request">Custom request</string>
-    <string name="settings_dashboard">Dashboard</string>
-    <string name="settings_downloads">Downloads</string>
-    <string name="settings_shares">Shares</string>
-    <string name="settings_items">item(-s)</string>
-    <string name="settings_times">time(-s)</string>
+    <string name="extras_title">Extras</string>
+    <string name="extras_custom_request">Custom request</string>
+    <string name="extras_dashboard">Dashboard</string>
+    <string name="extras_downloads">Downloads</string>
+    <string name="extras_shares">Shares</string>
+    <string name="extras_items">item(-s)</string>
+    <string name="extras_times">time(-s)</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
@@ -53,6 +54,17 @@
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
     <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
+
+    <string-array name="default_tab_entries">
+        <item>@string/feed_title</item>
+        <item>@string/favorites_title</item>
+        <item>@string/extras_title</item>
+    </string-array>
+    <string-array name="default_tab_entryValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
     <string-array name="app_theme_entries">
         <item>Auto</item>

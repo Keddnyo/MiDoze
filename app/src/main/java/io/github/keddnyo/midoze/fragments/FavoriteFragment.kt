@@ -100,7 +100,7 @@ class FavoriteFragment : Fragment() {
                         val prefs: SharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(this)
 
-                        title = getString(R.string.favorites)
+                        title = getString(R.string.favorites_title)
 
                         if (prefs.getInt("favoriteCount", 0) == 0) {
                             deviceListRecyclerView.visibility = View.GONE

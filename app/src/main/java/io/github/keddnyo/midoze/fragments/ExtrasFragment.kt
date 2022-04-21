@@ -18,7 +18,7 @@ class ExtrasFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
 
-        requireActivity().title = getString(R.string.settings_extras)
+        requireActivity().title = getString(R.string.extras_title)
 
         val customRequest = findPreference<Preference>("extras_custom_request")
 
@@ -35,9 +35,9 @@ class ExtrasFragment : PreferenceFragmentCompat() {
                 true
             }
 
-            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.settings_items)}"
-            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.settings_times)}"
-            shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.settings_times)}"
+            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.extras_items)}"
+            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.extras_times)}"
+            shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.extras_times)}"
         }
     }
 }

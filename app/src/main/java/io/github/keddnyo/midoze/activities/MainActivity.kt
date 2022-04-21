@@ -25,9 +25,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         UiUtils().switchDarkMode(this)
-        replaceFragment(feedFragment)
+
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(this)
+
+        when (prefs.getString("settings_default_tab", "1")) {
+            "2" -> {
+                replaceFragment(favFragment)
+            }
+            "3" -> {
+                replaceFragment(extrasFragment)
+            }
+            else -> {
+                replaceFragment(feedFragment)
+            }
+        }
 
         val bottomBar: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        fun changeBadge() {
+            bottomBar.getOrCreateBadge(R.id.action_fav).number = prefs.getInt("favoriteCount", 0)
+        }
+
+        changeBadge()
 
         bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -44,11 +64,9 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(settingsFragment)
                 }
             }
-            changeBadge(bottomBar)
+            changeBadge()
             true
         }
-
-        changeBadge(bottomBar)
 
         when (intent.action.toString()) {
             "FEED_SHORTCUT" -> {
@@ -72,13 +90,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun changeBadge(bottomBar: BottomNavigationView) {
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(this)
-
-        bottomBar.getOrCreateBadge(R.id.action_fav).number = prefs.getInt("favoriteCount", 0)
     }
 
     override fun onBackPressed() {
