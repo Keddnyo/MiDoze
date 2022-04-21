@@ -36,6 +36,8 @@ class FirmwareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firmware)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        UiUtils().switchDarkMode(this)
+
         runBlocking {
             withContext(Dispatchers.IO) {
                 init()

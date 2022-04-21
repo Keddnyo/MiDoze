@@ -9,7 +9,7 @@
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
     <string name="check_connectivity">Проверьте подключение к интернету</string>
-    <string name="add_favorites">Здесь хранятся ваши любимые устройства. Добавляйте их нажимая на сердечко.</string>
+    <string name="add_favorites">Сохраняйте свои любимые устройства нажимая на сердечко</string>
 
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>
