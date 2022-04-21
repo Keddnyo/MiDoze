@@ -6,6 +6,7 @@
     <string name="title_zepp" translatable="false">Zepp</string>
 
     <string name="firmware_updated">Firmware updated</string>
+    <string name="open_in_browser">In browser</string>
 
     <string name="feed_title">Feed</string>
     <string name="favorites_title">Favorites</string>
@@ -52,7 +53,6 @@
     <string name="settings_schakal" translatable="false">Schakal</string>
     <string name="settings_app_github_page">App\'s GitHub repo</string>
     <string name="settings_app_github_page_summary">Visit app\'s GitHub repo</string>
-    <string name="open_in_browser">In browser</string>
 
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>

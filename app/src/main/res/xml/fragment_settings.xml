@@ -58,6 +58,10 @@
             app:summary="@string/settings_schakal"
             app:title="@string/settings_json_storage_title" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/app_name">
+
         <Preference
             app:icon="@drawable/ic_info"
             app:key="settings_app_github_page"

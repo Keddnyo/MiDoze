@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="firmware_updated">Прошивка обновлена</string>
+    <string name="open_in_browser">В браузере</string>
 
     <string name="feed_title">Лента</string>
     <string name="favorites_title">Избранное</string>
@@ -41,7 +42,6 @@
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
     <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
-    <string name="open_in_browser">В браузере</string>
 
     <string-array name="app_theme_entries">
         <item>Авто</item>
