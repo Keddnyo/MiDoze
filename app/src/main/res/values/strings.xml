@@ -33,7 +33,7 @@
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
-    <string name="settings_appearance">Appearance</string>
+    <string name="settings_application">Application</string>
     <string name="settings_app_theme">App theme</string>
     <string name="settings_behaviour">Behaviour</string>
     <string name="settings_default_tab">Default tab</string>

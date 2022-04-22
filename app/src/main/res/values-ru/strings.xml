@@ -24,7 +24,7 @@
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
-    <string name="settings_appearance">Оформление</string>
+    <string name="settings_application">Приложение</string>
     <string name="settings_app_theme">Тема приложения</string>
     <string name="settings_behaviour">Поведение</string>
     <string name="settings_default_tab">Вкладка по умолчанию</string>
