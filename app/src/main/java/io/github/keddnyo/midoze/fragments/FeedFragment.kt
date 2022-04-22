@@ -2,10 +2,10 @@ package io.github.keddnyo.midoze.fragments
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +36,7 @@ class FeedFragment : Fragment() {
 
     override fun onResume() = with(requireActivity()) {
         super.onResume()
+        setHasOptionsMenu(true)
 
         deviceListIndex.clear()
         deviceListAdapter.clear()
@@ -127,6 +128,26 @@ class FeedFragment : Fragment() {
         super.onPause()
 
         state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_feed, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                deviceListAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->

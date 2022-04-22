@@ -1,8 +1,10 @@
 package io.github.keddnyo.midoze.fragments
 
+import android.app.DownloadManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -32,6 +34,21 @@ class ExtrasFragment : PreferenceFragmentCompat() {
 
             customRequest.setOnPreferenceClickListener {
                 startActivity(Intent(requireContext(), ExtrasRequestActivity::class.java))
+                true
+            }
+
+            favorites.setOnPreferenceClickListener {
+                fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FavoriteFragment())?.commitNow()
+                true
+            }
+
+            downloads.setOnPreferenceClickListener {
+                startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
+                true
+            }
+
+            shares.setOnPreferenceClickListener {
+                Toast.makeText(requireContext(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show()
                 true
             }
 

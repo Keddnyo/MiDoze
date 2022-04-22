@@ -1,12 +1,15 @@
 package io.github.keddnyo.midoze.fragments
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.utils.UiUtils
+
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -18,8 +21,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onResume()
 
         requireActivity().title = getString(R.string.settings_title)
-
-        val darkMode = findPreference<Preference>("settings_app_theme")
 
         val about = findPreference<Preference>("settings_app_info")
         val cloud = findPreference<Preference>("settings_server_info")

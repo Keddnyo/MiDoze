@@ -176,7 +176,7 @@ class FavoriteFragment : Fragment() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
             .setTitle(R.string.favorites_clear)
             .setMessage(R.string.favorites_clear_summary)
-            .setIcon(R.drawable.ic_clear)
+            .setIcon(R.drawable.ic_info)
             .setCancelable(false)
 
         builder.setNegativeButton(android.R.string.ok) { _: DialogInterface?, _: Int ->

@@ -2,6 +2,7 @@
 <resources>
     <string name="firmware_updated">Прошивка обновлена</string>
     <string name="open_in_browser">В браузере</string>
+    <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
     <string name="favorites_title">Избранное</string>
