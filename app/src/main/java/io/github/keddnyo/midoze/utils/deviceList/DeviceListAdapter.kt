@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
@@ -20,6 +21,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
+
 
 class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
     private val deviceListDataArray = ArrayList<DeviceListData>()
@@ -95,6 +97,15 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                 else -> {
                 }
             }
+        }
+
+        val params = holder.itemView.layoutParams as GridLayoutManager.LayoutParams
+        if (position == deviceListDataArray.lastIndex) {
+            params.bottomMargin = 400
+            holder.itemView.layoutParams = params
+        } else {
+            params.bottomMargin = 0
+            holder.itemView.layoutParams = params
         }
     }
 
