@@ -32,6 +32,7 @@
 
     <string name="profile_title">Профиль</string>
     <string name="profile_custom_request">Ручной запрос</string>
+    <string name="profile_custom_request_server_response">Ответ сервера</string>
     <string name="profile_dashboard">Статистика</string>
     <string name="profile_downloads">Загрузки</string>
     <string name="profile_shares">Отправления</string>

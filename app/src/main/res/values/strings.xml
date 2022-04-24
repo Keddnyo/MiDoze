@@ -41,6 +41,7 @@
 
     <string name="profile_title">Me</string>
     <string name="profile_custom_request">Custom request</string>
+    <string name="profile_custom_request_server_response">Server response</string>
     <string name="profile_dashboard">Dashboard</string>
     <string name="profile_downloads">Downloads</string>
     <string name="profile_shares">Shares</string>
