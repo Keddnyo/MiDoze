@@ -100,6 +100,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
+        val backStackEntryCount = supportFragmentManager.backStackEntryCount
+        if (backStackEntryCount < 2) {
+            finish()
+        } else {
+            supportFragmentManager.popBackStack()
+        }
     }
 }
