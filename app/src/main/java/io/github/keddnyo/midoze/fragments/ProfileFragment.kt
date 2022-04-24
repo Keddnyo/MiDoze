@@ -10,7 +10,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
-import io.github.keddnyo.midoze.activities.ExtrasResponseActivity
 import io.github.keddnyo.midoze.activities.SettingsActivity
 
 class ProfileFragment : PreferenceFragmentCompat() {

@@ -27,7 +27,6 @@
     <string name="settings_application">Приложение</string>
     <string name="settings_app_theme">Тема приложения</string>
     <string name="settings_behaviour">Поведение</string>
-    <string name="settings_default_tab">Вкладка по умолчанию</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
 

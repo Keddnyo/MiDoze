@@ -80,9 +80,6 @@ class MainActivity : AppCompatActivity() {
             "FAVORITE_SHORTCUT" -> {
                 openFragment(2)
             }
-            "EXTRAS_SHORTCUT" -> {
-                openFragment(3)
-            }
         }
     }
 

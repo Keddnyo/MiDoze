@@ -36,7 +36,6 @@
     <string name="settings_application">Application</string>
     <string name="settings_app_theme">App theme</string>
     <string name="settings_behaviour">Behaviour</string>
-    <string name="settings_default_tab">Default tab</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
 
@@ -59,17 +58,6 @@
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
     <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
-
-    <string-array name="default_tab_entries">
-        <item>@string/feed_title</item>
-        <item>@string/favorites_title</item>
-        <item>@string/profile_other</item>
-    </string-array>
-    <string-array name="default_tab_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
 
     <string-array name="app_theme_entries">
         <item>Auto</item>
