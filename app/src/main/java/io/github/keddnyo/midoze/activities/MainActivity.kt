@@ -7,18 +7,16 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.fragments.ExtrasFragment
+import io.github.keddnyo.midoze.fragments.ProfileFragment
 import io.github.keddnyo.midoze.fragments.FavoriteFragment
 import io.github.keddnyo.midoze.fragments.FeedFragment
-import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.utils.UiUtils
 
 class MainActivity : AppCompatActivity() {
 
     private val feedFragment = FeedFragment()
     private val favFragment = FavoriteFragment()
-    private val extrasFragment = ExtrasFragment()
-    private val settingsFragment = SettingsFragment()
+    private val extrasFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +69,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_extras -> {
                     replaceFragment(extrasFragment)
                 }
-                R.id.action_settings -> {
-                    replaceFragment(settingsFragment)
-                }
             }
             true
         }
@@ -101,10 +96,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val backStackEntryCount = supportFragmentManager.backStackEntryCount
-        if (backStackEntryCount < 2) {
+        if (backStackEntryCount <= 1) {
             finish()
         } else {
-            supportFragmentManager.popBackStack()
+            replaceFragment(feedFragment)
+            findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.action_feed
         }
     }
 }

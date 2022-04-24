@@ -40,13 +40,14 @@
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
 
-    <string name="extras_title">Extras</string>
-    <string name="extras_custom_request">Custom request</string>
-    <string name="extras_dashboard">Dashboard</string>
-    <string name="extras_downloads">Downloads</string>
-    <string name="extras_shares">Shares</string>
-    <string name="extras_items">item(-s)</string>
-    <string name="extras_times">time(-s)</string>
+    <string name="profile_title">Me</string>
+    <string name="profile_custom_request">Custom request</string>
+    <string name="profile_dashboard">Dashboard</string>
+    <string name="profile_downloads">Downloads</string>
+    <string name="profile_shares">Shares</string>
+    <string name="profile_items">item(-s)</string>
+    <string name="profile_times">time(-s)</string>
+    <string name="profile_other">Other</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
@@ -62,7 +63,7 @@
     <string-array name="default_tab_entries">
         <item>@string/feed_title</item>
         <item>@string/favorites_title</item>
-        <item>@string/extras_title</item>
+        <item>@string/profile_other</item>
     </string-array>
     <string-array name="default_tab_entryValues">
         <item>1</item>

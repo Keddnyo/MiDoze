@@ -10,32 +10,30 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
+import io.github.keddnyo.midoze.activities.ExtrasResponseActivity
+import io.github.keddnyo.midoze.activities.SettingsActivity
 
-class ExtrasFragment : PreferenceFragmentCompat() {
+class ProfileFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.fragment_extras, rootKey)
+        setPreferencesFromResource(R.xml.fragment_profile, rootKey)
     }
 
     override fun onResume() {
         super.onResume()
 
-        requireActivity().title = getString(R.string.extras_title)
-
-        val customRequest = findPreference<Preference>("extras_custom_request")
+        requireActivity().title = getString(R.string.profile_title)
 
         val favorites = findPreference<Preference>("extras_favorites")
         val downloads = findPreference<Preference>("extras_downloads")
         val shares = findPreference<Preference>("extras_shares")
 
-        if (customRequest != null && favorites != null && downloads != null && shares != null) {
+        val customRequest = findPreference<Preference>("extras_custom_request")
+        val settings = findPreference<Preference>("extras_settings")
+
+        if (customRequest != null && favorites != null && downloads != null && shares != null && settings != null) {
             val prefs: SharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(requireActivity())
-
-            customRequest.setOnPreferenceClickListener {
-                startActivity(Intent(requireContext(), ExtrasRequestActivity::class.java))
-                true
-            }
 
             favorites.setOnPreferenceClickListener {
                 fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FavoriteFragment())?.commitNow()
@@ -52,9 +50,19 @@ class ExtrasFragment : PreferenceFragmentCompat() {
                 true
             }
 
-            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.extras_items)}"
-            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.extras_times)}"
-            shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.extras_times)}"
+            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.profile_items)}"
+            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.profile_times)}"
+            shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.profile_times)}"
+
+            customRequest.setOnPreferenceClickListener {
+                startActivity(Intent(requireContext(), ExtrasRequestActivity::class.java))
+                true
+            }
+
+            settings.setOnPreferenceClickListener {
+                startActivity(Intent(context, SettingsActivity::class.java))
+                true
+            }
         }
     }
 }

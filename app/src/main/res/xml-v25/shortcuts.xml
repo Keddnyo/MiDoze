@@ -24,7 +24,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_extras_shortcut"
         android:shortcutId="Extras"
-        android:shortcutShortLabel="@string/extras_title">
+        android:shortcutShortLabel="@string/profile_other">
         <intent
             android:action="EXTRAS_SHORTCUT"
             android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
@@ -34,7 +34,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_custom_request_shortcut"
         android:shortcutId="CustomRequest"
-        android:shortcutShortLabel="@string/extras_custom_request">
+        android:shortcutShortLabel="@string/profile_custom_request">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="io.github.keddnyo.midoze.activities.ExtrasRequestActivity"

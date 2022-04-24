@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ExtrasResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
@@ -37,6 +40,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />

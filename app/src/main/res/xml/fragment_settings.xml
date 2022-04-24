@@ -4,15 +4,6 @@
 
         <ListPreference
             app:defaultValue="1"
-            app:entries="@array/default_tab_entries"
-            app:entryValues="@array/default_tab_entryValues"
-            app:icon="@drawable/ic_tab"
-            app:key="settings_default_tab"
-            app:title="@string/settings_default_tab"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="1"
             app:entries="@array/app_theme_entries"
             app:entryValues="@array/app_theme_entryValues"
             app:icon="@drawable/ic_dark_mode"
