@@ -229,8 +229,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun reloadFragment() {
-        fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FeedFragment())?.commit()
-        fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, this)?.commit()
+        fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FavoriteFragment())?.commit()
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->
