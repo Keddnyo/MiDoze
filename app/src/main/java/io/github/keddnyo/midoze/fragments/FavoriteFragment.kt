@@ -202,11 +202,11 @@ class FavoriteFragment : Fragment() {
             .setIcon(R.drawable.ic_info)
             .setCancelable(false)
 
-        builder.setNegativeButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
-            clearFavorites()
+        builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
             builder.show().dismiss()
         }
-        builder.setPositiveButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
+        builder.setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
+            clearFavorites()
             builder.show().dismiss()
         }
         builder.show()
