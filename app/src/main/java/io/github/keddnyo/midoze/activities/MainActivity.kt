@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -87,17 +88,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
             .commit()
-    }
-
-    override fun onBackPressed() {
-        val backStackEntryCount = supportFragmentManager.backStackEntryCount
-        if (backStackEntryCount <= 1) {
-            finish()
-        } else {
-            replaceFragment(feedFragment)
-            findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.action_feed
-        }
     }
 }
