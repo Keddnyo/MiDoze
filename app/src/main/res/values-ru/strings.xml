@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="firmware_updated">Прошивка обновлена</string>
+    <string name="firmware_version">Версия прошивки</string>
     <string name="open_in_browser">В браузере</string>
     <string name="search">Поиск</string>
 

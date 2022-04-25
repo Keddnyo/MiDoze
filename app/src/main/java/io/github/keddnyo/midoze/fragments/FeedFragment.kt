@@ -96,7 +96,7 @@ open class FeedFragment(private val favorite: Boolean) : Fragment() {
                         val firmwareVersionValue = jsonObject.getString("fw")
                         val firmwareReleaseDateValue = StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
 
-                        val firmwareUpdated = getString(R.string.firmware_updated)
+                        val firmwareUpdated = getString(R.string.firmware_version)
                         val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
 
                         val prefs: SharedPreferences =
