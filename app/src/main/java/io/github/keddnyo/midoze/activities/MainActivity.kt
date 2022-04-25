@@ -24,15 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         UiUtils().switchDarkMode(this)
 
-        replaceFragment(FeedFragment(false))
+        replaceFragment(FeedFragment())
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_feed -> {
-                    replaceFragment(FeedFragment(false))
-                }
-                R.id.action_fav -> {
-                    replaceFragment(FeedFragment(true))
+                    replaceFragment(FeedFragment())
                 }
                 R.id.action_extras -> {
                     replaceFragment(ProfileFragment())

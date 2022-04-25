@@ -9,12 +9,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_fav"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/favorites_title"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_extras"
         android:icon="@drawable/ic_me"
         android:title="@string/profile_title"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -23,7 +22,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
-open class FeedFragment(private val favorite: Boolean) : Fragment() {
+open class FeedFragment : Fragment() {
 
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
@@ -39,120 +38,72 @@ open class FeedFragment(private val favorite: Boolean) : Fragment() {
 
     override fun onResume() = with(requireActivity()) {
         super.onResume()
+        title = getString(R.string.feed_title)
         setHasOptionsMenu(true)
 
-        deviceListIndex.clear()
-        deviceListAdapter.clear()
+        if (view != null && DozeRequest().isOnline(this)) {
+            getData(true)
+            getData(false)
+        }
 
-        val deviceNamesArray = arrayOf(
-            getString(R.string.title_amazfit),
-            getString(R.string.title_mi_band),
-            getString(R.string.title_zepp)
-        )
+        if (state != null) {
+            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+        }
+    }
 
-        val deviceIconArray = arrayOf(
-            R.drawable.ic_amazfit,
-            R.drawable.ic_xiaomi,
-            R.drawable.ic_zepp
-        )
+    private fun getData(favorite: Boolean) {
+        deviceListRecyclerView = requireActivity().findViewById(R.id.device_list_recycler_view)
+        deviceListRecyclerView.layoutManager =
+            GridLayoutManager(context, UiUtils().getRecyclerSpanCount(requireContext()))
 
-        if (view != null) {
-            deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
-            val emptyListTextView: TextView = findViewById(R.id.empty_list_text_view)
-            deviceListRecyclerView.layoutManager =
-                GridLayoutManager(context, UiUtils().getRecyclerSpanCount(this))
+        val adapter = deviceListAdapter
+        deviceListRecyclerView.adapter = adapter
 
-            val adapter = deviceListAdapter
-            deviceListRecyclerView.adapter = adapter
+        val deviceListJson = runBlocking {
+            withContext(Dispatchers.IO) {
+                DozeRequest().getFirmwareLatest()
+            }
+        }
+        val responseParamsArray = deviceListJson.toMap()
+        val keys = responseParamsArray.keys
 
-            when (DozeRequest().isOnline(this)) {
-                true -> {
-                    deviceListRecyclerView.visibility = View.VISIBLE
-                    emptyListTextView.visibility = View.GONE
+        for (i in keys) {
+            val jsonObject = deviceListJson.getJSONObject(i)
 
-                    val deviceListJson = runBlocking {
-                        withContext(Dispatchers.IO) {
-                            DozeRequest().getFirmwareLatest()
-                        }
-                    }
-                    val responseParamsArray = deviceListJson.toMap()
-                    val keys = responseParamsArray.keys
-
-                    for (i in keys) {
-                        val jsonObject = deviceListJson.getJSONObject(i)
-
-                        val deviceNameValue = jsonObject.getString("name")
-                        val deviceIconValue = when {
-                            deviceNameValue.contains(deviceNamesArray[1], true) -> {
-                                deviceIconArray[1]
-                            }
-                            deviceNameValue.contains(deviceNamesArray[2], true) -> {
-                                deviceIconArray[2]
-                            }
-                            else -> {
-                                deviceIconArray[0]
-                            }
-                        }
-                        val firmwareVersionValue = jsonObject.getString("fw")
-                        val firmwareReleaseDateValue = StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
-
-                        val firmwareUpdated = getString(R.string.firmware_version)
-                        val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
-
-                        val prefs: SharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(this)
-
-                        if (favorite) {
-                            title = getString(R.string.favorites_title)
-
-                            if (prefs.getInt("favoriteCount", 0) == 0) {
-                                deviceListRecyclerView.visibility = View.GONE
-                                emptyListTextView.visibility = View.VISIBLE
-                                emptyListTextView.text = getString(R.string.add_favorites)
-                            } else {
-                                deviceListRecyclerView.visibility = View.VISIBLE
-                                emptyListTextView.visibility = View.GONE
-                            }
-
-                            if (prefs.getBoolean(i, false)) {
-                                deviceListAdapter.addDevice(
-                                    DeviceListData(
-                                        deviceNameValue,
-                                        deviceIconValue,
-                                        firmwareReleaseDateValue,
-                                        firmwareChangelogValue,
-                                        i.toInt()
-                                    )
-                                )
-                                deviceListAdapter.notifyItemInserted(i.toInt())
-                                deviceListIndex[deviceNameValue] = i.toInt()
-                            }
-                        } else {
-                            title = getString(R.string.feed_title)
-
-                            deviceListAdapter.addDevice(
-                                DeviceListData(
-                                    deviceNameValue,
-                                    deviceIconValue,
-                                    firmwareReleaseDateValue,
-                                    firmwareChangelogValue,
-                                    i.toInt()
-                                )
-                            )
-                            deviceListAdapter.notifyItemInserted(i.toInt())
-                            deviceListIndex[deviceNameValue] = i.toInt()
-                        }
-                    }
-
-                    if (state != null) {
-                        deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
-                    }
+            val deviceNameValue = jsonObject.getString("name")
+            val deviceIconValue = when {
+                deviceNameValue.contains(getString(R.string.title_mi_band), true) -> {
+                    R.drawable.ic_xiaomi
                 }
-                false -> {
-                    deviceListRecyclerView.visibility = View.GONE
-                    emptyListTextView.visibility = View.VISIBLE
-                    emptyListTextView.text = getString(R.string.check_connectivity)
+                deviceNameValue.contains(getString(R.string.title_zepp), true) -> {
+                    R.drawable.ic_zepp
                 }
+                else -> {
+                    R.drawable.ic_amazfit
+                }
+            }
+            val firmwareVersionValue = jsonObject.getString("fw")
+            val firmwareReleaseDateValue =
+                StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
+
+            val firmwareVersion = getString(R.string.firmware_version)
+            val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
+
+            val prefs: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+            if (prefs.getBoolean(i, false) == favorite) {
+                deviceListAdapter.addDevice(
+                    DeviceListData(
+                        deviceNameValue,
+                        deviceIconValue,
+                        firmwareReleaseDateValue,
+                        firmwareChangelogValue,
+                        i.toInt()
+                    )
+                )
+                deviceListAdapter.notifyItemInserted(i.toInt())
+                deviceListIndex[deviceNameValue] = i.toInt()
             }
         }
     }
