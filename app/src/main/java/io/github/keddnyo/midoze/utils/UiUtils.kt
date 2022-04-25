@@ -9,9 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
-import io.github.keddnyo.midoze.R
 
 class UiUtils {
     fun getRecyclerSpanCount(context: Context): Int = with(context) {

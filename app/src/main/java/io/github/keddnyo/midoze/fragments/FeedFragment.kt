@@ -1,6 +1,6 @@
 package io.github.keddnyo.midoze.fragments
 
-import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
@@ -8,11 +8,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.UiUtils
 import io.github.keddnyo.midoze.utils.deviceList.DeviceListAdapter
@@ -55,8 +54,6 @@ open class FeedFragment : Fragment() {
             R.drawable.ic_xiaomi,
             R.drawable.ic_zepp
         )
-
-        val fab: FloatingActionButton = findViewById(R.id.feed_floating_button)
 
         if (view != null) {
             deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
@@ -101,19 +98,49 @@ open class FeedFragment : Fragment() {
                         val firmwareUpdated = getString(R.string.firmware_updated)
                         val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
 
-                        title = getString(R.string.feed_title)
+                        val prefs: SharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(this)
 
-                        deviceListAdapter.addDevice(
-                            DeviceListData(
-                                deviceNameValue,
-                                deviceIconValue,
-                                firmwareReleaseDateValue,
-                                firmwareChangelogValue,
-                                i.toInt()
+                        if (prefs.getBoolean("Favorites", false)) {
+                            title = getString(R.string.favorites_title)
+
+                            if (prefs.getInt("favoriteCount", 0) == 0) {
+                                deviceListRecyclerView.visibility = View.GONE
+                                emptyListTextView.visibility = View.VISIBLE
+                                emptyListTextView.text = getString(R.string.add_favorites)
+                            } else {
+                                deviceListRecyclerView.visibility = View.VISIBLE
+                                emptyListTextView.visibility = View.GONE
+                            }
+
+                            if (prefs.getBoolean(i, false)) {
+                                deviceListAdapter.addDevice(
+                                    DeviceListData(
+                                        deviceNameValue,
+                                        deviceIconValue,
+                                        firmwareReleaseDateValue,
+                                        firmwareChangelogValue,
+                                        i.toInt()
+                                    )
+                                )
+                                deviceListAdapter.notifyItemInserted(i.toInt())
+                                deviceListIndex[deviceNameValue] = i.toInt()
+                            }
+                        } else {
+                            title = getString(R.string.feed_title)
+
+                            deviceListAdapter.addDevice(
+                                DeviceListData(
+                                    deviceNameValue,
+                                    deviceIconValue,
+                                    firmwareReleaseDateValue,
+                                    firmwareChangelogValue,
+                                    i.toInt()
+                                )
                             )
-                        )
-                        deviceListAdapter.notifyItemInserted(i.toInt())
-                        deviceListIndex[deviceNameValue] = i.toInt()
+                            deviceListAdapter.notifyItemInserted(i.toInt())
+                            deviceListIndex[deviceNameValue] = i.toInt()
+                        }
                     }
 
                     if (state != null) {
@@ -126,25 +153,6 @@ open class FeedFragment : Fragment() {
                     emptyListTextView.text = getString(R.string.check_connectivity)
                 }
             }
-        }
-
-        deviceListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && fab.isShown) {
-                    fab.hide()
-                }
-            }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    fab.show()
-                }
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
-
-        fab.setOnClickListener {
-            startActivity(Intent(requireContext(), ExtrasRequestActivity::class.java))
         }
     }
 

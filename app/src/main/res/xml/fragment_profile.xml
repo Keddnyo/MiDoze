@@ -5,17 +5,20 @@
         <Preference
             app:icon="@drawable/ic_favorite_border"
             app:key="extras_favorites"
-            app:title="@string/favorites_title" />
+            app:title="@string/favorites_title"
+            app:selectable="false" />
 
         <Preference
             app:icon="@drawable/ic_download"
             app:key="extras_downloads"
-            app:title="@string/profile_downloads" />
+            app:title="@string/profile_downloads"
+            app:selectable="false" />
 
         <Preference
             app:icon="@drawable/ic_share"
             app:key="extras_shares"
-            app:title="@string/profile_shares" />
+            app:title="@string/profile_shares"
+            app:selectable="false" />
 
     </PreferenceCategory>
 

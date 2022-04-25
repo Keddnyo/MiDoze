@@ -1,10 +1,8 @@
 package io.github.keddnyo.midoze.fragments
 
-import android.app.DownloadManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -34,23 +32,10 @@ class ProfileFragment : PreferenceFragmentCompat() {
             val prefs: SharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
-            favorites.setOnPreferenceClickListener {
-                fragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FavoriteFragment())?.commitNow()
-                true
-            }
-
-            downloads.setOnPreferenceClickListener {
-                startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
-                true
-            }
-
-            shares.setOnPreferenceClickListener {
-                Toast.makeText(requireContext(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show()
-                true
-            }
-
-            favorites.summary = "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.profile_items)}"
-            downloads.summary = "${prefs.getInt("downloadCount", 0)} ${getString(R.string.profile_times)}"
+            favorites.summary =
+                "${prefs.getInt("favoriteCount", 0)} ${getString(R.string.profile_items)}"
+            downloads.summary =
+                "${prefs.getInt("downloadCount", 0)} ${getString(R.string.profile_times)}"
             shares.summary = "${prefs.getInt("shareCount", 0)} ${getString(R.string.profile_times)}"
 
             customRequest.setOnPreferenceClickListener {
