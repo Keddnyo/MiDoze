@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.utils.FirmwareUtils
 import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -24,7 +23,7 @@ class FirmwareActivity : AppCompatActivity() {
     private var firmwareResponse = JSONObject()
     private var deviceNameValue: String = ""
 
-    val responseFirmwareTagsArray = arrayOf(
+    private val responseFirmwareTagsArray = arrayOf(
         "firmwareUrl",
         "resourceUrl",
         "baseResourceUrl",
