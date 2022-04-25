@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
 
-    <string name="title_amazfit" translatable="false">Amazfit</string>
     <string name="title_mi_band" translatable="false">Mi Band</string>
     <string name="title_zepp" translatable="false">Zepp</string>
 
@@ -10,13 +9,8 @@
     <string name="search">Search</string>
 
     <string name="feed_title">Feed</string>
-    <string name="favorites_title">Favorites</string>
-    <string name="favorites_clear">Clear</string>
-    <string name="favorites_clear_summary">Are you sure you want to clear Favorites?</string>
 
     <string name="firmware_connectivity_error">Connectivity error</string>
-    <string name="check_connectivity">Check internet connectivity</string>
-    <string name="add_favorites">Save your favorite devices by clicking on the "Like" icon</string>
 
     <string name="firmware_get">Get</string>
     <string name="firmware_changelog">Changelog</string>
@@ -39,14 +33,8 @@
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
 
-    <string name="profile_title">Me</string>
     <string name="profile_custom_request">Custom request</string>
     <string name="profile_custom_request_server_response">Server response</string>
-    <string name="profile_dashboard">Dashboard</string>
-    <string name="profile_downloads">Downloads</string>
-    <string name="profile_shares">Shares</string>
-    <string name="profile_items">item(-s)</string>
-    <string name="profile_times">time(-s)</string>
     <string name="profile_other">Other</string>
 
     <string name="settings_about">About</string>

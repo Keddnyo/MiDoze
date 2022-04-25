@@ -35,6 +35,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/profile_other">
+
+        <Preference
+            app:icon="@drawable/ic_custom_request"
+            app:key="settings_custom_request"
+            app:title="@string/profile_custom_request" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/app_name">
 
         <Preference

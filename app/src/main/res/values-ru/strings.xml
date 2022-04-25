@@ -5,13 +5,8 @@
     <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
-    <string name="favorites_title">Избранное</string>
-    <string name="favorites_clear">Очистить</string>
-    <string name="favorites_clear_summary">Вы точно хотите очистить Избранное?</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
-    <string name="check_connectivity">Проверьте подключение к интернету</string>
-    <string name="add_favorites">Сохраняйте свои любимые устройства нажимая на сердечко</string>
 
     <string name="firmware_get">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>
@@ -30,14 +25,8 @@
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
 
-    <string name="profile_title">Профиль</string>
     <string name="profile_custom_request">Ручной запрос</string>
     <string name="profile_custom_request_server_response">Ответ сервера</string>
-    <string name="profile_dashboard">Статистика</string>
-    <string name="profile_downloads">Загрузки</string>
-    <string name="profile_shares">Отправления</string>
-    <string name="profile_items">элемента(-ов)</string>
-    <string name="profile_times">раз(-а)</string>
     <string name="profile_other">Прочее</string>
 
     <string name="settings_about">О приложении</string>
