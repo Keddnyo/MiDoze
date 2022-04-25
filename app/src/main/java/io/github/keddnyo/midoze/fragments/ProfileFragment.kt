@@ -19,7 +19,7 @@ class ProfileFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
 
-        requireActivity().title = getString(R.string.profile_title)
+        requireActivity().title = getString(R.string.app_name)
 
         val favorites = findPreference<Preference>("extras_favorites")
         val downloads = findPreference<Preference>("extras_downloads")

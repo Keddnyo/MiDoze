@@ -3,14 +3,14 @@ package io.github.keddnyo.midoze.utils
 import java.util.*
 
 class Language {
-    private fun getCurrent(): String {
-        return Locale.getDefault().language.toString()
+    fun getCurrent(): Locale {
+        return Locale.getDefault()
     }
 
     fun getName(lang: String): String {
         val arrayOfLanguageCodes = lang.split(",").toTypedArray()
         val arrayOfLanguageNames = arrayListOf<String>()
-        val currentLanguage = Locale(getCurrent())
+        val currentLanguage = Locale(getCurrent().language.toString())
 
         for (i in arrayOfLanguageCodes) {
             arrayOfLanguageNames.add(

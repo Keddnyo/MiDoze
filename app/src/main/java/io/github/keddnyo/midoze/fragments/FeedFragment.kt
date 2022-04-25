@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
 import io.github.keddnyo.midoze.utils.deviceList.DeviceListAdapter
 import io.github.keddnyo.midoze.utils.deviceList.DeviceListData
@@ -22,7 +23,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
-open class FeedFragment : Fragment() {
+open class FeedFragment(private val favorite: Boolean) : Fragment() {
 
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
@@ -93,7 +94,7 @@ open class FeedFragment : Fragment() {
                             }
                         }
                         val firmwareVersionValue = jsonObject.getString("fw")
-                        val firmwareReleaseDateValue = jsonObject.getString("date")
+                        val firmwareReleaseDateValue = StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
 
                         val firmwareUpdated = getString(R.string.firmware_updated)
                         val firmwareChangelogValue = "$firmwareUpdated: $firmwareVersionValue"
@@ -101,7 +102,7 @@ open class FeedFragment : Fragment() {
                         val prefs: SharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(this)
 
-                        if (prefs.getBoolean("Favorites", false)) {
+                        if (favorite) {
                             title = getString(R.string.favorites_title)
 
                             if (prefs.getInt("favoriteCount", 0) == 0) {
