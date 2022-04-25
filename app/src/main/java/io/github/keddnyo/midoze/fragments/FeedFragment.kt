@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
-class FeedFragment : Fragment() {
+open class FeedFragment : Fragment() {
 
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()

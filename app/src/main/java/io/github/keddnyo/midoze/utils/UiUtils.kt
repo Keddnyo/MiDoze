@@ -9,7 +9,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
+import io.github.keddnyo.midoze.R
 
 class UiUtils {
     fun getRecyclerSpanCount(context: Context): Int = with(context) {
@@ -20,9 +22,11 @@ class UiUtils {
             2
         }
     }
+
     fun showToast(context: Context, string: String) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
+
     fun switchDarkMode(context: Context) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)

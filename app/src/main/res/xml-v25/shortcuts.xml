@@ -12,16 +12,6 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_favorite_shortcut"
-        android:shortcutId="Favorite"
-        android:shortcutShortLabel="@string/favorites_title">
-        <intent
-            android:action="FAVORITE_SHORTCUT"
-            android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
-            android:targetPackage="io.github.keddnyo.midoze" />
-    </shortcut>
-    <shortcut
-        android:enabled="true"
         android:icon="@drawable/ic_custom_request_shortcut"
         android:shortcutId="CustomRequest"
         android:shortcutShortLabel="@string/profile_custom_request">

@@ -2,8 +2,8 @@ package io.github.keddnyo.midoze.activities
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import io.github.keddnyo.midoze.BuildConfig
@@ -36,6 +36,13 @@ class SettingsActivity : AppCompatActivity() {
             val github = findPreference<Preference>("settings_app_github_page")
 
             if (about != null && cloud != null && github != null) {
+                github.setOnPreferenceClickListener {
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
+                    )
+                    true
+                }
+
                 about.title = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
 
                 about.setOnPreferenceClickListener {
@@ -47,14 +54,8 @@ class SettingsActivity : AppCompatActivity() {
 
                 cloud.setOnPreferenceClickListener {
                     startActivity(
-                        Intent(Intent.ACTION_VIEW, Uri.parse("https://4pda.to/forum/index.php?showuser=243484"))
-                    )
-                    true
-                }
-
-                github.setOnPreferenceClickListener {
-                    startActivity(
-                        Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
+                        Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://4pda.to/forum/index.php?showuser=243484"))
                     )
                     true
                 }

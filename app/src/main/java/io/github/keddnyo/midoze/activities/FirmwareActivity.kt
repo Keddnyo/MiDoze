@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.utils.FirmwareUtils
 import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -18,18 +19,18 @@ import org.json.JSONObject
 
 class FirmwareActivity : AppCompatActivity() {
 
-    private val firmwareResponseLinksValuesArray = arrayOf(
+    private val context = this@FirmwareActivity
+
+    private var firmwareResponse = JSONObject()
+    private var deviceNameValue: String = ""
+
+    val responseFirmwareTagsArray = arrayOf(
         "firmwareUrl",
         "resourceUrl",
         "baseResourceUrl",
         "fontUrl",
         "gpsUrl"
     )
-
-    private val context = this@FirmwareActivity
-
-    private var firmwareResponse = JSONObject()
-    private var deviceNameValue: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,7 +142,7 @@ class FirmwareActivity : AppCompatActivity() {
         context: Context,
         deviceName: String,
     ) {
-        for (i in firmwareResponseLinksValuesArray) {
+        for (i in responseFirmwareTagsArray) {
             if (jsonObject.has(i)) {
                 val urlString = jsonObject.getString(i)
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
@@ -153,7 +154,7 @@ class FirmwareActivity : AppCompatActivity() {
     private fun shareFirmware() {
         val firmwareLinks = arrayListOf<String>()
 
-        for (i in firmwareResponseLinksValuesArray) {
+        for (i in responseFirmwareTagsArray) {
             if (firmwareResponse.has(i)) {
                 firmwareLinks.add(firmwareResponse.getString(i))
             }
