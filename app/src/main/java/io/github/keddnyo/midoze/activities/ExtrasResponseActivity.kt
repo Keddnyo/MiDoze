@@ -28,6 +28,7 @@ class ExtrasResponseActivity : AppCompatActivity() {
             val responseTextView: TextView = findViewById(R.id.response_text)
             json = StringUtils().getExtrasFixed(intent.getStringExtra("json").toString())
             responseTextView.text = json
+            responseTextView.requestFocus()
         } else {
             runOnUiThread {
                 UiUtils().showToast(context, getString(R.string.firmware_not_found))

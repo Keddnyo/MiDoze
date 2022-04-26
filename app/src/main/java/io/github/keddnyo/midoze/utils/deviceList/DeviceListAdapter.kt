@@ -37,7 +37,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val firmwareChangelogTextView: TextView =
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
-        val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
+        val likeIcon: ImageView = itemView.findViewById(R.id.like_icon)
         val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
