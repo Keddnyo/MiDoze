@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,40 +19,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/deviceIconImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
-                    <ImageView
-                        android:id="@+id/deviceIconImageView"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        tools:ignore="ContentDescription" />
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/deviceNameTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
+                        android:gravity="center"
+                        android:textSize="10pt"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/deviceNameTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/firmwareVersionTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/firmwareVersionTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
 
                 </LinearLayout>
 
@@ -69,6 +61,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/firmware_changelog_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="4dp"

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
@@ -37,10 +38,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
         val likeIcon: ImageView = itemView.findViewById(R.id.likeIcon)
-        val customRequestButton: Button = itemView.findViewById(R.id.customRequestButton)
-        val openBrowserButton: Button = itemView.findViewById(R.id.openBrowserButton)
-
-        val downloadLayout: LinearLayout = itemView.findViewById(R.id.downloadLayout)
+        val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -87,26 +85,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
         holder.likeIcon.setOnClickListener {
             Dashboard().setFavoritesCount(holder.likeIcon.context, deviceIndex, holder)
-        }
-
-        holder.customRequestButton.setOnClickListener {
-            when (DozeRequest().isOnline(holder.customRequestButton.context)) {
-                true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.customRequestButton.context, true)
-                }
-                else -> {
-                }
-            }
-        }
-
-        holder.openBrowserButton.setOnClickListener {
-            when (DozeRequest().isOnline(holder.openBrowserButton.context)) {
-                true -> {
-                    DozeRequest().getOldVersions(holder.openBrowserButton.context, deviceIndex)
-                }
-                else -> {
-                }
-            }
         }
     }
 

@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +37,7 @@ class FirmwareActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         UiUtils().switchDarkMode(this)
 
@@ -50,6 +53,7 @@ class FirmwareActivity : AppCompatActivity() {
         val deviceIconTextView: ImageView = findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
         val firmwareChangelogTextView: TextView = findViewById(R.id.firmwareChangelogTextView)
+        val firmwareChangelogLayout: MaterialCardView = findViewById(R.id.firmware_changelog_layout)
         val firmwareLanguagesTextView: TextView = findViewById(R.id.firmwareLanguagesTextView)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
@@ -67,7 +71,6 @@ class FirmwareActivity : AppCompatActivity() {
             context
         )
 
-        title = deviceNameValue
         deviceNameTextView.text = deviceNameValue
 
         when {
@@ -93,12 +96,12 @@ class FirmwareActivity : AppCompatActivity() {
             }
             finish()
         }
-        firmwareChangelogTextView.text = if (firmwareResponse.has("changeLog")) {
-            StringUtils().getChangelogFixed(
+        if (firmwareResponse.has("changeLog")) {
+            firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
                 firmwareResponse.getString("changeLog")
             )
         } else {
-            getString(R.string.changelog_not_specified)
+            firmwareChangelogLayout.visibility = View.GONE
         }
         if (firmwareResponse.has("lang")) {
             firmwareLanguagesTextView.text = Language().getName(
