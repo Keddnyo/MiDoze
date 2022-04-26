@@ -2,7 +2,7 @@
 
     <style name="Theme.MiDoze" parent="Theme.Material3.Light" />
 
-    <style name="Theme.Dialog" parent="Theme.Material3.Light.Dialog.MinWidth">
+    <style name="Theme.Dialog" parent="Theme.Material3.Light.Dialog.Alert">
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
     </style>
 

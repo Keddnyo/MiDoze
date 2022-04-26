@@ -3,6 +3,7 @@ package io.github.keddnyo.midoze.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -36,6 +37,7 @@ class FirmwareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firmware)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        this.window.setGravity(Gravity.BOTTOM)
 
         UiUtils().switchDarkMode(this)
 
