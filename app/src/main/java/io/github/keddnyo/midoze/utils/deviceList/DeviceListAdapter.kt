@@ -74,6 +74,17 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             }
         }
 
+        holder.downloadLayout.setOnLongClickListener {
+            when (DozeRequest().isOnline(holder.downloadLayout.context)) {
+                true -> {
+                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context, true)
+                }
+                else -> {
+                }
+            }
+            true
+        }
+
         holder.likeIcon.setOnClickListener {
             Dashboard().setFavoritesCount(holder.likeIcon.context, deviceIndex, holder)
         }

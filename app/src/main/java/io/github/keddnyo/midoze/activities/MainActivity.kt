@@ -5,11 +5,11 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.Menu
-import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
@@ -23,6 +23,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -106,7 +107,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-
         state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
     }
 
@@ -128,16 +128,12 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> {
-                startActivity(Intent(this, SettingsActivity::class.java))
-            }
+        menu.findItem(R.id.action_settings).setOnMenuItemClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            true
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith { it ->

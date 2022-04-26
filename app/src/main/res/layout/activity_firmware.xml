@@ -61,7 +61,7 @@
                     android:id="@+id/firmwareDownloadButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/firmware_get"
+                    android:text="@string/firmware_download"
                     android:textSize="10pt" />
 
             </LinearLayout>

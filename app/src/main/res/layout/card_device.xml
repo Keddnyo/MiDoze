@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -24,33 +23,42 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/deviceIconImageView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        tools:ignore="ContentDescription" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
+                        android:id="@+id/linearLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:orientation="vertical"
-                        tools:ignore="NestedWeights">
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/likeIcon"
+                        app:layout_constraintStart_toEndOf="@+id/deviceIconImageView"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/deviceNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/firmwareChangelogTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/firmwareReleaseDateTextView"
@@ -64,16 +72,11 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_margin="5dp"
-                        android:foregroundGravity="right"
                         android:src="@drawable/ic_favorite_border"
-                        tools:ignore="ContentDescription" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/firmwareChangelogTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
@@ -83,33 +86,26 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/black"
-                android:backgroundTint="?attr/colorControlNormal" />
+                android:backgroundTint="?attr/colorControlNormal"
+                android:visibility="gone" />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/openBrowserButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="@string/open_in_browser"
+                android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/openBrowserButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/open_in_browser"
-                    tools:ignore="ButtonStyle" />
-
-                <Button
-                    android:id="@+id/customRequestButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/profile_custom_request"
-                    tools:ignore="ButtonStyle" />
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/customRequestButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="@string/profile_custom_request"
+                android:visibility="gone" />
 
         </LinearLayout>
 
