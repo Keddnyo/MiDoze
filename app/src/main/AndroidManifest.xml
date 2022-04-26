@@ -30,7 +30,8 @@
         <activity
             android:name=".activities.FirmwareActivity"
             android:exported="false"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Dialog.Firmware" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"

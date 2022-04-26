@@ -3,8 +3,6 @@ package io.github.keddnyo.midoze.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -111,32 +109,12 @@ class FirmwareActivity : AppCompatActivity() {
 
         firmwareDownloadButton.setOnClickListener {
             getFirmware(firmwareResponse, context, deviceNameValue)
-            Dashboard().setDownloadCount(context)
         }
 
         firmwareDownloadButton.setOnLongClickListener {
-            DozeRequest().getOldVersions(context, deviceSourceValue)
-            return@setOnLongClickListener true
+            shareFirmware()
+            true
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_firmware, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_share_firmware -> {
-                shareFirmware()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun getFirmware(
@@ -172,7 +150,5 @@ class FirmwareActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, deviceNameValue)
         startActivity(shareIntent)
-
-        Dashboard().setShareCount(context)
     }
 }

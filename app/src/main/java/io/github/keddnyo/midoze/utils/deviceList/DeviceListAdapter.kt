@@ -14,7 +14,6 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
 import io.github.keddnyo.midoze.activities.FirmwareActivity
-import io.github.keddnyo.midoze.utils.Dashboard
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -37,7 +36,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val firmwareChangelogTextView: TextView =
             itemView.findViewById(R.id.firmwareChangelogTextView)
 
-        val likeIcon: ImageView = itemView.findViewById(R.id.like_icon)
+        val likeIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
         val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
@@ -48,6 +47,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
+        val editor = prefs.edit()
 
         holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
         holder.deviceIconImageView.setImageResource(deviceListDataArray[position].deviceIcon)
@@ -60,6 +60,18 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
             holder.likeIcon.setImageResource(R.drawable.ic_favorite)
         } else {
             holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+        }
+
+        holder.likeIcon.setOnClickListener {
+            if (prefs.getBoolean(deviceIndex, false)) {
+                holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+                editor.putBoolean(deviceIndex, false)
+                editor.apply()
+            } else {
+                holder.likeIcon.setImageResource(R.drawable.ic_favorite)
+                editor.putBoolean(deviceIndex, true)
+                editor.apply()
+            }
         }
 
         holder.downloadLayout.setOnClickListener {
@@ -81,10 +93,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                 }
             }
             true
-        }
-
-        holder.likeIcon.setOnClickListener {
-            Dashboard().setFavoritesCount(holder.likeIcon.context, deviceIndex, holder)
         }
     }
 
