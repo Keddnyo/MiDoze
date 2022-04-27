@@ -14,7 +14,7 @@ The easiest way to download firmwares for Xiaomi wearables
 * Shortcuts *(since 1.1.0)*
 * Explore firmwares feed
 * Search a device using the SearchView
-* Favorites
+* Favorites *(since 2.0.0)*
 * Request host chooser
 * Request region chooser
 * Full languages names in response
