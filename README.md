@@ -41,7 +41,13 @@ The easiest way to download firmwares for Xiaomi wearables
 * Storage access *(for saving files)*
 * Network access *(for app work)*
 
-## Screenshots
+## Screenshots Android 4.0+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65981689/165644137-136a6c8e-66e7-4c5e-aa55-03527dbc4300.png">
+  <img src="https://user-images.githubusercontent.com/65981689/165644139-859805d4-1f67-4dc8-81fc-764a36292451.png">
+</p>
+
+## Screenshots Android 5.0+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/165500750-0f7ed39b-8d81-491e-a6b5-9c1680fea79c.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165500759-b227f527-8a0e-4074-b606-cf90d9cc9f3c.jpg" width="33%" height="33%">
