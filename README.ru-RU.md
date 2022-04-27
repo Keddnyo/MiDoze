@@ -31,7 +31,7 @@
 ## Скриншоты
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/165503385-b2cd1716-a3e6-4b71-9864-ac0fff8a37db.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165503389-7a291f3d-2898-4449-9113-c73e20693ed9.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165509935-2534a682-1182-4b3b-8d00-1b9eb88415a7.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165503391-7576d578-7997-403b-a705-71c56fbcf744.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165503393-3b8674e6-6b6f-467d-a613-eff218329e24.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165503394-e2b2bd2b-19b8-4986-8b2f-545697283727.jpg" width="33%" height="33%">
