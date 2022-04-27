@@ -41,7 +41,12 @@
 | Ручной запрос | **Есть** | **Есть** | **Есть** |
 | Отправка контента | **Только ручной запрос** | **Есть** | **Есть** |
 
-## Скриншоты
+## Скриншоты Android 4.0+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65981689/165643959-cee116d0-23d3-4005-af81-65a05dbb7d5e.png">
+  <img src="https://user-images.githubusercontent.com/65981689/165643964-6a7eddc4-8b02-4f65-a95e-f4a85f64f27f.png">
+
+## Скриншоты Android 5.0+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/165503385-b2cd1716-a3e6-4b71-9864-ac0fff8a37db.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165509935-2534a682-1182-4b3b-8d00-1b9eb88415a7.jpg" width="33%" height="33%">
