@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -11,10 +12,13 @@ import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
+import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -33,22 +37,26 @@ class DozeRequest {
         }
         return false
     }
+
     fun getFirmwareLatest(): JSONObject {
         return JSONObject(URL("https://schakal.ru/fw/latest.json").readText())
     }
+
     fun getApplicationValues(): String {
         return URL("https://schakal.ru/fw/dev_apps.json").readText()
     }
-    fun getApplicationLatestReleaseInfo(context: Context): JSONObject {
+
+    private fun getApplicationLatestReleaseInfo(context: Context): JSONObject {
         val appName = context.getString(R.string.app_name)
         return JSONObject(URL("https://api.github.com/repos/keddnyo/$appName/releases/latest").readText())
     }
+
     suspend fun getFirmwareLinks(
         productionSource: String,
         deviceSource: String,
         appVersion: String,
         appName: String,
-        context: Context
+        context: Context,
     ): JSONObject {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -130,7 +138,7 @@ class DozeRequest {
             .appendQueryParameter("gpsVersion", "0")
             .appendQueryParameter("baseResourceVersion", "0")
 
-        val request =  Request.Builder()
+        val request = Request.Builder()
             .url(uriBuilder.toString())
             .addHeader("hm-privacy-diagnostics", "false")
             .addHeader("country", country)
@@ -157,10 +165,11 @@ class DozeRequest {
             )
         }
     }
+
     fun getFirmwareFile(
         context: Context,
         fileUrl: String,
-        subName: String
+        subName: String,
     ) {
         val permissionCheck = ActivityCompat.checkSelfPermission(
             context,
@@ -187,6 +196,42 @@ class DozeRequest {
             )
 
             downloadManager.enqueue(request)
+        }
+    }
+
+    fun updateChecker(context: Context, prefs: SharedPreferences) = with(context) {
+        if (prefs.getBoolean("settings_app_update_checker", true)) {
+            val latestReleaseInfoJson = runBlocking {
+                withContext(Dispatchers.IO) {
+                    DozeRequest().getApplicationLatestReleaseInfo(context)
+                }
+            }
+
+            if (latestReleaseInfoJson.has("tag_name")) {
+                val latestVersion = latestReleaseInfoJson.getString("tag_name")
+                val latestVersionLink =
+                    latestReleaseInfoJson.getJSONArray("assets").getJSONObject(0)
+                        .getString("browser_download_url")
+
+                if (BuildConfig.VERSION_NAME < latestVersion) {
+                    val builder = AlertDialog.Builder(context)
+                        .setTitle(getString(R.string.update_dialog_title))
+                        .setMessage(getString(R.string.update_dialog_message))
+                        .setIcon(R.drawable.ic_info)
+                        .setCancelable(false)
+                    builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
+                        DozeRequest().getFirmwareFile(context,
+                            latestVersionLink,
+                            getString(R.string.app_name))
+                        UiUtils().showToast(context, getString(R.string.downloading_toast))
+                        DialogInterface.BUTTON_POSITIVE
+                    }
+                    builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
+                        DialogInterface.BUTTON_NEGATIVE
+                    }
+                    builder.show()
+                }
+            }
         }
     }
 }
