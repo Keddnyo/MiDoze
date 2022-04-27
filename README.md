@@ -24,6 +24,19 @@ The easiest way to download firmwares for Xiaomi wearables
 * Compose custom requests with **Custom request** in settings
 * Update checker *(since 2.1.0)*
 
+## Compatibility table
+| Features | Android 4.0+ | Android 5.0+ | Android 7.0+ |
+| --- | --- | --- | --- |
+| Full access | Compatibility Mode | **Yes** | **Yes** |
+| Firmwares feed | No | **Yes** | **Yes** |
+| Search | No | **Yes** | **Yes** |
+| Firmware page | No | **Yes** | **Yes** |
+| Shortcuts | No | No | **Yes** |
+| Settings | No | **Yes** | **Yes** |
+| Dark Mode | No | **Yes** | **Yes** |
+| Custom request | **Yes** | **Yes** | **Yes** |
+| Send content | Only Custom request | **Yes** | **Yes** |
+
 ## Requirements
 * Storage access *(for saving files)*
 * Network access *(for app work)*
