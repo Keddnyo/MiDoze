@@ -1,8 +1,5 @@
 package io.github.keddnyo.midoze.utils
 
-import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 

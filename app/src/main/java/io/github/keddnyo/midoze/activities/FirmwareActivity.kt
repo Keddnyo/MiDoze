@@ -130,7 +130,7 @@ class FirmwareActivity : AppCompatActivity() {
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
         }
-        UiUtils().showToast(context, getString(R.string.firmware_downloading))
+        UiUtils().showToast(context, getString(R.string.downloading_toast))
     }
 
     private fun shareFirmware() {

@@ -33,6 +33,12 @@
             app:title="@string/settings_request_region"
             app:useSimpleSummaryProvider="true" />
 
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_update"
+            app:key="settings_app_update_checker"
+            app:title="@string/settings_app_update_checker" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/profile_other">

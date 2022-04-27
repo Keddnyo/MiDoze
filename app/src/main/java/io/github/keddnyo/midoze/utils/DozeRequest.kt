@@ -39,6 +39,10 @@ class DozeRequest {
     fun getApplicationValues(): String {
         return URL("https://schakal.ru/fw/dev_apps.json").readText()
     }
+    fun getApplicationLatestReleaseInfo(context: Context): JSONObject {
+        val appName = context.getString(R.string.app_name)
+        return JSONObject(URL("https://api.github.com/repos/keddnyo/$appName/releases/latest").readText())
+    }
     suspend fun getFirmwareLinks(
         productionSource: String,
         deviceSource: String,
@@ -156,7 +160,7 @@ class DozeRequest {
     fun getFirmwareFile(
         context: Context,
         fileUrl: String,
-        deviceSource: String
+        subName: String
     ) {
         val permissionCheck = ActivityCompat.checkSelfPermission(
             context,
@@ -179,7 +183,7 @@ class DozeRequest {
             request.setNotificationVisibility(1)
             request.setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
-                "${context.getString(R.string.app_name)}/$deviceSource/$fileName"
+                "${context.getString(R.string.app_name)}/$subName/$fileName"
             )
 
             downloadManager.enqueue(request)
