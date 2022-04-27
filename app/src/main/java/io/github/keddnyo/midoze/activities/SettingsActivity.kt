@@ -8,10 +8,12 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.utils.UiUtils
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        UiUtils().switchDarkMode(this)
         setContentView(R.layout.activity_settings)
         supportFragmentManager
             .beginTransaction()
