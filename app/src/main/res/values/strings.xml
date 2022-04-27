@@ -69,9 +69,9 @@
     </string-array>
 
     <string-array name="request_region_entries">
+        <item>USA</item>
         <item>China</item>
         <item>Russia</item>
-        <item>USA</item>
         <item>UAE</item>
     </string-array>
     <string-array name="request_region_selector_entryValues">

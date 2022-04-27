@@ -1,6 +1,9 @@
 package io.github.keddnyo.midoze.utils
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class StringUtils {
@@ -14,15 +17,10 @@ class StringUtils {
         return string.replace("\\/", "/")
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun getLocaleFirmwareDate(firmwareDate: String): String {
-        val format = SimpleDateFormat("yyyy-MM-dd", Language().getCurrent())
-        val date = format.parse(firmwareDate)
-        return date?.toLocaleString()
-            .toString()
-            .replace("12:00:00 AM", "")
-            .replace("00:00:00", "")
-            .replace("0:00:00", "")
-            .trim()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Language().getCurrent())
+        val firmwareDateFormatted = dateFormat.parse(firmwareDate)
+        return DateFormat.getDateInstance(DateFormat.MEDIUM, Language().getCurrent())
+            .format(firmwareDateFormatted!!)
     }
 }
