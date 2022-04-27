@@ -10,10 +10,13 @@ The easiest way to download firmwares for Xiaomi wearables
 * User-friendly GUI
 * Material Design 3
 * English and Russian GUI languages
-* Light and dark themes
+* Light and Dark themes
 * Shortcuts *(since 1.1.0)*
 * Explore firmwares feed
 * Search a device using the SearchView
+* Favorites
+* Request host chooser
+* Request region chooser
 * Full languages names in response
 * Built-in download provider
 * Compose custom requests with Extras "Custom request"
@@ -24,13 +27,11 @@ The easiest way to download firmwares for Xiaomi wearables
 
 ## Screenshots
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/65981689/161893108-f40c792f-354c-4408-84d6-9e050759d185.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893116-083d2ead-3c96-4646-bac9-a340ec0e6b91.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893119-868d087f-f203-4ecb-921f-6029c335b027.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893121-7cf83dff-0427-4d3e-9068-e12e855945be.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893123-b64737a0-ae7b-4633-a984-f6a1c5e906b2.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893125-69a5e347-7c9e-4ceb-b441-994373d77ae7.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/161893126-8a3b0703-4ac6-45d0-9c8a-4282ce996dad.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165443731-fb6da003-7e2d-41c2-81e3-56cd6e61fd24.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165443738-4bd1d4dd-b7b9-48db-a2b8-e51238e048d9.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165443739-ef18bcb3-6829-4a47-b158-6e5126e818a5.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165443742-32392f35-8d19-4337-a7bc-735d27e59bb1.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165443743-66c1b18b-63e6-476c-9a39-72b0df401a4b.jpg" width="33%" height="33%">
 </p>
 
 ## Credits
