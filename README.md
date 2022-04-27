@@ -34,12 +34,12 @@ The easiest way to download firmwares for Xiaomi wearables
   <img src="https://user-images.githubusercontent.com/65981689/165500759-b227f527-8a0e-4074-b606-cf90d9cc9f3c.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165500762-faa27080-4b3a-4bc9-98b9-9f6eb8334621.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165500765-c6fe8644-dddb-48f1-820a-f7293b926925.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500767-28a00f73-00d9-48bf-81e2-3156c1fa7e00.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500769-a88e06d1-f3ea-44dd-9646-49a50d038501.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500771-a334898e-7830-4a10-955c-936311bec6b3.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500773-70f3d2da-a381-4b18-988a-fb63f28c3a66.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500775-bb8144ed-3f5f-4c95-badb-9ba47b251b71.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165500777-233eed3f-b572-4908-a3e4-d06039e3d347.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637317-1436a778-bbb2-41ac-9816-524eb2721809.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637324-9230859d-d118-461a-830a-edb7f5ab21c0.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637327-3f148c51-2717-4850-ba2c-3552198247cb.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637328-0b22b8ac-bfe1-4d24-ba5e-eadb873c33e2.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637330-350e2832-8c15-47ca-83e2-b5d3e9c15f93.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/165637332-8b3eda71-e35f-413f-8d39-263c35e2bf77.jpg" width="33%" height="33%">
   <img src="https://user-images.githubusercontent.com/65981689/165500779-a412f06c-f00a-41df-880c-04e18d03a72e.jpg" width="33%" height="33%">
 </p>
 
