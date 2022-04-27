@@ -19,7 +19,7 @@ The easiest way to download firmwares for Xiaomi wearables
 * Request region chooser
 * Full languages names in response
 * Built-in download provider
-* Compose custom requests with Extras "Custom request"
+* Compose custom requests with "Custom request" in settings
 * Update checker *(since 2.1.0)*
 
 ## Requirements
