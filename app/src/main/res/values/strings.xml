@@ -5,7 +5,6 @@
     <string name="title_zepp" translatable="false">Zepp</string>
 
     <string name="firmware_version">Firmware version</string>
-    <string name="open_in_browser">In browser</string>
     <string name="search">Search</string>
 
     <string name="feed_title">Feed</string>
@@ -19,7 +18,6 @@
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_try_switch_region">Try switching the region</string>
     <string name="firmware_share">Share</string>
-    <string name="changelog_not_specified">Changelog not specified</string>
     <string name="extras_device_source" translatable="false">deviceSource</string>
     <string name="extras_production_source" translatable="false">productionSource</string>
     <string name="extras_app_name" translatable="false">appname</string>

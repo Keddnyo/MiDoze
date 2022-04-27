@@ -13,6 +13,6 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_title"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
 </menu>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="firmware_version">Версия прошивки</string>
-    <string name="open_in_browser">В браузере</string>
     <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
@@ -15,7 +14,6 @@
     <string name="firmware_not_found">Не найдено</string>
     <string name="firmware_try_switch_region">Попробуйте сменить регион</string>
     <string name="firmware_share">Поделиться</string>
-    <string name="changelog_not_specified">Изменения не указаны</string>
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>

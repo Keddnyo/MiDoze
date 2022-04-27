@@ -186,10 +186,4 @@ class DozeRequest {
             downloadManager.enqueue(request)
         }
     }
-    fun getOldVersions(context: Context, string: String) {
-        Thread{
-            val url = "https://schakal.ru/fw/firmwares_list.htm?device=$string"
-            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }.start()
-    }
 }
