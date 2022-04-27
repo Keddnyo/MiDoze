@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
+    <string name="error_title">Connection error</string>
 
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_message">Update app to improve stability and get new features!</string>

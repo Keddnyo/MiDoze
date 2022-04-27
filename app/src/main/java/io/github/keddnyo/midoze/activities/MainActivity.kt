@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
+
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         UiUtils().switchDarkMode(this)
@@ -46,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         if (DozeRequest().isOnline(this)) {
             getData(true)
             getData(false)
+        } else {
+            title = getString(R.string.error_title)
         }
 
         if (state != null) {
@@ -56,7 +60,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getData(favorite: Boolean) {
-        deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(this, UiUtils().getRecyclerSpanCount(this))
 
@@ -92,8 +95,6 @@ class MainActivity : AppCompatActivity() {
 
             val firmwareVersion = getString(R.string.firmware_version)
             val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
-
-
 
             if (prefs.getBoolean(i, false) == favorite) {
                 deviceListAdapter.addDevice(
@@ -155,7 +156,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateChecker() {
-        if (prefs.getBoolean("settings_app_update_checker", true)) {
+        if (prefs.getBoolean("settings_app_update_checker", true) && DozeRequest().isOnline(this)) {
             val latestReleaseInfoJson = runBlocking {
                 withContext(Dispatchers.IO) {
                     DozeRequest().getApplicationLatestReleaseInfo(context)

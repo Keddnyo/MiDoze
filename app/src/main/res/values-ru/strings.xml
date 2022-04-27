@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="error_title">Ошибка подключения</string>
+
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_message">Установите обновление, в котором улучшена стабильность и доступны новые возможности!</string>
     <string name="update_dialog_button">Обновить</string>
