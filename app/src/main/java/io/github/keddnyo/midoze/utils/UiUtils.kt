@@ -38,7 +38,7 @@ class UiUtils {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                } else {
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     (context as Activity).window.statusBarColor = ContextCompat.getColor(context, android.R.color.black)
                 }
             }

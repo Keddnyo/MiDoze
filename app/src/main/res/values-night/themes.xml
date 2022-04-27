@@ -4,8 +4,6 @@
 
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
-        <item name="windowMinWidthMinor">100%</item>
-        <item name="windowMinWidthMajor">100%</item>
     </style>
 
     <style name="Theme.Dialog.Firmware" parent="Theme.Dialog">

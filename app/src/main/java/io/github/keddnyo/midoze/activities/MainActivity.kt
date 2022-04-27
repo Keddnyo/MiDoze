@@ -31,32 +31,36 @@ class MainActivity : AppCompatActivity() {
     private val deviceListIndex = hashMapOf<String, Int>()
     private val deviceListAdapter = DeviceListAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
+    private lateinit var prefs: SharedPreferences
     private var state: Parcelable? = null
     private val context = this@MainActivity
-    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            setContentView(R.layout.activity_main)
+            deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
+            prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        deviceListRecyclerView = findViewById(R.id.device_list_recycler_view)
+            UiUtils().switchDarkMode(this)
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+            if (DozeRequest().isOnline(this)) {
+                getData(true)
+                getData(false)
+            } else {
+                title = getString(R.string.error_title)
+            }
 
-        UiUtils().switchDarkMode(this)
+            if (state != null) {
+                deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+            }
 
-        if (DozeRequest().isOnline(this)) {
-            getData(true)
-            getData(false)
+            updateChecker()
         } else {
-            title = getString(R.string.error_title)
+            finish()
+            startActivity(Intent(this, ExtrasRequestActivity::class.java))
+            UiUtils().showToast(context, getString(R.string.compatibility_mode))
         }
-
-        if (state != null) {
-            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
-        }
-
-        updateChecker()
     }
 
     private fun getData(favorite: Boolean) {
@@ -114,7 +118,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

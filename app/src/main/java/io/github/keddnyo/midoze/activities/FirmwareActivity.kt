@@ -3,7 +3,6 @@ package io.github.keddnyo.midoze.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -11,7 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.*
+import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.utils.Language
+import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -37,7 +39,6 @@ class FirmwareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firmware)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        this.window.setGravity(Gravity.BOTTOM)
 
         UiUtils().switchDarkMode(this)
 

@@ -21,6 +21,8 @@ class ExtrasRequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_extras_request)
         title = getString(R.string.profile_custom_request)
 
+        UiUtils().switchDarkMode(this)
+
         val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =
             findViewById(R.id.extrasProductionSourceEditText)
