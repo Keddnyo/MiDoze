@@ -8,7 +8,7 @@
 [Show on English](https://github.com/Keddnyo/MiDoze/blob/master/README.md)
 
 ## Возможности
-* Android 4.0+ *(Полная совместимость с Android 5.0+)*
+* Android 4.0+ *(Полная совместимость только с Android 5.0+)*
 * Дружелюбный интерфейс
 * Material Design 3
 * Английский и русский языки
