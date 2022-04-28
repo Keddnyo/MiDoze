@@ -8,7 +8,7 @@ The easiest way to download firmwares for Xiaomi wearables
 [Показать на русском](https://github.com/Keddnyo/MiDoze/blob/master/README.ru-RU.md)
 
 ## Features
-* Android 4.0+ *(Full compatibility only with Android 5.0+)*
+* Android 4.0.4+ *(Full compatibility only with Android 5.0+)*
 * User-friendly GUI
 * Material Design 3
 * English and Russian GUI languages
@@ -41,7 +41,7 @@ The easiest way to download firmwares for Xiaomi wearables
 * Storage access *(for saving files)*
 * Network access *(for app work)*
 
-## Screenshots Android 4.0+
+## Screenshots Android 4.0.4+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/165644137-136a6c8e-66e7-4c5e-aa55-03527dbc4300.png">
   <img src="https://user-images.githubusercontent.com/65981689/165644139-859805d4-1f67-4dc8-81fc-764a36292451.png">
