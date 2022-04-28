@@ -25,7 +25,7 @@ The easiest way to download firmwares for Xiaomi wearables
 * Update checker *(since 2.1.0)*
 
 ## Compatibility table
-| Features | Android 4.0+ | Android 5.0+ | Android 7.0+ |
+| Features | Android 4.0.4+ | Android 5.0+ | Android 7.0+ |
 | --- | --- | --- | --- |
 | Full access | **Compatibility Mode** | **Yes** | **Yes** |
 | Firmwares feed | No | **Yes** | **Yes** |
