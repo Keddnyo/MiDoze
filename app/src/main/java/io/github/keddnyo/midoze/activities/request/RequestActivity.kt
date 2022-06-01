@@ -19,7 +19,7 @@ class RequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
-        title = getString(R.string.profile_custom_request)
+        title = getString(R.string.settings_custom_request)
 
         UiUtils().switchDarkMode(this)
 

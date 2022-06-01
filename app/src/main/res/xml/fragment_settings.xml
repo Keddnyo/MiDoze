@@ -41,12 +41,17 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/profile_other">
+    <PreferenceCategory app:title="@string/settings_other">
 
         <Preference
             app:icon="@drawable/ic_custom_request"
             app:key="settings_custom_request"
-            app:title="@string/profile_custom_request" />
+            app:title="@string/settings_custom_request" />
+
+        <Preference
+            app:icon="@drawable/ic_cached"
+            app:key="settings_clear_feed_cache"
+            app:title="@string/settings_clear_feed_cache" />
 
     </PreferenceCategory>
 

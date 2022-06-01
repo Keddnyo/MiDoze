@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:editable="false"
             android:gravity="top"
-            android:hint="@string/profile_custom_request_server_response"
+            android:hint="@string/settings_server_response"
             android:textIsSelectable="true"
             tools:ignore="Deprecated" />
 

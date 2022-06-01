@@ -14,7 +14,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_custom_request_shortcut"
         android:shortcutId="CustomRequest"
-        android:shortcutShortLabel="@string/profile_custom_request">
+        android:shortcutShortLabel="@string/settings_custom_request">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="io.github.keddnyo.midoze.activities.request.RequestActivity"

@@ -38,9 +38,11 @@
     <string name="settings_request_host">Request host</string>
     <string name="settings_app_update_checker">Update checker</string>
 
-    <string name="profile_custom_request">Custom request</string>
-    <string name="profile_custom_request_server_response">Server response</string>
-    <string name="profile_other">Other</string>
+    <string name="settings_other">Other</string>
+    <string name="settings_custom_request">Custom request</string>
+    <string name="settings_server_response">Server response</string>
+    <string name="settings_clear_feed_cache">Clear feed cache</string>
+    <string name="settings_clear_feed_cache_cleared">Cleared</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>

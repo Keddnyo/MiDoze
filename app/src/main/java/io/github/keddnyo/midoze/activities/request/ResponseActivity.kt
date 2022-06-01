@@ -19,7 +19,7 @@ class ResponseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_response)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.profile_custom_request_server_response)
+        title = getString(R.string.settings_server_response)
 
         UiUtils().switchDarkMode(this)
 
@@ -50,7 +50,7 @@ class ResponseActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.profile_other))
+                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.settings_other))
                 startActivity(shareIntent)
             }
         }

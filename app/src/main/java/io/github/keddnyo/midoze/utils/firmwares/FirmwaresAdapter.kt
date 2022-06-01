@@ -1,6 +1,7 @@
 package io.github.keddnyo.midoze.utils.firmwares
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -80,6 +81,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                     openFirmwareActivity(firmwaresDataArray[position].deviceIndex, holder.downloadLayout.context, false)
                 }
                 else -> {
+                    Toast.makeText(holder.deviceNameTextView.context, R.string.firmware_connectivity_error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
