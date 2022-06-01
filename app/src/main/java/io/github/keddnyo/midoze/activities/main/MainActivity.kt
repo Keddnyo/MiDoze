@@ -12,13 +12,16 @@ import io.github.keddnyo.midoze.databinding.ActivityMainBinding
 import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.utils.UiUtils
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPager: ViewPager
+    val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        UiUtils().switchDarkMode(context)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                         title = getString(R.string.settings_title)
                     }
                 }
+                UiUtils().switchDarkMode(context)
             }
         })
 

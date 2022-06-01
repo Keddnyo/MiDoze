@@ -53,8 +53,6 @@ class FeedFragment : Fragment() {
         val context = requireContext()
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
-            UiUtils().switchDarkMode(context)
-
             val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
             val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
 
@@ -97,16 +95,19 @@ class FeedFragment : Fragment() {
                         editor.putString("Firmwares", "")
                     }
 
-                    if (preloadedFirmwares == "") {
-                        if (getOnlineState()) {
-                            getFirmwaresData()
-                            releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
-                        } else {
-                            firmwaresProgressBar.visibility = View.GONE
-                            firmwaresErrorMessage.visibility = View.VISIBLE
+                    when (preloadedFirmwares) {
+                        "" -> {
+                            if (getOnlineState()) {
+                                getFirmwaresData()
+                                releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
+                            } else {
+                                firmwaresProgressBar.visibility = View.GONE
+                                firmwaresErrorMessage.visibility = View.VISIBLE
+                            }
                         }
-                    } else {
-                        firmwaresData = JSONObject(preloadedFirmwares.toString())
+                        else -> {
+                            firmwaresData = JSONObject(preloadedFirmwares.toString())
+                        }
                     }
                     return null
                 }

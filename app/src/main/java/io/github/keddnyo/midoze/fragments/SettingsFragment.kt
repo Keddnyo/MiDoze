@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -19,11 +20,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        val appThemeEntries = findPreference<Preference>("app_theme_entries")
         val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
         val customRequest = findPreference<Preference>("settings_custom_request")
 
@@ -31,14 +30,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val cloud = findPreference<Preference>("settings_server_info")
         val github = findPreference<Preference>("settings_app_github_page")
 
-        if (appThemeEntries != null && clearFeedCache != null && customRequest != null && about != null && cloud != null && github != null) {
-            val changeListener =
-                Preference.OnPreferenceChangeListener { _, _ -> // Code goes here
-                    UiUtils().switchDarkMode(requireContext())
-                    true
-                }
-
-            appThemeEntries.onPreferenceChangeListener = changeListener
+        if (clearFeedCache != null && customRequest != null && about != null && cloud != null && github != null) {
 
             clearFeedCache.setOnPreferenceClickListener {
                 val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
