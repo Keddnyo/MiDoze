@@ -3,6 +3,7 @@ package io.github.keddnyo.midoze.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -14,7 +15,7 @@ import androidx.preference.PreferenceManager
 class UiUtils {
     fun getGridLayoutIndex(
         context: Context,
-        columnWidthDp: Int
+        columnWidthDp: Int,
     ): Int {
         val displayMetrics: DisplayMetrics = context.resources.displayMetrics
         val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
@@ -29,18 +30,29 @@ class UiUtils {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
+        val nightModeFlags: Int = context.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK
+
+        fun darkStatusBar() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                (context as Activity).window.statusBarColor = ContextCompat.getColor(context, android.R.color.black)
+            }
+        }
+
         when (prefs.getString("settings_app_theme", "1")) {
+            "1" -> {
+                if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                    darkStatusBar()
+                }
+            }
             "2" -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             "3" -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    (context as Activity).window.statusBarColor = ContextCompat.getColor(context, android.R.color.black)
-                }
+                darkStatusBar()
             }
         }
     }
