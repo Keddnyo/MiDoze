@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,12 +32,13 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.fragment_settings, rootKey)
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onResume() {
             super.onResume()
 
             requireActivity().title = getString(R.string.settings_title)
 
-            val clearFeedCache = findPreference<Preference>("settings_clear_feed_cache")
+            val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
             val customRequest = findPreference<Preference>("settings_custom_request")
 
             val about = findPreference<Preference>("settings_app_info")
@@ -49,7 +51,7 @@ class SettingsActivity : AppCompatActivity() {
                     val editor = prefs.edit()
                     editor.putString("Firmwares", "")
                     editor.apply()
-                    Toast.makeText(requireContext(), R.string.settings_clear_feed_cache_cleared, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.settings_feed_cache_cleared, Toast.LENGTH_SHORT).show()
                     true
                 }
 

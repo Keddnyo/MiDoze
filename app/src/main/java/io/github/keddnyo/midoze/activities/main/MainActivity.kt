@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             setContentView(R.layout.activity_main)
-
             UiUtils().switchDarkMode(context)
 
             val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             class LoadDataForActivity :
                 AsyncTask<Void?, Void?, Void>() {
-                var deviceListJson: JSONObject = JSONObject("{}")
+                var firmwaresData: JSONObject = JSONObject("{}")
                 var releaseData: JSONObject = JSONObject("{}")
 
                 @Deprecated("Deprecated in Java")
@@ -73,19 +73,30 @@ class MainActivity : AppCompatActivity() {
                 override fun doInBackground(vararg p0: Void?): Void? {
                     val preloadedFirmwares = prefs.getString("Firmwares", "")
 
-                    if (preloadedFirmwares == "") {
-                        if (DozeRequest().isOnline(context)) {
-                            deviceListJson = DozeRequest().getFirmwareLatest()
-                            editor.putString("Firmwares", deviceListJson.toString())
-                            editor.apply()
+                    fun getOnlineState(): Boolean {
+                        return DozeRequest().isOnline(context)
+                    }
 
+                    fun getFirmwaresData() {
+                        firmwaresData = DozeRequest().getFirmwareLatest()
+                        editor.putString("Firmwares", firmwaresData.toString())
+                        editor.apply()
+                    }
+
+                    if (prefs.getBoolean("settings_feed_auto_update", true)) {
+                        editor.putString("Firmwares", "")
+                    }
+
+                    if (preloadedFirmwares == "") {
+                        if (getOnlineState()) {
+                            getFirmwaresData()
                             releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
                         } else {
                             firmwaresProgressBar.visibility = View.GONE
                             firmwaresErrorMessage.visibility = View.VISIBLE
                         }
                     } else {
-                        deviceListJson = JSONObject(preloadedFirmwares.toString())
+                        firmwaresData = JSONObject(preloadedFirmwares.toString())
                     }
                     return null
                 }
@@ -95,11 +106,11 @@ class MainActivity : AppCompatActivity() {
                     super.onPostExecute(result)
 
                     fun getData(favorite: Boolean) {
-                        val responseParamsArray = deviceListJson.toMap()
+                        val responseParamsArray = firmwaresData.toMap()
                         val keys = responseParamsArray.keys
 
                         for (i in keys) {
-                            val jsonObject = deviceListJson.getJSONObject(i)
+                            val jsonObject = firmwaresData.getJSONObject(i)
 
                             val deviceNameValue = jsonObject.getString("name")
                             val deviceIconValue = when {
@@ -177,7 +188,9 @@ class MainActivity : AppCompatActivity() {
                     updateChecker()
                 }
             }
-            LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            if (FirmwaresAdapter().itemCount == 0) {
+                LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))

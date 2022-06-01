@@ -13,6 +13,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/feed_title">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_update"
+            app:key="settings_feed_auto_update"
+            app:title="@string/settings_feed_auto_update" />
+
+        <Preference
+            app:icon="@drawable/ic_delete"
+            app:key="settings_feed_cache_clear"
+            app:title="@string/settings_feed_cache_clear" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/settings_behaviour">
 
         <ListPreference
@@ -33,12 +48,6 @@
             app:title="@string/settings_request_region"
             app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            app:defaultValue="true"
-            app:icon="@drawable/ic_update"
-            app:key="settings_app_update_checker"
-            app:title="@string/settings_app_update_checker" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/settings_other">
@@ -48,20 +57,11 @@
             app:key="settings_custom_request"
             app:title="@string/settings_custom_request" />
 
-        <Preference
-            app:icon="@drawable/ic_cached"
-            app:key="settings_clear_feed_cache"
-            app:title="@string/settings_clear_feed_cache" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/app_name">
-
-        <Preference
-            app:icon="@drawable/ic_info"
-            app:key="settings_app_github_page"
-            app:summary="@string/settings_app_github_page_summary"
-            app:title="@string/settings_app_github_page" />
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_update"
+            app:key="settings_app_update_checker"
+            app:title="@string/settings_app_update_checker" />
 
     </PreferenceCategory>
 
@@ -78,6 +78,12 @@
             app:key="settings_server_info"
             app:summary="@string/settings_schakal"
             app:title="@string/settings_json_storage_title" />
+
+        <Preference
+            app:icon="@drawable/ic_info"
+            app:key="settings_app_github_page"
+            app:summary="@string/settings_app_github_page_summary"
+            app:title="@string/settings_app_github_page" />
 
     </PreferenceCategory>
 

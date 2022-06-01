@@ -34,8 +34,9 @@
     <string name="settings_other">Прочее</string>
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-    <string name="settings_clear_feed_cache">Очистить кэш ленты</string>
-    <string name="settings_clear_feed_cache_cleared">Готово</string>
+    <string name="settings_feed_auto_update">Автообновление кэшированной ленты</string>
+    <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
+    <string name="settings_feed_cache_cleared">Готово</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
