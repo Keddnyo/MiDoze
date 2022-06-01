@@ -8,6 +8,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.utils.UiUtils
 
 class SettingsActivity : AppCompatActivity() {
@@ -41,7 +42,7 @@ class SettingsActivity : AppCompatActivity() {
 
             if (customRequest != null && about != null && cloud != null && github != null) {
                 customRequest.setOnPreferenceClickListener {
-                    startActivity(Intent(requireContext(), ExtrasRequestActivity::class.java))
+                    startActivity(Intent(requireContext(), RequestActivity::class.java))
                     true
                 }
 

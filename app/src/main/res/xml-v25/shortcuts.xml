@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/feed_title">
         <intent
             android:action="FEED_SHORTCUT"
-            android:targetClass="io.github.keddnyo.midoze.activities.MainActivity"
+            android:targetClass="io.github.keddnyo.midoze.activities.main.MainActivity"
             android:targetPackage="io.github.keddnyo.midoze" />
     </shortcut>
     <shortcut
@@ -17,7 +17,7 @@
         android:shortcutShortLabel="@string/profile_custom_request">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="io.github.keddnyo.midoze.activities.ExtrasRequestActivity"
+            android:targetClass="io.github.keddnyo.midoze.activities.request.RequestActivity"
             android:targetPackage="io.github.keddnyo.midoze" />
     </shortcut>
 </shortcuts>

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities
+package io.github.keddnyo.midoze.activities.request
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,13 +12,13 @@ import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.runBlocking
 
-class ExtrasRequestActivity : AppCompatActivity() {
+class RequestActivity : AppCompatActivity() {
 
-    private val context = this@ExtrasRequestActivity
+    private val context = this@RequestActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_extras_request)
+        setContentView(R.layout.activity_request)
         title = getString(R.string.profile_custom_request)
 
         UiUtils().switchDarkMode(this)
@@ -77,7 +77,7 @@ class ExtrasRequestActivity : AppCompatActivity() {
                         )
                     }
 
-                val intent = Intent(context, ExtrasResponseActivity::class.java)
+                val intent = Intent(context, ResponseActivity::class.java)
                 intent.putExtra("json", firmwareResponse.toString())
                 startActivity(intent)
             } else {

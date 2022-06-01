@@ -3,8 +3,8 @@ package io.github.keddnyo.midoze.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,13 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 
 class UiUtils {
-    fun getRecyclerSpanCount(context: Context): Int = with(context) {
-        val orientation = resources.configuration.orientation
-        return if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            1
-        } else {
-            2
-        }
+    fun getGridLayoutIndex(
+        context: Context,
+        columnWidthDp: Int
+    ): Int {
+        val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+        return (screenWidthDp / columnWidthDp.toString().toFloat() + 0.5).toInt()
     }
 
     fun showToast(context: Context, string: String) {

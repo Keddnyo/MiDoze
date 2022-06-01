@@ -1,6 +1,6 @@
-package io.github.keddnyo.midoze.utils.deviceList
+package io.github.keddnyo.midoze.utils.firmwares
 
-data class DeviceListData(
+data class FirmwaresData(
     val deviceName: String,
     val deviceIcon: Int,
     val firmwareReleaseDate: String,

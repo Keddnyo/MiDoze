@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="io.github.keddnyo.midoze">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,21 +18,21 @@
             android:name=".activities.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ExtrasResponseActivity"
+            android:name=".activities.request.ResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.ExtrasRequestActivity"
+            android:name=".activities.request.RequestActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog" />
         <activity
-            android:name=".activities.FirmwareActivity"
+            android:name=".activities.main.FirmwareActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog.Firmware" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.main.MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>

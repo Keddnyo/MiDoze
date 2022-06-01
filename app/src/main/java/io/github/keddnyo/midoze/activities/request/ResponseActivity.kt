@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities
+package io.github.keddnyo.midoze.activities.request
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +10,14 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
 
-class ExtrasResponseActivity : AppCompatActivity() {
+class ResponseActivity : AppCompatActivity() {
 
-    private val context = this@ExtrasResponseActivity
+    private val context = this@ResponseActivity
     private var json: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_extras_response)
+        setContentView(R.layout.activity_response)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.profile_custom_request_server_response)
 
