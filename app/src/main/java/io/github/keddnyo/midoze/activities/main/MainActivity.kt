@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
+            
+            UiUtils().switchDarkMode(context)
+
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
             class LoadDataForActivity :
@@ -85,8 +88,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-
-            UiUtils().switchDarkMode(context)
 
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
