@@ -71,6 +71,7 @@ class FeedFragment : Fragment() {
                 AsyncTask<Void?, Void?, Void>() {
                 var firmwaresData: JSONObject = JSONObject("{}")
                 var releaseData: JSONObject = JSONObject("{}")
+                val preloadedFirmwares = prefs.getString("Firmwares", "").toString()
 
                 @Deprecated("Deprecated in Java")
                 override fun onPreExecute() {
@@ -80,7 +81,6 @@ class FeedFragment : Fragment() {
 
                 @Deprecated("Deprecated in Java")
                 override fun doInBackground(vararg p0: Void?): Void? {
-                    val preloadedFirmwares = prefs.getString("Firmwares", "")
 
                     fun getOnlineState(): Boolean {
                         return DozeRequest().isOnline(context)
@@ -107,7 +107,7 @@ class FeedFragment : Fragment() {
                             }
                         }
                         else -> {
-                            firmwaresData = JSONObject(preloadedFirmwares.toString())
+                            firmwaresData = JSONObject(preloadedFirmwares)
                         }
                     }
                     return null
@@ -118,44 +118,47 @@ class FeedFragment : Fragment() {
                     super.onPostExecute(result)
 
                     fun getData(favorite: Boolean) {
-                        val responseParamsArray = firmwaresData.toMap()
-                        val keys = responseParamsArray.keys
+                        if (firmwaresData != JSONObject("{}")) {
 
-                        for (i in keys) {
-                            val jsonObject = firmwaresData.getJSONObject(i)
+                            val responseParamsArray = firmwaresData.toMap()
+                            val keys = responseParamsArray.keys
 
-                            val deviceNameValue = jsonObject.getString("name")
-                            val deviceIconValue = when {
-                                deviceNameValue.contains(getString(R.string.title_mi_band),
-                                    true) -> {
-                                    R.drawable.ic_xiaomi
+                            for (i in keys) {
+                                val jsonObject = firmwaresData.getJSONObject(i)
+
+                                val deviceNameValue = jsonObject.getString("name")
+                                val deviceIconValue = when {
+                                    deviceNameValue.contains(getString(R.string.title_mi_band),
+                                        true) -> {
+                                        R.drawable.ic_xiaomi
+                                    }
+                                    deviceNameValue.contains(getString(R.string.title_zepp), true) -> {
+                                        R.drawable.ic_zepp
+                                    }
+                                    else -> {
+                                        R.drawable.ic_amazfit
+                                    }
                                 }
-                                deviceNameValue.contains(getString(R.string.title_zepp), true) -> {
-                                    R.drawable.ic_zepp
-                                }
-                                else -> {
-                                    R.drawable.ic_amazfit
-                                }
-                            }
-                            val firmwareVersionValue = jsonObject.getString("fw")
-                            val firmwareReleaseDateValue =
-                                StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
+                                val firmwareVersionValue = jsonObject.getString("fw")
+                                val firmwareReleaseDateValue =
+                                    StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
 
-                            val firmwareVersion = getString(R.string.firmware_version)
-                            val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
+                                val firmwareVersion = getString(R.string.firmware_version)
+                                val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
 
-                            if (prefs.getBoolean(i, false) == favorite) {
-                                firmwaresAdapter.addDevice(
-                                    FirmwaresData(
-                                        deviceNameValue,
-                                        deviceIconValue,
-                                        firmwareReleaseDateValue,
-                                        firmwareChangelogValue,
-                                        i.toInt()
+                                if (prefs.getBoolean(i, false) == favorite) {
+                                    firmwaresAdapter.addDevice(
+                                        FirmwaresData(
+                                            deviceNameValue,
+                                            deviceIconValue,
+                                            firmwareReleaseDateValue,
+                                            firmwareChangelogValue,
+                                            i.toInt()
+                                        )
                                     )
-                                )
-                                firmwaresAdapter.notifyItemInserted(i.toInt())
-                                deviceListIndex[deviceNameValue] = i.toInt()
+                                    firmwaresAdapter.notifyItemInserted(i.toInt())
+                                    deviceListIndex[deviceNameValue] = i.toInt()
+                                }
                             }
                         }
                     }

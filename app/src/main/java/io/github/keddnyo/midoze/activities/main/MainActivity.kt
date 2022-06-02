@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 positionOffsetPixels: Int,
             ) {}
             override fun onPageSelected(position: Int) {
+                // UiUtils().switchDarkMode(context)
                 when (position) {
                     0 -> {
                         bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
@@ -51,7 +52,6 @@ class MainActivity : AppCompatActivity() {
                         title = getString(R.string.settings_title)
                     }
                 }
-                UiUtils().switchDarkMode(context)
             }
         })
 
