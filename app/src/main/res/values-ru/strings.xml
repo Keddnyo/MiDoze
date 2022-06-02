@@ -4,13 +4,16 @@
     <string name="compatibility_mode">Режим совместимости</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
-    <string name="update_dialog_message">Установите обновление, в котором улучшена стабильность и доступны новые возможности!</string>
     <string name="update_dialog_button">Обновить</string>
 
     <string name="firmware_version">Версия прошивки</string>
     <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
+    <string name="settings_feed_cache_use">Загружать из кэша</string>
+    <string name="settings_feed_cache_use_summary">Отображать ленту без интернета</string>
+    <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
+    <string name="settings_feed_cache_cleared">Готово</string>
 
     <string name="firmware_connectivity_error">Ошибка подключения</string>
 
@@ -24,25 +27,17 @@
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
-    <string name="settings_application">Приложение</string>
     <string name="settings_dark_mode">Тёмный режим</string>
     <string name="settings_requests">Запросы</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
     <string name="settings_app_check_updates">Проверять обновления</string>
 
-    <string name="settings_other">Прочее</string>
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-    <string name="settings_feed_cache_use">Загружать из кэша</string>
-    <string name="settings_feed_cache_use_summary">Отображать ленту без интернета</string>
-    <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
-    <string name="settings_feed_cache_cleared">Готово</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
-    <string name="settings_app_github_page">Страница проекта на GitHub</string>
-    <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
 
     <string-array name="request_region_entries">
         <item>США</item>

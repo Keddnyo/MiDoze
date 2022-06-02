@@ -1,8 +1,6 @@
 package io.github.keddnyo.midoze.fragments
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
@@ -10,7 +8,6 @@ import android.os.Parcelable
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -18,9 +15,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils

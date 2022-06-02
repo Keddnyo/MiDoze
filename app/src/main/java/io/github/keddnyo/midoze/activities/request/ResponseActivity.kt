@@ -50,7 +50,7 @@ class ResponseActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.settings_other))
+                val shareIntent = Intent.createChooser(sendIntent, getString(R.string.settings_server_response))
                 startActivity(shareIntent)
             }
         }

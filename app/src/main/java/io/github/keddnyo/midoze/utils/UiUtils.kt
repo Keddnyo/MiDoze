@@ -1,14 +1,10 @@
 package io.github.keddnyo.midoze.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.util.DisplayMetrics
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 
 class UiUtils {
