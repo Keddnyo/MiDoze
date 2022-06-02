@@ -41,10 +41,10 @@ class UiUtils {
         when (prefs.getBoolean("settings_dark_mode", false)) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                darkStatusBar()
             }
             false -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                darkStatusBar()
             }
         }
     }
