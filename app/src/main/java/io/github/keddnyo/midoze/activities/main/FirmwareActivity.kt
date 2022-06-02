@@ -40,8 +40,6 @@ class FirmwareActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        UiUtils().switchDarkMode(this)
-
         runBlocking {
             withContext(Dispatchers.IO) {
                 init()

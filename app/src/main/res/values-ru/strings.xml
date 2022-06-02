@@ -25,7 +25,7 @@
 
     <string name="settings_title">Настройки</string>
     <string name="settings_application">Приложение</string>
-    <string name="settings_app_theme">Тема приложения</string>
+    <string name="settings_dark_mode">Тёмный режим</string>
     <string name="settings_behaviour">Поведение</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
@@ -42,12 +42,6 @@
     <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_github_page">Страница проекта на GitHub</string>
     <string name="settings_app_github_page_summary">Посетить страницу проекта</string>
-
-    <string-array name="app_theme_entries">
-        <item>Авто</item>
-        <item>Светлая тема</item>
-        <item>Тёмная тема</item>
-    </string-array>
 
     <string-array name="request_region_entries">
         <item>США</item>

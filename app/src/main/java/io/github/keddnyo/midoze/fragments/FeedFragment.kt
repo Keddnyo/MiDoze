@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.fragments
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
@@ -204,8 +205,28 @@ class FeedFragment : Fragment() {
                     updateChecker()
                 }
             }
-            if (FirmwaresAdapter().itemCount == 0) {
+
+            @SuppressLint("NotifyDataSetChanged")
+            fun setData() {
+                firmwaresAdapter.clear()
+                firmwaresAdapter.notifyDataSetChanged()
                 LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
+
+            if (FirmwaresAdapter().itemCount == 0) {
+                setData()
+            }
+
+            val feedItem: View = findViewById(R.id.menu_feed)
+            val settingsItem: View = findViewById(R.id.menu_settings)
+            feedItem.setOnLongClickListener {
+                setData()
+                true
+            }
+            settingsItem.setOnLongClickListener {
+                val intent = Intent(requireActivity(), RequestActivity::class.java)
+                startActivity(intent)
+                true
             }
         } else {
             finish()

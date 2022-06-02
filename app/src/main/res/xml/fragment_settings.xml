@@ -2,14 +2,11 @@
 
     <PreferenceCategory app:title="@string/settings_application">
 
-        <ListPreference
-            app:defaultValue="1"
-            app:entries="@array/app_theme_entries"
-            app:entryValues="@array/app_theme_entryValues"
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
             app:icon="@drawable/ic_dark_mode"
-            app:key="settings_app_theme"
-            app:title="@string/settings_app_theme"
-            app:useSimpleSummaryProvider="true" />
+            app:key="settings_dark_mode"
+            app:title="@string/settings_dark_mode" />
 
     </PreferenceCategory>
 

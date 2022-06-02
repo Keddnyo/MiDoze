@@ -30,9 +30,6 @@ class UiUtils {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
-        val nightModeFlags: Int = context.resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK
-
         fun darkStatusBar() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -41,17 +38,12 @@ class UiUtils {
             }
         }
 
-        when (prefs.getString("settings_app_theme", "1")) {
-            "1" -> {
-                if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-                    darkStatusBar()
-                }
-            }
-            "2" -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            "3" -> {
+        when (prefs.getBoolean("settings_dark_mode", false)) {
+            true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            false -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 darkStatusBar()
             }
         }
