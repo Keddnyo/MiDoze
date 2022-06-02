@@ -54,183 +54,139 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
+        val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
 
-            val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
-            val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
+        val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
+        val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
 
-            deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
-            deviceListRecyclerView.layoutManager =
-                GridLayoutManager(this, UiUtils().getGridLayoutIndex(this, 400))
+        deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
+        deviceListRecyclerView.layoutManager =
+            GridLayoutManager(this, UiUtils().getGridLayoutIndex(this, 400))
 
-            val adapter = firmwaresAdapter
-            deviceListRecyclerView.adapter = adapter
+        val adapter = firmwaresAdapter
+        deviceListRecyclerView.adapter = adapter
 
-            prefs = PreferenceManager.getDefaultSharedPreferences(this)
-            val editor = prefs.edit()
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = prefs.edit()
 
-            class LoadDataForActivity :
-                AsyncTask<Void?, Void?, Void>() {
-                var firmwaresData: JSONObject = JSONObject("{}")
-                var releaseData: JSONObject = JSONObject("{}")
-                val preloadedFirmwares = prefs.getString("Firmwares", "").toString()
+        class LoadDataForActivity :
+            AsyncTask<Void?, Void?, Void>() {
+            var firmwaresData: JSONObject = JSONObject("{}")
+            val preloadedFirmwares = prefs.getString("Firmwares", "").toString()
 
-                @Deprecated("Deprecated in Java")
-                override fun onPreExecute() {
-                    super.onPreExecute()
-                    firmwaresProgressBar.visibility = View.VISIBLE
-                    firmwaresErrorMessage.visibility = View.GONE
+            @Deprecated("Deprecated in Java")
+            override fun onPreExecute() {
+                super.onPreExecute()
+                firmwaresProgressBar.visibility = View.VISIBLE
+                firmwaresErrorMessage.visibility = View.GONE
+            }
+
+            @Deprecated("Deprecated in Java")
+            override fun doInBackground(vararg p0: Void?): Void? {
+
+                fun getOnlineState(): Boolean {
+                    return DozeRequest().isOnline(context)
                 }
 
-                @Deprecated("Deprecated in Java")
-                override fun doInBackground(vararg p0: Void?): Void? {
-
-                    fun getFirmwaresData() {
-                        if (DozeRequest().isOnline(context)) {
-                            firmwaresData = DozeRequest().getFirmwareLatest()
-                            editor.putString("Firmwares", firmwaresData.toString())
-                            editor.apply()
-                        } else {
-                            runOnUiThread {
-                                firmwaresProgressBar.visibility = View.GONE
-                                firmwaresErrorMessage.visibility = View.VISIBLE
-                            }
+                fun getFirmwaresData() {
+                    if (getOnlineState()) {
+                        firmwaresData = DozeRequest().getFirmwareLatest()
+                        editor.putString("Firmwares", firmwaresData.toString())
+                        editor.apply()
+                    } else {
+                        runOnUiThread {
+                            firmwaresProgressBar.visibility = View.GONE
+                            firmwaresErrorMessage.visibility = View.VISIBLE
                         }
                     }
+                }
 
-                    if (prefs.getBoolean("settings_feed_cache_use", true)) {
-                        when (preloadedFirmwares) {
-                            "" -> {
-                                getFirmwaresData()
-                            }
-                            else -> {
-                                firmwaresData = JSONObject(preloadedFirmwares)
-                            }
-                        }
+                if (prefs.getBoolean("settings_feed_cache_use", true)) {
+                    if (preloadedFirmwares != "") {
+                        firmwaresData = JSONObject(preloadedFirmwares)
                     } else {
                         getFirmwaresData()
                     }
-                    releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
-
-                    return null
+                } else {
+                    getFirmwaresData()
                 }
 
-                @Deprecated("Deprecated in Java")
-                override fun onPostExecute(result: Void?) {
-                    super.onPostExecute(result)
+                return null
+            }
 
-                    fun getData(favorite: Boolean) {
-                        if (firmwaresData != JSONObject("{}")) {
+            @Deprecated("Deprecated in Java")
+            override fun onPostExecute(result: Void?) {
+                super.onPostExecute(result)
 
-                            val responseParamsArray = firmwaresData.toMap()
-                            val keys = responseParamsArray.keys
+                fun getData(favorite: Boolean) {
+                    if (firmwaresData != JSONObject("{}")) {
 
-                            for (i in keys) {
-                                val jsonObject = firmwaresData.getJSONObject(i)
+                        val responseParamsArray = firmwaresData.toMap()
+                        val keys = responseParamsArray.keys
 
-                                val deviceNameValue = jsonObject.getString("name")
-                                val deviceIconValue = when {
-                                    deviceNameValue.contains(getString(R.string.title_mi_band),
-                                        true) -> {
-                                        R.drawable.ic_xiaomi
-                                    }
-                                    deviceNameValue.contains(getString(R.string.title_zepp), true) -> {
-                                        R.drawable.ic_zepp
-                                    }
-                                    else -> {
-                                        R.drawable.ic_amazfit
-                                    }
+                        for (i in keys) {
+                            val jsonObject = firmwaresData.getJSONObject(i)
+
+                            val deviceNameValue = jsonObject.getString("name")
+                            val deviceIconValue = when {
+                                deviceNameValue.contains(getString(R.string.title_mi_band),
+                                    true) -> {
+                                    R.drawable.ic_xiaomi
                                 }
-                                val firmwareVersionValue = jsonObject.getString("fw")
-                                val firmwareReleaseDateValue =
-                                    StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
+                                deviceNameValue.contains(getString(R.string.title_zepp), true) -> {
+                                    R.drawable.ic_zepp
+                                }
+                                else -> {
+                                    R.drawable.ic_amazfit
+                                }
+                            }
+                            val firmwareVersionValue = jsonObject.getString("fw")
+                            val firmwareReleaseDateValue =
+                                StringUtils().getLocaleFirmwareDate(jsonObject.getString("date"))
 
-                                val firmwareVersion = getString(R.string.firmware_version)
-                                val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
+                            val firmwareVersion = getString(R.string.firmware_version)
+                            val firmwareChangelogValue = "$firmwareVersion: $firmwareVersionValue"
 
-                                if (prefs.getBoolean(i, false) == favorite) {
-                                    firmwaresAdapter.addDevice(
-                                        FirmwaresData(
-                                            deviceNameValue,
-                                            deviceIconValue,
-                                            firmwareReleaseDateValue,
-                                            firmwareChangelogValue,
-                                            i.toInt()
-                                        )
+                            if (prefs.getBoolean(i, false) == favorite) {
+                                firmwaresAdapter.addDevice(
+                                    FirmwaresData(
+                                        deviceNameValue,
+                                        deviceIconValue,
+                                        firmwareReleaseDateValue,
+                                        firmwareChangelogValue,
+                                        i.toInt()
                                     )
-                                    firmwaresAdapter.notifyItemInserted(i.toInt())
-                                    deviceListIndex[deviceNameValue] = i.toInt()
-                                }
+                                )
+                                firmwaresAdapter.notifyItemInserted(i.toInt())
+                                deviceListIndex[deviceNameValue] = i.toInt()
                             }
                         }
                     }
-                    firmwaresProgressBar.visibility = View.GONE
-                    firmwaresRefreshLayout.isRefreshing = false
-                    getData(true)
-                    getData(false)
+                }
+                firmwaresProgressBar.visibility = View.GONE
+                firmwaresRefreshLayout.isRefreshing = false
+                getData(true)
+                getData(false)
 
-                    if (state != null) {
-                        deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
-                    }
-
-                    fun updateChecker() {
-                        if (prefs.getBoolean("settings_app_update_checker",
-                                true) && DozeRequest().isOnline(context)
-                        ) {
-
-                            if (releaseData.has("tag_name") && releaseData.getJSONArray("assets")
-                                    .toString() != "[]"
-                            ) {
-                                val latestVersion = releaseData.getString("tag_name")
-                                val latestVersionLink =
-                                    releaseData.getJSONArray("assets").getJSONObject(0)
-                                        .getString("browser_download_url")
-
-                                if (BuildConfig.VERSION_NAME < latestVersion) {
-                                    val builder = AlertDialog.Builder(context)
-                                        .setTitle(getString(R.string.update_dialog_title))
-                                        .setMessage(getString(R.string.update_dialog_message))
-                                        .setIcon(R.drawable.ic_info)
-                                        .setCancelable(false)
-                                    builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
-                                        DozeRequest().getFirmwareFile(context,
-                                            latestVersionLink,
-                                            getString(R.string.app_name))
-                                        UiUtils().showToast(context,
-                                            getString(R.string.downloading_toast))
-                                        DialogInterface.BUTTON_POSITIVE
-                                    }
-                                    builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
-                                        DialogInterface.BUTTON_NEGATIVE
-                                    }
-                                    builder.show()
-                                }
-                            }
-                        }
-                    }
-                    updateChecker()
+                if (state != null) {
+                    deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                 }
             }
+        }
 
-            @SuppressLint("NotifyDataSetChanged")
-            fun setData() {
-                firmwaresAdapter.clear()
-                firmwaresAdapter.notifyDataSetChanged()
-                LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-            }
+        @SuppressLint("NotifyDataSetChanged")
+        fun setData() {
+            firmwaresAdapter.clear()
+            firmwaresAdapter.notifyDataSetChanged()
+            LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        }
 
-            if (FirmwaresAdapter().itemCount == 0) {
-                setData()
-            }
+        if (FirmwaresAdapter().itemCount == 0) {
+            setData()
+        }
 
-            firmwaresRefreshLayout.setOnRefreshListener {
-                setData()
-            }
-        } else {
-            finish()
-            startActivity(Intent(this, RequestActivity::class.java))
-            UiUtils().showToast(context, getString(R.string.compatibility_mode))
+        firmwaresRefreshLayout.setOnRefreshListener {
+            setData()
         }
     }
 

@@ -34,7 +34,8 @@
     <string name="settings_other">Прочее</string>
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-    <string name="settings_feed_cache_use">Загружать только из кэша</string>
+    <string name="settings_feed_cache_use">Загружать из кэша</string>
+    <string name="settings_feed_cache_use_summary">Отображать ленту без интернета</string>
     <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
     <string name="settings_feed_cache_cleared">Готово</string>
 

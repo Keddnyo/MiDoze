@@ -41,7 +41,8 @@
     <string name="settings_other">Other</string>
     <string name="settings_custom_request">Custom request</string>
     <string name="settings_server_response">Server response</string>
-    <string name="settings_feed_cache_use">Force load from cache</string>
+    <string name="settings_feed_cache_use">Load from cache</string>
+    <string name="settings_feed_cache_use_summary">Show feed w/o connection</string>
     <string name="settings_feed_cache_clear">Clear feed cache</string>
     <string name="settings_feed_cache_cleared">Cleared</string>
 
