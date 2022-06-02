@@ -1,7 +1,6 @@
 package io.github.keddnyo.midoze.utils.firmwares
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,8 +12,8 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
+import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="orange">#FFFFBB33</color>
-
     <color name="foreground">@color/white</color>
-
     <color name="red">#FF9090</color>
-    <color name="green">#BEED32</color>
-    <color name="blue">#BBF6FF</color>
-    <color name="purple">#EE8EFF</color>
 </resources>

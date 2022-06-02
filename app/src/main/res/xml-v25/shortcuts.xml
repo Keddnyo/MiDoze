@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/feed_title">
         <intent
             android:action="FEED_SHORTCUT"
-            android:targetClass="io.github.keddnyo.midoze.fragments.MainActivity"
+            android:targetClass="io.github.keddnyo.midoze.activities.main.MainActivity"
             android:targetPackage="io.github.keddnyo.midoze" />
     </shortcut>
     <shortcut

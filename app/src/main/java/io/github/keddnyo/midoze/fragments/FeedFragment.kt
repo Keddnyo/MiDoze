@@ -225,7 +225,7 @@ class FeedFragment : Fragment() {
             if (FirmwaresAdapter().itemCount == 0) {
                 setData()
             }
-            
+
             firmwaresRefreshLayout.setOnRefreshListener {
                 setData()
             }
