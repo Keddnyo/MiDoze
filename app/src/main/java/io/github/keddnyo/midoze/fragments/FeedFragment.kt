@@ -225,16 +225,8 @@ class FeedFragment : Fragment() {
             if (FirmwaresAdapter().itemCount == 0) {
                 setData()
             }
-
-            val settingsItem: View = findViewById(R.id.menu_settings)
-            settingsItem.setOnLongClickListener {
-                val intent = Intent(requireActivity(), RequestActivity::class.java)
-                startActivity(intent)
-                true
-            }
-
+            
             firmwaresRefreshLayout.setOnRefreshListener {
-                firmwaresRefreshLayout.isRefreshing = true
                 setData()
             }
         } else {
