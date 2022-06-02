@@ -1,8 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.MiDoze" parent="Theme.Material3.Dark" />
+    <style name="Theme.MiDoze" parent="Theme.Material3.Dark">
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
+    </style>
 
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="colorSurface">@color/black</item>
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
     </style>
 

@@ -29,18 +29,9 @@ class UiUtils {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
-        fun darkStatusBar() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                (context as Activity).window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                (context as Activity).window.statusBarColor = ContextCompat.getColor(context, android.R.color.black)
-            }
-        }
-
         when (prefs.getBoolean("settings_dark_mode", false)) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                darkStatusBar()
             }
             false -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

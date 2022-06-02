@@ -56,6 +56,7 @@ class FeedFragment : Fragment() {
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
+
             val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
             val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
 
