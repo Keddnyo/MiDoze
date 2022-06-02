@@ -86,36 +86,33 @@ class FeedFragment : Fragment() {
                 @Deprecated("Deprecated in Java")
                 override fun doInBackground(vararg p0: Void?): Void? {
 
-                    fun getOnlineState(): Boolean {
-                        return DozeRequest().isOnline(context)
-                    }
-
                     fun getFirmwaresData() {
-                        firmwaresData = DozeRequest().getFirmwareLatest()
-                        editor.putString("Firmwares", firmwaresData.toString())
-                        editor.apply()
-                    }
-
-                    if (prefs.getBoolean("settings_feed_auto_update", true)) {
-                        editor.putString("Firmwares", "")
-                    }
-
-                    when (preloadedFirmwares) {
-                        "" -> {
-                            if (getOnlineState()) {
-                                getFirmwaresData()
-                                releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
-                            } else {
-                                runOnUiThread {
-                                    firmwaresProgressBar.visibility = View.GONE
-                                    firmwaresErrorMessage.visibility = View.VISIBLE
-                                }
+                        if (DozeRequest().isOnline(context)) {
+                            firmwaresData = DozeRequest().getFirmwareLatest()
+                            editor.putString("Firmwares", firmwaresData.toString())
+                            editor.apply()
+                        } else {
+                            runOnUiThread {
+                                firmwaresProgressBar.visibility = View.GONE
+                                firmwaresErrorMessage.visibility = View.VISIBLE
                             }
                         }
-                        else -> {
-                            firmwaresData = JSONObject(preloadedFirmwares)
-                        }
                     }
+
+                    if (prefs.getBoolean("settings_feed_cache_use", true)) {
+                        when (preloadedFirmwares) {
+                            "" -> {
+                                getFirmwaresData()
+                            }
+                            else -> {
+                                firmwaresData = JSONObject(preloadedFirmwares)
+                            }
+                        }
+                    } else {
+                        getFirmwaresData()
+                    }
+                    releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
+
                     return null
                 }
 

@@ -29,12 +29,12 @@
     <string name="settings_requests">Запросы</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
-    <string name="settings_app_update_checker">Уведомлять об обновлениях</string>
+    <string name="settings_app_check_updates">Проверять обновления</string>
 
     <string name="settings_other">Прочее</string>
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-    <string name="settings_feed_auto_update">Обновлять кэш ленты</string>
+    <string name="settings_feed_cache_use">Загружать только из кэша</string>
     <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
     <string name="settings_feed_cache_cleared">Готово</string>
 

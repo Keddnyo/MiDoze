@@ -5,13 +5,14 @@
         <SwitchPreferenceCompat
             app:defaultValue="true"
             app:icon="@drawable/ic_update"
-            app:key="settings_feed_auto_update"
-            app:title="@string/settings_feed_auto_update" />
+            app:key="settings_feed_cache_use"
+            app:title="@string/settings_feed_cache_use" />
 
         <Preference
             app:icon="@drawable/ic_delete"
             app:key="settings_feed_cache_clear"
-            app:title="@string/settings_feed_cache_clear" />
+            app:title="@string/settings_feed_cache_clear"
+            app:dependency="settings_feed_cache_use"/>
 
     </PreferenceCategory>
 
@@ -39,7 +40,7 @@
             app:defaultValue="true"
             app:icon="@drawable/ic_update"
             app:key="settings_app_update_checker"
-            app:title="@string/settings_app_update_checker" />
+            app:title="@string/settings_app_check_updates" />
 
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/settings_about">
@@ -55,12 +56,6 @@
             app:key="settings_server_info"
             app:summary="@string/settings_schakal"
             app:title="@string/settings_json_storage_title" />
-
-        <Preference
-            app:icon="@drawable/ic_info"
-            app:key="settings_app_github_page"
-            app:summary="@string/settings_app_github_page_summary"
-            app:title="@string/settings_app_github_page" />
 
     </PreferenceCategory>
 

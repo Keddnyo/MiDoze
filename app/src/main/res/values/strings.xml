@@ -36,12 +36,12 @@
     <string name="settings_requests">Requests</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
-    <string name="settings_app_update_checker">Update checker</string>
+    <string name="settings_app_check_updates">Check updates</string>
 
     <string name="settings_other">Other</string>
     <string name="settings_custom_request">Custom request</string>
     <string name="settings_server_response">Server response</string>
-    <string name="settings_feed_auto_update">Auto-update cached feed</string>
+    <string name="settings_feed_cache_use">Force load from cache</string>
     <string name="settings_feed_cache_clear">Clear feed cache</string>
     <string name="settings_feed_cache_cleared">Cleared</string>
 

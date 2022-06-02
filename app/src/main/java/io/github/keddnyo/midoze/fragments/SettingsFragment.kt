@@ -29,9 +29,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val about = findPreference<Preference>("settings_app_info")
         val cloud = findPreference<Preference>("settings_server_info")
-        val github = findPreference<Preference>("settings_app_github_page")
 
-        if (clearFeedCache != null && about != null && cloud != null && github != null) {
+        if (clearFeedCache != null && about != null && cloud != null) {
 
             clearFeedCache.setOnPreferenceClickListener {
                 val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -44,18 +43,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
 
-            github.setOnPreferenceClickListener {
-                startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
-                )
-                true
-            }
-
             about.title = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
 
             about.setOnPreferenceClickListener {
                 startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo"))
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
                 )
                 true
             }
