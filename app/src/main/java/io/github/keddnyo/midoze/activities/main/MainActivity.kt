@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 positionOffsetPixels: Int,
             ) {}
             override fun onPageSelected(position: Int) {
-                // UiUtils().switchDarkMode(context)
+                UiUtils().switchDarkMode(context)
                 when (position) {
                     0 -> {
                         bottomBar.menu.findItem(R.id.menu_feed).isChecked = true

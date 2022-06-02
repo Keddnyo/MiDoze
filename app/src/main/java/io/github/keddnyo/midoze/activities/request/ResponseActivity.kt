@@ -37,7 +37,7 @@ class ResponseActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_firmware, menu)
+        menuInflater.inflate(R.menu.menu_response, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

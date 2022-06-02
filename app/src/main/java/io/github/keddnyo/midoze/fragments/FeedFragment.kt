@@ -77,6 +77,7 @@ class FeedFragment : Fragment() {
                 override fun onPreExecute() {
                     super.onPreExecute()
                     firmwaresProgressBar.visibility = View.VISIBLE
+                    firmwaresErrorMessage.visibility = View.GONE
                 }
 
                 @Deprecated("Deprecated in Java")
@@ -102,8 +103,10 @@ class FeedFragment : Fragment() {
                                 getFirmwaresData()
                                 releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
                             } else {
-                                firmwaresProgressBar.visibility = View.GONE
-                                firmwaresErrorMessage.visibility = View.VISIBLE
+                                runOnUiThread {
+                                    firmwaresProgressBar.visibility = View.GONE
+                                    firmwaresErrorMessage.visibility = View.VISIBLE
+                                }
                             }
                         }
                         else -> {
