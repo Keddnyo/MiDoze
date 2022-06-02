@@ -15,7 +15,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/settings_behaviour">
+    <PreferenceCategory app:title="@string/settings_requests">
 
         <ListPreference
             app:defaultValue="1"
@@ -35,15 +35,6 @@
             app:title="@string/settings_request_region"
             app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/settings_other">
-
-        <Preference
-            app:icon="@drawable/ic_custom_request"
-            app:key="settings_custom_request"
-            app:title="@string/settings_custom_request" />
-
         <SwitchPreferenceCompat
             app:defaultValue="true"
             app:icon="@drawable/ic_update"
@@ -51,7 +42,6 @@
             app:title="@string/settings_app_update_checker" />
 
     </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/settings_about">
 
         <Preference

@@ -33,7 +33,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_application">Application</string>
     <string name="settings_dark_mode">Dark mode</string>
-    <string name="settings_behaviour">Behaviour</string>
+    <string name="settings_requests">Requests</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
     <string name="settings_app_update_checker">Update checker</string>

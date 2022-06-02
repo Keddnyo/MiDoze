@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                 positionOffsetPixels: Int,
             ) {}
             override fun onPageSelected(position: Int) {
-                UiUtils().switchDarkMode(context)
                 when (position) {
                     0 -> {
                         bottomBar.menu.findItem(R.id.menu_feed).isChecked = true

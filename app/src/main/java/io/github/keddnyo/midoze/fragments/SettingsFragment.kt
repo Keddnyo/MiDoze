@@ -16,7 +16,6 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.utils.UiUtils
 
-
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
@@ -27,13 +26,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
 
         val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
-        val customRequest = findPreference<Preference>("settings_custom_request")
 
         val about = findPreference<Preference>("settings_app_info")
         val cloud = findPreference<Preference>("settings_server_info")
         val github = findPreference<Preference>("settings_app_github_page")
 
-        if (clearFeedCache != null && customRequest != null && about != null && cloud != null && github != null) {
+        if (clearFeedCache != null && about != null && cloud != null && github != null) {
 
             clearFeedCache.setOnPreferenceClickListener {
                 val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -43,11 +41,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 Toast.makeText(requireContext(),
                     R.string.settings_feed_cache_cleared,
                     Toast.LENGTH_SHORT).show()
-                true
-            }
-
-            customRequest.setOnPreferenceClickListener {
-                startActivity(Intent(requireContext(), RequestActivity::class.java))
                 true
             }
 
@@ -107,6 +100,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     editor.apply()
                 }
                 UiUtils().switchDarkMode(this)
+            }
+            R.id.action_custom_request -> {
+                startActivity(Intent(requireContext(), RequestActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
@@ -54,6 +55,7 @@ class FeedFragment : Fragment() {
         val context = requireContext()
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
+            val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
             val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
             val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
 
@@ -166,6 +168,7 @@ class FeedFragment : Fragment() {
                         }
                     }
                     firmwaresProgressBar.visibility = View.GONE
+                    firmwaresRefreshLayout.isRefreshing = false
                     getData(true)
                     getData(false)
 
@@ -223,16 +226,16 @@ class FeedFragment : Fragment() {
                 setData()
             }
 
-            val feedItem: View = findViewById(R.id.menu_feed)
             val settingsItem: View = findViewById(R.id.menu_settings)
-            feedItem.setOnLongClickListener {
-                setData()
-                true
-            }
             settingsItem.setOnLongClickListener {
                 val intent = Intent(requireActivity(), RequestActivity::class.java)
                 startActivity(intent)
                 true
+            }
+
+            firmwaresRefreshLayout.setOnRefreshListener {
+                firmwaresRefreshLayout.isRefreshing = true
+                setData()
             }
         } else {
             finish()

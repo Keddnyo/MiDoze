@@ -26,7 +26,7 @@
     <string name="settings_title">Настройки</string>
     <string name="settings_application">Приложение</string>
     <string name="settings_dark_mode">Тёмный режим</string>
-    <string name="settings_behaviour">Поведение</string>
+    <string name="settings_requests">Запросы</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
     <string name="settings_app_update_checker">Уведомлять об обновлениях</string>
