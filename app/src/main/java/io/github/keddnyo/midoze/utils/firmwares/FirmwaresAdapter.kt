@@ -21,7 +21,6 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
 
-
 class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
     private val firmwaresDataArray = ArrayList<FirmwaresData>()
     private var firmwaresDataArrayFull = ArrayList<FirmwaresData>()

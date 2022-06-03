@@ -1,8 +1,6 @@
 package io.github.keddnyo.midoze.activities.main
 
 import android.annotation.SuppressLint
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,7 +8,6 @@ import android.os.AsyncTask
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -83,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             // Default tab
             viewPager.currentItem = 0
             title = getString(R.string.feed_title)
-            
+
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
             class LoadDataForActivity :
