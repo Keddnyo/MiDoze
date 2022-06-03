@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.utils.deviceList
+package io.github.keddnyo.midoze.utils.firmwares
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,8 +12,8 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.ExtrasRequestActivity
-import io.github.keddnyo.midoze.activities.FirmwareActivity
+import io.github.keddnyo.midoze.activities.main.FirmwareActivity
+import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.utils.DozeRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -21,10 +21,9 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
 
-
-class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewHolder>(), Filterable {
-    private val deviceListDataArray = ArrayList<DeviceListData>()
-    private var deviceListDataArrayFull = ArrayList<DeviceListData>()
+class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
+    private val firmwaresDataArray = ArrayList<FirmwaresData>()
+    private var firmwaresDataArrayFull = ArrayList<FirmwaresData>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
@@ -41,7 +40,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_device, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_firmware, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -49,22 +48,22 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
         val editor = prefs.edit()
 
-        holder.deviceNameTextView.text = deviceListDataArray[position].deviceName
-        holder.deviceIconImageView.setImageResource(deviceListDataArray[position].deviceIcon)
-        holder.firmwareReleaseDateTextView.text = deviceListDataArray[position].firmwareReleaseDate
-        holder.firmwareChangelogTextView.text = deviceListDataArray[position].firmwareChangelog
+        holder.deviceNameTextView.text = firmwaresDataArray[position].deviceName
+        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].deviceIcon)
+        holder.firmwareReleaseDateTextView.text = firmwaresDataArray[position].firmwareReleaseDate
+        holder.firmwareChangelogTextView.text = firmwaresDataArray[position].firmwareChangelog
 
-        val deviceIndex = deviceListDataArray[position].deviceIndex.toString()
+        val deviceIndex = firmwaresDataArray[position].deviceIndex.toString()
 
         if (prefs.getBoolean(deviceIndex, false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_favorite)
         } else {
-            holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+            holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
         }
 
         holder.likeIcon.setOnClickListener {
             if (prefs.getBoolean(deviceIndex, false)) {
-                holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+                holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
                 editor.putBoolean(deviceIndex, false)
                 editor.apply()
             } else {
@@ -77,9 +76,10 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         holder.downloadLayout.setOnClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context, false)
+                    openFirmwareActivity(firmwaresDataArray[position].deviceIndex, holder.downloadLayout.context, false)
                 }
                 else -> {
+                    Toast.makeText(holder.deviceNameTextView.context, R.string.firmware_connectivity_error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -87,7 +87,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         holder.downloadLayout.setOnLongClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(deviceListDataArray[position].deviceIndex, holder.downloadLayout.context, true)
+                    openFirmwareActivity(firmwaresDataArray[position].deviceIndex, holder.downloadLayout.context, true)
                 }
                 else -> {
                 }
@@ -97,12 +97,12 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
     }
 
     override fun getItemCount(): Int {
-        return deviceListDataArray.size
+        return firmwaresDataArray.size
     }
 
-    fun addDevice(deviceListData: DeviceListData) {
-        deviceListDataArray.add(deviceListData)
-        deviceListDataArrayFull = ArrayList(deviceListDataArray)
+    fun addDevice(firmwaresData: FirmwaresData) {
+        firmwaresDataArray.add(firmwaresData)
+        firmwaresDataArrayFull = ArrayList(firmwaresDataArray)
     }
 
     override fun getFilter(): Filter {
@@ -111,12 +111,12 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
 
     private val deviceFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
-            val filteredList: MutableList<DeviceListData> = ArrayList()
+            val filteredList: MutableList<FirmwaresData> = ArrayList()
             if (constraint.isEmpty()) {
-                filteredList.addAll(deviceListDataArrayFull)
+                filteredList.addAll(firmwaresDataArrayFull)
             } else {
                 val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
-                for (item in deviceListDataArrayFull) {
+                for (item in firmwaresDataArrayFull) {
                     if (item.deviceName.lowercase(Locale.getDefault()).contains(filterPattern)) {
                         filteredList.add(item)
                     }
@@ -130,7 +130,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
         @SuppressLint("NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             clear()
-            deviceListDataArray.addAll(results.values as Collection<DeviceListData>)
+            firmwaresDataArray.addAll(results.values as Collection<FirmwaresData>)
             notifyDataSetChanged()
         }
     }
@@ -150,7 +150,7 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
                     jsonObject.getJSONObject(deviceIndex.toString()).getString("appVersion")
 
                 val intent = if (custom) {
-                    Intent(context, ExtrasRequestActivity::class.java)
+                    Intent(context, RequestActivity::class.java)
                 } else {
                     Intent(context, FirmwareActivity::class.java)
                 }
@@ -167,6 +167,6 @@ class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.DeviceListViewH
     }
 
     fun clear() {
-        deviceListDataArray.clear()
+        firmwaresDataArray.clear()
     }
 }

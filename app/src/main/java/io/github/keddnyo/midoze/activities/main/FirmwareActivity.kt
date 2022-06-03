@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities
+package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
 import android.content.Intent
@@ -39,8 +39,6 @@ class FirmwareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firmware)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        UiUtils().switchDarkMode(this)
 
         runBlocking {
             withContext(Dispatchers.IO) {

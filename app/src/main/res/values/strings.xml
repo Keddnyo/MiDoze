@@ -4,7 +4,6 @@
     <string name="compatibility_mode">Compatibility mode</string>
 
     <string name="update_dialog_title">Update available</string>
-    <string name="update_dialog_message">Update app to improve stability and get new features!</string>
     <string name="update_dialog_button">Update</string>
 
     <string name="title_mi_band" translatable="false">Mi Band</string>
@@ -14,6 +13,10 @@
     <string name="search">Search</string>
 
     <string name="feed_title">Feed</string>
+    <string name="settings_feed_cache_use">Load from cache</string>
+    <string name="settings_feed_cache_use_summary">Show feed w/o connection</string>
+    <string name="settings_feed_cache_clear">Clear feed cache</string>
+    <string name="settings_feed_cache_cleared">Cleared</string>
 
     <string name="firmware_connectivity_error">Connectivity error</string>
 
@@ -31,38 +34,23 @@
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
-    <string name="settings_application">Application</string>
-    <string name="settings_app_theme">App theme</string>
-    <string name="settings_behaviour">Behaviour</string>
+    <string name="settings_dark_mode">Dark mode</string>
+    <string name="settings_requests">Requests</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
-    <string name="settings_app_update_checker">Update checker</string>
+    <string name="settings_app_check_for_updates">Check for updates</string>
 
-    <string name="profile_custom_request">Custom request</string>
-    <string name="profile_custom_request_server_response">Server response</string>
-    <string name="profile_other">Other</string>
+    <string name="settings_custom_request">Custom request</string>
+    <string name="settings_server_response">Server response</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
     <string name="settings_json_storage_title">JSONs storage</string>
     <string name="settings_schakal" translatable="false">Schakal</string>
-    <string name="settings_app_github_page">App\'s GitHub repo</string>
-    <string name="settings_app_github_page_summary">Visit app\'s GitHub repo</string>
 
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
     <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
-
-    <string-array name="app_theme_entries">
-        <item>Auto</item>
-        <item>Light</item>
-        <item>Dark</item>
-    </string-array>
-    <string-array name="app_theme_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
 
     <string-array name="request_host_entries">
         <item>@string/request_host_first</item>
