@@ -1,5 +1,8 @@
 package io.github.keddnyo.midoze.activities.main
 
+import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,6 +10,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -29,11 +33,10 @@ class MainActivity : AppCompatActivity() {
     val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        UiUtils().switchDarkMode(context)
         super.onCreate(savedInstanceState)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
-
-            UiUtils().switchDarkMode(context)
 
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
@@ -98,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                     return null
                 }
 
+                @SuppressLint("InlinedApi")
                 @Deprecated("Deprecated in Java")
                 override fun onPostExecute(result: Void?) {
                     super.onPostExecute(result)
@@ -112,23 +116,26 @@ class MainActivity : AppCompatActivity() {
                                 .getString("browser_download_url")
 
                         if (BuildConfig.VERSION_NAME < latestVersion) {
-                            val builder = AlertDialog.Builder(context)
-                                .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
-                                .setMessage(releaseChangelog)
-                                .setIcon(R.drawable.ic_info)
-                                .setCancelable(false)
-                            builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
-                                DozeRequest().getFirmwareFile(context,
-                                    latestVersionLink,
-                                    getString(R.string.app_name))
-                                UiUtils().showToast(context,
-                                    getString(R.string.downloading_toast))
-                                DialogInterface.BUTTON_POSITIVE
+                            fun showUpdateDialog() {
+                                val builder = AlertDialog.Builder(context)
+                                    .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
+                                    .setMessage(releaseChangelog)
+                                    .setIcon(R.drawable.ic_info)
+                                    .setCancelable(false)
+                                builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
+                                    DozeRequest().getFirmwareFile(context,
+                                        latestVersionLink,
+                                        getString(R.string.app_name))
+                                    UiUtils().showToast(context,
+                                        getString(R.string.downloading_toast))
+                                    DialogInterface.BUTTON_POSITIVE
+                                }
+                                builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
+                                    DialogInterface.BUTTON_NEGATIVE
+                                }
+                                builder.show()
                             }
-                            builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
-                                DialogInterface.BUTTON_NEGATIVE
-                            }
-                            builder.show()
+                            showUpdateDialog()
                         }
                     }
                 }
