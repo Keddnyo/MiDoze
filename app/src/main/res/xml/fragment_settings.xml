@@ -40,7 +40,7 @@
             app:defaultValue="true"
             app:icon="@drawable/ic_update"
             app:key="settings_app_check_updates"
-            app:title="@string/settings_app_check_updates" />
+            app:title="@string/settings_app_check_for_updates" />
 
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/settings_about">

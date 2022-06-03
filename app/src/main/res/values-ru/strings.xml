@@ -31,7 +31,7 @@
     <string name="settings_requests">Запросы</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
-    <string name="settings_app_check_updates">Проверять обновления</string>
+    <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>

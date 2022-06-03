@@ -38,7 +38,7 @@
     <string name="settings_requests">Requests</string>
     <string name="settings_request_region">Request region</string>
     <string name="settings_request_host">Request host</string>
-    <string name="settings_app_check_updates">Check updates</string>
+    <string name="settings_app_check_for_updates">Check for updates</string>
 
     <string name="settings_custom_request">Custom request</string>
     <string name="settings_server_response">Server response</string>
