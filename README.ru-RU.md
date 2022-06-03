@@ -15,6 +15,8 @@
 * Светлая и тёмная темы
 * Ярлыки *(с версии 1.1.0)*
 * Лента прошивок
+* Адаптивное количество столбцов в ленте *(с версии 4.0.0)*
+* Кэш ленты *(с версии 4.0.0)*
 * Используйте панель для поиска устройства
 * Избранное *(с версии 2.0.0)*
 * Выбор хоста запроса
@@ -23,6 +25,7 @@
 * Встроенный загрузчик
 * Составляйте свой запрос с помощью функции "Ручной запрос"
 * Проверка обновлений *(с версии 2.1.0)*
+* Нижняя панель навигации *(с версии 4.0.0)*
 
 ## Требования
 * Доступ к хранилищу *(для сохранения файлов)*
@@ -33,6 +36,7 @@
 | --- | --- | --- | --- |
 | Полный доступ | **Только ручной запрос** | **Есть** | **Есть** |
 | Лента прошивок | Нет | **Есть** | **Есть** |
+| Кэш ленты | Нет | **Есть** | **Есть** |
 | Поиск | Нет | **Есть** | **Есть** |
 | Страница с прошивкой | Нет | **Есть** | **Есть** |
 | Ярлыки | Нет | Нет | **Есть** |
@@ -45,20 +49,33 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/165643959-cee116d0-23d3-4005-af81-65a05dbb7d5e.png">
   <img src="https://user-images.githubusercontent.com/65981689/165643964-6a7eddc4-8b02-4f65-a95e-f4a85f64f27f.png">
+</p>
 
-## Скриншоты Android 5.0+
+## Скриншоты Android 5.0+ с телефона
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/65981689/165503385-b2cd1716-a3e6-4b71-9864-ac0fff8a37db.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165509935-2534a682-1182-4b3b-8d00-1b9eb88415a7.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165503391-7576d578-7997-403b-a705-71c56fbcf744.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165503393-3b8674e6-6b6f-467d-a613-eff218329e24.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638002-d7c27dfd-82d2-4362-9158-1d1fcf121b57.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638005-fc1234cf-d802-4bb7-b173-c7cd78cf807c.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638006-c17cc492-cd08-4c2f-aa20-f331425d3b38.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638007-2bf31357-3159-4c54-8af9-cdc5f2648332.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638010-70c15db0-53ae-429f-beb6-dcddd2bbbdc1.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165638012-ccdacd22-0761-4321-8fed-4a1eb5ee0dd2.jpg" width="33%" height="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/165503408-380bcda3-1f96-4d10-baaa-90fbf84d8c02.jpg" width="33%" height="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807371-67a2a8f8-7e0d-4b96-a689-5f9c4fad6329.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807372-b4f144e3-f69f-4aa0-8766-ca0ef9071ee6.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807375-fecdf3fd-48cd-4c5e-9523-132fce5bf311.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807377-414c4c72-7789-4cfe-b8d7-7b0a148dfe1f.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807378-6db2ce5d-ed4b-40d5-9870-3ce7cfd2b28e.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807379-748dd801-f975-473e-88a6-fcfeeb58e35c.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807382-373afcab-17ba-4733-84bc-b8cfb899e955.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807385-bbc75f6f-710e-42a5-b0de-3c32445719f1.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807387-816e7833-8d32-4a55-9030-d12a11436669.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807390-ffddb486-c6f3-4308-bf72-48c909dba87e.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807391-bf05f1e1-222e-4bc5-96f2-378e61670570.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807393-26033c76-0b33-4e89-b9ac-1fc34520d409.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807395-527a7d59-182a-4a9b-8d5a-cdc32120e4a5.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807398-1e9bb099-b766-4d1b-80ff-9998f29918b7.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807400-156dc57a-3b54-4deb-843c-953738f3e057.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807401-3e9e30ee-15a7-4e71-b523-ba7c778c02a7.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807403-07749dfb-0cc0-44f2-a0c6-dcef788ed212.png" max-width="100%" width="33%">
+</p>
+
+## Скриншоты Android 5.0+ с планшета
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65981689/171807365-ad5ee4f0-e222-411a-8ab5-26b8138adc94.png" max-width="100%" width="85%">
+  <img src="https://user-images.githubusercontent.com/65981689/171807370-762c0092-74bd-486b-9bed-d69e86777610.png" max-width="100%" width="85%">
 </p>
 
 ## Благодарность
