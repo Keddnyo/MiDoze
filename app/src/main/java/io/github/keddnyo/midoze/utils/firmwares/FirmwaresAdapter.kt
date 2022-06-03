@@ -59,12 +59,12 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         if (prefs.getBoolean(deviceIndex, false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_favorite)
         } else {
-            holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+            holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
         }
 
         holder.likeIcon.setOnClickListener {
             if (prefs.getBoolean(deviceIndex, false)) {
-                holder.likeIcon.setImageResource(R.drawable.ic_favorite_border)
+                holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
                 editor.putBoolean(deviceIndex, false)
                 editor.apply()
             } else {

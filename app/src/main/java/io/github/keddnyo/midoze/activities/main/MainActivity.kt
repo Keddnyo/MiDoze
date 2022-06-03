@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
-            
+
             UiUtils().switchDarkMode(context)
 
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)

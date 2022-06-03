@@ -9,7 +9,7 @@
             app:title="@string/settings_feed_cache_use" />
 
         <Preference
-            app:icon="@drawable/ic_delete"
+            app:icon="@drawable/ic_clear"
             app:key="settings_feed_cache_clear"
             app:title="@string/settings_feed_cache_clear"
             app:dependency="settings_feed_cache_use"/>
