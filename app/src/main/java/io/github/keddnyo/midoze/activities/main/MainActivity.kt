@@ -35,6 +35,52 @@ class MainActivity : AppCompatActivity() {
 
             UiUtils().switchDarkMode(context)
 
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            val adapter = MyAdapter(this, supportFragmentManager)
+
+            viewPager = findViewById(R.id.viewPager)
+            viewPager.adapter = adapter
+
+            val bottomBar = binding.bottomBar
+
+            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {}
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    when (position) {
+                        0 -> {
+                            bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
+                            title = getString(R.string.feed_title)
+                        }
+                        1 -> {
+                            bottomBar.menu.findItem(R.id.menu_settings).isChecked = true
+                            title = getString(R.string.settings_title)
+                        }
+                    }
+                }
+            })
+
+            bottomBar.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.menu_feed -> viewPager.currentItem = 0
+                    R.id.menu_settings -> viewPager.currentItem = 1
+                    else -> viewPager.currentItem = 0
+                }
+                true
+            }
+
+            // Default tab
+            viewPager.currentItem = 0
+            title = getString(R.string.feed_title)
+            
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
             class LoadDataForActivity :
@@ -88,52 +134,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            val adapter = MyAdapter(this, supportFragmentManager)
-
-            viewPager = findViewById(R.id.viewPager)
-            viewPager.adapter = adapter
-
-            val bottomBar = binding.bottomBar
-
-            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrollStateChanged(state: Int) {}
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int,
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    when (position) {
-                        0 -> {
-                            bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
-                            title = getString(R.string.feed_title)
-                        }
-                        1 -> {
-                            bottomBar.menu.findItem(R.id.menu_settings).isChecked = true
-                            title = getString(R.string.settings_title)
-                        }
-                    }
-                }
-            })
-
-            bottomBar.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_feed -> viewPager.currentItem = 0
-                    R.id.menu_settings -> viewPager.currentItem = 1
-                    else -> viewPager.currentItem = 0
-                }
-                true
-            }
-
-            // Default tab
-            viewPager.currentItem = 0
-            title = getString(R.string.feed_title)
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))
