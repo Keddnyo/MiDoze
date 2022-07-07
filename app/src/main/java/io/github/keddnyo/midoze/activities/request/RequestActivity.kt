@@ -68,7 +68,7 @@ class RequestActivity : AppCompatActivity() {
             if (DozeRequest().isOnline(context)) {
                 val firmwareResponse =
                     runBlocking {
-                        DozeRequest().getFirmwareLinks(
+                        DozeRequest().getFirmwareData(
                             extrasProductionSourceEditText.text.toString(),
                             extrasDeviceSourceEditText.text.toString(),
                             extrasAppVersionEditText.text.toString(),

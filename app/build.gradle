@@ -45,4 +45,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'io.ktor:ktor-client-core:2.0.3'
+    implementation 'io.ktor:ktor-client-android:2.0.3'
+    implementation 'io.ktor:ktor-client-serialization:2.0.3'
+    implementation 'io.ktor:ktor-client-logging:2.0.3'
 }

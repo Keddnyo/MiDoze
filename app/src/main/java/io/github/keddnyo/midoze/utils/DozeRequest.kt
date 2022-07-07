@@ -14,10 +14,14 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import io.github.keddnyo.midoze.utils.devices.DeviceData
+import io.github.keddnyo.midoze.utils.devices.DeviceRepository
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.net.URL
 
@@ -34,8 +38,53 @@ class DozeRequest {
         return false
     }
 
-    fun getFirmwareLatest(): JSONObject {
-        return JSONObject(URL("https://schakal.ru/fw/latest.json").readText())
+    fun getFirmwareLatest(context: Context): ArrayList<DeviceData> {
+        val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
+
+        var firmwareData: JSONObject
+        var deviceIcon: Int
+        var deviceName: String
+
+        val productionSourceArray = arrayOf(
+            256, 257, 258, 259
+        )
+
+        runBlocking {
+            productionSourceArray.forEach { productionSource ->
+                for (deviceSource in 12..92) {
+                    firmwareData = DozeRequest().getFirmwareData(
+                        productionSource.toString(),
+                        deviceSource.toString(),
+                        "6.10.1-play_100770",
+                        "com.huami.midong",
+                        context
+                    )
+
+                    if (firmwareData.has("firmwareVersion")) {
+                        deviceName =
+                            DeviceRepository().getDeviceNameByCode(deviceSource, productionSource)
+
+                        deviceIcon = if (deviceName.contains("Mi Band")) {
+                            R.drawable.ic_xiaomi
+                        } else if (deviceName.contains("Zepp")) {
+                            R.drawable.ic_zepp
+                        } else {
+                            R.drawable.ic_amazfit
+                        }
+
+                        deviceArrayList.add(
+                            DeviceData(
+                                icon = deviceIcon,
+                                name = deviceName,
+                                firmware = firmwareData
+                            )
+                        )
+                    }
+                }
+            }
+        }
+
+        return deviceArrayList
     }
 
     fun getApplicationValues(): String {
@@ -47,15 +96,27 @@ class DozeRequest {
         return JSONObject(URL("https://api.github.com/repos/keddnyo/$appName/releases/latest").readText())
     }
 
-    suspend fun getFirmwareLinks(
+    suspend fun getFirmwareData(
         productionSource: String,
         deviceSource: String,
         appVersion: String,
-        appName: String,
-        context: Context,
+        appname: String,
+        context: Context
     ): JSONObject {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
+
+        val requestHost = when (prefs.getString("settings_request_host", "1")) {
+            "2" -> {
+                context.getString(R.string.request_host_second)
+            }
+            "3" -> {
+                context.getString(R.string.request_host_third)
+            }
+            else -> {
+                context.getString(R.string.request_host_first)
+            }
+        }
 
         val country = when (prefs.getString("settings_request_region", "1")) {
             "2" -> {
@@ -86,80 +147,63 @@ class DozeRequest {
             }
         }
 
-        val requestHost = when (prefs.getString("settings_request_host", "1")) {
-            "2" -> {
-                context.getString(R.string.request_host_second)
+        val client = HttpClient()
+        val response = client.get {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = requestHost
+                appendPathSegments("devices", "ALL", "hasNewVersion")
+                parameter("productId", "0")
+                parameter("vendorSource", "0")
+                parameter("resourceVersion", "0")
+                parameter("firmwareFlag", "0")
+                parameter("vendorId", "0")
+                parameter("resourceFlag", "0")
+                parameter("productionSource", productionSource)
+                parameter("userid", "0")
+                parameter("userId", "0")
+                parameter("deviceSource", deviceSource)
+                parameter("fontVersion", "0")
+                parameter("fontFlag", "0")
+                parameter("appVersion", appVersion)
+                parameter("appid", "0")
+                parameter("callid", "0")
+                parameter("channel", "0")
+                parameter("country", "0")
+                parameter("cv", "0")
+                parameter("device", "0")
+                parameter("deviceType", "ALL")
+                parameter("device_type", "android_phone")
+                parameter("firmwareVersion", "0")
+                parameter("hardwareVersion", "0")
+                parameter("lang", "0")
+                parameter("support8Bytes", "true")
+                parameter("timezone", "0")
+                parameter("v", "0")
+                parameter("gpsVersion", "0")
+                parameter("baseResourceVersion", "0")
             }
-            "3" -> {
-                context.getString(R.string.request_host_third)
-            }
-            else -> {
-                context.getString(R.string.request_host_first)
+            headers {
+                append("hm-privacy-diagnostics", "false")
+                append("country", country)
+                append("appplatform", "android_phone")
+                append("hm-privacy-ceip", "0")
+                append("x-request-id", "0")
+                append("timezone", "0")
+                append("channel", "0")
+                append("user-agent", "0")
+                append("cv", "0")
+                append("appname", appname)
+                append("v", "0")
+                append("apptoken", "0")
+                append("lang", lang)
+                append("Host", requestHost)
+                append("Connection", "Keep-Alive")
+                append("accept-encoding", "gzip")
+                append("accept", "*/*")
             }
         }
-
-        val uriBuilder: Uri.Builder = Uri.Builder()
-        uriBuilder.scheme("https")
-            .authority(requestHost)
-            .appendPath("devices")
-            .appendPath("ALL")
-            .appendPath("hasNewVersion")
-            .appendQueryParameter("productId", "0")
-            .appendQueryParameter("vendorSource", "0")
-            .appendQueryParameter("resourceVersion", "0")
-            .appendQueryParameter("firmwareFlag", "0")
-            .appendQueryParameter("vendorId", "0")
-            .appendQueryParameter("resourceFlag", "0")
-            .appendQueryParameter("productionSource", productionSource)
-            .appendQueryParameter("userid", "0")
-            .appendQueryParameter("userId", "0")
-            .appendQueryParameter("deviceSource", deviceSource)
-            .appendQueryParameter("fontVersion", "0")
-            .appendQueryParameter("fontFlag", "0")
-            .appendQueryParameter("appVersion", appVersion)
-            .appendQueryParameter("appid", "0")
-            .appendQueryParameter("callid", "0")
-            .appendQueryParameter("channel", "0")
-            .appendQueryParameter("country", "0")
-            .appendQueryParameter("cv", "0")
-            .appendQueryParameter("device", "0")
-            .appendQueryParameter("deviceType", "ALL")
-            .appendQueryParameter("device_type", "android_phone")
-            .appendQueryParameter("firmwareVersion", "0")
-            .appendQueryParameter("hardwareVersion", "0")
-            .appendQueryParameter("lang", "0")
-            .appendQueryParameter("support8Bytes", "true")
-            .appendQueryParameter("timezone", "0")
-            .appendQueryParameter("v", "0")
-            .appendQueryParameter("gpsVersion", "0")
-            .appendQueryParameter("baseResourceVersion", "0")
-
-        val request = Request.Builder()
-            .url(uriBuilder.toString())
-            .addHeader("hm-privacy-diagnostics", "false")
-            .addHeader("country", country)
-            .addHeader("appplatform", "android_phone")
-            .addHeader("hm-privacy-ceip", "0")
-            .addHeader("x-request-id", "0")
-            .addHeader("timezone", "0")
-            .addHeader("channel", "0")
-            .addHeader("user-agent", "0")
-            .addHeader("cv", "0")
-            .addHeader("appname", appName)
-            .addHeader("v", "0")
-            .addHeader("apptoken", "0")
-            .addHeader("lang", lang)
-            .addHeader("Host", requestHost)
-            .addHeader("Connection", "Keep-Alive")
-            .addHeader("accept-encoding", "gzip")
-            .addHeader("accept", "*/*")
-            .build()
-
-        return withContext(Dispatchers.IO) {
-            JSONObject(
-                OkHttpClient().newCall(request).execute().body()?.string().toString()
-            )
-        }
+        return JSONObject(response.bodyAsText())
     }
 
     fun getFirmwareFile(

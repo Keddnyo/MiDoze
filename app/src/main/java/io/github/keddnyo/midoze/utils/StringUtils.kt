@@ -20,8 +20,8 @@ class StringUtils {
         return string.replace("\\/", "/")
     }
 
-    fun getLocaleFirmwareDate(firmwareDate: String): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Language().getCurrent())
+    fun getLocalFirmwareDate(firmwareDate: String): String {
+        val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Language().getCurrent())
         val firmwareDateFormatted = dateFormat.parse(firmwareDate)
         return DateFormat.getDateInstance(DateFormat.MEDIUM, Language().getCurrent())
             .format(firmwareDateFormatted!!)

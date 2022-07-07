@@ -19,6 +19,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.devices.DeviceData
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresData
 import org.json.JSONArray
@@ -66,6 +67,9 @@ class FeedFragment : Fragment() {
 
         class LoadDataForActivity :
             AsyncTask<Void?, Void?, Void>() {
+
+            var deviceArrayList: ArrayList<DeviceData> = arrayListOf()
+
             var firmwaresData: JSONObject = JSONObject("{}")
             val preloadedFirmwares = prefs.getString("Firmwares", "").toString()
 
@@ -85,9 +89,9 @@ class FeedFragment : Fragment() {
 
                 fun getFirmwaresData() {
                     if (getOnlineState()) {
-                        firmwaresData = DozeRequest().getFirmwareLatest()
-                        editor.putString("Firmwares", firmwaresData.toString())
-                        editor.apply()
+                        deviceArrayList = DozeRequest().getFirmwareLatest(context)
+                        //editor.putString("Firmwares", firmwaresData.toString())
+                        //editor.apply()
                     } else {
                         runOnUiThread {
                             firmwaresProgressBar.visibility = View.GONE
@@ -96,7 +100,7 @@ class FeedFragment : Fragment() {
                     }
                 }
 
-                if (prefs.getBoolean("settings_feed_cache_use", true)) {
+                /*if (prefs.getBoolean("settings_feed_cache_use", true)) {
                     if (preloadedFirmwares != "") {
                         firmwaresData = JSONObject(preloadedFirmwares)
                     } else {
@@ -104,7 +108,8 @@ class FeedFragment : Fragment() {
                     }
                 } else {
                     getFirmwaresData()
-                }
+                }*/
+                getFirmwaresData()
 
                 return null
             }
@@ -113,7 +118,24 @@ class FeedFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
 
-                fun getData(favorite: Boolean) {
+                deviceArrayList.forEachIndexed { index, it ->
+                    firmwaresAdapter.addDevice(
+                        FirmwaresData(
+                            it.name,
+                            it.icon,
+                            StringUtils().getLocalFirmwareDate(it.firmware.getString("buildTime")),
+                            it.firmware.getString("firmwareVersion").toString(),
+                            it.firmware.getString("deviceSource").toString().toInt()
+                        )
+                    )
+                    firmwaresAdapter.notifyItemInserted(index)
+                    deviceListIndex[it.name] = index
+                }
+
+                firmwaresProgressBar.visibility = View.GONE
+                firmwaresRefreshLayout.isRefreshing = false
+
+                /*fun getData(favorite: Boolean) {
                     if (firmwaresData != JSONObject("{}")) {
 
                         val responseParamsArray = firmwaresData.toMap()
@@ -161,7 +183,7 @@ class FeedFragment : Fragment() {
                 firmwaresProgressBar.visibility = View.GONE
                 firmwaresRefreshLayout.isRefreshing = false
                 getData(true)
-                getData(false)
+                getData(false)*/
 
                 if (state != null) {
                     deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
