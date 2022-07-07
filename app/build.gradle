@@ -10,8 +10,8 @@ android {
         applicationId "io.github.keddnyo.midoze"
         minSdk 14
         targetSdk 32
-        versionCode 9
-        versionName "4.0.0"
+        versionCode 10
+        versionName "5.0.0"
     }
 
     buildTypes {
@@ -37,11 +37,11 @@ android {
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
