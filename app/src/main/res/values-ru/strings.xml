@@ -39,6 +39,7 @@
     <string name="filters_request_deviceSource_range">Предел значений deviceSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
+    <string name="filters_show_unknown_devices">Отображать неизвестные устройства</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>

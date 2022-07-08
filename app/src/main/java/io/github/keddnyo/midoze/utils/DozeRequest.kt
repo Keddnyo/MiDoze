@@ -37,7 +37,11 @@ class DozeRequest {
         return false
     }
 
-    fun getFirmwareLatest(context: Context, appName: String, appVersion: String): ArrayList<DeviceData> = with(context as Activity) {
+    fun getFirmwareLatest(
+        context: Context,
+        appName: String,
+        appVersion: String
+    ): ArrayList<DeviceData> = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
         val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
@@ -50,7 +54,7 @@ class DozeRequest {
             256, 257, 258, 259
         )
 
-        val deviceSourceRange = prefs.getInt("settings_feed_appSource_range", 100)
+        val deviceSourceRange = prefs.getInt("filters_feed_appSource_range", 100)
 
         runBlocking {
             productionSourceArray.forEach { productionSource ->
@@ -85,16 +89,22 @@ class DozeRequest {
                             }).toString()
                         }
 
-                        deviceArrayList.add(
-                            DeviceData(
-                                icon = deviceIcon,
-                                name = deviceName,
-                                firmware = firmwareData,
-                                buildTime = get("buildTime"),
-                                deviceSource = get("deviceSource"),
-                                productionSource = get("productionSource")
+                        if (deviceName.contains("Unknown") == prefs.getBoolean(
+                                "filters_show_unknown_devices",
+                                false
                             )
-                        )
+                        ) {
+                            deviceArrayList.add(
+                                DeviceData(
+                                    icon = deviceIcon,
+                                    name = deviceName,
+                                    firmware = firmwareData,
+                                    buildTime = get("buildTime"),
+                                    deviceSource = get("deviceSource"),
+                                    productionSource = get("productionSource")
+                                )
+                            )
+                        }
                     }
                 }
             }
@@ -118,7 +128,7 @@ class DozeRequest {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
-        val requestHost = when (prefs.getString("settings_request_host", "1")) {
+        val requestHost = when (prefs.getString("filters_request_host", "1")) {
             "2" -> {
                 context.getString(R.string.request_host_second)
             }
@@ -130,7 +140,7 @@ class DozeRequest {
             }
         }
 
-        val country = when (prefs.getString("settings_request_region", "1")) {
+        val country = when (prefs.getString("filters_request_region", "1")) {
             "2" -> {
                 "CH"
             }
@@ -144,7 +154,7 @@ class DozeRequest {
                 "US"
             }
         }
-        val lang = when (prefs.getString("settings_request_region", "1")) {
+        val lang = when (prefs.getString("filters_request_region", "1")) {
             "2" -> {
                 "zh_CH"
             }
