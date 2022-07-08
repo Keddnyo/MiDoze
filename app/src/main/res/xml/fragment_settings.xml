@@ -10,68 +10,10 @@
             app:summary="@string/settings_feed_ignore_cached_items_summary"
             app:title="@string/settings_feed_ignore_cached_items" />
 
-        <ListPreference
-            app:defaultValue="Zepp"
-            app:dependency="settings_feed_ignore_cached_items"
-            app:entries="@array/request_app_name_entries"
-            app:entryValues="@array/request_app_name_entryValues"
-            app:icon="@drawable/ic_pretend_app"
-            app:key="settings_feed_app_name"
-            app:title="@string/settings_request_app_name"
-            app:useSimpleSummaryProvider="true" />
-
-        <EditTextPreference
-            app:defaultValue="@string/settings_request_zepp_app_version_value"
-            app:dependency="settings_feed_ignore_cached_items"
-            app:icon="@drawable/ic_zepp_app"
-            app:key="settings_feed_zepp_app_version"
-            app:title="@string/settings_request_zepp_app_version"
-            app:useSimpleSummaryProvider="true" />
-
-        <EditTextPreference
-            app:defaultValue="@string/settings_request_zepp_life_app_version_value"
-            app:dependency="settings_feed_ignore_cached_items"
-            app:icon="@drawable/ic_app_zepp_life"
-            app:key="settings_feed_zepp_life_app_version"
-            app:title="@string/settings_request_zepp_life_app_version"
-            app:useSimpleSummaryProvider="true" />
-
         <Preference
             app:icon="@drawable/ic_clear"
             app:key="settings_feed_cache_clear"
             app:title="@string/settings_feed_cache_clear" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/data_request_title">
-
-        <ListPreference
-            app:defaultValue="1"
-            app:entries="@array/request_host_entries"
-            app:entryValues="@array/request_host_selector_entryValues"
-            app:icon="@drawable/ic_request_host"
-            app:key="settings_request_host"
-            app:title="@string/settings_request_host"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="1"
-            app:entries="@array/request_region_entries"
-            app:entryValues="@array/request_region_selector_entryValues"
-            app:icon="@drawable/ic_request_region"
-            app:key="settings_request_region"
-            app:title="@string/settings_request_region"
-            app:useSimpleSummaryProvider="true" />
-
-        <SeekBarPreference
-            asp:max="250"
-            app:defaultValue="95"
-            app:dependency="settings_feed_ignore_cached_items"
-            app:icon="@drawable/ic_device_source_range"
-            app:key="settings_feed_appSource_range"
-            app:min="1"
-            app:showSeekBarValue="true"
-            app:title="@string/settings_request_deviceSource_range" />
 
     </PreferenceCategory>
 

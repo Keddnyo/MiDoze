@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat
 
 class StringUtils {
     val tabTitles = arrayOf(
+        R.string.filters_title,
         R.string.feed_title,
         R.string.settings_title
     )

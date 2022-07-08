@@ -8,7 +8,6 @@ import android.os.Parcelable
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -102,9 +101,9 @@ class FeedFragment : Fragment() {
 
                 appVersion = when (getAppName()) {
                     "Zepp" -> {
-                        prefs.getString("settings_feed_zepp_app_version", getString(R.string.settings_request_zepp_app_version_value))
+                        prefs.getString("settings_feed_zepp_app_version", getString(R.string.filters_request_zepp_app_version_value))
                     } else -> {
-                        prefs.getString("settings_feed_zepp_app_life_version", getString(R.string.settings_request_zepp_life_app_version_value))
+                        prefs.getString("settings_feed_zepp_app_life_version", getString(R.string.filters_request_zepp_life_app_version_value))
                     }
                 }
 

@@ -1,0 +1,58 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:asp="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/filters_title">
+
+        <ListPreference
+            app:defaultValue="Zepp"
+            app:entries="@array/request_app_name_entries"
+            app:entryValues="@array/request_app_name_entryValues"
+            app:icon="@drawable/ic_pretend_app"
+            app:key="settings_feed_app_name"
+            app:title="@string/filters_request_app_name"
+            app:useSimpleSummaryProvider="true" />
+
+        <SeekBarPreference
+            asp:max="250"
+            app:defaultValue="95"
+            app:icon="@drawable/ic_device_source_range"
+            app:key="settings_feed_appSource_range"
+            app:min="1"
+            app:showSeekBarValue="true"
+            app:title="@string/filters_request_deviceSource_range" />
+
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/request_host_entries"
+            app:entryValues="@array/request_host_selector_entryValues"
+            app:icon="@drawable/ic_request_host"
+            app:key="settings_request_host"
+            app:title="@string/filters_request_host"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/request_region_entries"
+            app:entryValues="@array/request_region_selector_entryValues"
+            app:icon="@drawable/ic_request_region"
+            app:key="settings_request_region"
+            app:title="@string/filters_request_region"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="@string/filters_request_zepp_app_version_value"
+            app:icon="@drawable/ic_zepp_app"
+            app:key="settings_feed_zepp_app_version"
+            app:title="@string/filters_request_zepp_app_version"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="@string/filters_request_zepp_life_app_version_value"
+            app:icon="@drawable/ic_app_zepp_life"
+            app:key="settings_feed_zepp_life_app_version"
+            app:title="@string/filters_request_zepp_life_app_version"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
