@@ -2,6 +2,7 @@
 <resources>
     <string name="error_title">Ошибка подключения</string>
     <string name="compatibility_mode">Режим совместимости</string>
+    <string name="fragment_feed_loading">Загрузка…</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
@@ -10,8 +11,8 @@
     <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
-    <string name="settings_feed_cache_use">Загружать из кэша</string>
-    <string name="settings_feed_cache_use_summary">Отображать ленту без интернета</string>
+    <string name="settings_feed_ignore_cached_items">Игнорировать кэш списка</string>
+    <string name="settings_feed_ignore_cached_items_summary">Всегда запрашивать актуальные данные</string>
     <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
     <string name="settings_feed_cache_cleared">Готово</string>
 
@@ -28,16 +29,19 @@
 
     <string name="settings_title">Настройки</string>
     <string name="settings_dark_mode">Тёмный режим</string>
-    <string name="settings_requests">Запросы</string>
-    <string name="settings_request_region">Регион запроса</string>
-    <string name="settings_request_host">Хост запроса</string>
-    <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string name="settings_custom_request">Ручной запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 
+    <string name="data_request_title">Загрузка данных</string>
+    <string name="settings_request_region">Регион запроса</string>
+    <string name="settings_request_host">Хост запроса</string>
+    <string name="settings_request_app_name">Pretend to be a Zepp Life</string>
+    <string name="settings_request_app_version">Версия представляемого приложения</string>
+
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
+    <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string-array name="request_region_entries">
         <item>США</item>

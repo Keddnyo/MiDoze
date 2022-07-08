@@ -35,7 +35,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             clearFeedCache.setOnPreferenceClickListener {
                 val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
                 val editor = prefs.edit()
-                editor.putString("Firmwares", "")
+                editor.putString("deviceArrayList", "")
                 editor.apply()
                 Toast.makeText(requireContext(),
                     R.string.settings_feed_cache_cleared,

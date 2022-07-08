@@ -40,7 +40,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_firmware, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_feed_firmware, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -53,7 +53,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.firmwareReleaseDateTextView.text = firmwaresDataArray[position].firmwareReleaseDate
         holder.firmwareChangelogTextView.text = firmwaresDataArray[position].firmwareChangelog
 
-        val deviceIndex = firmwaresDataArray[position].deviceIndex.toString()
+        val deviceIndex = firmwaresDataArray[position].deviceSource.toString()
 
         if (prefs.getBoolean(deviceIndex, false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_favorite)
@@ -76,7 +76,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.downloadLayout.setOnClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(firmwaresDataArray[position].deviceIndex, holder.downloadLayout.context, false)
+                    openFirmwareActivity(firmwaresDataArray[position].deviceSource, holder.downloadLayout.context, false)
                 }
                 else -> {
                     Toast.makeText(holder.deviceNameTextView.context, R.string.firmware_connectivity_error, Toast.LENGTH_SHORT).show()
@@ -87,7 +87,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.downloadLayout.setOnLongClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(firmwaresDataArray[position].deviceIndex, holder.downloadLayout.context, true)
+                    openFirmwareActivity(firmwaresDataArray[position].deviceSource, holder.downloadLayout.context, true)
                 }
                 else -> {
                 }

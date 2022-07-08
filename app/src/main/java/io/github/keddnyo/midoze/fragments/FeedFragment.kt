@@ -8,6 +8,7 @@ import android.os.Parcelable
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -28,7 +29,6 @@ import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresData
 import org.json.JSONArray
 import org.json.JSONObject
-import java.lang.reflect.Type
 
 class FeedFragment : Fragment() {
 
@@ -58,6 +58,8 @@ class FeedFragment : Fragment() {
         val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
 
         val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
+        val firmwaresLoadingDataText: TextView = findViewById(R.id.firmwaresLoadingDataText)
+
         val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
@@ -84,7 +86,9 @@ class FeedFragment : Fragment() {
             override fun onPreExecute() {
                 super.onPreExecute()
                 firmwaresProgressBar.visibility = View.VISIBLE
+                firmwaresLoadingDataText.visibility = View.VISIBLE
                 firmwaresErrorMessage.visibility = View.GONE
+                firmwaresRefreshLayout.isRefreshing = false
             }
 
             @Deprecated("Deprecated in Java")
@@ -124,7 +128,9 @@ class FeedFragment : Fragment() {
                     }
                 }
 
-                if (prefs.getBoolean("settings_feed_cache_use", true)) {
+                if (prefs.getBoolean("settings_feed_ignore_cached_items", true)) {
+                    getFirmwaresData()
+                } else {
                     val gson = GsonBuilder().create()
 
                     val json1 = prefs.getString("deviceArrayList", "")
@@ -134,17 +140,6 @@ class FeedFragment : Fragment() {
                     } else {
                         getFirmwaresData()
                     }
-
-                    /*val json1 = prefs.getString("deviceArrayList", "")
-
-                    if (json1 != null && json1 != "") {
-                        val type: Type = object : TypeToken<ArrayList<DeviceData>>() {}.type
-                        deviceArrayList = gson.fromJson(json1, type)
-                    } else {
-                        getFirmwaresData()
-                    }*/
-                } else {
-                    getFirmwaresData()
                 }
 
                 return null
@@ -159,11 +154,10 @@ class FeedFragment : Fragment() {
                         FirmwaresData(
                             it.name,
                             it.icon,
-                            //StringUtils().getLocalFirmwareDate(it.firmware.getString("buildTime")),
-                            it.firmware.getString("buildTime"),
+                            StringUtils().getLocalFirmwareDate(it.buildTime),
                             it.firmware.getString("firmwareVersion").toString(),
-                            //it.firmware.getString("deviceSource").toString().toInt()
-                            20
+                            it.deviceSource.toInt(),
+                            it.productionSource.toInt()
                         )
                     )
                     firmwaresAdapter.notifyItemInserted(index)
@@ -171,7 +165,7 @@ class FeedFragment : Fragment() {
                 }
 
                 firmwaresProgressBar.visibility = View.GONE
-                firmwaresRefreshLayout.isRefreshing = false
+                firmwaresLoadingDataText.visibility = View.GONE
 
                 /*fun getData(favorite: Boolean) {
                     if (firmwaresData != JSONObject("{}")) {
@@ -241,6 +235,7 @@ class FeedFragment : Fragment() {
         }
 
         firmwaresRefreshLayout.setOnRefreshListener {
+            deviceListRecyclerView.scrollToPosition(0)
             setData()
         }
     }

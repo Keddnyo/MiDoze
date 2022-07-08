@@ -3,23 +3,24 @@
     <PreferenceCategory app:title="@string/feed_title">
 
         <SwitchPreferenceCompat
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:icon="@drawable/ic_update"
-            app:key="settings_feed_cache_use"
-            app:title="@string/settings_feed_cache_use" />
+            app:key="settings_feed_ignore_cached_items"
+            app:title="@string/settings_feed_ignore_cached_items"
+            app:summary="@string/settings_feed_ignore_cached_items_summary"/>
 
         <Preference
             app:icon="@drawable/ic_clear"
             app:key="settings_feed_cache_clear"
-            app:title="@string/settings_feed_cache_clear"
-            app:dependency="settings_feed_cache_use"/>
+            app:title="@string/settings_feed_cache_clear"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/settings_requests">
+    <PreferenceCategory app:title="@string/data_request_title">
 
         <ListPreference
             app:defaultValue="1"
+            app:dependency="settings_feed_ignore_cached_items"
             app:entries="@array/request_host_entries"
             app:entryValues="@array/request_host_selector_entryValues"
             app:icon="@drawable/ic_request_host"
@@ -29,6 +30,7 @@
 
         <ListPreference
             app:defaultValue="1"
+            app:dependency="settings_feed_ignore_cached_items"
             app:entries="@array/request_region_entries"
             app:entryValues="@array/request_region_selector_entryValues"
             app:icon="@drawable/ic_request_region"
@@ -36,13 +38,19 @@
             app:title="@string/settings_request_region"
             app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            app:defaultValue="true"
+        <SwitchPreference
+            app:title="@string/settings_request_app_name"
+            app:defaultValue="false"
             app:icon="@drawable/ic_update"
-            app:key="settings_app_check_updates"
-            app:title="@string/settings_app_check_for_updates" />
+            app:dependency="settings_feed_ignore_cached_items" />
+
+        <EditTextPreference
+            app:title="@string/settings_request_app_version"
+            app:icon="@drawable/ic_update"
+            app:dependency="settings_feed_ignore_cached_items"/>
 
     </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/settings_about">
 
         <Preference
@@ -56,6 +64,12 @@
             app:key="settings_server_info"
             app:summary="@string/settings_schakal"
             app:title="@string/settings_json_storage_title" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_update"
+            app:key="settings_app_check_updates"
+            app:title="@string/settings_app_check_for_updates" />
 
     </PreferenceCategory>
 

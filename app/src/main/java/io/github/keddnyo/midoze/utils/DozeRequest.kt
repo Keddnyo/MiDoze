@@ -10,7 +10,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
+import android.view.View
 import android.webkit.URLUtil
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
@@ -38,7 +40,7 @@ class DozeRequest {
         return false
     }
 
-    fun getFirmwareLatest(context: Context): ArrayList<DeviceData> {
+    fun getFirmwareLatest(context: Context): ArrayList<DeviceData> = with(context as Activity) {
         val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
 
         var firmwareData: JSONObject
@@ -50,7 +52,7 @@ class DozeRequest {
         )
 
         runBlocking {
-            productionSourceArray.forEach { productionSource ->
+            productionSourceArray.forEachIndexed { index, productionSource ->
                 for (deviceSource in 12..92) {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),
@@ -72,11 +74,24 @@ class DozeRequest {
                             R.drawable.ic_amazfit
                         }
 
+                        fun get(key: String): String {
+                            val f = firmwareData
+
+                            return if (f.has(key)) {
+                                f.getString(key)
+                            } else ({
+                                null
+                            }).toString()
+                        }
+
                         deviceArrayList.add(
                             DeviceData(
                                 icon = deviceIcon,
                                 name = deviceName,
-                                firmware = firmwareData
+                                firmware = firmwareData,
+                                buildTime = get("buildTime"),
+                                deviceSource = get("deviceSource"),
+                                productionSource = get("productionSource")
                             )
                         )
                     }

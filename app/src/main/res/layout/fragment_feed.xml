@@ -17,6 +17,17 @@
             android:layout_gravity="center"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/firmwaresLoadingDataText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:text="@string/fragment_feed_loading"
+            android:textSize="10pt"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <include
             android:id="@+id/firmwaresErrorMessage"
             layout="@layout/activity_main_error"
@@ -28,7 +39,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:visibility="visible"
-            tools:listitem="@layout/activity_main_firmware" />
+            tools:listitem="@layout/fragment_feed_firmware" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
