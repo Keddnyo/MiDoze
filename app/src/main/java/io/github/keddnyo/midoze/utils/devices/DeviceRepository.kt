@@ -61,7 +61,7 @@ class DeviceRepository {
             "52" -> "Amazfit GTR 42mm SWK Global"
             "113" -> "Amazfit Bip"
             "63" -> "Amazfit GTR2 Chinese"
-            else -> "Unknown - $deviceSource : $productionSource"
+            else -> "Unknown $deviceSource $productionSource"
         }
     }
 }
