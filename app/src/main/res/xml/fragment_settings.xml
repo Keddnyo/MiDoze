@@ -15,7 +15,7 @@
             app:dependency="settings_feed_ignore_cached_items"
             app:entries="@array/request_app_name_entries"
             app:entryValues="@array/request_app_name_entryValues"
-            app:icon="@drawable/ic_update"
+            app:icon="@drawable/ic_pretend_app"
             app:key="settings_feed_app_name"
             app:title="@string/settings_request_app_name"
             app:useSimpleSummaryProvider="true" />

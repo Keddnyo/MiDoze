@@ -2,7 +2,6 @@
     <string name="app_name" translatable="false">MiDoze</string>
     <string name="error_title">Connection error</string>
     <string name="compatibility_mode">Compatibility mode</string>
-    <string name="fragment_feed_loading">Loading…</string>
 
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>

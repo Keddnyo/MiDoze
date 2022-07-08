@@ -2,7 +2,6 @@
 <resources>
     <string name="error_title">Ошибка подключения</string>
     <string name="compatibility_mode">Режим совместимости</string>
-    <string name="fragment_feed_loading">Загрузка…</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
