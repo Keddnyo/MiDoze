@@ -36,8 +36,10 @@
     <string name="data_request_title">Загрузка данных</string>
     <string name="settings_request_region">Регион запроса</string>
     <string name="settings_request_host">Хост запроса</string>
-    <string name="settings_request_app_name">Pretend to be a Zepp Life</string>
-    <string name="settings_request_app_version">Версия представляемого приложения</string>
+    <string name="settings_request_app_name">Эмуляция приложения</string>
+    <string name="settings_request_deviceSource_range">Предел значений deviceSource</string>
+    <string name="settings_request_zepp_app_version">Версия Zepp</string>
+    <string name="settings_request_zepp_life_app_version">Версия Zepp Life</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>

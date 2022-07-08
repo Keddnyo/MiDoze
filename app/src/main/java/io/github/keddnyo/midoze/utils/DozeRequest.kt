@@ -41,6 +41,8 @@ class DozeRequest {
     }
 
     fun getFirmwareLatest(context: Context): ArrayList<DeviceData> = with(context as Activity) {
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
         val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
 
         var firmwareData: JSONObject
@@ -51,14 +53,36 @@ class DozeRequest {
             256, 257, 258, 259
         )
 
+        fun getAppName(): String? {
+            return prefs.getString("settings_feed_app_name", "Zepp")
+        }
+
+        val appName = when (getAppName()) {
+            "Zepp" -> {
+                "com.huami.midong"
+            } else -> {
+                "com.xiaomi.hm.health"
+            }
+        }
+
+        val appVersion = when (getAppName()) {
+            "Zepp" -> {
+                prefs.getString("settings_feed_zepp_app_version", getString(R.string.settings_request_zepp_app_version_value))
+            } else -> {
+                prefs.getString("settings_feed_zepp_app_life_version", getString(R.string.settings_request_zepp_life_app_version_value))
+            }
+        }
+
+        val deviceSourceRange = prefs.getInt("settings_feed_appSource_range", 100)
+
         runBlocking {
-            productionSourceArray.forEachIndexed { index, productionSource ->
-                for (deviceSource in 12..92) {
+            productionSourceArray.forEach { productionSource ->
+                for (deviceSource in 0..deviceSourceRange) {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),
                         deviceSource.toString(),
-                        "6.10.1-play_100770",
-                        "com.huami.midong",
+                        appVersion.toString(),
+                        appName,
                         context
                     )
 
@@ -117,7 +141,7 @@ class DozeRequest {
         appVersion: String,
         appname: String,
         context: Context
-    ): JSONObject {
+    ): JSONObject = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
