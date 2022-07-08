@@ -15,15 +15,20 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.utils.TinyDB
 import io.github.keddnyo.midoze.utils.UiUtils
 import io.github.keddnyo.midoze.utils.devices.DeviceData
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresData
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.reflect.Type
 
 class FeedFragment : Fragment() {
 
@@ -68,6 +73,8 @@ class FeedFragment : Fragment() {
         class LoadDataForActivity :
             AsyncTask<Void?, Void?, Void>() {
 
+            val tinydb = TinyDB(context)
+            val gson = Gson()
             var deviceArrayList: ArrayList<DeviceData> = arrayListOf()
 
             var firmwaresData: JSONObject = JSONObject("{}")
@@ -82,16 +89,33 @@ class FeedFragment : Fragment() {
 
             @Deprecated("Deprecated in Java")
             override fun doInBackground(vararg p0: Void?): Void? {
+                /*val deviceArrayListObject = tinydb.getListObject("deviceArrayList", DeviceData::class.java)
 
-                fun getOnlineState(): Boolean {
-                    return DozeRequest().isOnline(context)
-                }
+                deviceArrayListObject.forEach {
+                    deviceArrayList.add(it as DeviceData)
+                }*/
+
 
                 fun getFirmwaresData() {
-                    if (getOnlineState()) {
+                    val isOnline = DozeRequest().isOnline(context)
+
+                    if (isOnline) {
                         deviceArrayList = DozeRequest().getFirmwareLatest(context)
-                        //editor.putString("Firmwares", firmwaresData.toString())
-                        //editor.apply()
+
+                        val jsArray = gson.toJson(deviceArrayList)
+                        editor.putString("deviceArrayList", jsArray.toString())
+                        editor.apply()
+
+                        /*val json2 = gson.toJson(deviceArrayList)
+                        editor.putString("deviceArrayList", json2)
+                        editor.apply()*/
+
+                        /*deviceArrayListObject.clear()
+                        deviceArrayList.forEach {
+                            deviceArrayListObject.add(it as Any)
+                        }
+
+                        tinydb.putListObject("deviceArrayList", deviceArrayListObject)*/
                     } else {
                         runOnUiThread {
                             firmwaresProgressBar.visibility = View.GONE
@@ -100,16 +124,28 @@ class FeedFragment : Fragment() {
                     }
                 }
 
-                /*if (prefs.getBoolean("settings_feed_cache_use", true)) {
-                    if (preloadedFirmwares != "") {
-                        firmwaresData = JSONObject(preloadedFirmwares)
+                if (prefs.getBoolean("settings_feed_cache_use", true)) {
+                    val gson = GsonBuilder().create()
+
+                    val json1 = prefs.getString("deviceArrayList", "")
+
+                    if (json1 != "") {
+                        deviceArrayList = gson.fromJson(json1.toString(), object :TypeToken<ArrayList<DeviceData>>(){}.type)
                     } else {
                         getFirmwaresData()
                     }
+
+                    /*val json1 = prefs.getString("deviceArrayList", "")
+
+                    if (json1 != null && json1 != "") {
+                        val type: Type = object : TypeToken<ArrayList<DeviceData>>() {}.type
+                        deviceArrayList = gson.fromJson(json1, type)
+                    } else {
+                        getFirmwaresData()
+                    }*/
                 } else {
                     getFirmwaresData()
-                }*/
-                getFirmwaresData()
+                }
 
                 return null
             }
@@ -123,9 +159,11 @@ class FeedFragment : Fragment() {
                         FirmwaresData(
                             it.name,
                             it.icon,
-                            StringUtils().getLocalFirmwareDate(it.firmware.getString("buildTime")),
+                            //StringUtils().getLocalFirmwareDate(it.firmware.getString("buildTime")),
+                            it.firmware.getString("buildTime"),
                             it.firmware.getString("firmwareVersion").toString(),
-                            it.firmware.getString("deviceSource").toString().toInt()
+                            //it.firmware.getString("deviceSource").toString().toInt()
+                            20
                         )
                     )
                     firmwaresAdapter.notifyItemInserted(index)
