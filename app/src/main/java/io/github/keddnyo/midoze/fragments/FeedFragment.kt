@@ -79,6 +79,9 @@ class FeedFragment : Fragment() {
             val gson = Gson()
             var deviceArrayList: ArrayList<DeviceData> = arrayListOf()
 
+            var appName = ""
+            var appVersion: String? = ""
+
             var firmwaresData: JSONObject = JSONObject("{}")
             val preloadedFirmwares = prefs.getString("Firmwares", "").toString()
 
@@ -100,11 +103,33 @@ class FeedFragment : Fragment() {
                 }*/
 
 
+
+                fun getAppName(): String? {
+                    return prefs.getString("settings_feed_app_name", "Zepp")
+                }
+
+                appName = when (getAppName()) {
+                    "Zepp" -> {
+                        "com.huami.midong"
+                    } else -> {
+                        "com.xiaomi.hm.health"
+                    }
+                }
+
+                appVersion = when (getAppName()) {
+                    "Zepp" -> {
+                        prefs.getString("settings_feed_zepp_app_version", getString(R.string.settings_request_zepp_app_version_value))
+                    } else -> {
+                        prefs.getString("settings_feed_zepp_app_life_version", getString(R.string.settings_request_zepp_life_app_version_value))
+                    }
+                }
+
+
                 fun getFirmwaresData() {
                     val isOnline = DozeRequest().isOnline(context)
 
                     if (isOnline) {
-                        deviceArrayList = DozeRequest().getFirmwareLatest(context)
+                        deviceArrayList = DozeRequest().getFirmwareLatest(context, appName, appVersion.toString())
 
                         val jsArray = gson.toJson(deviceArrayList)
                         editor.putString("deviceArrayList", jsArray.toString())
@@ -157,7 +182,9 @@ class FeedFragment : Fragment() {
                             StringUtils().getLocalFirmwareDate(it.buildTime),
                             it.firmware.getString("firmwareVersion").toString(),
                             it.deviceSource.toInt(),
-                            it.productionSource.toInt()
+                            it.productionSource.toInt(),
+                            appName,
+                            appVersion.toString()
                         )
                     )
                     firmwaresAdapter.notifyItemInserted(index)

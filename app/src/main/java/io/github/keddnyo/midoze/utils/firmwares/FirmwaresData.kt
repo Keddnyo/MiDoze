@@ -6,5 +6,7 @@ data class FirmwaresData(
     val firmwareReleaseDate: String,
     val firmwareChangelog: String,
     val deviceSource: Int,
-    val productionSource: Int
+    val productionSource: Int,
+    val appName: String,
+    val appVersion: String
 )

@@ -40,12 +40,14 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_feed_firmware, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_feed_firmware, parent, false)
         return DeviceListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
         val editor = prefs.edit()
 
         holder.deviceNameTextView.text = firmwaresDataArray[position].deviceName
@@ -54,6 +56,25 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.firmwareChangelogTextView.text = firmwaresDataArray[position].firmwareChangelog
 
         val deviceIndex = firmwaresDataArray[position].deviceSource.toString()
+
+        fun openFirmwareActivity(
+            context: Context,
+            custom: Boolean
+        ) {
+            val intent = if (custom) {
+                Intent(context, RequestActivity::class.java)
+            } else {
+                Intent(context, FirmwareActivity::class.java)
+            }
+
+            intent.putExtra("deviceName", firmwaresDataArray[position].deviceName)
+            intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)
+            intent.putExtra("deviceSource", firmwaresDataArray[position].deviceSource)
+            intent.putExtra("appName", firmwaresDataArray[position].appName)
+            intent.putExtra("appVersion", firmwaresDataArray[position].appVersion)
+
+            context.startActivity(intent)
+        }
 
         if (prefs.getBoolean(deviceIndex, false)) {
             holder.likeIcon.setImageResource(R.drawable.ic_favorite)
@@ -76,10 +97,17 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.downloadLayout.setOnClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(firmwaresDataArray[position].deviceSource, holder.downloadLayout.context, false)
+                    openFirmwareActivity(
+                        holder.downloadLayout.context,
+                        false
+                    )
                 }
                 else -> {
-                    Toast.makeText(holder.deviceNameTextView.context, R.string.firmware_connectivity_error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.deviceNameTextView.context,
+                        R.string.firmware_connectivity_error,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -87,9 +115,17 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.downloadLayout.setOnLongClickListener {
             when (DozeRequest().isOnline(holder.downloadLayout.context)) {
                 true -> {
-                    openFirmwareActivity(firmwaresDataArray[position].deviceSource, holder.downloadLayout.context, true)
+                    openFirmwareActivity(
+                        holder.downloadLayout.context,
+                        true
+                    )
                 }
                 else -> {
+                    Toast.makeText(
+                        holder.deviceNameTextView.context,
+                        R.string.firmware_connectivity_error,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             true
@@ -115,7 +151,8 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             if (constraint.isEmpty()) {
                 filteredList.addAll(firmwaresDataArrayFull)
             } else {
-                val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+                val filterPattern =
+                    constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
                 for (item in firmwaresDataArrayFull) {
                     if (item.deviceName.lowercase(Locale.getDefault()).contains(filterPattern)) {
                         filteredList.add(item)
@@ -132,37 +169,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             clear()
             firmwaresDataArray.addAll(results.values as Collection<FirmwaresData>)
             notifyDataSetChanged()
-        }
-    }
-
-    private fun openFirmwareActivity(deviceIndex: Int, context: Context, custom: Boolean) {
-        runBlocking {
-            withContext(Dispatchers.IO) {
-                val jsonObject = JSONObject(DozeRequest().getApplicationValues())
-
-                val deviceNameValue =
-                    jsonObject.getJSONObject(deviceIndex.toString()).getString("name")
-                val productionSourceValue =
-                    jsonObject.getJSONObject(deviceIndex.toString()).getString("productionSource")
-                val appNameValue =
-                    jsonObject.getJSONObject(deviceIndex.toString()).getString("appname")
-                val appVersionValue =
-                    jsonObject.getJSONObject(deviceIndex.toString()).getString("appVersion")
-
-                val intent = if (custom) {
-                    Intent(context, RequestActivity::class.java)
-                } else {
-                    Intent(context, FirmwareActivity::class.java)
-                }
-
-                intent.putExtra("deviceName", deviceNameValue)
-                intent.putExtra("productionSource", productionSourceValue)
-                intent.putExtra("deviceSource", deviceIndex)
-                intent.putExtra("appname", appNameValue)
-                intent.putExtra("appVersion", appVersionValue)
-
-                context.startActivity(intent)
-            }
         }
     }
 

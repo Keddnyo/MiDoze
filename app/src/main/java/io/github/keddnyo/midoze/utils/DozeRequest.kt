@@ -10,16 +10,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
-import android.view.View
 import android.webkit.URLUtil
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.devices.DeviceData
 import io.github.keddnyo.midoze.utils.devices.DeviceRepository
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -40,7 +37,7 @@ class DozeRequest {
         return false
     }
 
-    fun getFirmwareLatest(context: Context): ArrayList<DeviceData> = with(context as Activity) {
+    fun getFirmwareLatest(context: Context, appName: String, appVersion: String): ArrayList<DeviceData> = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
         val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
@@ -53,26 +50,6 @@ class DozeRequest {
             256, 257, 258, 259
         )
 
-        fun getAppName(): String? {
-            return prefs.getString("settings_feed_app_name", "Zepp")
-        }
-
-        val appName = when (getAppName()) {
-            "Zepp" -> {
-                "com.huami.midong"
-            } else -> {
-                "com.xiaomi.hm.health"
-            }
-        }
-
-        val appVersion = when (getAppName()) {
-            "Zepp" -> {
-                prefs.getString("settings_feed_zepp_app_version", getString(R.string.settings_request_zepp_app_version_value))
-            } else -> {
-                prefs.getString("settings_feed_zepp_app_life_version", getString(R.string.settings_request_zepp_life_app_version_value))
-            }
-        }
-
         val deviceSourceRange = prefs.getInt("settings_feed_appSource_range", 100)
 
         runBlocking {
@@ -81,7 +58,7 @@ class DozeRequest {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),
                         deviceSource.toString(),
-                        appVersion.toString(),
+                        appVersion,
                         appName,
                         context
                     )
@@ -126,10 +103,6 @@ class DozeRequest {
         return deviceArrayList
     }
 
-    fun getApplicationValues(): String {
-        return URL("https://schakal.ru/fw/dev_apps.json").readText()
-    }
-
     fun getApplicationLatestReleaseInfo(context: Context): JSONObject {
         val appName = context.getString(R.string.app_name)
         return JSONObject(URL("https://api.github.com/repos/keddnyo/$appName/releases/latest").readText())
@@ -139,7 +112,7 @@ class DozeRequest {
         productionSource: String,
         deviceSource: String,
         appVersion: String,
-        appname: String,
+        appName: String,
         context: Context
     ): JSONObject = with(context as Activity) {
         val prefs: SharedPreferences =
@@ -232,7 +205,7 @@ class DozeRequest {
                 append("channel", "0")
                 append("user-agent", "0")
                 append("cv", "0")
-                append("appname", appname)
+                append("appname", appName)
                 append("v", "0")
                 append("apptoken", "0")
                 append("lang", lang)
