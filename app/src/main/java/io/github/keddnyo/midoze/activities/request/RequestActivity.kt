@@ -99,7 +99,6 @@ class RequestActivity : AppCompatActivity() {
         appButton.setOnClickListener {
             val zeppAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
             val zeppLifeAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
-            val zeppLifeAppVersionCustom = prefs.getString("filters_feed_zepp_life_app_version", zeppLifeAppVersionDefault)
 
             if (prefs.getString("filters_feed_app_name", "Zepp") == "Zepp") {
                 extrasAppNameEditText.setText(getString(R.string.zepp_app_name_value))
@@ -111,7 +110,7 @@ class RequestActivity : AppCompatActivity() {
                 extrasAppNameEditText.setText(getString(R.string.zepp_life_app_name_value))
                 extrasAppVersionEditText.setText(
                     prefs.getString("filters_feed_zepp_life_app_version", zeppLifeAppVersionDefault)
-                        ?: zeppAppVersionDefault
+                        ?: zeppLifeAppVersionDefault
                 )
             }
         }
