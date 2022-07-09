@@ -29,19 +29,20 @@ class RequestActivity : AppCompatActivity() {
         val extrasAppNameEditText: TextInputEditText = findViewById(R.id.extrasAppNameEditText)
         val extrasAppVersionEditText: TextInputEditText = findViewById(R.id.extrasAppVersionEditText)
         val submitButton: MaterialButton = findViewById(R.id.extrasSubmitButton)
+        val appButton: MaterialButton = findViewById(R.id.extras_app_button)
         val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
 
-        val sharedPreferences =
+        val prefs =
             PreferenceManager.getDefaultSharedPreferences(context)
-        val editor = sharedPreferences.edit()
+        val editor = prefs.edit()
 
-        if ((sharedPreferences.getString(
+        if ((prefs.getString(
                 "productionSource",
                 ""
-            ) != "") || (sharedPreferences.getString(
+            ) != "") || (prefs.getString(
                 "deviceSource",
                 ""
-            ) != "") || (sharedPreferences.getString(
+            ) != "") || (prefs.getString(
                 "appVersion",
                 ""
             ) != "")
@@ -95,11 +96,31 @@ class RequestActivity : AppCompatActivity() {
             true
         }
 
+        appButton.setOnClickListener {
+            val zeppAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
+            val zeppLifeAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
+            val zeppLifeAppVersionCustom = prefs.getString("filters_feed_zepp_life_app_version", zeppLifeAppVersionDefault)
+
+            if (prefs.getString("filters_feed_app_name", "Zepp") == "Zepp") {
+                extrasAppNameEditText.setText(getString(R.string.zepp_app_name_value))
+                extrasAppVersionEditText.setText(
+                    prefs.getString("filters_feed_zepp_app_version", zeppAppVersionDefault)
+                        ?: zeppAppVersionDefault
+                )
+            } else {
+                extrasAppNameEditText.setText(getString(R.string.zepp_life_app_name_value))
+                extrasAppVersionEditText.setText(
+                    prefs.getString("filters_feed_zepp_life_app_version", zeppLifeAppVersionDefault)
+                        ?: zeppAppVersionDefault
+                )
+            }
+        }
+
         importButton.setOnClickListener {
-            extrasProductionSourceEditText.setText(sharedPreferences.getString("productionSource", ""))
-            extrasDeviceSourceEditText.setText(sharedPreferences.getString("deviceSource", ""))
-            extrasAppVersionEditText.setText(sharedPreferences.getString("appVersion", ""))
-            extrasAppNameEditText.setText(sharedPreferences.getString("appname", ""))
+            extrasProductionSourceEditText.setText(prefs.getString("productionSource", ""))
+            extrasDeviceSourceEditText.setText(prefs.getString("deviceSource", ""))
+            extrasAppVersionEditText.setText(prefs.getString("appVersion", ""))
+            extrasAppNameEditText.setText(prefs.getString("appname", ""))
         }
 
         importButton.setOnLongClickListener {

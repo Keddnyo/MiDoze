@@ -40,14 +40,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="10pt"
+                        android:textSize="12pt"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/firmwareVersionTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textSize="8pt" />
 
                 </LinearLayout>
 
@@ -79,13 +80,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="10pt"
+                    android:textSize="12pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="8pt" />
 
             </LinearLayout>
 
@@ -107,13 +109,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="10pt"
+                    android:textSize="12pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="8pt" />
 
             </LinearLayout>
 

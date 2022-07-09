@@ -54,10 +54,11 @@ class DozeRequest {
             256, 257, 258, 259
         )
 
-        val deviceSourceRange = prefs.getInt("filters_feed_appSource_range", 100)
+        val productionSourceRange = prefs.getInt("filters_feed_productionSource_range", 257)
+        val deviceSourceRange = prefs.getInt("filters_feed_deviceSource_range", 95)
 
         runBlocking {
-            productionSourceArray.forEach { productionSource ->
+            for (productionSource in 256..productionSourceRange) {
                 for (deviceSource in 0..deviceSourceRange) {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),

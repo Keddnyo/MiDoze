@@ -31,6 +31,7 @@
     <string name="extras_production_source" translatable="false">productionSource</string>
     <string name="extras_app_name" translatable="false">appname</string>
     <string name="extras_app_version" translatable="false">appVersion</string>
+    <string name="extras_app_data">Insert app data</string>
     <string name="extras_import_button">Import</string>
 
     <string name="settings_title">Settings</string>
@@ -40,15 +41,20 @@
     <string name="settings_server_response">Server response</string>
 
     <string name="filters_title">Filters</string>
+    <string name="filters_host_title">Host</string>
+    <string name="filters_region_title">Region</string>
+    <string name="filters_app_title">Application</string>
+    <string name="filters_advanced_title">Advanced</string>
     <string name="filters_request_region">Request region</string>
     <string name="filters_request_host">Request host</string>
     <string name="filters_request_app_name">Pretend to be like app</string>
     <string name="filters_request_deviceSource_range">Set deviceSource value range</string>
+    <string name="filters_request_productionSource_range">Set productionSource value range</string>
     <string name="filters_request_zepp_app_version">Zepp app version</string>
     <string name="filters_request_zepp_app_version_value" translatable="false">6.10.1-play_100770</string>
     <string name="filters_request_zepp_life_app_version">Zepp Life app version</string>
     <string name="filters_request_zepp_life_app_version_value" translatable="false">6.2.1_50602</string>
-    <string name="filters_show_unknown_devices">Show unknown devices</string>
+    <string name="filters_show_unknown_devices">Just unknown devices</string>
 
     <string name="settings_about">About</string>
     <string name="settings_keddnyo" translatable="false">Keddnyo</string>
@@ -84,9 +90,14 @@
         <item>4</item>
     </string-array>
 
+    <string name="zepp_app_name" translatable="false">Zepp</string>
+    <string name="zepp_life_app_name" translatable="false">Zepp Life</string>
+    <string name="zepp_app_name_value" translatable="false">com.huami.midong</string>
+    <string name="zepp_life_app_name_value" translatable="false">com.xiaomi.hm.health</string>
+
     <string-array name="request_app_name_entries">
-        <item>Zepp</item>
-        <item>Zepp Life</item>
+        <item>@string/zepp_app_name</item>
+        <item>@string/zepp_life_app_name</item>
     </string-array>
     <string-array name="request_app_name_entryValues">
         <item>Zepp</item>

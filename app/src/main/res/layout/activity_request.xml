@@ -71,6 +71,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/extras_app_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/extras_app_data"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/extrasSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

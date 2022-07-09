@@ -11,7 +11,7 @@
 
     <string name="feed_title">Лента</string>
     <string name="settings_feed_ignore_cached_items">Игнорировать кэш списка</string>
-    <string name="settings_feed_ignore_cached_items_summary">Всегда запрашивать актуальные данные</string>
+    <string name="settings_feed_ignore_cached_items_summary">Запрашивать актуальные данные</string>
     <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
     <string name="settings_feed_cache_cleared">Готово</string>
 
@@ -24,6 +24,7 @@
     <string name="firmware_not_found">Не найдено</string>
     <string name="firmware_try_switch_region">Попробуйте сменить регион</string>
     <string name="firmware_share">Поделиться</string>
+    <string name="extras_app_data">Вставить приложение</string>
     <string name="extras_import_button">Импорт</string>
 
     <string name="settings_title">Настройки</string>
@@ -33,13 +34,18 @@
     <string name="settings_server_response">Ответ сервера</string>
 
     <string name="filters_title">Фильтры</string>
+    <string name="filters_host_title">Хост</string>
+    <string name="filters_region_title">Регион</string>
+    <string name="filters_app_title">Приложение</string>
+    <string name="filters_advanced_title">Дополнительно</string>
     <string name="filters_request_region">Регион запроса</string>
     <string name="filters_request_host">Хост запроса</string>
     <string name="filters_request_app_name">Эмуляция приложения</string>
     <string name="filters_request_deviceSource_range">Предел значений deviceSource</string>
+    <string name="filters_request_productionSource_range">Предел значений productionSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
-    <string name="filters_show_unknown_devices">Отображать неизвестные устройства</string>
+    <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
 
     <string name="settings_about">О приложении</string>
     <string name="settings_json_storage_title">Хранилище JSON</string>
