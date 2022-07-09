@@ -57,7 +57,7 @@
     <PreferenceCategory app:title="@string/filters_advanced_title">
 
         <SeekBarPreference
-            asp:max="250"
+            asp:max="350"
             app:defaultValue="95"
             app:icon="@drawable/ic_device_source_range"
             app:key="filters_feed_deviceSource_range"
@@ -66,7 +66,7 @@
             app:title="@string/filters_request_deviceSource_range" />
 
         <SeekBarPreference
-            asp:max="260"
+            asp:max="270"
             app:defaultValue="257"
             app:icon="@drawable/ic_device_source_range"
             app:key="filters_feed_productionSource_range"

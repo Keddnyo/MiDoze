@@ -50,10 +50,6 @@ class DozeRequest {
         var deviceIcon: Int
         var deviceName: String
 
-        val productionSourceArray = arrayOf(
-            256, 257, 258, 259
-        )
-
         val productionSourceRange = prefs.getInt("filters_feed_productionSource_range", 257)
         val deviceSourceRange = prefs.getInt("filters_feed_deviceSource_range", 95)
 

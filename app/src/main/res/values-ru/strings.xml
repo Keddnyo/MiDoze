@@ -48,7 +48,6 @@
     <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
 
     <string name="settings_about">О приложении</string>
-    <string name="settings_json_storage_title">Хранилище JSON</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string-array name="request_region_entries">

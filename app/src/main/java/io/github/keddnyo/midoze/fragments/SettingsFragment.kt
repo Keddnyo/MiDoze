@@ -26,11 +26,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
 
         val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
-
         val about = findPreference<Preference>("settings_app_info")
-        val cloud = findPreference<Preference>("settings_server_info")
 
-        if (clearFeedCache != null && about != null && cloud != null) {
+        if (clearFeedCache != null && about != null) {
 
             clearFeedCache.setOnPreferenceClickListener {
                 val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -48,14 +46,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             about.setOnPreferenceClickListener {
                 startActivity(
                     Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
-                )
-                true
-            }
-
-            cloud.setOnPreferenceClickListener {
-                startActivity(
-                    Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://4pda.to/forum/index.php?showuser=243484"))
                 )
                 true
             }
