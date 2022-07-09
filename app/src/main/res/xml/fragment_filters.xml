@@ -40,7 +40,7 @@
 
         <EditTextPreference
             app:defaultValue="@string/filters_request_zepp_app_version_value"
-            app:icon="@drawable/ic_zepp_app"
+            app:icon="@drawable/ic_app_zepp"
             app:key="filters_feed_zepp_app_version"
             app:title="@string/filters_request_zepp_app_version"
             app:useSimpleSummaryProvider="true" />
@@ -59,7 +59,7 @@
         <SeekBarPreference
             asp:max="350"
             app:defaultValue="95"
-            app:icon="@drawable/ic_device_source_range"
+            app:icon="@drawable/ic_range"
             app:key="filters_feed_deviceSource_range"
             app:min="30"
             app:showSeekBarValue="true"
@@ -68,7 +68,7 @@
         <SeekBarPreference
             asp:max="270"
             app:defaultValue="257"
-            app:icon="@drawable/ic_device_source_range"
+            app:icon="@drawable/ic_range"
             app:key="filters_feed_productionSource_range"
             app:min="256"
             app:showSeekBarValue="true"

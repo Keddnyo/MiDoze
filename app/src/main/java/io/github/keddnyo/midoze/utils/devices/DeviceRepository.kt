@@ -55,6 +55,9 @@ class DeviceRepository {
             "83" -> "Amazfit T-Rex Pro Chinese"
 
             "92" -> "Amazfit GTS2 mini"
+            "98" -> "Amazfit GTR2 eSIM" // Found
+
+            "104" -> "Amazfit GTR 3 Pro" // Found
 
             "113" -> "Amazfit Bip"
 
@@ -75,10 +78,12 @@ class DeviceRepository {
 
             "230" -> "Amazfit GTR3 Pro Global"
 
-            "262" -> "Xiaomi Smart Band 7"
-            "263" -> "Xiaomi Smart Band 7"
-            "264" -> "Xiaomi Smart Band 7"
-            "265" -> "Xiaomi Smart Band 7"
+            // "243" -> "Amazfit GTR 47mm Titanium" // Found
+
+            "262" -> "Xiaomi Smart Band 7" // 257
+            "263" -> "Xiaomi Smart Band 7" // 258
+            "264" -> "Xiaomi Smart Band 7" // 259
+            "265" -> "Xiaomi Smart Band 7" // 260
 
             else -> "Unknown $deviceSource $productionSource"
         }

@@ -7,13 +7,11 @@
     android:viewportHeight="24"
     tools:ignore="VectorRaster">
     <path
-        android:fillAlpha="0.3"
         android:fillColor="@android:color/white"
-        android:pathData="M15.5,15.38l0,-6.76l3.38,3.38l-3.38,3.38"
-        android:strokeAlpha="0.3"
+        android:pathData="M15.5,5l-4.5,0l5,7l-5,7l4.5,0l5,-7z"
         tools:ignore="VectorRaster" />
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M15.5,15.38V8.62L18.88,12L15.5,15.38M14,19l7,-7l-7,-7V19L14,19zM10,19V5l-7,7L10,19z"
+        android:pathData="M8.5,5l-4.5,0l5,7l-5,7l4.5,0l5,-7z"
         tools:ignore="VectorRaster" />
 </vector>
