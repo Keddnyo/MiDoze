@@ -8,7 +8,6 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.UiUtils
 import org.json.JSONObject
 

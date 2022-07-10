@@ -8,7 +8,7 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.UiUtils
 import kotlinx.coroutines.runBlocking
 

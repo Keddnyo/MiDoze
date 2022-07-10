@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.utils.devices
+package io.github.keddnyo.midoze.local.devices
 
 import org.json.JSONObject
 

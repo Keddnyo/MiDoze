@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Language
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils

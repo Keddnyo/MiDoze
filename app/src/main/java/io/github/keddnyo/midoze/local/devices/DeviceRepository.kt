@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.utils.devices
+package io.github.keddnyo.midoze.local.devices
 
 @Suppress("UNUSED_EXPRESSION")
 class DeviceRepository {
@@ -7,13 +7,13 @@ class DeviceRepository {
             "12" -> "Amazfit Bip"
 
             "20" -> "Amazfit Bip2"
-            "24" -> "Mi Band 4 NFC"
-            "25" -> "Mi Band 4 Global"
+            "24" -> "Xiaomi Mi Smart Band 4 NFC"
+            "25" -> "Xiaomi Mi Smart Band 4 Global"
             "28" -> "Amazfit Bip S"
             "29" -> "Amazfit Bip S Lite"
 
             "30" -> "Amazfit Verge Lite Global"
-            "31" -> "Mi Band 3i"
+            "31" -> "Xiaomi Mi Band 3i"
             "35" -> "Amazfit GTR 47mm Chinese"
             "36" -> "Amazfit GTR 47mm Global"
             "37" -> "Amazfit GTR 42mm Chinese"
@@ -32,8 +32,8 @@ class DeviceRepository {
             "53" -> "Amazfit X Chinese"
             "56" -> "Zepp Z Chinese"
             "57" -> "Zepp E Circle Chinese"
-            "58" -> "Mi Band 5 NFC"
-            "59" -> "Mi Band 5"
+            "58" -> "Xiaomi Mi Band Smart 5 NFC"
+            "59" -> "Xiaomi Mi Smart Band 5"
 
             "61" -> "Zepp E Square Chinese"
             "62" -> "Amazfit Neo"
@@ -67,8 +67,8 @@ class DeviceRepository {
             "209" -> "Amazfit GTR2e Global"
 
             "210" -> "Amazfit GTS2e Global"
-            "211" -> "Mi Band 6 Chinese NFC"
-            "212" -> "Mi Band 6 Global"
+            "211" -> "Xiaomi Mi Band 6 Chinese NFC"
+            "212" -> "Xiaomi Mi Smart Band 6 Global"
 
             "224" -> "Amazfit GTS3 Chinese"
             "225" -> "Amazfit GTS3 Global"

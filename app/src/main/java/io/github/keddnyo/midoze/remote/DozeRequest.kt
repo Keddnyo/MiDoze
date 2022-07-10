@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.utils
+package io.github.keddnyo.midoze.remote
 
 import android.Manifest
 import android.app.Activity
@@ -14,8 +14,8 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.devices.DeviceData
-import io.github.keddnyo.midoze.utils.devices.DeviceRepository
+import io.github.keddnyo.midoze.local.devices.DeviceData
+import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -68,7 +68,7 @@ class DozeRequest {
                         deviceName =
                             DeviceRepository().getDeviceNameByCode(deviceSource, productionSource)
 
-                        deviceIcon = if (deviceName.contains("Mi Band")) {
+                        deviceIcon = if (deviceName.contains("Xiaomi")) {
                             R.drawable.ic_xiaomi
                         } else if (deviceName.contains("Zepp")) {
                             R.drawable.ic_zepp

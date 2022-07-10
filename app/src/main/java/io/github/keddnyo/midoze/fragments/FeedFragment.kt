@@ -19,10 +19,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
+import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
-import io.github.keddnyo.midoze.utils.devices.DeviceData
+import io.github.keddnyo.midoze.local.devices.DeviceData
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresData
 

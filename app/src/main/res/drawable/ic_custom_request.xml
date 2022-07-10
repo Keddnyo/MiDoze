@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:width="24dp"
     android:height="24dp"
-    android:autoMirrored="true"
     android:tint="?attr/colorPrimaryDark"
     android:viewportWidth="24"
     android:viewportHeight="24"
     tools:ignore="VectorRaster">
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M3,18h13v-2H3V18zM3,13h10v-2H3V13zM3,6v2h13V6H3zM21,15.59L17.42,12L21,8.41L19.59,7l-5,5l5,5L21,15.59z"
+        android:pathData="M3,5h10v2L3,7zM7,11L3,11v2h4v2h2L9,9L7,9zM13,15h-2v6h2v-2h8v-2h-8zM3,17h6v2L3,19zM11,11h10v2L11,13zM17,3h-2v6h2L17,7h4L21,5h-4z"
         tools:ignore="VectorRaster" />
 </vector>

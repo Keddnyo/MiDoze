@@ -1,19 +1,15 @@
 package io.github.keddnyo.midoze.activities.main
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
-import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.databinding.ActivityMainBinding
@@ -21,10 +17,8 @@ import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.FiltersFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.remote.AppUpdates
-import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
