@@ -45,14 +45,13 @@
     <string name="filters_request_productionSource_range">Предел значений productionSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
-    <string name="filters_app_version_load_defaults">Сбросить версии</string>
+    <string name="filters_app_version_load_defaults">Версии по умолчанию</string>
     <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
 
     <string name="settings_firmwares_title">Прошивки</string>
-    <string name="settings_firmwares_show_changelog">Показывать список изменений</string>
+    <string name="settings_firmwares_show_changelog">Список изменений</string>
     <string name="settings_firmwares_show_changelog_summary">Для поддерживаемых устройств</string>
-
-    <string name="settings_firmwares_show_languages">Выводить поддерживаемые языки</string>
+    <string name="settings_firmwares_show_languages">Поддерживаемые языки</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
