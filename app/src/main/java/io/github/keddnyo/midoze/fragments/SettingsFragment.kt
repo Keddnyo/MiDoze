@@ -31,9 +31,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val editor = prefs.edit()
                 editor.putString("deviceArrayList", "")
                 editor.apply()
-                Toast.makeText(requireContext(),
-                    R.string.settings_feed_cache_cleared,
-                    Toast.LENGTH_SHORT).show()
                 true
             }
 

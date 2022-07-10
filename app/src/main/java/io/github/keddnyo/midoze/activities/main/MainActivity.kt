@@ -20,6 +20,7 @@ import io.github.keddnyo.midoze.databinding.ActivityMainBinding
 import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.FiltersFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
+import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.utils.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.UiUtils
@@ -89,61 +90,7 @@ class MainActivity : AppCompatActivity() {
 
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-            class LoadDataForActivity :
-                AsyncTask<Void?, Void?, Void>() {
-
-                var releaseData: JSONObject = JSONObject("{}")
-
-                @Deprecated("Deprecated in Java")
-                override fun doInBackground(vararg p0: Void?): Void? {
-                    if (prefs.getBoolean("settings_app_check_updates",
-                            true) && DozeRequest().isOnline(context)
-                    ) {
-                        releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
-                    }
-                    return null
-                }
-
-                @SuppressLint("InlinedApi")
-                @Deprecated("Deprecated in Java")
-                override fun onPostExecute(result: Void?) {
-                    super.onPostExecute(result)
-
-                    if (releaseData.has("tag_name") && releaseData.getJSONArray("assets")
-                            .toString() != "[]"
-                    ) {
-                        val latestVersion = releaseData.getString("tag_name")
-                        val releaseChangelog = releaseData.getString("body")
-                        val latestVersionLink =
-                            releaseData.getJSONArray("assets").getJSONObject(0)
-                                .getString("browser_download_url")
-
-                        if (BuildConfig.VERSION_NAME < latestVersion) {
-                            fun showUpdateDialog() {
-                                val builder = AlertDialog.Builder(context)
-                                    .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
-                                    .setMessage(releaseChangelog)
-                                    .setIcon(R.drawable.ic_info)
-                                    .setCancelable(false)
-                                builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
-                                    DozeRequest().getFirmwareFile(context,
-                                        latestVersionLink,
-                                        getString(R.string.app_name))
-                                    UiUtils().showToast(context,
-                                        getString(R.string.downloading_toast))
-                                    DialogInterface.BUTTON_POSITIVE
-                                }
-                                builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
-                                    DialogInterface.BUTTON_NEGATIVE
-                                }
-                                builder.show()
-                            }
-                            showUpdateDialog()
-                        }
-                    }
-                }
-            }
-            LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            AppUpdates(prefs, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))

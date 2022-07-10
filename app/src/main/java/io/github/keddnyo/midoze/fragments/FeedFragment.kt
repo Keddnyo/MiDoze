@@ -62,7 +62,7 @@ class FeedFragment : Fragment() {
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
 
-        class LoadDataForActivity :
+        class FirmwareData :
             AsyncTask<Void?, Void?, Void>() {
 
             val gson = Gson()
@@ -176,7 +176,7 @@ class FeedFragment : Fragment() {
         fun setData() {
             firmwaresAdapter.clear()
             firmwaresAdapter.notifyDataSetChanged()
-            LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            FirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 
         if (FirmwaresAdapter().itemCount == 0) {
