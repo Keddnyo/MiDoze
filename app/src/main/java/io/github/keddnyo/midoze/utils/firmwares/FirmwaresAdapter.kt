@@ -101,7 +101,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 else -> {
                     Toast.makeText(
                         holder.deviceNameTextView.context,
-                        R.string.firmware_connectivity_error,
+                        R.string.feed_connectivity_error,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -119,7 +119,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 else -> {
                     Toast.makeText(
                         holder.deviceNameTextView.context,
-                        R.string.firmware_connectivity_error,
+                        R.string.feed_connectivity_error,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

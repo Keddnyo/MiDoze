@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
-    <string name="error_title">Connection error</string>
     <string name="compatibility_mode">Compatibility mode</string>
 
     <string name="update_dialog_title">Update available</string>
@@ -18,7 +17,8 @@
     <string name="settings_feed_cache_clear">Clear feed cache</string>
     <string name="settings_feed_cache_cleared">Cleared</string>
 
-    <string name="firmware_connectivity_error">Connectivity error</string>
+    <string name="feed_connectivity_error">Connectivity error</string>
+    <string name="feed_devices_not_found">Devices not found</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_changelog">Changelog</string>

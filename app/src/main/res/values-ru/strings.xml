@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_title">Ошибка подключения</string>
     <string name="compatibility_mode">Режим совместимости</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
@@ -15,7 +14,8 @@
     <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
     <string name="settings_feed_cache_cleared">Готово</string>
 
-    <string name="firmware_connectivity_error">Ошибка подключения</string>
+    <string name="feed_connectivity_error">Ошибка подключения</string>
+    <string name="feed_devices_not_found">Устройства не найдены</string>
 
     <string name="firmware_download">Скачать</string>
     <string name="firmware_changelog">Список изменений</string>

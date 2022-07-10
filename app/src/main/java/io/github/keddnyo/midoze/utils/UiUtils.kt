@@ -18,7 +18,7 @@ class UiUtils {
     }
 
     fun showToast(context: Context, string: String) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+        val toast = Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 
     fun switchDarkMode(context: Context) {

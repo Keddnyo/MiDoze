@@ -18,8 +18,13 @@
             android:visibility="gone" />
 
         <include
-            android:id="@+id/firmwaresErrorMessage"
-            layout="@layout/activity_main_error"
+            android:id="@+id/feedConnectivityError"
+            layout="@layout/fragment_feed_connectivity_error"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/feedDevicesNotFound"
+            layout="@layout/fragment_feed_devices_not_found"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView

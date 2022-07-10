@@ -82,7 +82,7 @@ class RequestActivity : AppCompatActivity() {
                 intent.putExtra("json", firmwareResponse.toString())
                 startActivity(intent)
             } else {
-                UiUtils().showToast(context, getString(R.string.firmware_connectivity_error))
+                UiUtils().showToast(context, getString(R.string.feed_connectivity_error))
             }
         }
 

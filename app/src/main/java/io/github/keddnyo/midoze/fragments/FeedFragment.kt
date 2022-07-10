@@ -34,16 +34,12 @@ class FeedFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var state: Parcelable? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
@@ -51,9 +47,10 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
-        val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
-        val firmwaresProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
-        val firmwaresErrorMessage: ConstraintLayout = findViewById(R.id.firmwaresErrorMessage)
+        val feedRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
+        val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
+        val feedConnectivityError: ConstraintLayout = findViewById(R.id.feedConnectivityError)
+        val feedDevicesNotFound: ConstraintLayout = findViewById(R.id.feedDevicesNotFound)
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
         deviceListRecyclerView.layoutManager =
@@ -77,9 +74,10 @@ class FeedFragment : Fragment() {
             @Deprecated("Deprecated in Java")
             override fun onPreExecute() {
                 super.onPreExecute()
-                firmwaresProgressBar.visibility = View.VISIBLE
-                firmwaresErrorMessage.visibility = View.GONE
-                firmwaresRefreshLayout.isRefreshing = false
+                feedProgressBar.visibility = View.VISIBLE
+                feedConnectivityError.visibility = View.GONE
+                feedDevicesNotFound.visibility = View.GONE
+                feedRefreshLayout.isRefreshing = false
             }
 
             @Deprecated("Deprecated in Java")
@@ -116,8 +114,8 @@ class FeedFragment : Fragment() {
                         editor.apply()
                     } else {
                         runOnUiThread {
-                            firmwaresProgressBar.visibility = View.GONE
-                            firmwaresErrorMessage.visibility = View.VISIBLE
+                            feedProgressBar.visibility = View.GONE
+                            feedConnectivityError.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -166,7 +164,11 @@ class FeedFragment : Fragment() {
 
                 getData(true)
                 getData(false)
-                firmwaresProgressBar.visibility = View.GONE
+                feedProgressBar.visibility = View.GONE
+
+                if (firmwaresAdapter.itemCount == 0) {
+                    feedDevicesNotFound.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -181,7 +183,7 @@ class FeedFragment : Fragment() {
             setData()
         }
 
-        firmwaresRefreshLayout.setOnRefreshListener {
+        feedRefreshLayout.setOnRefreshListener {
             setData()
         }
 

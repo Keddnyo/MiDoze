@@ -18,12 +18,8 @@ import io.github.keddnyo.midoze.utils.UiUtils
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.fragment_settings, rootKey)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        setPreferencesFromResource(R.xml.fragment_settings, rootKey)
 
         val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
         val about = findPreference<Preference>("settings_app_info")
@@ -82,9 +78,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     editor.apply()
                 }
                 UiUtils().switchDarkMode(this)
-            }
-            R.id.action_custom_request -> {
-                startActivity(Intent(requireContext(), RequestActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
