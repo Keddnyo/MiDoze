@@ -84,7 +84,7 @@ class FeedFragment : Fragment() {
             override fun doInBackground(vararg p0: Void?): Void? {
 
                 fun getAppName(): String? {
-                    return prefs.getString("filters_feed_app_name", "Zepp")
+                    return prefs.getString("filters_app_name", "Zepp")
                 }
 
                 appName = when (getAppName()) {
@@ -97,9 +97,9 @@ class FeedFragment : Fragment() {
 
                 appVersion = when (getAppName()) {
                     "Zepp" -> {
-                        prefs.getString("filters_feed_zepp_app_version", getString(R.string.filters_request_zepp_app_version_value))
+                        prefs.getString("filters_zepp_app_version", getString(R.string.filters_request_zepp_app_version_value))
                     } else -> {
-                        prefs.getString("filters_feed_zepp_app_life_version", getString(R.string.filters_request_zepp_life_app_version_value))
+                        prefs.getString("filters_zepp_app_life_version", getString(R.string.filters_request_zepp_life_app_version_value))
                     }
                 }
 

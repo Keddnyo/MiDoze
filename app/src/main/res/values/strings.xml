@@ -54,6 +54,7 @@
     <string name="filters_request_zepp_app_version_value" translatable="false">6.10.1-play_100770</string>
     <string name="filters_request_zepp_life_app_version">Zepp Life app version</string>
     <string name="filters_request_zepp_life_app_version_value" translatable="false">6.2.1_50602</string>
+    <string name="filters_app_version_load_defaults">Load versions defaults</string>
     <string name="filters_show_unknown_devices">Show unknown devices only</string>
 
     <string name="settings_firmwares_title">Firmwares</string>

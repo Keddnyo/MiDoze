@@ -45,6 +45,7 @@
     <string name="filters_request_productionSource_range">Предел значений productionSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
+    <string name="filters_app_version_load_defaults">Сбросить версии</string>
     <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
 
     <string name="settings_firmwares_title">Прошивки</string>

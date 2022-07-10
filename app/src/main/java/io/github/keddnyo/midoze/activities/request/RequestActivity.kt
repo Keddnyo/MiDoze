@@ -96,29 +96,35 @@ class RequestActivity : AppCompatActivity() {
             true
         }
 
-
-
         val zeppAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
         val zeppLifeAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
+        val zeppAppVersionCustom = prefs.getString("filters_zepp_app_version", zeppAppVersionDefault)
+        val zeppLifeAppVersionCustom = prefs.getString("filters_zepp_life_app_version", zeppLifeAppVersionDefault)
 
         fun setZeppAppData() {
             extrasAppNameEditText.setText(getString(R.string.zepp_app_name_value))
             extrasAppVersionEditText.setText(
-                prefs.getString("filters_feed_zepp_app_version", zeppAppVersionDefault)
-                    ?: zeppAppVersionDefault
+                if (zeppAppVersionCustom != "") {
+                    zeppAppVersionCustom
+                } else {
+                    zeppAppVersionDefault
+                }
             )
         }
 
         fun setZeppLifeAppData() {
             extrasAppNameEditText.setText(getString(R.string.zepp_life_app_name_value))
             extrasAppVersionEditText.setText(
-                prefs.getString("filters_feed_zepp_life_app_version", zeppLifeAppVersionDefault)
-                    ?: zeppLifeAppVersionDefault
+                if (zeppLifeAppVersionCustom != "") {
+                    zeppLifeAppVersionCustom
+                } else {
+                    zeppLifeAppVersionDefault
+                }
             )
         }
 
         appButton.setOnClickListener {
-            if (prefs.getString("filters_feed_app_name", "Zepp") == "Zepp") {
+            if (prefs.getString("filters_app_name", "Zepp") == "Zepp") {
                 setZeppAppData()
             } else {
                 setZeppLifeAppData()
@@ -126,7 +132,7 @@ class RequestActivity : AppCompatActivity() {
         }
 
         appButton.setOnLongClickListener {
-            if (prefs.getString("filters_feed_app_name", "Zepp") == "Zepp") {
+            if (prefs.getString("filters_app_name", "Zepp") == "Zepp") {
                 setZeppLifeAppData()
             } else {
                 setZeppAppData()

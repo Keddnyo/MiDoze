@@ -30,27 +30,33 @@
     <PreferenceCategory app:title="@string/filters_app_title">
 
         <ListPreference
+            app:allowDividerBelow="true"
             app:defaultValue="Zepp"
             app:entries="@array/request_app_name_entries"
             app:entryValues="@array/request_app_name_entryValues"
             app:icon="@drawable/ic_pretend_app"
-            app:key="filters_feed_app_name"
+            app:key="filters_app_name"
             app:title="@string/filters_request_app_name"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:defaultValue="@string/filters_request_zepp_app_version_value"
             app:icon="@drawable/ic_app_zepp"
-            app:key="filters_feed_zepp_app_version"
+            app:key="filters_zepp_app_version"
             app:title="@string/filters_request_zepp_app_version"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:defaultValue="@string/filters_request_zepp_life_app_version_value"
             app:icon="@drawable/ic_app_zepp_life"
-            app:key="filters_feed_zepp_life_app_version"
+            app:key="filters_zepp_life_app_version"
             app:title="@string/filters_request_zepp_life_app_version"
             app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:icon="@drawable/ic_update"
+            app:title="@string/filters_app_version_load_defaults"
+            app:key="filters_app_version_load_defaults" />
 
     </PreferenceCategory>
 
