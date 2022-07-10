@@ -47,7 +47,13 @@
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
     <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
 
-    <string name="settings_about">О приложении</string>
+    <string name="settings_firmwares_title">Прошивки</string>
+    <string name="settings_firmwares_show_changelog">Показывать список изменений</string>
+    <string name="settings_firmwares_show_changelog_summary">Для поддерживаемых устройств</string>
+
+    <string name="settings_firmwares_show_languages">Выводить поддерживаемые языки</string>
+
+    <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string-array name="request_region_entries">

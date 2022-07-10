@@ -64,7 +64,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/firmware_changelog_layout"
+            android:id="@+id/firmwareChangelogLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="4dp"
@@ -94,6 +94,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/firmwareLanguagesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="4dp"

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.DozeRequest
@@ -42,18 +43,21 @@ class FirmwareActivity : AppCompatActivity() {
 
         runBlocking {
             withContext(Dispatchers.IO) {
-                init()
+                init(this@FirmwareActivity)
             }
         }
     }
 
-    private suspend fun init() = withContext(Dispatchers.IO) {
+    private suspend fun init(context: Context) = withContext(Dispatchers.IO) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+
         val deviceNameTextView: TextView = findViewById(R.id.deviceNameTextView)
         val deviceIconTextView: ImageView = findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
         val firmwareChangelogTextView: TextView = findViewById(R.id.firmwareChangelogTextView)
-        val firmwareChangelogLayout: MaterialCardView = findViewById(R.id.firmware_changelog_layout)
+        val firmwareChangelogLayout: MaterialCardView = findViewById(R.id.firmwareChangelogLayout)
         val firmwareLanguagesTextView: TextView = findViewById(R.id.firmwareLanguagesTextView)
+        val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
         deviceNameValue = intent.getStringExtra("deviceName").toString()
@@ -61,6 +65,9 @@ class FirmwareActivity : AppCompatActivity() {
         val productionSourceValue = intent.getIntExtra("productionSource", 0).toString()
         val appNameValue = intent.getStringExtra("appName").toString()
         val appVersionValue = intent.getStringExtra("appVersion").toString()
+
+        val isShowChangelog = prefs.getBoolean("settings_firmwares_show_changelog", false)
+        val isShowLanguages = prefs.getBoolean("settings_firmwares_show_languages", true)
 
         firmwareResponse = DozeRequest().getFirmwareData(
             productionSourceValue,
@@ -95,17 +102,19 @@ class FirmwareActivity : AppCompatActivity() {
             }
             finish()
         }
-        if (firmwareResponse.has("changeLog")) {
+        if (isShowChangelog && firmwareResponse.has("changeLog")) {
             firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
                 firmwareResponse.getString("changeLog")
             )
         } else {
             firmwareChangelogLayout.visibility = View.GONE
         }
-        if (firmwareResponse.has("lang")) {
+        if (isShowLanguages && firmwareResponse.has("lang")) {
             firmwareLanguagesTextView.text = Language().getName(
                 firmwareResponse.getString("lang")
             )
+        } else {
+            firmwareLanguagesLayout.visibility = View.GONE
         }
 
         firmwareDownloadButton.setOnClickListener {

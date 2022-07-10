@@ -16,7 +16,24 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/settings_about">
+    <PreferenceCategory app:title="@string/settings_firmwares_title">
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:icon="@drawable/ic_custom_request"
+            app:key="settings_firmwares_show_changelog"
+            app:summary="@string/settings_firmwares_show_changelog_summary"
+            app:title="@string/settings_firmwares_show_changelog" />
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:icon="@drawable/ic_request_region"
+            app:key="settings_firmwares_show_languages"
+            app:title="@string/settings_firmwares_show_languages" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/settings_about_title">
 
         <Preference
             app:icon="@drawable/ic_info"
