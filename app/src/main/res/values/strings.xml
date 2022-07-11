@@ -63,6 +63,7 @@
     <string name="settings_firmwares_show_languages">Show supported languages</string>
 
     <string name="settings_about_title">About</string>
+    <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
     <string name="settings_app_check_for_updates">Check for updates</string>
 
     <string name="request_host_first" translatable="false">api.amazfit.com</string>

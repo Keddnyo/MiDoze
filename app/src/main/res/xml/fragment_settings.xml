@@ -38,6 +38,7 @@
         <Preference
             app:icon="@mipmap/ic_launcher"
             app:key="settings_app_info"
+            app:summary="@string/settings_about_summary"
             app:title="@string/app_name" />
 
         <SwitchPreferenceCompat
