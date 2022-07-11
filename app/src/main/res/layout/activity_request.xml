@@ -74,20 +74,23 @@
             android:id="@+id/extrasSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@android:string/ok" />
+            android:text="@android:string/ok"
+            android:theme="@style/Button" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extrasImportButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/extras_import_button"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:theme="@style/Button" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extras_app_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/extras_app_data"/>
+            android:text="@string/extras_app_data"
+            android:theme="@style/Button" />
 
     </LinearLayout>
 

@@ -36,7 +36,7 @@
     <PreferenceCategory app:title="@string/settings_about_title">
 
         <Preference
-            app:icon="@drawable/ic_info"
+            app:icon="@mipmap/ic_launcher"
             app:key="settings_app_info"
             app:title="@string/app_name" />
 
