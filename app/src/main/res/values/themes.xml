@@ -2,16 +2,16 @@
 
     <style name="Theme.MiDoze" parent="Theme.Material3.Light">
 
-        <item name="colorPrimary">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_light_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorSecondary">@color/orange_light_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_light_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_light_accentDark</item>
-        <item name="colorOnSecondaryContainer">@color/orange_light_background</item>
-        <item name="android:colorBackground">@color/orange_light_background</item>
-        <item name="colorOnBackground">@color/orange_light_background</item>
+        <item name="colorPrimary">@color/accent_light</item>
+        <item name="colorOnPrimary">@color/accent_dark</item>
+        <item name="colorPrimaryContainer">@color/accent_light</item>
+        <item name="colorOnPrimaryContainer">@color/accent_light</item>
+        <item name="colorSecondary">@color/accent_light</item>
+        <item name="colorOnSecondary">@color/accent_dark</item>
+        <item name="colorSecondaryContainer">@color/accent_dark</item>
+        <item name="colorOnSecondaryContainer">@color/background_light</item>
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/background_light</item>
 
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
@@ -22,32 +22,32 @@
     <style name="Theme.Dialog" parent="Theme.Material3.Light.Dialog.Alert">
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
 
-        <item name="colorPrimary">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_light_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorSecondary">@color/orange_light_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_light_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_light_accentDark</item>
-        <item name="colorOnSecondaryContainer">@color/orange_light_background</item>
-        <item name="android:colorBackground">@color/orange_light_background</item>
-        <item name="colorOnBackground">@color/orange_light_background</item>
+        <item name="colorPrimary">@color/accent_light</item>
+        <item name="colorOnPrimary">@color/accent_dark</item>
+        <item name="colorPrimaryContainer">@color/accent_light</item>
+        <item name="colorOnPrimaryContainer">@color/accent_light</item>
+        <item name="colorSecondary">@color/accent_light</item>
+        <item name="colorOnSecondary">@color/accent_dark</item>
+        <item name="colorSecondaryContainer">@color/accent_dark</item>
+        <item name="colorOnSecondaryContainer">@color/background_light</item>
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/background_light</item>
     </style>
 
     <style name="Theme.Dialog.Firmware" parent="Theme.Material3.Light.Dialog.Alert">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">#00000000</item>
 
-        <item name="colorPrimary">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_light_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_light_accentLight</item>
-        <item name="colorSecondary">@color/orange_light_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_light_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_light_accentDark</item>
-        <item name="colorOnSecondaryContainer">@color/orange_light_background</item>
-        <item name="android:colorBackground">@color/orange_light_background</item>
-        <item name="colorOnBackground">@color/orange_light_background</item>
+        <item name="colorPrimary">@color/accent_light</item>
+        <item name="colorOnPrimary">@color/accent_dark</item>
+        <item name="colorPrimaryContainer">@color/accent_light</item>
+        <item name="colorOnPrimaryContainer">@color/accent_light</item>
+        <item name="colorSecondary">@color/accent_light</item>
+        <item name="colorOnSecondary">@color/accent_dark</item>
+        <item name="colorSecondaryContainer">@color/accent_dark</item>
+        <item name="colorOnSecondaryContainer">@color/background_light</item>
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/background_light</item>
     </style>
 
 </resources>

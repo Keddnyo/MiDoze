@@ -2,11 +2,10 @@
 
     <style name="Theme.MiDoze" parent="Theme.Material3.Dark">
         <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
-
-        <item name="android:colorBackground">@color/orange_dark_background</item>
     </style>
 
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">

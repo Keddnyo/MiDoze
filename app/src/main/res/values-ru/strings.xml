@@ -30,7 +30,7 @@
     <string name="settings_title">Настройки</string>
     <string name="settings_dark_mode">Тёмный режим</string>
 
-    <string name="settings_custom_request">Ручной запрос</string>
+    <string name="settings_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 
     <string name="filters_title">Фильтры</string>
