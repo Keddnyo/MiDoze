@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.utils.firmwares
+package io.github.keddnyo.midoze.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,6 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.devices.DeviceData
-import org.json.JSONObject
 import java.util.*
 
 class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
@@ -32,7 +31,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         val firmwareVersionTextView: TextView =
             itemView.findViewById(R.id.firmwareVersionTextView)
 
-        val likeIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
+        val feedCustomRequest: ImageView = itemView.findViewById(R.id.feedCustomRequest)
         val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
@@ -75,22 +74,11 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             context.startActivity(intent)
         }
 
-        if (prefs.getBoolean(deviceIndex, false)) {
-            holder.likeIcon.setImageResource(R.drawable.ic_favorite)
-        } else {
-            holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
-        }
-
-        holder.likeIcon.setOnClickListener {
-            if (prefs.getBoolean(deviceIndex, false)) {
-                holder.likeIcon.setImageResource(R.drawable.ic_unfavorite)
-                editor.putBoolean(deviceIndex, false)
-                editor.apply()
-            } else {
-                holder.likeIcon.setImageResource(R.drawable.ic_favorite)
-                editor.putBoolean(deviceIndex, true)
-                editor.apply()
-            }
+        holder.feedCustomRequest.setOnClickListener {
+            openFirmwareActivity(
+                holder.downloadLayout.context,
+                true
+            )
         }
 
         holder.downloadLayout.setOnClickListener {
@@ -98,14 +86,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 holder.downloadLayout.context,
                 false
             )
-        }
-
-        holder.downloadLayout.setOnLongClickListener {
-            openFirmwareActivity(
-                holder.downloadLayout.context,
-                true
-            )
-            true
         }
     }
 

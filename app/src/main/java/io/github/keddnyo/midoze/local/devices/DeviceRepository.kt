@@ -55,9 +55,9 @@ class DeviceRepository {
             "83" -> "Amazfit T-Rex Pro Chinese"
 
             "92" -> "Amazfit GTS2 mini"
-            "98" -> "Amazfit GTR2 eSIM" // Found
+            "98" -> "Amazfit GTR2 eSIM"
 
-            "104" -> "Amazfit GTR 3 Pro" // Found
+            "104" -> "Amazfit GTS 2 Mini"
 
             "113" -> "Amazfit Bip"
 
@@ -77,6 +77,13 @@ class DeviceRepository {
             "229" -> "Amazfit GTR3 Pro Chinese"
 
             "230" -> "Amazfit GTR3 Pro Global"
+
+            "243" -> "Amazfit GTR3 Pro Limited"
+            "244" -> "Amazfit GTR 2"
+            "244" -> "Amazfit GTS 2"
+
+            "256" -> "Amazfit Bip 3 Pro"
+            "257" -> "Amazfit Bip 3"
 
             // "243" -> "Amazfit GTR 47mm Titanium" // Found
 

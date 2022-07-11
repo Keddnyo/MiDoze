@@ -63,7 +63,6 @@ class FirmwareActivity : AppCompatActivity() {
         deviceNameValue = intent.getStringExtra("deviceName").toString()
 
         val isShowChangelog = prefs.getBoolean("settings_firmwares_show_changelog", false)
-        val isShowLanguages = prefs.getBoolean("settings_firmwares_show_languages", true)
 
         firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())
 
@@ -91,7 +90,7 @@ class FirmwareActivity : AppCompatActivity() {
         } else {
             firmwareChangelogLayout.visibility = View.GONE
         }
-        if (isShowLanguages && firmwareResponse.has("lang")) {
+        if (firmwareResponse.has("lang")) {
             firmwareLanguagesTextView.text = Language().getName(
                 firmwareResponse.getString("lang")
             )

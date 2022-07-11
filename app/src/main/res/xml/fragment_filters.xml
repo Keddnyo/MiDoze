@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:asp="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/filters_host_title">
+    <PreferenceCategory app:title="@string/filters_host_and_region_title">
 
         <ListPreference
             app:defaultValue="1"
@@ -11,10 +11,6 @@
             app:key="filters_request_host"
             app:title="@string/filters_request_host"
             app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/filters_region_title">
 
         <ListPreference
             app:defaultValue="1"
@@ -69,7 +65,7 @@
             app:key="filters_feed_deviceSource_range"
             app:min="30"
             app:showSeekBarValue="true"
-            app:title="@string/filters_request_deviceSource_range" />
+            app:title="@string/filters_request_deviceSource_span" />
 
         <SeekBarPreference
             asp:max="270"
@@ -78,7 +74,7 @@
             app:key="filters_feed_productionSource_range"
             app:min="256"
             app:showSeekBarValue="true"
-            app:title="@string/filters_request_productionSource_range" />
+            app:title="@string/filters_request_productionSource_span" />
 
         <SwitchPreference
             app:defaultValue="false"

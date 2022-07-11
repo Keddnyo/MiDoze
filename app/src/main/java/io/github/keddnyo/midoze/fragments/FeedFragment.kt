@@ -14,7 +14,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -22,7 +21,6 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.local.devices.DeviceData
-import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
 
 class FeedFragment : Fragment() {
 
@@ -63,6 +61,8 @@ class FeedFragment : Fragment() {
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
 
+        val isOnline = DozeRequest().isOnline(context)
+
         class FirmwareData :
             AsyncTask<Void?, Void?, Void>() {
 
@@ -71,19 +71,6 @@ class FeedFragment : Fragment() {
 
             var appName = ""
             var appVersion: String? = ""
-
-            fun getFirmwareDataFromCache() {
-                val gson = GsonBuilder().create()
-
-                val json1 = prefs.getString("deviceArrayList", "")
-
-                if (json1 != "") {
-                    deviceArrayList = gson.fromJson(
-                        json1.toString(),
-                        object : TypeToken<ArrayList<DeviceData>>() {}.type
-                    )
-                }
-            }
 
             @Deprecated("Deprecated in Java")
             override fun onPreExecute() {
@@ -97,36 +84,41 @@ class FeedFragment : Fragment() {
             @Deprecated("Deprecated in Java")
             override fun doInBackground(vararg p0: Void?): Void? {
 
-                fun getAppName(): String? {
-                    return prefs.getString("filters_app_name", "Zepp")
-                }
+                val deviceArrayListJson = prefs.getString("deviceArrayList", "")
 
-                appName = when (getAppName()) {
-                    "Zepp" -> {
-                        "com.huami.midong"
+                if (deviceArrayListJson != "") {
+                    deviceArrayList = GsonBuilder().create().fromJson(
+                        deviceArrayListJson.toString(),
+                        object : TypeToken<ArrayList<DeviceData>>() {}.type
+                    )
+                } else {
+                    fun getAppName(): String? {
+                        return prefs.getString("filters_app_name", "Zepp")
                     }
-                    else -> {
-                        "com.xiaomi.hm.health"
-                    }
-                }
 
-                appVersion = when (getAppName()) {
-                    "Zepp" -> {
-                        prefs.getString(
-                            "filters_zepp_app_version",
-                            getString(R.string.filters_request_zepp_app_version_value)
-                        )
+                    appName = when (getAppName()) {
+                        "Zepp" -> {
+                            "com.huami.midong"
+                        }
+                        else -> {
+                            "com.xiaomi.hm.health"
+                        }
                     }
-                    else -> {
-                        prefs.getString(
-                            "filters_zepp_app_life_version",
-                            getString(R.string.filters_request_zepp_life_app_version_value)
-                        )
-                    }
-                }
 
-                fun getFirmwaresData() {
-                    val isOnline = DozeRequest().isOnline(context)
+                    appVersion = when (getAppName()) {
+                        "Zepp" -> {
+                            prefs.getString(
+                                "filters_zepp_app_version",
+                                getString(R.string.filters_request_zepp_app_version_value)
+                            )
+                        }
+                        else -> {
+                            prefs.getString(
+                                "filters_zepp_app_life_version",
+                                getString(R.string.filters_request_zepp_life_app_version_value)
+                            )
+                        }
+                    }
 
                     if (isOnline) {
                         deviceArrayList =
@@ -143,16 +135,6 @@ class FeedFragment : Fragment() {
                     }
                 }
 
-                fun checkCacheBoolean() {
-                    if (prefs.getBoolean("settings_feed_ignore_cached_items", true)) {
-                        getFirmwaresData()
-                    } else {
-                        getFirmwareDataFromCache()
-                    }
-                }
-
-                checkCacheBoolean()
-
                 return null
             }
 
@@ -160,48 +142,17 @@ class FeedFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
 
-                fun getData(favorite: Boolean) {
-                    deviceArrayList.forEachIndexed { index, it ->
-                        firmwaresAdapter.notifyItemInserted(index)
-                        deviceListIndex[it.name] = index
-                    }
+                firmwaresAdapter.addDevice(deviceArrayList)
 
-                    if (favorite) {
-                        firmwaresAdapter.addDevice(deviceArrayList)
-                    }
+                deviceArrayList.forEachIndexed { index, it ->
+                    firmwaresAdapter.notifyItemInserted(index)
+                    deviceListIndex[it.name] = index
                 }
 
-                getData(true)
-                getData(false)
                 feedProgressBar.visibility = View.GONE
 
-                if (firmwaresAdapter.itemCount == 0) {
-                    if (DozeRequest().isOnline(context)){
-                        feedDevicesNotFound.visibility = View.VISIBLE
-                    } else {
-                        if (prefs.getString("deviceArrayList", "") != "") {
-                            val snackBar = Snackbar.make(
-                                view,
-                                getString(R.string.feed_snackbar_load_from_title),
-                                Snackbar.LENGTH_INDEFINITE
-                            )
-
-                            snackBar.anchorView = findViewById(R.id.bottomBar)
-                            snackBar.setAction(
-                                getString(android.R.string.ok)
-                            ) {
-                                editor.putBoolean("settings_feed_ignore_cached_items", false)
-                                editor.apply()
-
-                                getFirmwareDataFromCache()
-
-                                getData(true)
-                                getData(false)
-                                feedConnectivityError.visibility = View.GONE
-                            }
-                            snackBar.show()
-                        }
-                    }
+                if (DozeRequest().isOnline(context) && firmwaresAdapter.itemCount == 0) {
+                    feedDevicesNotFound.visibility = View.VISIBLE
                 }
             }
         }
@@ -213,13 +164,15 @@ class FeedFragment : Fragment() {
             FirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 
-        if (FirmwaresAdapter().itemCount == 0) {
+        feedRefreshLayout.setOnRefreshListener {
+            if (isOnline) {
+                editor.putString("deviceArrayList", "")
+                editor.apply()
+            }
             setData()
         }
 
-        feedRefreshLayout.setOnRefreshListener {
-            setData()
-        }
+        setData()
 
         if (state != null) {
             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)

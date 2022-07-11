@@ -11,10 +11,6 @@
     <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
-    <string name="settings_feed_ignore_cached_items">Игнорировать кэш списка</string>
-    <string name="settings_feed_ignore_cached_items_summary">Запрашивать актуальные данные</string>
-    <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
-    <string name="settings_feed_cache_cleared">Готово</string>
 
     <string name="feed_connectivity_error">Ошибка подключения</string>
     <string name="feed_devices_not_found">Устройства не найдены</string>
@@ -36,25 +32,22 @@
     <string name="settings_server_response">Ответ сервера</string>
 
     <string name="filters_title">Фильтры</string>
-    <string name="filters_host_title">Хост</string>
-    <string name="filters_region_title">Регион</string>
+    <string name="filters_host_and_region_title">Хост и регион</string>
     <string name="filters_app_title">Приложение</string>
     <string name="filters_advanced_title">Дополнительно</string>
-    <string name="filters_request_region">Регион запроса</string>
-    <string name="filters_request_host">Хост запроса</string>
-    <string name="filters_request_app_name">Эмуляция приложения</string>
-    <string name="filters_request_deviceSource_range">Предел значений deviceSource</string>
-    <string name="filters_request_productionSource_range">Предел значений productionSource</string>
+    <string name="filters_request_region">Регион</string>
+    <string name="filters_request_host">Хост</string>
+    <string name="filters_request_app_name">Имя приложения</string>
+    <string name="filters_request_deviceSource_span">Диапазон deviceSource</string>
+    <string name="filters_request_productionSource_span">Диапазон productionSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
-    <string name="filters_app_version_load_defaults">Версии по умолчанию</string>
-    <string name="filters_show_unknown_devices">Показывать только неизвестные устройства</string>
+    <string name="filters_app_version_load_defaults">Сбросить версии</string>
+    <string name="filters_show_unknown_devices">Неизвестные устройства</string>
 
     <string name="settings_firmwares_title">Прошивки</string>
     <string name="settings_firmwares_show_changelog">Список изменений</string>
     <string name="settings_firmwares_show_changelog_summary">Для поддерживаемых устройств</string>
-    <string name="settings_firmwares_show_languages">Поддерживаемые языки</string>
-    <string name="settings_firmwares_show_languages_summary">Показывать список языков</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>

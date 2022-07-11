@@ -1,21 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/feed_title">
-
-        <SwitchPreferenceCompat
-            app:defaultValue="false"
-            app:icon="@drawable/ic_update"
-            app:key="settings_feed_ignore_cached_items"
-            app:summary="@string/settings_feed_ignore_cached_items_summary"
-            app:title="@string/settings_feed_ignore_cached_items" />
-
-        <Preference
-            app:icon="@drawable/ic_clear"
-            app:key="settings_feed_cache_clear"
-            app:title="@string/settings_feed_cache_clear" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/settings_firmwares_title">
 
         <SwitchPreference
@@ -24,13 +8,6 @@
             app:key="settings_firmwares_show_changelog"
             app:summary="@string/settings_firmwares_show_changelog_summary"
             app:title="@string/settings_firmwares_show_changelog" />
-
-        <SwitchPreference
-            app:defaultValue="true"
-            app:icon="@drawable/ic_request_region"
-            app:key="settings_firmwares_show_languages"
-            app:summary="@string/settings_firmwares_show_languages_summary"
-            app:title="@string/settings_firmwares_show_languages" />
 
     </PreferenceCategory>
 

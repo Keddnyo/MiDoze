@@ -19,19 +19,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
 
-        val clearFeedCache = findPreference<Preference>("settings_feed_cache_clear")
         val about = findPreference<Preference>("settings_app_info")
 
-        if (clearFeedCache != null && about != null) {
-
-            clearFeedCache.setOnPreferenceClickListener {
-                val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                val editor = prefs.edit()
-                editor.putString("deviceArrayList", "")
-                editor.apply()
-                true
-            }
-
+        if (about != null) {
             about.title = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
 
             about.setOnPreferenceClickListener {
