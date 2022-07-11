@@ -14,10 +14,8 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.databinding.ActivityMainBinding
 import io.github.keddnyo.midoze.fragments.FeedFragment
-import io.github.keddnyo.midoze.fragments.FiltersFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.remote.AppUpdates
-import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
 
 class MainActivity : AppCompatActivity() {
@@ -53,14 +51,10 @@ class MainActivity : AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     when (position) {
                         0 -> {
-                            bottomBar.menu.findItem(R.id.menu_filters).isChecked = true
-                            title = getString(R.string.filters_title)
-                        }
-                        1 -> {
                             bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
                             title = getString(R.string.feed_title)
                         }
-                        2 -> {
+                        1 -> {
                             bottomBar.menu.findItem(R.id.menu_settings).isChecked = true
                             title = getString(R.string.settings_title)
                         }
@@ -70,16 +64,15 @@ class MainActivity : AppCompatActivity() {
 
             bottomBar.setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.menu_filters -> viewPager.currentItem = 0
-                    R.id.menu_feed -> viewPager.currentItem = 1
-                    R.id.menu_settings -> viewPager.currentItem = 2
-                    else -> viewPager.currentItem = 1
+                    R.id.menu_feed -> viewPager.currentItem = 0
+                    R.id.menu_settings -> viewPager.currentItem = 1
+                    else -> viewPager.currentItem = 0
                 }
                 true
             }
 
             // Default tab
-            viewPager.currentItem = 1
+            viewPager.currentItem = 0
             title = getString(R.string.feed_title)
 
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
@@ -94,20 +87,19 @@ class MainActivity : AppCompatActivity() {
 
     class MyAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getCount(): Int {
-            return 3
+            return 2
         }
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> FiltersFragment()
-                1 -> FeedFragment()
-                2 -> SettingsFragment()
+                0 -> FeedFragment()
+                1 -> SettingsFragment()
                 else -> FeedFragment()
             }
         }
 
         override fun getPageTitle(position: Int): CharSequence {
-            return context.resources.getString(StringUtils().tabTitles[position])
+            return context.resources.getString(Display().tabTitles[position])
         }
     }
 

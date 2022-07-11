@@ -49,8 +49,6 @@ class FirmwareActivity : AppCompatActivity() {
     }
 
     private suspend fun init(context: Context) = withContext(Dispatchers.IO) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-
         val deviceNameTextView: TextView = findViewById(R.id.deviceNameTextView)
         val deviceIconTextView: ImageView = findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
@@ -61,11 +59,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
         deviceNameValue = intent.getStringExtra("deviceName").toString()
-
-        val isShowChangelog = prefs.getBoolean("settings_firmwares_show_changelog", false)
-
         firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())
-
         deviceNameTextView.text = deviceNameValue
 
         when {
@@ -83,7 +77,7 @@ class FirmwareActivity : AppCompatActivity() {
         firmwareVersionTextView.text = firmwareResponse.getString(
             "firmwareVersion"
         )
-        if (isShowChangelog && firmwareResponse.has("changeLog")) {
+        if (firmwareResponse.has("changeLog")) {
             firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
                 firmwareResponse.getString("changeLog")
             )

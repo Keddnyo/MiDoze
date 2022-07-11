@@ -31,7 +31,6 @@
     <string name="settings_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 
-    <string name="filters_title">Фильтры</string>
     <string name="filters_host_and_region_title">Хост и регион</string>
     <string name="filters_app_title">Приложение</string>
     <string name="filters_advanced_title">Дополнительно</string>
@@ -45,12 +44,8 @@
     <string name="filters_app_version_load_defaults">Сбросить версии</string>
     <string name="filters_show_unknown_devices">Неизвестные устройства</string>
 
-    <string name="settings_firmwares_title">Прошивки</string>
-    <string name="settings_firmwares_show_changelog">Список изменений</string>
-    <string name="settings_firmwares_show_changelog_summary">Для поддерживаемых устройств</string>
-
     <string name="settings_about_title">О приложении</string>
-    <string name="settings_app_check_for_updates">Проверять обновления</string>
+    <string name="settings_app_check_for_updates_disabled">Обновления отключены</string>
 
     <string-array name="request_region_entries">
         <item>США</item>

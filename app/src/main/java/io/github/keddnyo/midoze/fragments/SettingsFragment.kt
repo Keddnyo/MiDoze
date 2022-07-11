@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -19,17 +20,30 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
 
-        val about = findPreference<Preference>("settings_app_info")
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor = prefs.edit()
 
-        if (about != null) {
-            about.title = getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
+        fun getStringByKey(key: String): String? {
+            return prefs.getString(key, "") // Wrong but working
+        }
 
-            about.setOnPreferenceClickListener {
-                startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Keddnyo/MiDoze"))
-                )
-                true
-            }
+        findPreference<Preference>("filters_app_version_load_defaults")?.setOnPreferenceClickListener {
+            editor.putString(
+                "filters_zepp_app_version",
+                getString(R.string.filters_request_zepp_app_version_value)
+            )
+            editor.putString(
+                "filters_zepp_life_app_version",
+                getString(R.string.filters_request_zepp_life_app_version_value)
+            )
+            editor.apply()
+
+            findPreference<EditTextPreference>("filters_zepp_app_version")?.text =
+                getStringByKey("filters_zepp_app_version")
+            findPreference<EditTextPreference>("filters_zepp_life_app_version")?.text =
+                getStringByKey("filters_zepp_life_app_version")
+
+            true
         }
     }
 

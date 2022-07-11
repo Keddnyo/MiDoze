@@ -6,8 +6,14 @@ import android.util.DisplayMetrics
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import io.github.keddnyo.midoze.R
 
 class Display {
+    val tabTitles = arrayOf(
+        R.string.feed_title,
+        R.string.settings_title
+    )
+
     fun getGridLayoutIndex(
         context: Context,
         columnWidthDp: Int,

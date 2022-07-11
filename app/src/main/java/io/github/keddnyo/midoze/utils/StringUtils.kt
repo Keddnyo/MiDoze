@@ -5,12 +5,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class StringUtils {
-    val tabTitles = arrayOf(
-        R.string.filters_title,
-        R.string.feed_title,
-        R.string.settings_title
-    )
-
     fun getChangelogFixed(changeLog: String): String {
         var c = changeLog.substringBefore('#')
         c = c.replace(";", "")

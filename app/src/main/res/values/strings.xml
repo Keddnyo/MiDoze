@@ -38,7 +38,6 @@
     <string name="settings_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
 
-    <string name="filters_title">Filters</string>
     <string name="filters_host_and_region_title">Host &amp; region</string>
     <string name="filters_app_title">Application</string>
     <string name="filters_advanced_title">Advanced</string>
@@ -54,13 +53,9 @@
     <string name="filters_app_version_load_defaults">Load versions defaults</string>
     <string name="filters_show_unknown_devices">Show unknown devices only</string>
 
-    <string name="settings_firmwares_title">Firmwares</string>
-    <string name="settings_firmwares_show_changelog">Show update changelog</string>
-    <string name="settings_firmwares_show_changelog_summary">For supported devices</string>
-
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
-    <string name="settings_app_check_for_updates">Check for updates</string>
+    <string name="settings_app_check_for_updates_disabled">Updates disabled</string>
 
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>

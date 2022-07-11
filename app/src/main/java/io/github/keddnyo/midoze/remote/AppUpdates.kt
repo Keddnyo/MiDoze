@@ -46,7 +46,7 @@ class AppUpdates(val prefs: SharedPreferences, val context: Context) :
                     val builder = AlertDialog.Builder(context)
                         .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
                         .setMessage(releaseChangelog)
-                        .setIcon(R.drawable.ic_info)
+                        .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
                     builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
                         DozeRequest().getFirmwareFile(context,
