@@ -18,7 +18,7 @@ import io.github.keddnyo.midoze.fragments.FiltersFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        UiUtils().switchDarkMode(context)
+        Display().switchDarkMode(context)
         super.onCreate(savedInstanceState)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))
-            UiUtils().showToast(context, getString(R.string.compatibility_mode))
+            Display().showToast(context, getString(R.string.compatibility_mode))
         }
     }
 

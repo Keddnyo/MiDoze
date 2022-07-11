@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 
-class UiUtils {
+class Display {
     fun getGridLayoutIndex(
         context: Context,
         columnWidthDp: Int,

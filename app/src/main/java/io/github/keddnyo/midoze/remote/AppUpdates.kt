@@ -8,7 +8,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
@@ -52,7 +52,7 @@ class AppUpdates(val prefs: SharedPreferences, val context: Context) :
                         DozeRequest().getFirmwareFile(context,
                             latestVersionLink,
                             getString(R.string.app_name))
-                        UiUtils().showToast(context,
+                        Display().showToast(context,
                             getString(R.string.downloading_toast))
                         DialogInterface.BUTTON_POSITIVE
                     }

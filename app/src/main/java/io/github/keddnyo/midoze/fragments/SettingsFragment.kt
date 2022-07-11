@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -74,7 +72,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     editor.putBoolean("settings_dark_mode", true)
                     editor.apply()
                 }
-                UiUtils().switchDarkMode(this)
+                Display().switchDarkMode(this)
             }
         }
         return super.onOptionsItemSelected(item)

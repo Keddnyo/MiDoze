@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.fragments
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
@@ -15,16 +14,15 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
-import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.local.devices.DeviceData
 import io.github.keddnyo.midoze.utils.firmwares.FirmwaresAdapter
-import io.github.keddnyo.midoze.utils.firmwares.FirmwaresData
 
 class FeedFragment : Fragment() {
 
@@ -54,7 +52,8 @@ class FeedFragment : Fragment() {
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
         deviceListRecyclerView.layoutManager =
-            GridLayoutManager(this, UiUtils().getGridLayoutIndex(this, 400))
+            GridLayoutManager(this, Display()
+                .getGridLayoutIndex(this, 400))
 
         val adapter = firmwaresAdapter
         deviceListRecyclerView.adapter = adapter
@@ -116,6 +115,8 @@ class FeedFragment : Fragment() {
                         runOnUiThread {
                             feedProgressBar.visibility = View.GONE
                             feedConnectivityError.visibility = View.VISIBLE
+
+                            Snackbar.make(window.decorView.findViewById(R.id.viewPager), "Load from cache", Snackbar.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -143,22 +144,12 @@ class FeedFragment : Fragment() {
 
                 fun getData(favorite: Boolean) {
                     deviceArrayList.forEachIndexed { index, it ->
-                        if (prefs.getBoolean(it.deviceSource, false) == favorite) {
-                            firmwaresAdapter.addDevice(
-                                FirmwaresData(
-                                    it.name,
-                                    it.icon,
-                                    StringUtils().getLocalFirmwareDate(it.buildTime),
-                                    it.firmware.getString("firmwareVersion").toString(),
-                                    it.deviceSource.toInt(),
-                                    it.productionSource.toInt(),
-                                    appName,
-                                    appVersion.toString()
-                                )
-                            )
-                        }
                         firmwaresAdapter.notifyItemInserted(index)
                         deviceListIndex[it.name] = index
+                    }
+
+                    if (favorite) {
+                        firmwaresAdapter.addDevice(deviceArrayList)
                     }
                 }
 
@@ -166,16 +157,16 @@ class FeedFragment : Fragment() {
                 getData(false)
                 feedProgressBar.visibility = View.GONE
 
-                if (firmwaresAdapter.itemCount == 0) {
+                if (DozeRequest().isOnline(context) && firmwaresAdapter.itemCount == 0) {
                     feedDevicesNotFound.visibility = View.VISIBLE
                 }
             }
         }
 
-        @SuppressLint("NotifyDataSetChanged")
         fun setData() {
+            val itemCount = firmwaresAdapter.itemCount
             firmwaresAdapter.clear()
-            firmwaresAdapter.notifyDataSetChanged()
+            firmwaresAdapter.notifyItemRangeRemoved(0, itemCount)
             FirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 

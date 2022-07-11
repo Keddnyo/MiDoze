@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 
 class ResponseActivity : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class ResponseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.settings_server_response)
 
-        UiUtils().switchDarkMode(this)
+        Display().switchDarkMode(this)
 
         if (intent.hasExtra("json")) {
             val responseTextView: TextView = findViewById(R.id.response_text)
@@ -30,7 +30,7 @@ class ResponseActivity : AppCompatActivity() {
             responseTextView.requestFocus()
         } else {
             runOnUiThread {
-                UiUtils().showToast(context, getString(R.string.firmware_not_found))
+                Display().showToast(context, getString(R.string.firmware_not_found))
             }
             finish()
         }

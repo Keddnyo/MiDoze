@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/firmwareChangelogTextView"
+                android:id="@+id/firmwareVersionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

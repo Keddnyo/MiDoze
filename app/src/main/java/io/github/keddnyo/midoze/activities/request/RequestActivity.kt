@@ -9,7 +9,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.runBlocking
 
 class RequestActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class RequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_request)
         title = getString(R.string.settings_custom_request)
 
-        UiUtils().switchDarkMode(this)
+        Display().switchDarkMode(this)
 
         val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =
@@ -53,9 +53,9 @@ class RequestActivity : AppCompatActivity() {
         }
 
         // Get Intent
-        if (intent.getIntExtra("deviceSource", 0) != 0) {
-            val deviceSourceValue = intent.getIntExtra("deviceSource", 0).toString()
-            val productionSourceValue = intent.getIntExtra("productionSource", 0).toString()
+        if (intent.getStringExtra("deviceSource")?.isNotBlank() == true) {
+            val deviceSourceValue = intent.getStringExtra("deviceSource").toString()
+            val productionSourceValue = intent.getStringExtra("productionSource").toString()
             val appNameValue = intent.getStringExtra("appName").toString()
             val appVersionValue = intent.getStringExtra("appVersion").toString()
 
@@ -82,7 +82,7 @@ class RequestActivity : AppCompatActivity() {
                 intent.putExtra("json", firmwareResponse.toString())
                 startActivity(intent)
             } else {
-                UiUtils().showToast(context, getString(R.string.feed_connectivity_error))
+                Display().showToast(context, getString(R.string.feed_connectivity_error))
             }
         }
 

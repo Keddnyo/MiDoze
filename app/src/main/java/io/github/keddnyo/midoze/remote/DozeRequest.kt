@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.devices.DeviceData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
+import io.github.keddnyo.midoze.utils.StringUtils
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -96,9 +97,13 @@ class DozeRequest {
                                     icon = deviceIcon,
                                     name = deviceName,
                                     firmware = firmwareData,
-                                    buildTime = get("buildTime"),
+                                    firmwareVersion = firmwareData.getString("firmwareVersion"),
+                                    buildTime = StringUtils().getLocalFirmwareDate(get("buildTime")),
+                                    changeLog = get("changeLog"),
                                     deviceSource = get("deviceSource"),
-                                    productionSource = get("productionSource")
+                                    productionSource = get("productionSource"),
+                                    appName = appName,
+                                    appVersion = appVersion
                                 )
                             )
                         }

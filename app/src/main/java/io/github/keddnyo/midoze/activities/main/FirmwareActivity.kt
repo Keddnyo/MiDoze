@@ -14,7 +14,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Language
 import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -61,21 +61,11 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
         deviceNameValue = intent.getStringExtra("deviceName").toString()
-        val deviceSourceValue = intent.getIntExtra("deviceSource", 0).toString()
-        val productionSourceValue = intent.getIntExtra("productionSource", 0).toString()
-        val appNameValue = intent.getStringExtra("appName").toString()
-        val appVersionValue = intent.getStringExtra("appVersion").toString()
 
         val isShowChangelog = prefs.getBoolean("settings_firmwares_show_changelog", false)
         val isShowLanguages = prefs.getBoolean("settings_firmwares_show_languages", true)
 
-        firmwareResponse = DozeRequest().getFirmwareData(
-            productionSourceValue,
-            deviceSourceValue,
-            appVersionValue,
-            appNameValue,
-            context
-        )
+        firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())
 
         deviceNameTextView.text = deviceNameValue
 
@@ -91,17 +81,9 @@ class FirmwareActivity : AppCompatActivity() {
             }
         }
 
-        if (firmwareResponse.has("firmwareVersion")) {
-            firmwareVersionTextView.text = firmwareResponse.getString(
-                "firmwareVersion"
-            )
-        } else {
-            runOnUiThread {
-                UiUtils().showToast(context, getString(R.string.firmware_not_found))
-                UiUtils().showToast(context, getString(R.string.firmware_try_switch_region))
-            }
-            finish()
-        }
+        firmwareVersionTextView.text = firmwareResponse.getString(
+            "firmwareVersion"
+        )
         if (isShowChangelog && firmwareResponse.has("changeLog")) {
             firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
                 firmwareResponse.getString("changeLog")
@@ -118,7 +100,11 @@ class FirmwareActivity : AppCompatActivity() {
         }
 
         firmwareDownloadButton.setOnClickListener {
-            getFirmware(firmwareResponse, context, deviceNameValue)
+            if (DozeRequest().isOnline(context)) {
+                getFirmware(firmwareResponse, context, deviceNameValue)
+            } else {
+                Display().showToast(context, getString(R.string.feed_connectivity_error))
+            }
         }
 
         firmwareDownloadButton.setOnLongClickListener {
@@ -138,7 +124,7 @@ class FirmwareActivity : AppCompatActivity() {
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
         }
-        UiUtils().showToast(context, getString(R.string.downloading_toast))
+        Display().showToast(context, getString(R.string.downloading_toast))
     }
 
     private fun shareFirmware() {
