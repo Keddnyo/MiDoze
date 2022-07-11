@@ -2,6 +2,8 @@
 <resources>
     <string name="compatibility_mode">Режим совместимости</string>
 
+    <string name="feed_snackbar_load_from_title">Загрузить из кэша?</string>
+
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
 

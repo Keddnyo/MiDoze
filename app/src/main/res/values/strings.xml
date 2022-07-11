@@ -2,6 +2,8 @@
     <string name="app_name" translatable="false">MiDoze</string>
     <string name="compatibility_mode">Compatibility mode</string>
 
+    <string name="feed_snackbar_load_from_title">Load from cache?</string>
+
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>
 
