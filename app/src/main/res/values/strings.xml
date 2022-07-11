@@ -61,6 +61,7 @@
     <string name="settings_firmwares_show_changelog">Show update changelog</string>
     <string name="settings_firmwares_show_changelog_summary">For supported devices</string>
     <string name="settings_firmwares_show_languages">Show supported languages</string>
+    <string name="settings_firmwares_show_languages_summary">Show supported language list</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>

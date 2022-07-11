@@ -52,6 +52,7 @@
     <string name="settings_firmwares_show_changelog">Список изменений</string>
     <string name="settings_firmwares_show_changelog_summary">Для поддерживаемых устройств</string>
     <string name="settings_firmwares_show_languages">Поддерживаемые языки</string>
+    <string name="settings_firmwares_show_languages_summary">Show supported language list</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>

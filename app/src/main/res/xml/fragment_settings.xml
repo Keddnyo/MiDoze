@@ -29,6 +29,7 @@
             app:defaultValue="true"
             app:icon="@drawable/ic_request_region"
             app:key="settings_firmwares_show_languages"
+            app:summary="@string/settings_firmwares_show_languages_summary"
             app:title="@string/settings_firmwares_show_languages" />
 
     </PreferenceCategory>
