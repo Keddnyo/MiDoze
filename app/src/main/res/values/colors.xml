@@ -7,11 +7,11 @@
 
     <color name="red">#FFCC0000</color>
 
-    <color name="orange_light_accentLight">#FF2600</color>
-    <color name="orange_light_accentDark">#F6BEFF</color>
+    <color name="orange_light_accentLight">#FF3815</color>
+    <color name="orange_light_accentDark">#FFE9E2</color>
     <color name="orange_light_background">#FFFFFF</color>
 
-    <color name="orange_dark_accentLight">#FFDACF</color>
-    <color name="orange_dark_accentDark">#AD00C8</color>
+    <color name="orange_dark_accentLight">#FADEFF</color>
+    <color name="orange_dark_accentDark">#9801AF</color>
     <color name="orange_dark_background">#000000</color>
 </resources>

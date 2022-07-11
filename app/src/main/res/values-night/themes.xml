@@ -6,45 +6,17 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
 
-        <item name="colorPrimary">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_dark_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorSecondary">@color/orange_dark_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_dark_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_dark_accentDark</item>
         <item name="android:colorBackground">@color/orange_dark_background</item>
-        <item name="colorOnBackground">@color/orange_dark_background</item>
     </style>
 
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
         <item name="colorSurface">@color/black</item>
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
-
-        <item name="colorPrimary">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_dark_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorSecondary">@color/orange_dark_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_dark_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_dark_accentDark</item>
-        <item name="android:colorBackground">@color/orange_dark_background</item>
-        <item name="colorOnBackground">@color/orange_dark_background</item>
     </style>
 
     <style name="Theme.Dialog.Firmware" parent="Theme.Material3.Dark.Dialog.Alert">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">#00000000</item>
-
-        <item name="colorPrimary">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimary">@color/orange_dark_accentDark</item>
-        <item name="colorPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorOnPrimaryContainer">@color/orange_dark_accentLight</item>
-        <item name="colorSecondary">@color/orange_dark_accentLight</item>
-        <item name="colorOnSecondary">@color/orange_dark_accentDark</item>
-        <item name="colorSecondaryContainer">@color/orange_dark_accentDark</item>
-        <item name="android:colorBackground">@color/orange_dark_background</item>
-        <item name="colorOnBackground">@color/orange_dark_background</item>
     </style>
 
 </resources>
