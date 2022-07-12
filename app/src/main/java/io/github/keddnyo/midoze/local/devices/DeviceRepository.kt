@@ -10,7 +10,7 @@ class DeviceRepository {
 
             "20" -> "Amazfit Bip 2"
             "24" -> DeviceData(R.drawable.mi_band_4_nfc, "Xiaomi Mi Band 4 NFC")
-            "25" -> "Xiaomi Mi Band 4 GL"
+            "25" -> DeviceData(R.drawable.mi_band_4_nfc, "Xiaomi Mi Band 4 GL")
             "28" -> "Amazfit Bip S"
             "29" -> "Amazfit Bip S Lite"
 
@@ -36,7 +36,7 @@ class DeviceRepository {
             "56" -> "Zepp Z CH"
             "57" -> "Zepp E Circle CH"
             "58" -> DeviceData(R.drawable.mi_band_5_nfc, "Xiaomi Mi Band 5 NFC")
-            "59" -> "Xiaomi Mi Band 5"
+            "59" -> DeviceData(R.drawable.mi_band_5_nfc, "Xiaomi Mi Band 5")
 
             "61" -> "Zepp E Square CH"
             "62" -> "Amazfit Neo"
