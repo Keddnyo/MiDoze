@@ -29,6 +29,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             return prefs.getString(key, "") // Wrong but working
         }
 
+        findPreference<Preference>("settings_credentials")?.title =
+            "${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME}"
+
         findPreference<Preference>("filters_app_version_load_defaults")?.setOnPreferenceClickListener {
             editor.putString(
                 "filters_zepp_app_version",
