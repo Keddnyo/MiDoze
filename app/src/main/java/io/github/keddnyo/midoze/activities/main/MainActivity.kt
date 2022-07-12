@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,8 @@ import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.Language
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -82,6 +85,44 @@ class MainActivity : AppCompatActivity() {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))
             Display().showToast(context, getString(R.string.compatibility_mode))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        fun getCurrentLocale(): Locale {
+            return Language().getCurrent()
+        }
+
+        fun setLocale(loc: Locale) {
+            val config = Configuration()
+            config.locale = loc
+            baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+        }
+
+        val ruLocale = Locale("ru")
+        val beLocale = Locale("be")
+        val uaLocale = Locale("uk")
+        val enLocale = Locale("en")
+
+        when (getCurrentLocale()) {
+            ruLocale -> {
+                Locale.setDefault(ruLocale)
+                setLocale(ruLocale)
+            }
+            beLocale -> {
+                Locale.setDefault(ruLocale)
+                setLocale(ruLocale)
+            }
+            uaLocale -> {
+                Locale.setDefault(ruLocale)
+                setLocale((ruLocale))
+            }
+            else -> {
+                Locale.setDefault(enLocale)
+                setLocale(enLocale)
+            }
         }
     }
 

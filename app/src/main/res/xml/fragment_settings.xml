@@ -60,10 +60,10 @@
 
         <SeekBarPreference
             asp:max="350"
-            app:defaultValue="95"
+            app:defaultValue="180"
             app:icon="@drawable/ic_range"
             app:key="filters_feed_deviceSource_range"
-            app:min="30"
+            app:min="150"
             app:showSeekBarValue="true"
             app:title="@string/filters_request_deviceSource_span" />
 

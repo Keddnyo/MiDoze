@@ -52,7 +52,7 @@ class DozeRequest {
         var deviceName: String
 
         val productionSourceRange = prefs.getInt("filters_feed_productionSource_range", 257)
-        val deviceSourceRange = prefs.getInt("filters_feed_deviceSource_range", 95)
+        val deviceSourceRange = prefs.getInt("filters_feed_deviceSource_range", 180)
 
         runBlocking {
             for (productionSource in 256..productionSourceRange) {

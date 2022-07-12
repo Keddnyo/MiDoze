@@ -23,8 +23,7 @@
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/storopia</item>
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
-
-        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
 
         <item name="colorPrimary">@color/accent_dark</item>
         <item name="colorOnPrimary">@color/accent_light</item>
@@ -41,6 +40,8 @@
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/storopia</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">#00000000</item>
+
+        <item name="colorSurface">@color/black</item>
 
         <item name="colorPrimary">@color/accent_dark</item>
         <item name="colorOnPrimary">@color/accent_light</item>
