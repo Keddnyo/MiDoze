@@ -13,6 +13,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.remote.Routes
 import io.github.keddnyo.midoze.utils.Display
 
@@ -76,6 +77,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val editor = prefs.edit()
 
         when (item.itemId) {
+            R.id.action_request -> {
+                startActivity(Intent(context, RequestActivity::class.java))
+            }
             R.id.action_dark_mode -> {
                 if (prefs.getBoolean("settings_dark_mode", false)) {
                     editor.putBoolean("settings_dark_mode", false)

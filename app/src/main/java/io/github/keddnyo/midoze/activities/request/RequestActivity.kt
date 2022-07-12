@@ -54,13 +54,17 @@ class RequestActivity : AppCompatActivity() {
 
         // Get Intent
         if (intent.getStringExtra("deviceSource")?.isNotBlank() == true) {
+            val deviceName = intent.getStringExtra("deviceName").toString()
             val deviceSourceValue = intent.getStringExtra("deviceSource").toString()
             val productionSourceValue = intent.getStringExtra("productionSource").toString()
             val appNameValue = intent.getStringExtra("appName").toString()
             val appVersionValue = intent.getStringExtra("appVersion").toString()
 
+            title = deviceName
             extrasDeviceSourceEditText.setText(deviceSourceValue)
+            extrasDeviceSourceEditText.isEnabled = false
             extrasProductionSourceEditText.setText(productionSourceValue)
+            extrasProductionSourceEditText.isEnabled = false
             extrasAppNameEditText.setText(appNameValue)
             extrasAppVersionEditText.setText(appVersionValue)
         }
