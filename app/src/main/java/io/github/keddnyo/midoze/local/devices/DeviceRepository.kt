@@ -30,6 +30,7 @@ class DeviceRepository {
             "51" -> "Amazfit GTR 42mm SWK"
             "52" -> "Amazfit GTR 42mm SWK Global"
             "53" -> "Amazfit X Chinese"
+            "54" -> "Amazfit GTR 47mm Disney"
             "56" -> "Zepp Z Chinese"
             "57" -> "Zepp E Circle Chinese"
             "58" -> "Xiaomi Mi Band Smart 5 NFC"
@@ -78,10 +79,12 @@ class DeviceRepository {
 
             "230" -> "Amazfit GTR 3 Pro Global"
 
+            "242" -> "Amazfit GTR 3 Pro Limited"
             "243" -> "Amazfit GTR 3 Pro Limited"
             "244" -> "Amazfit GTR 2"
             "245" -> "Amazfit GTS 2"
 
+            "254" -> "Amazfit Band 7"
             "256" -> "Amazfit Bip 3 Pro"
             "257" -> "Amazfit Bip 3"
 
