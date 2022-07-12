@@ -14,7 +14,7 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.devices.DeviceData
+import io.github.keddnyo.midoze.local.devices.FirmwareData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.ktor.client.*
@@ -42,10 +42,10 @@ class DozeRequest {
         context: Context,
         appName: String,
         appVersion: String
-    ): ArrayList<DeviceData> = with(context as Activity) {
+    ): ArrayList<FirmwareData> = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
-        val deviceArrayList: ArrayList<DeviceData> = arrayListOf()
+        val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
         var firmwareData: JSONObject
         var deviceIcon: Int
@@ -93,7 +93,7 @@ class DozeRequest {
                             )
                         ) {
                             deviceArrayList.add(
-                                DeviceData(
+                                FirmwareData(
                                     icon = deviceIcon,
                                     name = deviceName,
                                     firmware = firmwareData,

@@ -20,7 +20,6 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
-import io.github.keddnyo.midoze.local.devices.DeviceData
 
 class FeedFragment : Fragment() {
 
@@ -52,7 +51,7 @@ class FeedFragment : Fragment() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 400)
+                    .getGridLayoutIndex(this, 200)
             )
 
         val adapter = firmwaresAdapter
@@ -67,7 +66,7 @@ class FeedFragment : Fragment() {
             AsyncTask<Void?, Void?, Void>() {
 
             val gson = Gson()
-            var deviceArrayList: ArrayList<DeviceData> = arrayListOf()
+            var deviceArrayList: ArrayList<io.github.keddnyo.midoze.local.devices.FirmwareData> = arrayListOf()
 
             var appName = ""
             var appVersion: String? = ""
@@ -89,7 +88,7 @@ class FeedFragment : Fragment() {
                 if (deviceArrayListJson != "") {
                     deviceArrayList = GsonBuilder().create().fromJson(
                         deviceArrayListJson.toString(),
-                        object : TypeToken<ArrayList<DeviceData>>() {}.type
+                        object : TypeToken<ArrayList<io.github.keddnyo.midoze.local.devices.FirmwareData>>() {}.type
                     )
                 } else {
                     fun getAppName(): String? {

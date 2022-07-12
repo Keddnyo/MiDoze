@@ -14,12 +14,12 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.local.devices.DeviceData
+import io.github.keddnyo.midoze.local.devices.FirmwareData
 import java.util.*
 
 class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
-    private var firmwaresDataArray = ArrayList<DeviceData>()
-    private var firmwaresDataArrayFull = ArrayList<DeviceData>()
+    private var firmwaresDataArray = ArrayList<FirmwareData>()
+    private var firmwaresDataArrayFull = ArrayList<FirmwareData>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
@@ -42,16 +42,10 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(holder.deviceNameTextView.context)
-        val editor = prefs.edit()
-
         holder.deviceNameTextView.text = firmwaresDataArray[position].name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].icon)
         holder.firmwareReleaseDateTextView.text = firmwaresDataArray[position].buildTime
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
-
-        val deviceIndex = firmwaresDataArray[position].deviceSource
 
         fun openFirmwareActivity(
             context: Context,
@@ -93,8 +87,8 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         return firmwaresDataArray.size
     }
 
-    fun addDevice(deviceDataArray: ArrayList<DeviceData>) {
-        firmwaresDataArray = deviceDataArray
+    fun addDevice(firmwareDataArray: ArrayList<FirmwareData>) {
+        firmwaresDataArray = firmwareDataArray
         firmwaresDataArrayFull = firmwaresDataArray
     }
 
@@ -104,7 +98,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
 
     private val deviceFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
-            val filteredList: MutableList<DeviceData> = ArrayList()
+            val filteredList: MutableList<FirmwareData> = ArrayList()
             if (constraint.isEmpty()) {
                 filteredList.addAll(firmwaresDataArrayFull)
             } else {
@@ -124,7 +118,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         @SuppressLint("NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             clear()
-            firmwaresDataArray.addAll(results.values as Collection<DeviceData>)
+            firmwaresDataArray.addAll(results.values as Collection<FirmwareData>)
             notifyDataSetChanged()
         }
     }
