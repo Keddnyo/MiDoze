@@ -86,13 +86,17 @@
 
     <PreferenceCategory app:title="@string/settings_about_title">
 
+        <Preference
+            app:icon="@mipmap/ic_launcher"
+            app:key="settings_credentials"
+            app:summary="@string/settings_about_summary"
+            app:title="@string/app_name" />
+
         <SwitchPreference
             app:defaultValue="true"
-            app:icon="@mipmap/ic_launcher"
+            app:icon="@drawable/ic_update"
             app:key="settings_app_check_updates"
-            app:summaryOff="@string/settings_app_check_for_updates_disabled"
-            app:summaryOn="@string/settings_about_summary"
-            app:title="@string/app_name" />
+            app:title="@string/settings_app_check_for_updates" />
 
     </PreferenceCategory>
 

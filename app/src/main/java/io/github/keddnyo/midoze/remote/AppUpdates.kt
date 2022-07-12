@@ -12,7 +12,7 @@ import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
-class AppUpdates(val prefs: SharedPreferences, val context: Context) :
+class AppUpdates(private val prefs: SharedPreferences, val context: Context) :
     AsyncTask<Void?, Void?, Void>() {
 
     var releaseData: JSONObject = JSONObject("{}")
@@ -22,7 +22,7 @@ class AppUpdates(val prefs: SharedPreferences, val context: Context) :
         if (prefs.getBoolean("settings_app_check_updates",
                 true) && DozeRequest().isOnline(context)
         ) {
-            releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
+            releaseData = DozeRequest().getAppReleaseData()
         }
         return null
     }

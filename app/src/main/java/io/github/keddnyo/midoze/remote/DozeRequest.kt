@@ -115,9 +115,8 @@ class DozeRequest {
         return deviceArrayList
     }
 
-    fun getApplicationLatestReleaseInfo(context: Context): JSONObject {
-        val appName = context.getString(R.string.app_name)
-        return JSONObject(URL("https://api.github.com/repos/keddnyo/$appName/releases/latest").readText())
+    fun getAppReleaseData(): JSONObject {
+        return JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
     }
 
     suspend fun getFirmwareData(

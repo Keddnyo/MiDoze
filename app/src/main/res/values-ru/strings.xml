@@ -45,7 +45,7 @@
     <string name="filters_show_unknown_devices">Неизвестные устройства</string>
 
     <string name="settings_about_title">О приложении</string>
-    <string name="settings_app_check_for_updates_disabled">Обновления отключены</string>
+    <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string-array name="request_region_entries">
         <item>США</item>

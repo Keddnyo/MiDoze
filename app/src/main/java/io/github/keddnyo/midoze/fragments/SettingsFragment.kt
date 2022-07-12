@@ -13,6 +13,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.remote.Routes
 import io.github.keddnyo.midoze.utils.Display
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -43,6 +44,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<EditTextPreference>("filters_zepp_life_app_version")?.text =
                 getStringByKey("filters_zepp_life_app_version")
 
+            true
+        }
+
+        findPreference<Preference>("settings_credentials")?.setOnPreferenceClickListener {
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(Routes.GITHUB_PROJECT_PAGE))
+            )
             true
         }
     }

@@ -104,8 +104,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (viewPager.currentItem != 1) {
-            viewPager.currentItem = 1
+        if (viewPager.currentItem != 0) {
+            viewPager.currentItem = 0
         } else {
             super.onBackPressed()
         }

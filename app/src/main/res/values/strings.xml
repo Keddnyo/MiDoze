@@ -55,7 +55,7 @@
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
-    <string name="settings_app_check_for_updates_disabled">Updates disabled</string>
+    <string name="settings_app_check_for_updates">Check for updates</string>
 
     <string name="request_host_first" translatable="false">api.amazfit.com</string>
     <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>

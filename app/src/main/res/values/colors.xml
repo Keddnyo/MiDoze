@@ -7,7 +7,7 @@
 
     <color name="red">#FFCC0000</color>
 
-    <color name="accent_light">#F44336</color>
+    <color name="accent_light">#B6352B</color>
     <color name="accent_dark">#FFB9A2</color>
     <color name="background_light">@color/white</color>
 </resources>
