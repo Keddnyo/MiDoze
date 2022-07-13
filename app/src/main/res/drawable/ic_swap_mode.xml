@@ -8,10 +8,5 @@
     tools:ignore="VectorRaster">
     <path
         android:fillColor="@android:color/white"
-        android:pathData="M15.5,5l-4.5,0l5,7l-5,7l4.5,0l5,-7z"
-        tools:ignore="VectorRaster" />
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M8.5,5l-4.5,0l5,7l-5,7l4.5,0l5,-7z"
-        tools:ignore="VectorRaster" />
+        android:pathData="M6.99,11L3,15l3.99,4v-3H14v-2H6.99v-3zM21,9l-3.99,-4v3H10v2h7.01v3L21,9z" />
 </vector>

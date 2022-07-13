@@ -25,16 +25,16 @@
 
                 <ImageView
                     android:id="@+id/deviceIconImageView"
-                    android:src="@drawable/zepp_e_square"
                     android:layout_width="80dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/zepp_e_square"
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="10dp">
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/deviceNameTextView"
@@ -57,41 +57,12 @@
                         android:id="@+id/firmwareDownloadButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="@string/firmware_download"
                         android:textSize="10pt"
                         android:theme="@style/Button" />
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/firmwareChangelogLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/firmware_changelog"
-                    android:textSize="10pt"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/firmwareChangelogTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="8pt" />
 
             </LinearLayout>
 
@@ -119,6 +90,36 @@
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="8pt" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/firmwareChangelogLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firmware_changelog"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/firmwareChangelogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="8pt" />

@@ -14,8 +14,10 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.local.apps.Application
 import io.github.keddnyo.midoze.local.devices.FirmwareData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
+import io.github.keddnyo.midoze.local.devices.Wearable
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -40,28 +42,22 @@ class DozeRequest {
 
     fun getFirmwareLatest(
         context: Context,
-        appName: String,
-        appVersion: String
+        application: Application
     ): ArrayList<FirmwareData> = with(context as Activity) {
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
         val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
         var firmwareData: JSONObject
-        var deviceIcon: Int
+        var devicePreview: Int
         var deviceName: String
 
-        val productionSourceRange = prefs.getInt("filters_feed_productionSource_range", 257)
-        val deviceSourceRange = prefs.getInt("filters_feed_deviceSource_range", 180)
-
         runBlocking {
-            for (productionSource in 256..productionSourceRange) {
-                for (deviceSource in 0..deviceSourceRange) {
+            for (productionSource in 256..270) {
+                for (deviceSource in 0..350) {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),
                         deviceSource.toString(),
-                        appVersion,
-                        appName,
+                        application.version,
+                        application.name,
                         context
                     )
 
@@ -71,7 +67,7 @@ class DozeRequest {
                         deviceName =
                             deviceData.name
 
-                        deviceIcon =
+                        devicePreview =
                             deviceData.image
 
                         /*deviceIcon = if (deviceName.contains("Xiaomi")) {
@@ -92,26 +88,18 @@ class DozeRequest {
                             }).toString()
                         }
 
-                        if (deviceName.contains("Unknown") == prefs.getBoolean(
-                                "filters_show_unknown_devices",
-                                false
+                        deviceArrayList.add(
+                            FirmwareData(
+                                wearable = Wearable(deviceName, devicePreview),
+                                application = application,
+                                firmware = firmwareData,
+                                firmwareVersion = firmwareData.getString("firmwareVersion"),
+                                buildTime = StringUtils().getLocalFirmwareDate(get("buildTime")),
+                                changeLog = get("changeLog"),
+                                deviceSource = get("deviceSource"),
+                                productionSource = get("productionSource"),
                             )
-                        ) {
-                            deviceArrayList.add(
-                                FirmwareData(
-                                    icon = deviceIcon,
-                                    name = deviceName,
-                                    firmware = firmwareData,
-                                    firmwareVersion = firmwareData.getString("firmwareVersion"),
-                                    buildTime = StringUtils().getLocalFirmwareDate(get("buildTime")),
-                                    changeLog = get("changeLog"),
-                                    deviceSource = get("deviceSource"),
-                                    productionSource = get("productionSource"),
-                                    appName = appName,
-                                    appVersion = appVersion
-                                )
-                            )
-                        }
+                        )
                     }
                 }
             }

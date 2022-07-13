@@ -57,6 +57,12 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
+        if (DozeRequest().isOnline(context)) {
+            runOnUiThread {
+                firmwareDownloadButton.visibility = View.VISIBLE
+            }
+        }
+
         val deviceIconValue = intent.getIntExtra("deviceIcon", R.drawable.amazfit_bip)
         deviceNameValue = intent.getStringExtra("deviceName").toString()
         firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())

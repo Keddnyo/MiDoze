@@ -2,13 +2,10 @@
 <resources>
     <string name="compatibility_mode">Режим совместимости</string>
 
-    <string name="feed_snackbar_load_from_title">Загрузить из кэша?</string>
-
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
 
     <string name="firmware_version">Версия прошивки</string>
-    <string name="search">Поиск</string>
 
     <string name="feed_title">Лента</string>
 
@@ -33,16 +30,11 @@
 
     <string name="filters_host_and_region_title">Хост и регион</string>
     <string name="filters_app_title">Приложение</string>
-    <string name="filters_advanced_title">Дополнительно</string>
     <string name="filters_request_region">Регион</string>
     <string name="filters_request_host">Хост</string>
-    <string name="filters_request_app_name">Имя приложения</string>
-    <string name="filters_request_deviceSource_span">Диапазон deviceSource (x10)</string>
-    <string name="filters_request_productionSource_span">Диапазон productionSource</string>
     <string name="filters_request_zepp_app_version">Версия Zepp</string>
     <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
     <string name="filters_app_version_load_defaults">Сбросить версии</string>
-    <string name="filters_show_unknown_devices">Неизвестные устройства</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>

@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
 
         fun getCurrentLocale(): Locale {
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 setLocale(enLocale)
             }
         }
-    }
+    }*/
 
     class MyAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getCount(): Int {

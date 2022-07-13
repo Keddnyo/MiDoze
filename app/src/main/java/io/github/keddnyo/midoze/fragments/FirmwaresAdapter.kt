@@ -31,7 +31,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         val firmwareVersionTextView: TextView =
             itemView.findViewById(R.id.firmwareVersionTextView)
 
-        val feedCustomRequest: ImageView = itemView.findViewById(R.id.feedCustomRequest)
         val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
@@ -42,8 +41,8 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.deviceNameTextView.text = firmwaresDataArray[position].name
-        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].icon)
+        holder.deviceNameTextView.text = firmwaresDataArray[position].wearable.name
+        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].wearable.image)
         holder.firmwareReleaseDateTextView.text = firmwaresDataArray[position].buildTime
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
 
@@ -57,23 +56,16 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 Intent(context, FirmwareActivity::class.java)
             }
 
-            intent.putExtra("deviceIcon", firmwaresDataArray[position].icon)
-            intent.putExtra("deviceName", firmwaresDataArray[position].name)
+            intent.putExtra("deviceName", firmwaresDataArray[position].wearable.name)
+            intent.putExtra("deviceIcon", firmwaresDataArray[position].wearable.image)
             intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
 
             intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)
             intent.putExtra("deviceSource", firmwaresDataArray[position].deviceSource)
-            intent.putExtra("appName", firmwaresDataArray[position].appName)
-            intent.putExtra("appVersion", firmwaresDataArray[position].appVersion)
+            intent.putExtra("appName", firmwaresDataArray[position].application.name)
+            intent.putExtra("appVersion", firmwaresDataArray[position].application.version)
 
             context.startActivity(intent)
-        }
-
-        holder.feedCustomRequest.setOnClickListener {
-            openFirmwareActivity(
-                holder.downloadLayout.context,
-                true
-            )
         }
 
         holder.downloadLayout.setOnClickListener {
@@ -81,6 +73,14 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 holder.downloadLayout.context,
                 false
             )
+        }
+
+        holder.downloadLayout.setOnLongClickListener {
+            openFirmwareActivity(
+                holder.downloadLayout.context,
+                true
+            )
+            true
         }
     }
 
@@ -106,7 +106,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 val filterPattern =
                     constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
                 for (item in firmwaresDataArrayFull) {
-                    if (item.name.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                    if (item.wearable.name.lowercase(Locale.getDefault()).contains(filterPattern)) {
                         filteredList.add(item)
                     }
                 }

@@ -25,16 +25,6 @@
 
     <PreferenceCategory app:title="@string/filters_app_title">
 
-        <ListPreference
-            app:allowDividerBelow="true"
-            app:defaultValue="Zepp"
-            app:entries="@array/request_app_name_entries"
-            app:entryValues="@array/request_app_name_entryValues"
-            app:icon="@drawable/ic_pretend_app"
-            app:key="filters_app_name"
-            app:title="@string/filters_request_app_name"
-            app:useSimpleSummaryProvider="true" />
-
         <EditTextPreference
             app:defaultValue="@string/filters_request_zepp_app_version_value"
             app:icon="@drawable/ic_app_zepp"
@@ -53,34 +43,6 @@
             app:icon="@drawable/ic_update"
             app:key="filters_app_version_load_defaults"
             app:title="@string/filters_app_version_load_defaults" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/filters_advanced_title">
-
-        <SeekBarPreference
-            asp:max="350"
-            app:defaultValue="180"
-            app:icon="@drawable/ic_range"
-            app:key="filters_feed_deviceSource_range"
-            app:min="150"
-            app:showSeekBarValue="true"
-            app:title="@string/filters_request_deviceSource_span" />
-
-        <SeekBarPreference
-            asp:max="270"
-            app:defaultValue="257"
-            app:icon="@drawable/ic_range"
-            app:key="filters_feed_productionSource_range"
-            app:min="256"
-            app:showSeekBarValue="true"
-            app:title="@string/filters_request_productionSource_span" />
-
-        <SwitchPreference
-            app:defaultValue="false"
-            app:icon="@drawable/ic_unknown"
-            app:key="filters_show_unknown_devices"
-            app:title="@string/filters_show_unknown_devices" />
 
     </PreferenceCategory>
 

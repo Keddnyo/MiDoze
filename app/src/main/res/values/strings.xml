@@ -2,8 +2,6 @@
     <string name="app_name" translatable="false">MiDoze</string>
     <string name="compatibility_mode">Compatibility mode</string>
 
-    <string name="feed_snackbar_load_from_title">Load from cache?</string>
-
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>
 
@@ -11,7 +9,6 @@
     <string name="title_zepp" translatable="false">Zepp</string>
 
     <string name="firmware_version">Firmware version</string>
-    <string name="search">Search</string>
 
     <string name="feed_title">Feed</string>
 
@@ -40,18 +37,13 @@
 
     <string name="filters_host_and_region_title">Host &amp; region</string>
     <string name="filters_app_title">Application</string>
-    <string name="filters_advanced_title">Advanced</string>
     <string name="filters_request_region">Region</string>
     <string name="filters_request_host">Host</string>
-    <string name="filters_request_app_name">App name</string>
-    <string name="filters_request_deviceSource_span">Set deviceSource range</string>
-    <string name="filters_request_productionSource_span">Set productionSource range</string>
     <string name="filters_request_zepp_app_version">Zepp version</string>
     <string name="filters_request_zepp_app_version_value" translatable="false">6.10.1-play_100770</string>
     <string name="filters_request_zepp_life_app_version">Zepp Life version</string>
     <string name="filters_request_zepp_life_app_version_value" translatable="false">6.2.1_50602</string>
     <string name="filters_app_version_load_defaults">Load versions defaults</string>
-    <string name="filters_show_unknown_devices">Show unknown devices only</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
@@ -89,13 +81,4 @@
     <string name="zepp_life_app_name" translatable="false">Zepp Life</string>
     <string name="zepp_app_name_value" translatable="false">com.huami.midong</string>
     <string name="zepp_life_app_name_value" translatable="false">com.xiaomi.hm.health</string>
-
-    <string-array name="request_app_name_entries">
-        <item>@string/zepp_app_name</item>
-        <item>@string/zepp_life_app_name</item>
-    </string-array>
-    <string-array name="request_app_name_entryValues">
-        <item>Zepp</item>
-        <item>ZeppLife</item>
-    </string-array>
 </resources>
