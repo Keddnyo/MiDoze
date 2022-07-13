@@ -28,17 +28,17 @@ class DeviceRepository {
             "44" -> DeviceData("Amazfit GTR 42mm Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
             "46" -> DeviceData("Amazfit GTR 47mm Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
 
-            "50" -> "Amazfit T-Rex"
+            "50" -> DeviceData("Amazfit T-Rex", R.drawable.amazfit_t_rex)
             "51" -> DeviceData("Amazfit GTR 42mm SWK", R.drawable.amazfit_gtr) // TODO: May be replace
             "52" -> DeviceData("Amazfit GTR 42mm SWK GL", R.drawable.amazfit_gtr) // TODO: May be replace
-            "53" -> "Amazfit X CH"
+            "53" -> DeviceData("Amazfit X CH", R.drawable.amazfit_x)
             "54" -> DeviceData("Amazfit GTR 47mm Disney", R.drawable.amazfit_gtr) // TODO: May be replace
-            "56" -> "Zepp Z CH"
-            "57" -> "Zepp E Circle CH"
+            "56" -> DeviceData("Zepp Z CH", R.drawable.zepp_z)
+            "57" -> DeviceData("Zepp E Circle CH", R.drawable.zepp_e_circle)
             "58" -> DeviceData("Xiaomi Mi Band 5 NFC", R.drawable.mi_band_5_nfc)
             "59" -> DeviceData("Xiaomi Mi Band 5", R.drawable.mi_band_5_nfc)
 
-            "61" -> "Zepp E Square CH"
+            "61" -> DeviceData("Zepp E Square CH", R.drawable.zepp_e_square)
             "62" -> "Amazfit Neo"
             "63" -> "Amazfit GTR 2 CH"
             "64" -> "Amazfit GTR 2 GL"
@@ -47,14 +47,14 @@ class DeviceRepository {
             "69" -> "Amazfit Bip U Pro"
 
             "70" -> "Amazfit Bip U"
-            "71" -> "Amazfit X GL"
+            "71" -> DeviceData("Amazfit X GL", R.drawable.amazfit_x)
             "73" -> DeviceData("Amazfit Band 5", R.drawable.amazfit_band_5)
-            "76" -> "Zepp Z GL"
+            "76" -> DeviceData("Zepp Z GL", R.drawable.zepp_z)
             "77" -> "Amazfit GTS 2 CH"
             "78" -> "Amazfit GTS 2 GL"
 
-            "81" -> "Zepp E Circle GL"
-            "82" -> "Zepp E Square GL"
+            "81" -> DeviceData("Zepp E Circle GL", R.drawable.zepp_e_circle)
+            "82" -> DeviceData("Zepp E Square GL", R.drawable.zepp_e_square)
             "83" -> "Amazfit T-Rex Pro CH"
 
             "92" -> "Amazfit GTS 2 mini"
