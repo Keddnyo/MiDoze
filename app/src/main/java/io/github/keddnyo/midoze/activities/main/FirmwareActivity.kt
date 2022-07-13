@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
@@ -50,7 +49,7 @@ class FirmwareActivity : AppCompatActivity() {
 
     private suspend fun init(context: Context) = withContext(Dispatchers.IO) {
         val deviceNameTextView: TextView = findViewById(R.id.deviceNameTextView)
-        val deviceIconTextView: ImageView = findViewById(R.id.deviceIconImageView)
+        val deviceIconImageView: ImageView = findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
         val firmwareChangelogTextView: TextView = findViewById(R.id.firmwareChangelogTextView)
         val firmwareChangelogLayout: MaterialCardView = findViewById(R.id.firmwareChangelogLayout)
@@ -58,11 +57,14 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
+        val deviceIconValue = intent.getIntExtra("deviceIcon", R.drawable.amazfit_bip)
         deviceNameValue = intent.getStringExtra("deviceName").toString()
         firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())
         deviceNameTextView.text = deviceNameValue
 
-        when {
+        deviceIconImageView.setImageResource(deviceIconValue)
+
+        /*when {
             deviceNameValue.contains("Mi Band", true) -> {
                 deviceIconTextView.setImageResource(R.drawable.ic_xiaomi)
             }
@@ -72,7 +74,7 @@ class FirmwareActivity : AppCompatActivity() {
             else -> {
                 deviceIconTextView.setImageResource(R.drawable.ic_amazfit)
             }
-        }
+        }*/
 
         firmwareVersionTextView.text = firmwareResponse.getString(
             "firmwareVersion"

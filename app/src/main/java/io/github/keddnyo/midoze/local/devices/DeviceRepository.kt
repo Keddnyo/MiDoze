@@ -8,31 +8,31 @@ class DeviceRepository {
         return when (deviceSource.toString()) {
             "12" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "20" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip_s) // TODO: May be replace
+            "20" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip) // TODO: May be replace
             "24" -> DeviceData("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
             "25" -> DeviceData("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
-            "28" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip_s)
+            "28" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip)
             "29" -> DeviceData("Amazfit Bip S Lite", R.drawable.amazfit_bip_s_lite)
 
             "30" -> DeviceData("Amazfit Verge Lite GL", R.drawable.amazfit_verge_lite)
             "31" -> DeviceData("Xiaomi Mi Band 3i", R.drawable.mi_band_3i)
-            "35" -> DeviceData("Amazfit GTR 47mm CH", R.drawable.amazfit_gtr)
-            "36" -> DeviceData("Amazfit GTR 47mm GL", R.drawable.amazfit_gtr)
-            "37" -> DeviceData("Amazfit GTR 42mm CH", R.drawable.amazfit_gtr)
-            "38" -> DeviceData("Amazfit GTR 42mm GL", R.drawable.amazfit_gtr)
+            "35" -> DeviceData("Amazfit GTR 47 CH", R.drawable.amazfit_gtr)
+            "36" -> DeviceData("Amazfit GTR 47 GL", R.drawable.amazfit_gtr)
+            "37" -> DeviceData("Amazfit GTR 42 CH", R.drawable.amazfit_gtr)
+            "38" -> DeviceData("Amazfit GTR 42 GL", R.drawable.amazfit_gtr)
             "39" -> DeviceData("Amazfit Bip Lite CH", R.drawable.amazfit_bip)
 
             "40" -> DeviceData("Amazfit GTS CH", R.drawable.amazfit_gts)
             "41" -> DeviceData("Amazfit GTS GL", R.drawable.amazfit_gts)
             "42" -> DeviceData("Amazfit Bip Lite GL", R.drawable.amazfit_bip)
-            "44" -> DeviceData("Amazfit GTR 42mm Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
-            "46" -> DeviceData("Amazfit GTR 47mm Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "44" -> DeviceData("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "46" -> DeviceData("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
 
             "50" -> DeviceData("Amazfit T-Rex", R.drawable.amazfit_t_rex)
-            "51" -> DeviceData("Amazfit GTR 42mm SWK", R.drawable.amazfit_gtr) // TODO: May be replace
-            "52" -> DeviceData("Amazfit GTR 42mm SWK GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "51" -> DeviceData("Amazfit GTR 42 SWK", R.drawable.amazfit_gtr) // TODO: May be replace
+            "52" -> DeviceData("Amazfit GTR 42 SWK GL", R.drawable.amazfit_gtr) // TODO: May be replace
             "53" -> DeviceData("Amazfit X CH", R.drawable.amazfit_x)
-            "54" -> DeviceData("Amazfit GTR 47mm Disney", R.drawable.amazfit_gtr) // TODO: May be replace
+            "54" -> DeviceData("Amazfit GTR 47 Disney", R.drawable.amazfit_gtr) // TODO: May be replace
             "56" -> DeviceData("Zepp Z CH", R.drawable.zepp_z)
             "57" -> DeviceData("Zepp E Circle CH", R.drawable.zepp_e_circle)
             "58" -> DeviceData("Xiaomi Mi Band 5 NFC", R.drawable.mi_band_5_nfc)

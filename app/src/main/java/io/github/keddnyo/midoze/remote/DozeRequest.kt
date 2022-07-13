@@ -66,16 +66,21 @@ class DozeRequest {
                     )
 
                     if (firmwareData.has("firmwareVersion")) {
-                        deviceName =
-                            DeviceRepository().getDeviceNameByCode(deviceSource, productionSource)
+                        val deviceData = DeviceRepository().getDeviceNameByCode(deviceSource, productionSource)
 
-                        deviceIcon = if (deviceName.contains("Xiaomi")) {
+                        deviceName =
+                            deviceData.name
+
+                        deviceIcon =
+                            deviceData.image
+
+                        /*deviceIcon = if (deviceName.contains("Xiaomi")) {
                             R.drawable.ic_xiaomi
                         } else if (deviceName.contains("Zepp")) {
                             R.drawable.ic_zepp
                         } else {
                             R.drawable.ic_amazfit
-                        }
+                        }*/
 
                         fun get(key: String): String {
                             val f = firmwareData

@@ -57,6 +57,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 Intent(context, FirmwareActivity::class.java)
             }
 
+            intent.putExtra("deviceIcon", firmwaresDataArray[position].icon)
             intent.putExtra("deviceName", firmwaresDataArray[position].name)
             intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
 

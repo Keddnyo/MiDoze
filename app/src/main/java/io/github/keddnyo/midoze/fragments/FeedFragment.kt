@@ -18,6 +18,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.local.devices.FirmwareData
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 
@@ -62,11 +63,11 @@ class FeedFragment : Fragment() {
 
         val isOnline = DozeRequest().isOnline(context)
 
-        class FirmwareData :
+        class FetchFirmwareData :
             AsyncTask<Void?, Void?, Void>() {
 
             val gson = Gson()
-            var deviceArrayList: ArrayList<io.github.keddnyo.midoze.local.devices.FirmwareData> = arrayListOf()
+            var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
             var appName = ""
             var appVersion: String? = ""
@@ -88,7 +89,7 @@ class FeedFragment : Fragment() {
                 if (deviceArrayListJson != "") {
                     deviceArrayList = GsonBuilder().create().fromJson(
                         deviceArrayListJson.toString(),
-                        object : TypeToken<ArrayList<io.github.keddnyo.midoze.local.devices.FirmwareData>>() {}.type
+                        object : TypeToken<ArrayList<FirmwareData>>() {}.type
                     )
                 } else {
                     fun getAppName(): String? {
@@ -160,7 +161,7 @@ class FeedFragment : Fragment() {
             val itemCount = firmwaresAdapter.itemCount
             firmwaresAdapter.clear()
             firmwaresAdapter.notifyItemRangeRemoved(0, itemCount)
-            FirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            FetchFirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 
         feedRefreshLayout.setOnRefreshListener {
