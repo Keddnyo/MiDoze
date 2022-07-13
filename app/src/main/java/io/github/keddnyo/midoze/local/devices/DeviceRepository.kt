@@ -8,7 +8,7 @@ class DeviceRepository {
         return when (deviceSource.toString()) {
             "12" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "20" -> DeviceData("Amazfit Bip 2", R.drawable.amazfit_bip_s) // TODO: May be replace
+            "20" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip_s) // TODO: May be replace
             "24" -> DeviceData("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
             "25" -> DeviceData("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
             "28" -> DeviceData("Amazfit Bip S", R.drawable.amazfit_bip_s)
@@ -62,7 +62,7 @@ class DeviceRepository {
 
             "104" -> DeviceData("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
 
-            "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
+            // "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
             "200" -> DeviceData("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex) // TODO: May be replace
             "206" -> DeviceData("Amazfit GTR 2e CH", R.drawable.amazfit_gtr)
@@ -73,8 +73,8 @@ class DeviceRepository {
             "211" -> DeviceData("Xiaomi Mi Band 6 NFC", R.drawable.mi_band_6)
             "212" -> DeviceData("Xiaomi Mi Band 6 GL", R.drawable.mi_band_6)
 
-            "224" -> "Amazfit GTS 3 CH"
-            "225" -> "Amazfit GTS 3 GL"
+            "224" -> DeviceData("Amazfit GTS 3 CH", R.drawable.amazfit_gts_3)
+            "225" -> DeviceData("Amazfit GTS 3 GL", R.drawable.amazfit_gts_3)
             "226" -> DeviceData("Amazfit GTR 3 CH", R.drawable.amazfit_gtr_3)
             "227" -> DeviceData("Amazfit GTR 3 GL", R.drawable.amazfit_gtr_3)
             "229" -> DeviceData("Amazfit GTR 3 Pro CH", R.drawable.amazfit_gtr_3)
@@ -86,16 +86,16 @@ class DeviceRepository {
             "244" -> DeviceData("Amazfit GTR 2", R.drawable.amazfit_gtr)
             "245" -> DeviceData("Amazfit GTS 2", R.drawable.amazfit_gts_2)
 
-            "254" -> "Amazfit Band 7"
-            "256" -> "Amazfit Bip 3 Pro"
-            "257" -> "Amazfit Bip 3"
+            "254" -> DeviceData("Amazfit Band 7", R.drawable.amazfit_band_5) // TODO: May be replace
+            "256" -> DeviceData("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
+            "257" -> DeviceData("Amazfit Bip 3", R.drawable.amazfit_bip_3)
 
             "262" -> DeviceData("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 257
             "263" -> DeviceData("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 258
             "264" -> DeviceData("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 259
             "265" -> DeviceData("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 260
 
-            else -> "Unknown $deviceSource $productionSource"
+            else -> DeviceData("Unknown $deviceSource $productionSource", R.drawable.unknown)
         }
     }
 }
