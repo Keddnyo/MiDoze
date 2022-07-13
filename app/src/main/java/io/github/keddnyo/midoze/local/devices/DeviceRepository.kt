@@ -39,52 +39,52 @@ class DeviceRepository {
             "59" -> DeviceData("Xiaomi Mi Band 5", R.drawable.mi_band_5_nfc)
 
             "61" -> DeviceData("Zepp E Square CH", R.drawable.zepp_e_square)
-            "62" -> "Amazfit Neo"
-            "63" -> "Amazfit GTR 2 CH"
-            "64" -> "Amazfit GTR 2 GL"
-            "67" -> "Amazfit Pop Pro"
-            "68" -> "Amazfit Pop"
-            "69" -> "Amazfit Bip U Pro"
+            "62" -> DeviceData("Amazfit Neo", R.drawable.amazfit_neo)
+            "63" -> DeviceData("Amazfit GTR 2 CH", R.drawable.amazfit_gtr)
+            "64" -> DeviceData("Amazfit GTR 2 GL", R.drawable.amazfit_gtr)
+            "67" -> DeviceData("Amazfit Pop Pro", R.drawable.amazfit_bip_u)
+            "68" -> DeviceData("Amazfit Pop", R.drawable.amazfit_bip_u)
+            "69" -> DeviceData("Amazfit Bip U Pro", R.drawable.amazfit_bip_u)
 
-            "70" -> "Amazfit Bip U"
+            "70" -> DeviceData("Amazfit Bip U", R.drawable.amazfit_bip_u)
             "71" -> DeviceData("Amazfit X GL", R.drawable.amazfit_x)
             "73" -> DeviceData("Amazfit Band 5", R.drawable.amazfit_band_5)
             "76" -> DeviceData("Zepp Z GL", R.drawable.zepp_z)
-            "77" -> "Amazfit GTS 2 CH"
-            "78" -> "Amazfit GTS 2 GL"
+            "77" -> DeviceData("Amazfit GTS 2 CH", R.drawable.amazfit_gts_2)
+            "78" -> DeviceData("Amazfit GTS 2 GL", R.drawable.amazfit_gts_2)
 
             "81" -> DeviceData("Zepp E Circle GL", R.drawable.zepp_e_circle)
             "82" -> DeviceData("Zepp E Square GL", R.drawable.zepp_e_square)
-            "83" -> "Amazfit T-Rex Pro CH"
+            "83" -> DeviceData("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex) // TODO: May be replace
 
-            "92" -> "Amazfit GTS 2 mini"
-            "98" -> "Amazfit GTR 2 eSIM"
+            "92" -> DeviceData("Amazfit GTS 2 mini", R.drawable.amazfit_gts_2_mini)
+            "98" -> DeviceData("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
-            "104" -> "Amazfit GTS 2 Mini"
+            "104" -> DeviceData("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
 
             "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "200" -> "Amazfit T-Rex Pro GL"
-            "206" -> "Amazfit GTR 2e CH"
-            "207" -> "Amazfit GTS 2e CH"
-            "209" -> "Amazfit GTR 2e GL"
+            "200" -> DeviceData("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex) // TODO: May be replace
+            "206" -> DeviceData("Amazfit GTR 2e CH", R.drawable.amazfit_gtr)
+            "207" -> DeviceData("Amazfit GTS 2e CH", R.drawable.amazfit_gts_2)
+            "209" -> DeviceData("Amazfit GTR 2e GL", R.drawable.amazfit_gtr)
 
-            "210" -> "Amazfit GTS 2e GL"
+            "210" -> DeviceData("Amazfit GTS 2e GL", R.drawable.amazfit_gts_2)
             "211" -> DeviceData("Xiaomi Mi Band 6 NFC", R.drawable.mi_band_6)
             "212" -> DeviceData("Xiaomi Mi Band 6 GL", R.drawable.mi_band_6)
 
             "224" -> "Amazfit GTS 3 CH"
             "225" -> "Amazfit GTS 3 GL"
-            "226" -> "Amazfit GTR 3 CH"
-            "227" -> "Amazfit GTR 3 GL"
-            "229" -> "Amazfit GTR 3 Pro CH"
+            "226" -> DeviceData("Amazfit GTR 3 CH", R.drawable.amazfit_gtr_3)
+            "227" -> DeviceData("Amazfit GTR 3 GL", R.drawable.amazfit_gtr_3)
+            "229" -> DeviceData("Amazfit GTR 3 Pro CH", R.drawable.amazfit_gtr_3)
 
-            "230" -> "Amazfit GTR 3 Pro GL"
+            "230" -> DeviceData("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
-            "242" -> "Amazfit GTR 3 Pro Ltd"
-            "243" -> "Amazfit GTR 3 Pro Ltd"
-            "244" -> "Amazfit GTR 2"
-            "245" -> "Amazfit GTS 2"
+            "242" -> DeviceData("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
+            "243" -> DeviceData("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
+            "244" -> DeviceData("Amazfit GTR 2", R.drawable.amazfit_gtr)
+            "245" -> DeviceData("Amazfit GTS 2", R.drawable.amazfit_gts_2)
 
             "254" -> "Amazfit Band 7"
             "256" -> "Amazfit Bip 3 Pro"
