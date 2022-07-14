@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/filters_host_and_region_title">
+    <PreferenceCategory app:title="@string/filters_search_title">
 
         <ListPreference
             app:defaultValue="1"
@@ -19,6 +19,13 @@
             app:key="filters_request_region"
             app:title="@string/filters_request_region"
             app:useSimpleSummaryProvider="true" />
+
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:icon="@drawable/ic_search"
+            app:key="filters_advanced_search"
+            app:summary="@string/filters_advanced_search_summary"
+            app:title="@string/filters_advanced_search" />
 
     </PreferenceCategory>
 

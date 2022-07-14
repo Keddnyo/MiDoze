@@ -36,8 +36,8 @@
     <string name="settings_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
 
-    <string name="filters_host_and_region_title">Host &amp; region</string>
-    <string name="filters_app_title">Application</string>
+    <string name="filters_search_title">Search</string>
+    <string name="filters_app_title">App</string>
     <string name="filters_request_region">Region</string>
     <string name="filters_request_host">Host</string>
     <string name="filters_request_zepp_app_version">Zepp version</string>
@@ -45,6 +45,8 @@
     <string name="filters_request_zepp_life_app_version">Zepp Life version</string>
     <string name="filters_request_zepp_life_app_version_value" translatable="false">6.2.1_50602</string>
     <string name="filters_app_version_load_defaults">Load versions defaults</string>
+    <string name="filters_advanced_search">Advanced search</string>
+    <string name="filters_advanced_search_summary">May take a very long time</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>

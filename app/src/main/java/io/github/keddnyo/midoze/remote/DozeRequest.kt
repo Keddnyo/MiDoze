@@ -52,8 +52,24 @@ class DozeRequest {
         var deviceName: String
 
         runBlocking {
-            for (productionSource in 256..270) {
-                for (deviceSource in 0..350) {
+            val prefs: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context)
+            val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
+
+            val productionSourceLimit = if (isAdvancedSearch) {
+                270
+            } else {
+                258
+            }
+
+            val deviceSourceLimit = if (isAdvancedSearch) {
+                350
+            } else {
+                110
+            }
+
+            for (productionSource in 256..productionSourceLimit) {
+                for (deviceSource in 0..deviceSourceLimit) {
                     firmwareData = DozeRequest().getFirmwareData(
                         productionSource.toString(),
                         deviceSource.toString(),
@@ -88,8 +104,7 @@ class DozeRequest {
                                 null
                             }).toString()
                         }
-                        val prefs: SharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(context)
+
                         val host = prefs.getString("filters_request_host", "1").toString()
                         val region = prefs.getString("filters_request_region", "1").toString()
                         val zeppVersion = prefs.getString("filters_zepp_app_version", getString(R.string.filters_request_zepp_app_version_value)).toString()
@@ -105,7 +120,7 @@ class DozeRequest {
                                 changeLog = get("changeLog"),
                                 deviceSource = get("deviceSource"),
                                 productionSource = get("productionSource"),
-                                request = Request(host = host, region = region, zeppVersion =  zeppVersion, zeppLifeVersion = zeppLifeVersion)
+                                request = Request(host = host, region = region, isAdvancedSearch = isAdvancedSearch, zeppVersion =  zeppVersion, zeppLifeVersion = zeppLifeVersion)
                             )
                         )
                     }

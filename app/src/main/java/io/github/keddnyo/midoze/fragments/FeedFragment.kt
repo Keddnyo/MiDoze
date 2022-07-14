@@ -165,8 +165,10 @@ class FeedFragment : Fragment() {
         firmwaresRefreshLayout.setOnRefreshListener {
             val prefs: SharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(context)
+
             val host = prefs.getString("filters_request_host", "1").toString()
             val region = prefs.getString("filters_request_region", "1").toString()
+            val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
             val zeppVersion = prefs.getString(
                 "filters_zepp_app_version",
                 getString(R.string.filters_request_zepp_app_version_value)
@@ -181,6 +183,7 @@ class FeedFragment : Fragment() {
             if (!(
                         request.host == host &&
                         request.region == region &&
+                        request.isAdvancedSearch == isAdvancedSearch &&
                         request.zeppVersion == zeppVersion &&
                         request.zeppLifeVersion == zeppLifeVersion)
             ) {
