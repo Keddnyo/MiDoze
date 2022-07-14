@@ -113,11 +113,10 @@ class FeedFragment : Fragment() {
                         val zeppLifeDeviceArrayList =
                             DozeRequest().getFirmwareLatest(context, getAppData(true))
 
-                        for (i in zeppLifeDeviceArrayList) {
+                        for (i in zeppDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
-                        for (i in zeppDeviceArrayList) {
-                            if (deviceArrayList.contains(i))
+                        for (i in zeppLifeDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
 
