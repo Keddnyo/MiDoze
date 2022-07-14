@@ -54,7 +54,7 @@ class DozeRequest {
         runBlocking {
             val prefs: SharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(context)
-            val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
+            val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
 
             val productionSourceLimit = if (isAdvancedSearch) {
                 270

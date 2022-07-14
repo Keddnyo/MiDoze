@@ -23,9 +23,9 @@
         <CheckBoxPreference
             app:defaultValue="false"
             app:icon="@drawable/ic_search"
-            app:key="filters_advanced_search"
-            app:summary="@string/filters_advanced_search_summary"
-            app:title="@string/filters_advanced_search" />
+            app:key="filters_deep_search"
+            app:summary="@string/filters_deep_search_summary"
+            app:title="@string/filters_deep_search" />
 
     </PreferenceCategory>
 

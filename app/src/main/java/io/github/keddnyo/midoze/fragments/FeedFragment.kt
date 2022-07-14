@@ -171,7 +171,7 @@ class FeedFragment : Fragment() {
 
                 val host = prefs.getString("filters_request_host", "1").toString()
                 val region = prefs.getString("filters_request_region", "1").toString()
-                val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
+                val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
                 val zeppVersion = prefs.getString(
                     "filters_zepp_app_version",
                     getString(R.string.filters_request_zepp_app_version_value)
