@@ -191,6 +191,7 @@ class FeedFragment : Fragment() {
             if (prefs.getBoolean("allow_exit", true)) {
                 setData()
             } else {
+                firmwaresRefreshLayout.isRefreshing = false
                 Display().showToast(context, getString(R.string.feed_wait_for_process))
             }
         }
