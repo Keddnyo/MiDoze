@@ -12,6 +12,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.utils.StringUtils
 import kotlin.collections.ArrayList
 
 class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
@@ -39,7 +40,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         holder.deviceNameTextView.text = firmwaresDataArray[position].wearable.name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].wearable.image)
-        holder.firmwareReleaseDateTextView.text = firmwaresDataArray[position].buildTime
+        holder.firmwareReleaseDateTextView.text = StringUtils().getLocalFirmwareDate(firmwaresDataArray[position].buildTime)
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
 
         fun openFirmwareActivity(

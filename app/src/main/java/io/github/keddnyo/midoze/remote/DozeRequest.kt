@@ -116,7 +116,7 @@ class DozeRequest {
                                 application = application,
                                 firmware = firmwareData,
                                 firmwareVersion = firmwareData.getString("firmwareVersion"),
-                                buildTime = StringUtils().getLocalFirmwareDate(get("buildTime")),
+                                buildTime = get("buildTime"),
                                 changeLog = get("changeLog"),
                                 deviceSource = get("deviceSource"),
                                 productionSource = get("productionSource"),
