@@ -41,130 +41,36 @@ class DozeRequest {
         return false
     }
 
-    fun getFirmwareLatestByCustomRequest(
-        context: Context,
-        application: Application,
-        deviceSource: String,
-        productionSource: String
-    ): FirmwareData? = with(context as Activity) {
-        val firmwareData = runBlocking {
-            DozeRequest().getFirmwareData(
-                productionSource,
-                deviceSource,
-                application.version,
-                application.name,
-                context
-            )
-        }
-
-        return setFirmwareData(
-            context = context,
-            application = application,
-            firmwareData = firmwareData,
-            deviceSource = deviceSource,
-            productionSource = productionSource
-        )
-    }
-
-    private fun setFirmwareData(
-        context: Context,
-        application: Application,
-        firmwareData: JSONObject,
-        deviceSource: String,
-        productionSource: String
-    ): FirmwareData? = with(context as Activity) {
-        return if (firmwareData.has("firmwareVersion")) {
-            val deviceData = DeviceRepository().getDeviceNameByCode(deviceSource.toInt(), productionSource.toInt())
-
-            val deviceName =
-                deviceData.name
-
-            val devicePreview = deviceData.image
-
-            fun get(key: String): String {
-                val f = firmwareData
-
-                return if (f.has(key)) {
-                    f.getString(key)
-                } else ({
-                    null
-                }).toString()
-            }
-
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
-            val host = prefs.getString("filters_request_host", "1").toString()
-            val region = prefs.getString("filters_request_region", "1").toString()
-            val zeppVersion = prefs.getString(
-                "filters_zepp_app_version",
-                getString(R.string.filters_request_zepp_app_version_value)
-            ).toString()
-            val zeppLifeVersion = prefs.getString(
-                "filters_zepp_life_app_version",
-                getString(R.string.filters_request_zepp_life_app_version_value)
-            ).toString()
-
-            FirmwareData(
-                wearable = Wearable(deviceName, devicePreview),
-                application = application,
-                firmware = firmwareData,
-                firmwareVersion = firmwareData.getString("firmwareVersion"),
-                buildTime = get("buildTime"),
-                changeLog = get("changeLog"),
-                deviceSource = get("deviceSource"),
-                productionSource = get("productionSource"),
-                request = Request(
-                    host = host,
-                    region = region,
-                    isAdvancedSearch = false,
-                    zeppVersion = zeppVersion,
-                    zeppLifeVersion = zeppLifeVersion
-                )
-            )
-        } else {
-            null
-        }
-    }
-
     fun getFirmwareLatest(
         context: Context,
         application: Application
     ): ArrayList<FirmwareData> = with(context as Activity) {
         val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
-        runBlocking {
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
-            val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
+        val prefs: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
+        val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
 
-            val productionSourceLimit = if (isAdvancedSearch) {
-                270
-            } else {
-                257
-            }
+        val productionSourceLimit = if (isAdvancedSearch) {
+            270
+        } else {
+            257
+        }
 
-            val deviceSourceLimit = if (isAdvancedSearch) {
-                350
-            } else {
-                95
-            }
+        val deviceSourceLimit = if (isAdvancedSearch) {
+            350
+        } else {
+            95
+        }
 
-            for (productionSource in 256..productionSourceLimit) {
-                for (deviceSource in 0..deviceSourceLimit) {
-                    val firmwareData = DozeRequest().getFirmwareData(
-                        productionSource.toString(),
-                        deviceSource.toString(),
-                        application.version,
-                        application.name,
-                        context
-                    )
-
-                    setFirmwareData(
+        for (productionSource in 256..productionSourceLimit) {
+            for (deviceSource in 0..deviceSourceLimit) {
+                runBlocking {
+                    DozeRequest().getFirmwareData(
                         context = context,
-                        application = application,
-                        firmwareData = firmwareData,
                         deviceSource = deviceSource.toString(),
-                        productionSource = productionSource.toString()
+                        productionSource = productionSource.toString(),
+                        application = application
                     )?.let {
                         deviceArrayList.add(
                             it
@@ -177,17 +83,12 @@ class DozeRequest {
         return deviceArrayList
     }
 
-    fun getAppReleaseData(): JSONObject {
-        return JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
-    }
-
     suspend fun getFirmwareData(
-        productionSource: String,
+        context: Context,
         deviceSource: String,
-        appVersion: String,
-        appName: String,
-        context: Context
-    ): JSONObject = with(context as Activity) {
+        productionSource: String,
+        application: Application
+    ): FirmwareData? = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -250,7 +151,7 @@ class DozeRequest {
                 parameter("deviceSource", deviceSource)
                 parameter("fontVersion", "0")
                 parameter("fontFlag", "0")
-                parameter("appVersion", appVersion)
+                parameter("appVersion", application.version)
                 parameter("appid", "0")
                 parameter("callid", "0")
                 parameter("channel", "0")
@@ -278,7 +179,7 @@ class DozeRequest {
                 append("channel", "0")
                 append("user-agent", "0")
                 append("cv", "0")
-                append("appname", appName)
+                append("appname", application.name)
                 append("v", "0")
                 append("apptoken", "0")
                 append("lang", lang)
@@ -288,7 +189,58 @@ class DozeRequest {
                 append("accept", "*/*")
             }
         }
-        return JSONObject(response.bodyAsText())
+
+        val firmwareData = JSONObject(response.bodyAsText())
+
+        return if (firmwareData.has("firmwareVersion")) {
+            val deviceData = DeviceRepository().getDeviceNameByCode(deviceSource.toInt(), productionSource.toInt())
+
+            val deviceName =
+                deviceData.name
+
+            val devicePreview = deviceData.image
+
+            fun get(key: String): String {
+                val f = firmwareData
+
+                return if (f.has(key)) {
+                    f.getString(key)
+                } else ({
+                    null
+                }).toString()
+            }
+
+            val host = prefs.getString("filters_request_host", "1").toString()
+            val region = prefs.getString("filters_request_region", "1").toString()
+            val zeppVersion = prefs.getString(
+                "filters_zepp_app_version",
+                getString(R.string.filters_request_zepp_app_version_value)
+            ).toString()
+            val zeppLifeVersion = prefs.getString(
+                "filters_zepp_life_app_version",
+                getString(R.string.filters_request_zepp_life_app_version_value)
+            ).toString()
+
+            FirmwareData(
+                wearable = Wearable(deviceName, devicePreview),
+                application = application,
+                firmware = firmwareData,
+                firmwareVersion = firmwareData.getString("firmwareVersion"),
+                buildTime = get("buildTime"),
+                changeLog = get("changeLog"),
+                deviceSource = get("deviceSource"),
+                productionSource = get("productionSource"),
+                request = Request(
+                    host = host,
+                    region = region,
+                    isAdvancedSearch = false,
+                    zeppVersion = zeppVersion,
+                    zeppLifeVersion = zeppLifeVersion
+                )
+            )
+        } else {
+            null
+        }
     }
 
     fun getFirmwareFile(
@@ -322,5 +274,9 @@ class DozeRequest {
 
             downloadManager.enqueue(request)
         }
+    }
+
+    fun getAppReleaseData(): JSONObject {
+        return JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
     }
 }

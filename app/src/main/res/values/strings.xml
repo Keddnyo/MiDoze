@@ -14,7 +14,7 @@
     <string name="feed_title">Feed</string>
 
     <string name="feed_connectivity_error">Connectivity error</string>
-    <string name="feed_devices_not_found">Devices not found</string>
+    <string name="feed_devices_not_found">Device(-s) not found</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_changelog">Changelog</string>

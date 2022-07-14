@@ -76,14 +76,14 @@ class RequestActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             if (DozeRequest().isOnline(context)) {
                 val firmwareResponse = runBlocking {
-                    DozeRequest().getFirmwareLatestByCustomRequest(
+                    DozeRequest().getFirmwareData(
                         context,
+                        extrasDeviceSourceEditText.text.toString(),
+                        extrasProductionSourceEditText.text.toString(),
                         Application(
                             extrasAppNameEditText.text.toString(),
                             extrasAppVersionEditText.text.toString()
                         ),
-                        extrasDeviceSourceEditText.text.toString(),
-                        extrasProductionSourceEditText.text.toString(),
                     )
                 }
 
@@ -101,7 +101,7 @@ class RequestActivity : AppCompatActivity() {
 
                     context.startActivity(intent)
                 } else {
-                    Display().showToast(context, getString(R.string.feed_connectivity_error))
+                    Display().showToast(context, getString(R.string.feed_devices_not_found))
                 }
 
 
