@@ -59,13 +59,13 @@ class DozeRequest {
             val productionSourceLimit = if (isAdvancedSearch) {
                 270
             } else {
-                258
+                257
             }
 
             val deviceSourceLimit = if (isAdvancedSearch) {
                 350
             } else {
-                110
+                95
             }
 
             for (productionSource in 256..productionSourceLimit) {
