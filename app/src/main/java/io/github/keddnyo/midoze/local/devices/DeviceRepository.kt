@@ -1,6 +1,7 @@
 package io.github.keddnyo.midoze.local.devices
 
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.local.dataModels.Wearable
 
 @Suppress("UNUSED_EXPRESSION")
 class DeviceRepository {

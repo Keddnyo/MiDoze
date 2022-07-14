@@ -5,19 +5,19 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.*
-import android.widget.Button
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.apps.Application
-import io.github.keddnyo.midoze.local.devices.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 
@@ -41,6 +41,7 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
+        val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val feedConnectivityError: ConstraintLayout = findViewById(R.id.feedConnectivityError)
         val feedDevicesNotFound: ConstraintLayout = findViewById(R.id.feedDevicesNotFound)
@@ -69,6 +70,7 @@ class FeedFragment : Fragment() {
             @Deprecated("Deprecated in Java")
             override fun onPreExecute() {
                 super.onPreExecute()
+                firmwaresRefreshLayout.isRefreshing = false
                 feedProgressBar.visibility = View.VISIBLE
                 feedConnectivityError.visibility = View.GONE
                 feedDevicesNotFound.visibility = View.GONE
@@ -111,10 +113,11 @@ class FeedFragment : Fragment() {
                         val zeppLifeDeviceArrayList =
                             DozeRequest().getFirmwareLatest(context, getAppData(true))
 
-                        for (i in zeppDeviceArrayList) {
+                        for (i in zeppLifeDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
-                        for (i in zeppLifeDeviceArrayList) {
+                        for (i in zeppDeviceArrayList) {
+                            if (deviceArrayList.contains(i))
                             deviceArrayList.add(i)
                         }
 
@@ -155,6 +158,21 @@ class FeedFragment : Fragment() {
             firmwaresAdapter.clear()
             firmwaresAdapter.notifyItemRangeRemoved(0, itemCount)
             FetchFirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        }
+
+        firmwaresRefreshLayout.setOnRefreshListener {
+            val prefs: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context)
+            val host = prefs.getString("filters_request_host", "1").toString()
+            val region = prefs.getString("filters_request_region", "1").toString()
+
+            val request = firmwaresAdapter.getItems()[0].request
+
+            if (request.host != host || request.region != region) {
+                prefs.edit().putString("deviceArray", "").apply()
+            }
+
+            setData()
         }
 
         setData()

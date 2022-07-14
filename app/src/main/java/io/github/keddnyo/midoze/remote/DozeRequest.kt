@@ -14,10 +14,11 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.apps.Application
-import io.github.keddnyo.midoze.local.devices.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Request
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
-import io.github.keddnyo.midoze.local.devices.Wearable
+import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -87,6 +88,10 @@ class DozeRequest {
                                 null
                             }).toString()
                         }
+                        val prefs: SharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(context)
+                        val host = prefs.getString("filters_request_host", "1").toString()
+                        val region = prefs.getString("filters_request_region", "1").toString()
 
                         deviceArrayList.add(
                             FirmwareData(
@@ -98,6 +103,7 @@ class DozeRequest {
                                 changeLog = get("changeLog"),
                                 deviceSource = get("deviceSource"),
                                 productionSource = get("productionSource"),
+                                request = Request(host = host, region = region)
                             )
                         )
                     }

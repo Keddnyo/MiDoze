@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.devices
+package io.github.keddnyo.midoze.local.dataModels
 
 data class Wearable(
     val name: String,

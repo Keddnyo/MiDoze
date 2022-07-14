@@ -1,6 +1,5 @@
-package io.github.keddnyo.midoze.local.devices
+package io.github.keddnyo.midoze.local.dataModels
 
-import io.github.keddnyo.midoze.local.apps.Application
 import org.json.JSONObject
 
 data class FirmwareData(
@@ -11,5 +10,6 @@ data class FirmwareData(
     val buildTime: String,
     val changeLog: String,
     val deviceSource: String,
-    val productionSource: String
+    val productionSource: String,
+    val request: Request
 )
