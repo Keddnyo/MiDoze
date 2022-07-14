@@ -8,6 +8,8 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.main.FirmwareActivity
+import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.runBlocking
@@ -23,11 +25,13 @@ class RequestActivity : AppCompatActivity() {
 
         Display().switchDarkMode(this)
 
-        val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
+        val extrasDeviceSourceEditText: TextInputEditText =
+            findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =
             findViewById(R.id.extrasProductionSourceEditText)
         val extrasAppNameEditText: TextInputEditText = findViewById(R.id.extrasAppNameEditText)
-        val extrasAppVersionEditText: TextInputEditText = findViewById(R.id.extrasAppVersionEditText)
+        val extrasAppVersionEditText: TextInputEditText =
+            findViewById(R.id.extrasAppVersionEditText)
         val submitButton: MaterialButton = findViewById(R.id.extrasSubmitButton)
         val appButton: MaterialButton = findViewById(R.id.extras_app_button)
         val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
@@ -71,20 +75,40 @@ class RequestActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             if (DozeRequest().isOnline(context)) {
-                val firmwareResponse =
-                    runBlocking {
-                        DozeRequest().getFirmwareData(
-                            extrasProductionSourceEditText.text.toString(),
-                            extrasDeviceSourceEditText.text.toString(),
-                            extrasAppVersionEditText.text.toString(),
+                val firmwareResponse = runBlocking {
+                    DozeRequest().getFirmwareLatestByCustomRequest(
+                        context,
+                        Application(
                             extrasAppNameEditText.text.toString(),
-                            context
-                        )
-                    }
+                            extrasAppVersionEditText.text.toString()
+                        ),
+                        extrasDeviceSourceEditText.text.toString(),
+                        extrasProductionSourceEditText.text.toString(),
+                    )
+                }
 
-                val intent = Intent(context, ResponseActivity::class.java)
-                intent.putExtra("json", firmwareResponse.toString())
-                startActivity(intent)
+                val intent = Intent(context, FirmwareActivity::class.java)
+
+                if (firmwareResponse != null) {
+                    intent.putExtra("deviceName", firmwareResponse.wearable.name)
+                    intent.putExtra("deviceIcon", firmwareResponse.wearable.image)
+                    intent.putExtra("firmwareData", firmwareResponse.firmware.toString())
+
+                    intent.putExtra("productionSource", firmwareResponse.productionSource)
+                    intent.putExtra("deviceSource", firmwareResponse.deviceSource)
+                    intent.putExtra("appName", firmwareResponse.application.name)
+                    intent.putExtra("appVersion", firmwareResponse.application.version)
+
+                    context.startActivity(intent)
+                } else {
+                    Display().showToast(context, getString(R.string.feed_connectivity_error))
+                }
+
+
+
+//                val intent = Intent(context, ResponseActivity::class.java)
+//                intent.putExtra("json", firmwareResponse.toString())
+//                startActivity(intent)
             } else {
                 Display().showToast(context, getString(R.string.feed_connectivity_error))
             }
@@ -102,8 +126,10 @@ class RequestActivity : AppCompatActivity() {
 
         val zeppAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
         val zeppLifeAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
-        val zeppAppVersionCustom = prefs.getString("filters_zepp_app_version", zeppAppVersionDefault)
-        val zeppLifeAppVersionCustom = prefs.getString("filters_zepp_life_app_version", zeppLifeAppVersionDefault)
+        val zeppAppVersionCustom =
+            prefs.getString("filters_zepp_app_version", zeppAppVersionDefault)
+        val zeppLifeAppVersionCustom =
+            prefs.getString("filters_zepp_life_app_version", zeppLifeAppVersionDefault)
 
         fun setZeppAppData() {
             extrasAppNameEditText.setText(getString(R.string.zepp_app_name_value))
