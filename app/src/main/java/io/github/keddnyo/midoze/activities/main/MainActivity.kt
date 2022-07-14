@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.AsyncTask
 import android.os.Bundle
@@ -148,7 +149,13 @@ class MainActivity : AppCompatActivity() {
         if (viewPager.currentItem != 0) {
             viewPager.currentItem = 0
         } else {
-            super.onBackPressed()
+            val prefs: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context)
+            if (prefs.getBoolean("allow_exit", true)) {
+                super.onBackPressed()
+            } else {
+                Display().showToast(context, getString(R.string.feed_wait_for_process))
+            }
         }
     }
 }

@@ -74,6 +74,7 @@ class FeedFragment : Fragment() {
                 feedProgressBar.visibility = View.VISIBLE
                 feedConnectivityError.visibility = View.GONE
                 feedDevicesNotFound.visibility = View.GONE
+                editor.putBoolean("allow_exit", false).apply()
             }
 
             @Deprecated("Deprecated in Java")
@@ -113,10 +114,10 @@ class FeedFragment : Fragment() {
                         val zeppLifeDeviceArrayList =
                             DozeRequest().getFirmwareLatest(context, getAppData(true))
 
-                        for (i in zeppDeviceArrayList) {
+                        for (i in zeppLifeDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
-                        for (i in zeppLifeDeviceArrayList) {
+                        for (i in zeppDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
 
@@ -149,6 +150,8 @@ class FeedFragment : Fragment() {
                 if (DozeRequest().isOnline(context) && firmwaresAdapter.itemCount == 0) {
                     feedDevicesNotFound.visibility = View.VISIBLE
                 }
+
+                editor.putBoolean("allow_exit", true).apply()
             }
         }
 
@@ -164,10 +167,23 @@ class FeedFragment : Fragment() {
                 PreferenceManager.getDefaultSharedPreferences(context)
             val host = prefs.getString("filters_request_host", "1").toString()
             val region = prefs.getString("filters_request_region", "1").toString()
+            val zeppVersion = prefs.getString(
+                "filters_zepp_app_version",
+                getString(R.string.filters_request_zepp_app_version_value)
+            ).toString()
+            val zeppLifeVersion = prefs.getString(
+                "filters_zepp_life_app_version",
+                getString(R.string.filters_request_zepp_life_app_version_value)
+            ).toString()
 
             val request = firmwaresAdapter.getItems()[0].request
 
-            if (request.host != host || request.region != region) {
+            if (!(
+                        request.host == host &&
+                        request.region == region &&
+                        request.zeppVersion == zeppVersion &&
+                        request.zeppLifeVersion == zeppLifeVersion)
+            ) {
                 prefs.edit().putString("deviceArray", "").apply()
             }
 

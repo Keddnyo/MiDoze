@@ -92,6 +92,8 @@ class DozeRequest {
                             PreferenceManager.getDefaultSharedPreferences(context)
                         val host = prefs.getString("filters_request_host", "1").toString()
                         val region = prefs.getString("filters_request_region", "1").toString()
+                        val zeppVersion = prefs.getString("filters_zepp_app_version", getString(R.string.filters_request_zepp_app_version_value)).toString()
+                        val zeppLifeVersion = prefs.getString("filters_zepp_life_app_version", getString(R.string.filters_request_zepp_life_app_version_value)).toString()
 
                         deviceArrayList.add(
                             FirmwareData(
@@ -103,7 +105,7 @@ class DozeRequest {
                                 changeLog = get("changeLog"),
                                 deviceSource = get("deviceSource"),
                                 productionSource = get("productionSource"),
-                                request = Request(host = host, region = region)
+                                request = Request(host = host, region = region, zeppVersion =  zeppVersion, zeppLifeVersion = zeppLifeVersion)
                             )
                         )
                     }

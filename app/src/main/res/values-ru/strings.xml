@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="compatibility_mode">Режим совместимости</string>
+    <string name="feed_wait_for_process">Дождитесь получения данных</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
