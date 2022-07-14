@@ -59,7 +59,9 @@ class FeedFragment : Fragment() {
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
 
-        val isOnline = DozeRequest().isOnline(context)
+        fun isOnline(): Boolean {
+            return DozeRequest().isOnline(context)
+        }
 
         class FetchFirmwareData :
             AsyncTask<Void?, Void?, Void>() {
@@ -108,7 +110,7 @@ class FeedFragment : Fragment() {
                         }
                     }
 
-                    if (isOnline) {
+                    if (isOnline()) {
                         val zeppDeviceArrayList =
                             DozeRequest().getFirmwareLatest(context, getAppData(false))
                         val zeppLifeDeviceArrayList =
@@ -163,34 +165,34 @@ class FeedFragment : Fragment() {
         }
 
         firmwaresRefreshLayout.setOnRefreshListener {
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
+            if (firmwaresAdapter.itemCount != 0) {
+                val prefs: SharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(context)
 
-            val host = prefs.getString("filters_request_host", "1").toString()
-            val region = prefs.getString("filters_request_region", "1").toString()
-            val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
-            val zeppVersion = prefs.getString(
-                "filters_zepp_app_version",
-                getString(R.string.filters_request_zepp_app_version_value)
-            ).toString()
-            val zeppLifeVersion = prefs.getString(
-                "filters_zepp_life_app_version",
-                getString(R.string.filters_request_zepp_life_app_version_value)
-            ).toString()
+                val host = prefs.getString("filters_request_host", "1").toString()
+                val region = prefs.getString("filters_request_region", "1").toString()
+                val isAdvancedSearch = prefs.getBoolean("filters_advanced_search", false)
+                val zeppVersion = prefs.getString(
+                    "filters_zepp_app_version",
+                    getString(R.string.filters_request_zepp_app_version_value)
+                ).toString()
+                val zeppLifeVersion = prefs.getString(
+                    "filters_zepp_life_app_version",
+                    getString(R.string.filters_request_zepp_life_app_version_value)
+                ).toString()
 
-            val request = firmwaresAdapter.getItems()[0].request
+                val request = firmwaresAdapter.getItems()[0].request
 
-            if (!(
-                        request.host == host &&
-                        request.region == region &&
-                        request.isAdvancedSearch == isAdvancedSearch &&
-                        request.zeppVersion == zeppVersion &&
-                        request.zeppLifeVersion == zeppLifeVersion)
-            ) {
-                prefs.edit().putString("deviceArray", "").apply()
+                if (!(request.host == host && request.region == region && request.isAdvancedSearch == isAdvancedSearch && request.zeppVersion == zeppVersion && request.zeppLifeVersion == zeppLifeVersion)) {
+                    prefs.edit().putString("deviceArray", "").apply()
+                }
             }
 
-            setData()
+            if (prefs.getBoolean("allow_exit", true)) {
+                setData()
+            } else {
+                Display().showToast(context, getString(R.string.feed_wait_for_process))
+            }
         }
 
         setData()
