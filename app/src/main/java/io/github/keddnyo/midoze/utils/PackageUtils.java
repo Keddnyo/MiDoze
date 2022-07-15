@@ -8,7 +8,9 @@ public class PackageUtils {
     public String getPackageVersion(Context context, String packageName) {
         try {
             PackageInfo eInfo = context.getPackageManager().getPackageInfo(packageName, 0);
-            return eInfo.versionName;
+            String version = eInfo.versionName;
+            int build = eInfo.versionCode;
+            return version + "_" + build;
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
