@@ -20,7 +20,7 @@ class AppUpdates(private val prefs: SharedPreferences, val context: Context) :
     @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg p0: Void?): Void? = with(context) {
         if (prefs.getBoolean("settings_app_check_updates",
-                true) && DozeRequest().isOnline(context)
+                true) && DozeRequest().getHostReachable() != null
         ) {
             releaseData = DozeRequest().getAppReleaseData()
         }

@@ -4,15 +4,6 @@
 
         <ListPreference
             app:defaultValue="1"
-            app:entries="@array/request_host_entries"
-            app:entryValues="@array/request_host_selector_entryValues"
-            app:icon="@drawable/ic_request_host"
-            app:key="filters_request_host"
-            app:title="@string/filters_request_host"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="1"
             app:entries="@array/request_region_entries"
             app:entryValues="@array/request_region_selector_entryValues"
             app:icon="@drawable/ic_request_region"

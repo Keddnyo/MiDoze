@@ -41,7 +41,6 @@
     <string name="filters_deep_search_summary">May take a very long time</string>
     <string name="filters_app_title">App</string>
     <string name="filters_request_region">Region</string>
-    <string name="filters_request_host">Host</string>
     <string name="filters_request_zepp_app_version">Zepp version</string>
     <string name="filters_request_zepp_app_version_value" translatable="false">6.10.1-play_100770</string>
     <string name="filters_request_zepp_life_app_version">Zepp Life version</string>
@@ -51,21 +50,6 @@
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
     <string name="settings_app_check_for_updates">Check for updates</string>
-
-    <string name="request_host_first" translatable="false">api.amazfit.com</string>
-    <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
-    <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
-
-    <string-array name="request_host_entries">
-        <item>@string/request_host_first</item>
-        <item>@string/request_host_second</item>
-        <item>@string/request_host_third</item>
-    </string-array>
-    <string-array name="request_host_selector_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
 
     <string-array name="request_region_entries">
         <item>USA</item>

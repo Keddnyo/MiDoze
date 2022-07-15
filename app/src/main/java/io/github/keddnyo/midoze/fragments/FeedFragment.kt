@@ -20,6 +20,7 @@ import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
+import kotlinx.coroutines.runBlocking
 
 class FeedFragment : Fragment() {
 
@@ -149,7 +150,7 @@ class FeedFragment : Fragment() {
 
                 feedProgressBar.visibility = View.GONE
 
-                if (DozeRequest().isOnline(context) && firmwaresAdapter.itemCount == 0) {
+                if (isOnline() != null && firmwaresAdapter.itemCount == 0) {
                     feedDevicesNotFound.visibility = View.VISIBLE
                 }
 

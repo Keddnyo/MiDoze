@@ -19,14 +19,18 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.dataModels.Request
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.dataModels.Wearable
-import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
+import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
+import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.URL
+import java.net.*
 
 class DozeRequest {
     fun isOnline(context: Context): Boolean {
@@ -39,6 +43,27 @@ class DozeRequest {
             }
         }
         return false
+    }
+
+    private fun isHostAvailable(host: String): Boolean {
+        val connection: HttpURLConnection = URL("https://$host").openConnection() as HttpURLConnection
+        connection.requestMethod = "HEAD"
+        val responseCode = runBlocking(Dispatchers.IO) {
+            connection.responseCode
+        }
+        return responseCode == 200
+    }
+
+    fun getHostReachable(): String? {
+        return if (isHostAvailable(MIDOZE_HOST_FIRST)) {
+            MIDOZE_HOST_FIRST
+        } else if (isHostAvailable(MIDOZE_HOST_SECOND)) {
+            MIDOZE_HOST_SECOND
+        } else if (isHostAvailable(MIDOZE_HOST_THIRD)) {
+            MIDOZE_HOST_THIRD
+        } else {
+            null
+        }
     }
 
     fun getFirmwareLatest(
@@ -92,18 +117,6 @@ class DozeRequest {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
-        val requestHost = when (prefs.getString("filters_request_host", "1")) {
-            "2" -> {
-                context.getString(R.string.request_host_second)
-            }
-            "3" -> {
-                context.getString(R.string.request_host_third)
-            }
-            else -> {
-                context.getString(R.string.request_host_first)
-            }
-        }
-
         val country = when (prefs.getString("filters_request_region", "1")) {
             "2" -> {
                 "CH"
@@ -137,7 +150,7 @@ class DozeRequest {
         val response = client.get {
             url {
                 protocol = URLProtocol.HTTPS
-                host = requestHost
+                host = getHostReachable().toString()
                 appendPathSegments("devices", "ALL", "hasNewVersion")
                 parameter("productId", "0")
                 parameter("vendorSource", "0")
@@ -183,7 +196,7 @@ class DozeRequest {
                 append("v", "0")
                 append("apptoken", "0")
                 append("lang", lang)
-                append("Host", requestHost)
+                append("Host", getHostReachable().toString())
                 append("Connection", "Keep-Alive")
                 append("accept-encoding", "gzip")
                 append("accept", "*/*")
@@ -193,7 +206,11 @@ class DozeRequest {
         val firmwareData = JSONObject(response.bodyAsText())
 
         return if (firmwareData.has("firmwareVersion")) {
-            val deviceData = DeviceRepository().getDeviceNameByCode(deviceSource.toInt(), productionSource.toInt())
+            val deviceData =
+                DeviceRepository().getDeviceNameByCode(
+                    deviceSource.toInt(),
+                    productionSource.toInt()
+                )
 
             val deviceName =
                 deviceData.name

@@ -57,7 +57,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
-        if (DozeRequest().isOnline(context)) {
+        if (DozeRequest().getHostReachable() != null) {
             runOnUiThread {
                 firmwareDownloadButton.visibility = View.VISIBLE
             }

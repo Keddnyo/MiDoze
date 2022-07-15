@@ -12,6 +12,7 @@ import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class RequestActivity : AppCompatActivity() {
@@ -73,8 +74,14 @@ class RequestActivity : AppCompatActivity() {
             extrasAppVersionEditText.setText(appVersionValue)
         }
 
+        val isOnline = runBlocking(Dispatchers.IO) {
+            DozeRequest().getHostReachable() != null
+        }
+
+        Display().showToast(context, DozeRequest().getHostReachable().toString())
+
         submitButton.setOnClickListener {
-            if (DozeRequest().isOnline(context)) {
+            if (isOnline) {
                 val firmwareResponse = runBlocking {
                     DozeRequest().getFirmwareData(
                         context,
