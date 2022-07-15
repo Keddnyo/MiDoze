@@ -22,6 +22,7 @@ import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
+import io.github.keddnyo.midoze.utils.DozeLocale
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -74,7 +75,7 @@ class DozeRequest {
 
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
-        val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
+        val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
         val productionSourceLimit = if (isAdvancedSearch) {
             270
@@ -119,32 +120,39 @@ class DozeRequest {
 
         val country = when (prefs.getString("filters_request_region", "1")) {
             "2" -> {
-                "CH"
+                "US"
             }
             "3" -> {
-                "RU"
+                "CH"
             }
             "4" -> {
+                "RU"
+            }
+            "5" -> {
                 "AR"
             }
             else -> {
-                "US"
+                DozeLocale().currentCountry
             }
         }
         val lang = when (prefs.getString("filters_request_region", "1")) {
             "2" -> {
-                "zh_CH"
+                "en_US"
             }
             "3" -> {
-                "ru_RU"
+                "zh_CH"
             }
             "4" -> {
+                "ru_RU"
+            }
+            "5" -> {
                 "ar_AR"
             }
             else -> {
-                "en_US"
+                DozeLocale().currentLanguage
             }
         }
+
 
         val client = HttpClient()
         val response = client.get {
@@ -227,16 +235,8 @@ class DozeRequest {
                 }).toString()
             }
 
-            val host = prefs.getString("filters_request_host", "1").toString()
             val region = prefs.getString("filters_request_region", "1").toString()
-            val zeppVersion = prefs.getString(
-                "filters_zepp_app_version",
-                getString(R.string.filters_request_zepp_app_version_value)
-            ).toString()
-            val zeppLifeVersion = prefs.getString(
-                "filters_zepp_life_app_version",
-                getString(R.string.filters_request_zepp_life_app_version_value)
-            ).toString()
+            val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
             FirmwareData(
                 wearable = Wearable(deviceName, devicePreview),
@@ -248,11 +248,8 @@ class DozeRequest {
                 deviceSource = get("deviceSource"),
                 productionSource = get("productionSource"),
                 request = Request(
-                    host = host,
                     region = region,
-                    isAdvancedSearch = false,
-                    zeppVersion = zeppVersion,
-                    zeppLifeVersion = zeppLifeVersion
+                    isAdvancedSearch = isAdvancedSearch,
                 )
             )
         } else {

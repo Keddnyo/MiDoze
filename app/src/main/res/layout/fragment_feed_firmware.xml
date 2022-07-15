@@ -58,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="Jun 22, 2022"
                 android:textSize="6pt" />
 

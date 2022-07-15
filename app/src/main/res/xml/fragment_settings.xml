@@ -14,32 +14,9 @@
         <CheckBoxPreference
             app:defaultValue="false"
             app:icon="@drawable/ic_search"
-            app:key="filters_deep_search"
+            app:key="filters_deep_scan"
             app:summary="@string/filters_deep_search_summary"
-            app:title="@string/filters_deep_search" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/filters_app_title">
-
-        <EditTextPreference
-            app:defaultValue="@string/filters_request_zepp_app_version_value"
-            app:icon="@drawable/ic_app_zepp"
-            app:key="filters_zepp_app_version"
-            app:title="@string/filters_request_zepp_app_version"
-            app:useSimpleSummaryProvider="true" />
-
-        <EditTextPreference
-            app:defaultValue="@string/filters_request_zepp_life_app_version_value"
-            app:icon="@drawable/ic_app_zepp_life"
-            app:key="filters_zepp_life_app_version"
-            app:title="@string/filters_request_zepp_life_app_version"
-            app:useSimpleSummaryProvider="true" />
-
-        <Preference
-            app:icon="@drawable/ic_update"
-            app:key="filters_app_version_load_defaults"
-            app:title="@string/filters_app_version_load_defaults" />
+            app:title="@string/filters_deep_scan" />
 
     </PreferenceCategory>
 

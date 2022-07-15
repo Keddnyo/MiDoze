@@ -22,34 +22,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val editor = prefs.edit()
-
-        fun getStringByKey(key: String): String? {
-            return prefs.getString(key, "") // Wrong but working
-        }
-
         findPreference<Preference>("settings_credentials")?.title =
             "${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME}"
-
-        findPreference<Preference>("filters_app_version_load_defaults")?.setOnPreferenceClickListener {
-            editor.putString(
-                "filters_zepp_app_version",
-                getString(R.string.filters_request_zepp_app_version_value)
-            )
-            editor.putString(
-                "filters_zepp_life_app_version",
-                getString(R.string.filters_request_zepp_life_app_version_value)
-            )
-            editor.apply()
-
-            findPreference<EditTextPreference>("filters_zepp_app_version")?.text =
-                getStringByKey("filters_zepp_app_version")
-            findPreference<EditTextPreference>("filters_zepp_life_app_version")?.text =
-                getStringByKey("filters_zepp_life_app_version")
-
-            true
-        }
 
         findPreference<Preference>("settings_credentials")?.setOnPreferenceClickListener {
             startActivity(

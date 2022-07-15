@@ -30,18 +30,15 @@
     <string name="settings_server_response">Ответ сервера</string>
 
     <string name="filters_search_title">Поиск</string>
-    <string name="filters_deep_search">Глубокий поиск</string>
+    <string name="filters_deep_scan">Глубокое сканирование</string>
     <string name="filters_deep_search_summary">Может занять долгое время</string>
-    <string name="filters_app_title">Приложение</string>
     <string name="filters_request_region">Регион</string>
-    <string name="filters_request_zepp_app_version">Версия Zepp</string>
-    <string name="filters_request_zepp_life_app_version">Версия Zepp Life</string>
-    <string name="filters_app_version_load_defaults">Сбросить версии</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
 
     <string-array name="request_region_entries">
+        <item>Авто</item>
         <item>США</item>
         <item>Китай</item>
         <item>Россия</item>

@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.activities.request
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,7 +12,12 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.remote.DozeRequest
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.PackageUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -71,25 +77,27 @@ class RequestActivity : AppCompatActivity() {
             extrasProductionSourceEditText.setText(productionSourceValue)
             extrasProductionSourceEditText.isEnabled = false
             extrasAppNameEditText.setText(appNameValue)
+            extrasAppNameEditText.isEnabled = false
             extrasAppVersionEditText.setText(appVersionValue)
+
+            importButton.visibility = View.GONE
+            appButton.visibility = View.GONE
         }
 
         val isOnline = runBlocking(Dispatchers.IO) {
             DozeRequest().getHostReachable() != null
         }
 
-        Display().showToast(context, DozeRequest().getHostReachable().toString())
-
         submitButton.setOnClickListener {
             if (isOnline) {
                 val firmwareResponse = runBlocking {
                     DozeRequest().getFirmwareData(
                         context,
-                        extrasDeviceSourceEditText.text.toString(),
-                        extrasProductionSourceEditText.text.toString(),
+                        extrasDeviceSourceEditText.text.toString().trim(),
+                        extrasProductionSourceEditText.text.toString().trim(),
                         Application(
-                            extrasAppNameEditText.text.toString(),
-                            extrasAppVersionEditText.text.toString()
+                            extrasAppNameEditText.text.toString().trim(),
+                            extrasAppVersionEditText.text.toString().trim()
                         ),
                     )
                 }
@@ -131,32 +139,17 @@ class RequestActivity : AppCompatActivity() {
             true
         }
 
-        val zeppAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
-        val zeppLifeAppVersionDefault = getString(R.string.filters_request_zepp_app_version_value)
-        val zeppAppVersionCustom =
-            prefs.getString("filters_zepp_app_version", zeppAppVersionDefault)
-        val zeppLifeAppVersionCustom =
-            prefs.getString("filters_zepp_life_app_version", zeppLifeAppVersionDefault)
-
         fun setZeppAppData() {
-            extrasAppNameEditText.setText(getString(R.string.zepp_app_name_value))
+            extrasAppNameEditText.setText(ZEPP_NAME)
             extrasAppVersionEditText.setText(
-                if (zeppAppVersionCustom != "") {
-                    zeppAppVersionCustom
-                } else {
-                    zeppAppVersionDefault
-                }
+                PackageUtils().getPackageVersion(context, ZEPP_NAME) ?: ZEPP_VERSION
             )
         }
 
         fun setZeppLifeAppData() {
-            extrasAppNameEditText.setText(getString(R.string.zepp_life_app_name_value))
+            extrasAppNameEditText.setText(ZEPP_LIFE_NAME)
             extrasAppVersionEditText.setText(
-                if (zeppLifeAppVersionCustom != "") {
-                    zeppLifeAppVersionCustom
-                } else {
-                    zeppLifeAppVersionDefault
-                }
+                PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME) ?: ZEPP_LIFE_VERSION
             )
         }
 

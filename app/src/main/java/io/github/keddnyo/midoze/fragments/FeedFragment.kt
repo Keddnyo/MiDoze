@@ -18,8 +18,15 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.packages.PackageNames
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.packages.PackageVersions
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.PackageUtils
 import kotlinx.coroutines.runBlocking
 
 class FeedFragment : Fragment() {
@@ -94,19 +101,17 @@ class FeedFragment : Fragment() {
                     fun getAppData(zeppLife: Boolean): Application {
                         return if (zeppLife) {
                             Application(
-                                "com.xiaomi.hm.health",
-                                prefs.getString(
-                                    "filters_zepp_app_life_version",
-                                    getString(R.string.filters_request_zepp_life_app_version_value)
-                                ).toString()
+                                ZEPP_LIFE_NAME,
+                                PackageUtils().getPackageVersion(context,
+                                    ZEPP_LIFE_NAME
+                                ) ?: ZEPP_LIFE_VERSION
                             )
                         } else {
                             Application(
-                                "com.huami.midong",
-                                prefs.getString(
-                                    "filters_zepp_app_version",
-                                    getString(R.string.filters_request_zepp_app_version_value)
-                                ).toString()
+                                ZEPP_NAME,
+                                PackageUtils().getPackageVersion(context,
+                                    ZEPP_NAME
+                                ) ?: ZEPP_VERSION
                             )
                         }
                     }
@@ -150,7 +155,7 @@ class FeedFragment : Fragment() {
 
                 feedProgressBar.visibility = View.GONE
 
-                if (isOnline() != null && firmwaresAdapter.itemCount == 0) {
+                if (isOnline() && firmwaresAdapter.itemCount == 0) {
                     feedDevicesNotFound.visibility = View.VISIBLE
                 }
 
@@ -170,21 +175,12 @@ class FeedFragment : Fragment() {
                 val prefs: SharedPreferences =
                     PreferenceManager.getDefaultSharedPreferences(context)
 
-                val host = prefs.getString("filters_request_host", "1").toString()
                 val region = prefs.getString("filters_request_region", "1").toString()
-                val isAdvancedSearch = prefs.getBoolean("filters_deep_search", false)
-                val zeppVersion = prefs.getString(
-                    "filters_zepp_app_version",
-                    getString(R.string.filters_request_zepp_app_version_value)
-                ).toString()
-                val zeppLifeVersion = prefs.getString(
-                    "filters_zepp_life_app_version",
-                    getString(R.string.filters_request_zepp_life_app_version_value)
-                ).toString()
+                val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
                 val request = firmwaresAdapter.getItems()[0].request
 
-                if (!(request.host == host && request.region == region && request.isAdvancedSearch == isAdvancedSearch && request.zeppVersion == zeppVersion && request.zeppLifeVersion == zeppLifeVersion)) {
+                if (!(request.region == region && request.isAdvancedSearch == isAdvancedSearch)) {
                     prefs.edit().putString("deviceArray", "").apply()
                 }
             }

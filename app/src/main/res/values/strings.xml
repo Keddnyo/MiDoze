@@ -37,21 +37,16 @@
     <string name="settings_server_response">Server response</string>
 
     <string name="filters_search_title">Search</string>
-    <string name="filters_deep_search">Deep search</string>
+    <string name="filters_deep_scan">Deep scan</string>
     <string name="filters_deep_search_summary">May take a very long time</string>
-    <string name="filters_app_title">App</string>
     <string name="filters_request_region">Region</string>
-    <string name="filters_request_zepp_app_version">Zepp version</string>
-    <string name="filters_request_zepp_app_version_value" translatable="false">6.10.1-play_100770</string>
-    <string name="filters_request_zepp_life_app_version">Zepp Life version</string>
-    <string name="filters_request_zepp_life_app_version_value" translatable="false">6.2.1_50602</string>
-    <string name="filters_app_version_load_defaults">Load versions defaults</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
     <string name="settings_app_check_for_updates">Check for updates</string>
 
     <string-array name="request_region_entries">
+        <item>Auto</item>
         <item>USA</item>
         <item>China</item>
         <item>Russia</item>
@@ -62,10 +57,6 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
-
-    <string name="zepp_app_name" translatable="false">Zepp</string>
-    <string name="zepp_life_app_name" translatable="false">Zepp Life</string>
-    <string name="zepp_app_name_value" translatable="false">com.huami.midong</string>
-    <string name="zepp_life_app_name_value" translatable="false">com.xiaomi.hm.health</string>
 </resources>
