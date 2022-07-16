@@ -45,7 +45,8 @@ class DozeRequest {
     }
 
     private fun isHostAvailable(host: String): Boolean {
-        val connection: HttpURLConnection = URL("https://$host").openConnection() as HttpURLConnection
+        val connection: HttpURLConnection =
+            URL("https://$host").openConnection() as HttpURLConnection
         connection.requestMethod = "HEAD"
         val responseCode = runBlocking(Dispatchers.IO) {
             connection.responseCode
@@ -76,21 +77,21 @@ class DozeRequest {
         val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
         val productionSourceLimit = if (isAdvancedSearch) {
-            270
+            265
         } else {
             257
         }
 
         val deviceSourceLimit = if (isAdvancedSearch) {
-            350
+            345
         } else {
             95
         }
 
         for (productionSource in 256..productionSourceLimit) {
-            for (deviceSource in 0..deviceSourceLimit) {
+            for (deviceSource in 12..deviceSourceLimit) {
                 fun getFirmwareRegionData(region: Region): FirmwareData? {
-                    return runBlocking {
+                    return runBlocking(Dispatchers.IO) {
                         DozeRequest().getFirmwareData(
                             context = context,
                             deviceSource = deviceSource.toString(),
@@ -101,30 +102,11 @@ class DozeRequest {
                     }
                 }
 
-                if (getFirmwareRegionData(REGION_ARRAY[0]) != null) {
-                    getFirmwareRegionData(REGION_ARRAY[0])?.let{
-                        deviceArrayList.add(
-                            it
-                        )
-                    }
-                } else if (getFirmwareRegionData(REGION_ARRAY[1]) != null) {
-                    getFirmwareRegionData(REGION_ARRAY[1])?.let{
-                        deviceArrayList.add(
-                            it
-                        )
-                    }
-                } else if (getFirmwareRegionData(REGION_ARRAY[2]) != null) {
-                    getFirmwareRegionData(REGION_ARRAY[2])?.let{
-                        deviceArrayList.add(
-                            it
-                        )
-                    }
-                } else if (getFirmwareRegionData(REGION_ARRAY[3]) != null) {
-                    getFirmwareRegionData(REGION_ARRAY[3])?.let{
-                        deviceArrayList.add(
-                            it
-                        )
-                    }
+                (getFirmwareRegionData(REGION_ARRAY[0])
+                ?: getFirmwareRegionData(REGION_ARRAY[1]))?.let {
+                    deviceArrayList.add(
+                        it
+                    )
                 }
             }
         }
