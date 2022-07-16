@@ -20,6 +20,12 @@
     <string name="firmware_not_found">Не найдено</string>
     <string name="firmware_try_switch_region">Попробуйте сменить регион</string>
     <string name="firmware_share">Поделиться</string>
+    <string name="extras_device_source">Код устройства</string>
+    <string name="extras_production_source">Код продукции</string>
+    <string name="extras_app_name">Имя приложения</string>
+    <string name="extras_app_version">Версия приложения</string>
+    <string name="extras_app_country">Страна</string>
+    <string name="extras_app_lang">Язык</string>
     <string name="extras_app_data">Вставить приложение</string>
     <string name="extras_import_button">Импорт</string>
 
@@ -32,16 +38,7 @@
     <string name="filters_search_title">Поиск</string>
     <string name="filters_deep_scan">Глубокое сканирование</string>
     <string name="filters_deep_search_summary">Может занять долгое время</string>
-    <string name="filters_request_region">Регион</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
-
-    <string-array name="request_region_entries">
-        <item>Авто</item>
-        <item>США</item>
-        <item>Китай</item>
-        <item>Россия</item>
-        <item>ОАЭ</item>
-    </string-array>
 </resources>

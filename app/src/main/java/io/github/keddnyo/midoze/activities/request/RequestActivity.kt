@@ -12,6 +12,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
@@ -40,6 +41,8 @@ class RequestActivity : AppCompatActivity() {
         val extrasAppNameEditText: TextInputEditText = findViewById(R.id.extrasAppNameEditText)
         val extrasAppVersionEditText: TextInputEditText =
             findViewById(R.id.extrasAppVersionEditText)
+        val extrasCountryEditText: TextInputEditText = findViewById(R.id.extrasCountryEditText)
+        val extrasLangEditText: TextInputEditText = findViewById(R.id.extrasLangEditText)
         val submitButton: MaterialButton = findViewById(R.id.extrasSubmitButton)
         val appButton: MaterialButton = findViewById(R.id.extras_app_button)
         val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
@@ -71,6 +74,8 @@ class RequestActivity : AppCompatActivity() {
             val productionSourceValue = intent.getStringExtra("productionSource").toString()
             val appNameValue = intent.getStringExtra("appName").toString()
             val appVersionValue = intent.getStringExtra("appVersion").toString()
+            val countryValue = intent.getStringExtra("country").toString()
+            val langValue = intent.getStringExtra("lang").toString()
 
             title = deviceName
             extrasDeviceSourceEditText.setText(deviceSourceValue)
@@ -80,6 +85,8 @@ class RequestActivity : AppCompatActivity() {
             extrasAppNameEditText.setText(appNameValue)
             extrasAppNameEditText.isEnabled = false
             extrasAppVersionEditText.setText(appVersionValue)
+            extrasCountryEditText.setText(countryValue)
+            extrasLangEditText.setText(langValue)
 
             importButton.visibility = View.GONE
             appButton.visibility = View.GONE
@@ -100,7 +107,10 @@ class RequestActivity : AppCompatActivity() {
                             extrasAppNameEditText.text.toString().trim(),
                             extrasAppVersionEditText.text.toString().trim()
                         ),
-                        region = REGION_ARRAY[0]
+                        Region(
+                            extrasCountryEditText.text.toString().trim(),
+                            extrasLangEditText.text.toString().trim()
+                        )
                     )
                 }
 
@@ -136,6 +146,8 @@ class RequestActivity : AppCompatActivity() {
             editor.putString("deviceSource", extrasDeviceSourceEditText.text.toString())
             editor.putString("appVersion", extrasAppVersionEditText.text.toString())
             editor.putString("appname", extrasAppNameEditText.text.toString())
+            editor.putString("country", extrasCountryEditText.text.toString())
+            editor.putString("lang", extrasLangEditText.text.toString())
             editor.apply()
             importButton.visibility = View.VISIBLE
             true
@@ -177,6 +189,8 @@ class RequestActivity : AppCompatActivity() {
             extrasDeviceSourceEditText.setText(prefs.getString("deviceSource", ""))
             extrasAppVersionEditText.setText(prefs.getString("appVersion", ""))
             extrasAppNameEditText.setText(prefs.getString("appname", ""))
+            extrasCountryEditText.setText(prefs.getString("country", ""))
+            extrasLangEditText.setText(prefs.getString("lang", ""))
         }
 
         importButton.setOnLongClickListener {
@@ -184,6 +198,8 @@ class RequestActivity : AppCompatActivity() {
             editor.remove("deviceSource")
             editor.remove("appVersion")
             editor.remove("appname")
+            editor.remove("country")
+            editor.remove("lang")
             editor.apply()
             importButton.visibility = View.GONE
             true

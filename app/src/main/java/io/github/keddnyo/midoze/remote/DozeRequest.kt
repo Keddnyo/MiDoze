@@ -223,7 +223,6 @@ class DozeRequest {
                 }).toString()
             }
 
-            val region = prefs.getString("filters_request_region", "1").toString()
             val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
             FirmwareData(
@@ -236,9 +235,9 @@ class DozeRequest {
                 deviceSource = get("deviceSource"),
                 productionSource = get("productionSource"),
                 request = Request(
-                    region = region,
                     isAdvancedSearch = isAdvancedSearch,
-                )
+                ),
+                region = region
             )
         } else {
             null

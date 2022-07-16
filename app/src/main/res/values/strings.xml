@@ -23,10 +23,12 @@
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_try_switch_region">Try switching the region</string>
     <string name="firmware_share">Share</string>
-    <string name="extras_device_source" translatable="false">deviceSource</string>
-    <string name="extras_production_source" translatable="false">productionSource</string>
-    <string name="extras_app_name" translatable="false">appname</string>
-    <string name="extras_app_version" translatable="false">appVersion</string>
+    <string name="extras_device_source">Device source</string>
+    <string name="extras_production_source">Production source</string>
+    <string name="extras_app_name">App name</string>
+    <string name="extras_app_version">App version</string>
+    <string name="extras_app_country">Country</string>
+    <string name="extras_app_lang">Language</string>
     <string name="extras_app_data">Insert app data</string>
     <string name="extras_import_button">Import</string>
 
@@ -39,24 +41,8 @@
     <string name="filters_search_title">Search</string>
     <string name="filters_deep_scan">Deep scan</string>
     <string name="filters_deep_search_summary">May take a very long time</string>
-    <string name="filters_request_region">Region</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
     <string name="settings_app_check_for_updates">Check for updates</string>
-
-    <string-array name="request_region_entries">
-        <item>Auto</item>
-        <item>USA</item>
-        <item>China</item>
-        <item>Russia</item>
-        <item>UAE</item>
-    </string-array>
-    <string-array name="request_region_selector_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
 </resources>

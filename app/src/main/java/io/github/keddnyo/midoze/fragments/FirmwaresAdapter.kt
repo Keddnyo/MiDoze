@@ -62,6 +62,9 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             intent.putExtra("appName", firmwaresDataArray[position].application.name)
             intent.putExtra("appVersion", firmwaresDataArray[position].application.version)
 
+            intent.putExtra("country", firmwaresDataArray[position].region.country)
+            intent.putExtra("lang", firmwaresDataArray[position].region.language)
+
             context.startActivity(intent)
         }
 

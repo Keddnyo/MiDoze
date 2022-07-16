@@ -2,15 +2,6 @@
 
     <PreferenceCategory app:title="@string/filters_search_title">
 
-        <ListPreference
-            app:defaultValue="1"
-            app:entries="@array/request_region_entries"
-            app:entryValues="@array/request_region_selector_entryValues"
-            app:icon="@drawable/ic_request_region"
-            app:key="filters_request_region"
-            app:title="@string/filters_request_region"
-            app:useSimpleSummaryProvider="true" />
-
         <CheckBoxPreference
             app:defaultValue="false"
             app:icon="@drawable/ic_search"

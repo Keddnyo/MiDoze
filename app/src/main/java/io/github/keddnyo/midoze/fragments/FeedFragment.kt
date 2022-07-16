@@ -175,12 +175,11 @@ class FeedFragment : Fragment() {
                 val prefs: SharedPreferences =
                     PreferenceManager.getDefaultSharedPreferences(context)
 
-                val region = prefs.getString("filters_request_region", "1").toString()
                 val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
                 val request = firmwaresAdapter.getItems()[0].request
 
-                if (!(request.region == region && request.isAdvancedSearch == isAdvancedSearch)) {
+                if (!(request.isAdvancedSearch == isAdvancedSearch)) {
                     prefs.edit().putString("deviceArray", "").apply()
                 }
             }
