@@ -11,10 +11,10 @@ object Region {
             country = "US", language = "en_US"
         ),
         Region(
-            country = "AR", language = "ar_AR"
+            country = "CH", language = "zh_CH"
         ),
         Region(
-            country = "CH", language = "zh_CH"
+            country = "AR", language = "ar_AR"
         )
     )
 }
