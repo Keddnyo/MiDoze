@@ -103,7 +103,9 @@ class DozeRequest {
                 }
 
                 (getFirmwareRegionData(REGION_ARRAY[0])
-                ?: getFirmwareRegionData(REGION_ARRAY[1]))?.let {
+                ?: getFirmwareRegionData(REGION_ARRAY[1])
+                ?: getFirmwareRegionData(REGION_ARRAY[2])
+                ?: getFirmwareRegionData(REGION_ARRAY[3]))?.let {
                     deviceArrayList.add(
                         it
                     )
