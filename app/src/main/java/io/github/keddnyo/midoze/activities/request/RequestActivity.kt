@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
+import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
@@ -99,6 +100,7 @@ class RequestActivity : AppCompatActivity() {
                             extrasAppNameEditText.text.toString().trim(),
                             extrasAppVersionEditText.text.toString().trim()
                         ),
+                        region = REGION_ARRAY[0]
                     )
                 }
 

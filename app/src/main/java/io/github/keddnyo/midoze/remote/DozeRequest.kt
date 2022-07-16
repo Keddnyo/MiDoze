@@ -14,11 +14,9 @@ import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Application
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.dataModels.Request
+import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
+import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
-import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
@@ -91,13 +89,38 @@ class DozeRequest {
 
         for (productionSource in 256..productionSourceLimit) {
             for (deviceSource in 0..deviceSourceLimit) {
-                runBlocking {
-                    DozeRequest().getFirmwareData(
-                        context = context,
-                        deviceSource = deviceSource.toString(),
-                        productionSource = productionSource.toString(),
-                        application = application
-                    )?.let {
+                fun getFirmwareRegionData(region: Region): FirmwareData? {
+                    return runBlocking {
+                        DozeRequest().getFirmwareData(
+                            context = context,
+                            deviceSource = deviceSource.toString(),
+                            productionSource = productionSource.toString(),
+                            application = application,
+                            region = region
+                        )
+                    }
+                }
+
+                if (getFirmwareRegionData(REGION_ARRAY[0]) != null) {
+                    getFirmwareRegionData(REGION_ARRAY[0])?.let{
+                        deviceArrayList.add(
+                            it
+                        )
+                    }
+                } else if (getFirmwareRegionData(REGION_ARRAY[1]) != null) {
+                    getFirmwareRegionData(REGION_ARRAY[1])?.let{
+                        deviceArrayList.add(
+                            it
+                        )
+                    }
+                } else if (getFirmwareRegionData(REGION_ARRAY[2]) != null) {
+                    getFirmwareRegionData(REGION_ARRAY[2])?.let{
+                        deviceArrayList.add(
+                            it
+                        )
+                    }
+                } else if (getFirmwareRegionData(REGION_ARRAY[3]) != null) {
+                    getFirmwareRegionData(REGION_ARRAY[3])?.let{
                         deviceArrayList.add(
                             it
                         )
@@ -113,46 +136,11 @@ class DozeRequest {
         context: Context,
         deviceSource: String,
         productionSource: String,
-        application: Application
+        application: Application,
+        region: Region
     ): FirmwareData? = with(context as Activity) {
         val prefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
-
-        val country = when (prefs.getString("filters_request_region", "1")) {
-            "2" -> {
-                "US"
-            }
-            "3" -> {
-                "CH"
-            }
-            "4" -> {
-                "RU"
-            }
-            "5" -> {
-                "AR"
-            }
-            else -> {
-                DozeLocale().currentCountry
-            }
-        }
-        val lang = when (prefs.getString("filters_request_region", "1")) {
-            "2" -> {
-                "en_US"
-            }
-            "3" -> {
-                "zh_CH"
-            }
-            "4" -> {
-                "ru_RU"
-            }
-            "5" -> {
-                "ar_AR"
-            }
-            else -> {
-                DozeLocale().currentLanguage
-            }
-        }
-
 
         val client = HttpClient()
         val response = client.get {
@@ -192,7 +180,7 @@ class DozeRequest {
             }
             headers {
                 append("hm-privacy-diagnostics", "false")
-                append("country", country)
+                append("country", region.country)
                 append("appplatform", "android_phone")
                 append("hm-privacy-ceip", "0")
                 append("x-request-id", "0")
@@ -203,7 +191,7 @@ class DozeRequest {
                 append("appname", application.name)
                 append("v", "0")
                 append("apptoken", "0")
-                append("lang", lang)
+                append("lang", region.language)
                 append("Host", getHostReachable().toString())
                 append("Connection", "Keep-Alive")
                 append("accept-encoding", "gzip")

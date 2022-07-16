@@ -18,6 +18,7 @@ import io.github.keddnyo.midoze.databinding.ActivityMainBinding
 import io.github.keddnyo.midoze.fragments.FeedFragment
 import io.github.keddnyo.midoze.fragments.SettingsFragment
 import io.github.keddnyo.midoze.remote.AppUpdates
+import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.Language
 import java.util.*
@@ -81,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-            AppUpdates(prefs, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            if (DozeRequest().isOnline(context)) {
+                AppUpdates(prefs, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))
