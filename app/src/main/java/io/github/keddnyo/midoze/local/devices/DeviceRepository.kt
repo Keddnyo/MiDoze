@@ -43,6 +43,7 @@ class DeviceRepository {
             "62" -> Wearable("Amazfit Neo", R.drawable.amazfit_neo)
             "63" -> Wearable("Amazfit GTR 2 CH", R.drawable.amazfit_gtr)
             "64" -> Wearable("Amazfit GTR 2 GL", R.drawable.amazfit_gtr)
+            "65" -> Wearable("Amazfit Ares", R.drawable.amazfit_ares)
             "67" -> Wearable("Amazfit Pop Pro", R.drawable.amazfit_bip_u)
             "68" -> Wearable("Amazfit Pop", R.drawable.amazfit_bip_u)
             "69" -> Wearable("Amazfit Bip U Pro", R.drawable.amazfit_bip_u)
