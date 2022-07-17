@@ -83,14 +83,14 @@ class DeviceRepository {
 
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
-            "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
-            "243" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
-            "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr)
-            "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2)
+            "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3) // Not found
+            "243" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3) // Not found
+            "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr) // Not found
+            "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2) // Not found
 
             "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_5) // TODO: May be replace
-            "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
-            "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3)
+            "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3) // Not found
+            "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3) // Not found
 
             "262" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 257
             "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 258

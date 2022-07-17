@@ -516,5 +516,37 @@ class WearableRepository(val context: Context) {
             isZeppLife = false,
             isChineseRegion = false
         ),
+
+        // Mi Band 7 / Zepp Life
+        addWearable(
+            deviceSource = "262",
+            productionSource = "257",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 7 / Zepp Life
+        addWearable(
+            deviceSource = "263",
+            productionSource = "258",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 7 / Zepp Life
+        addWearable(
+            deviceSource = "264",
+            productionSource = "259",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 7 / Zepp Life
+        addWearable(
+            deviceSource = "265",
+            productionSource = "260",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
     )
 }
