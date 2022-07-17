@@ -69,7 +69,6 @@ class RequestActivity : AppCompatActivity() {
 
         // Get Intent
         if (intent.getStringExtra("deviceSource")?.isNotBlank() == true) {
-            val deviceName = intent.getStringExtra("deviceName").toString()
             val deviceSourceValue = intent.getStringExtra("deviceSource").toString()
             val productionSourceValue = intent.getStringExtra("productionSource").toString()
             val appNameValue = intent.getStringExtra("appName").toString()
@@ -77,19 +76,12 @@ class RequestActivity : AppCompatActivity() {
             val countryValue = intent.getStringExtra("country").toString()
             val langValue = intent.getStringExtra("lang").toString()
 
-            title = deviceName
             extrasDeviceSourceEditText.setText(deviceSourceValue)
-            extrasDeviceSourceEditText.isEnabled = false
             extrasProductionSourceEditText.setText(productionSourceValue)
-            extrasProductionSourceEditText.isEnabled = false
             extrasAppNameEditText.setText(appNameValue)
-            extrasAppNameEditText.isEnabled = false
             extrasAppVersionEditText.setText(appVersionValue)
             extrasCountryEditText.setText(countryValue)
             extrasLangEditText.setText(langValue)
-
-            importButton.visibility = View.GONE
-            appButton.visibility = View.GONE
         }
 
         submitButton.setOnClickListener {
@@ -130,12 +122,6 @@ class RequestActivity : AppCompatActivity() {
                 } else {
                     Display().showToast(context, getString(R.string.feed_devices_not_found))
                 }
-
-
-
-//                val intent = Intent(context, ResponseActivity::class.java)
-//                intent.putExtra("json", firmwareResponse.toString())
-//                startActivity(intent)
             } else {
                 Display().showToast(context, getString(R.string.feed_connectivity_error))
             }

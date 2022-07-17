@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
@@ -98,10 +99,16 @@ class FirmwareActivity : AppCompatActivity() {
         }
 
         firmwareDownloadButton.setOnClickListener {
-            if (DozeRequest().isOnline(context)) {
-                getFirmware(firmwareResponse, context, deviceNameValue)
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                val intent = Intent(context, ResponseActivity::class.java)
+                intent.putExtra("json", firmwareResponse.toString())
+                startActivity(intent)
             } else {
-                Display().showToast(context, getString(R.string.feed_connectivity_error))
+                if (DozeRequest().isOnline(context)) {
+                    getFirmware(firmwareResponse, context, deviceNameValue)
+                } else {
+                    Display().showToast(context, getString(R.string.feed_connectivity_error))
+                }
             }
         }
 
