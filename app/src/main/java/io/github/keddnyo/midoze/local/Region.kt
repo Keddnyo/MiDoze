@@ -8,13 +8,7 @@ object Region {
             country = "RU", language = "ru_RU"
         ),
         Region(
-            country = "US", language = "en_US"
-        ),
-        Region(
             country = "CH", language = "zh_CH"
-        ),
-        Region(
-            country = "AR", language = "ar_AR"
         )
     )
 }

@@ -1,6 +1,6 @@
 package io.github.keddnyo.midoze.local.dataModels
 
-data class Application(
+data class Device(
     val name: String,
-    val version: String?
+    val image: Int
 )

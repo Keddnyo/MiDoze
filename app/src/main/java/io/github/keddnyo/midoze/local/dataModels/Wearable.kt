@@ -1,6 +1,8 @@
 package io.github.keddnyo.midoze.local.dataModels
 
 data class Wearable(
-    val name: String,
-    val image: Int
+    val deviceSource: String,
+    val productionSource: String,
+    val application: Application,
+    val region: Region
 )

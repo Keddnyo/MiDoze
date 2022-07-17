@@ -20,14 +20,12 @@ import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
-import io.github.keddnyo.midoze.utils.DozeLocale
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.*
 
@@ -102,10 +100,7 @@ class DozeRequest {
                     }
                 }
 
-                (getFirmwareRegionData(REGION_ARRAY[0])
-                ?: getFirmwareRegionData(REGION_ARRAY[1])
-                ?: getFirmwareRegionData(REGION_ARRAY[2])
-                ?: getFirmwareRegionData(REGION_ARRAY[3]))?.let {
+                (getFirmwareRegionData(REGION_ARRAY[0]))?.let {
                     deviceArrayList.add(
                         it
                     )
@@ -210,7 +205,7 @@ class DozeRequest {
             val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
 
             FirmwareData(
-                wearable = Wearable(deviceName, devicePreview),
+                wearable = Device(deviceName, devicePreview),
                 application = application,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),

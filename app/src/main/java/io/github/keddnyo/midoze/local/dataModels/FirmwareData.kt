@@ -3,7 +3,7 @@ package io.github.keddnyo.midoze.local.dataModels
 import org.json.JSONObject
 
 data class FirmwareData(
-    val wearable: Wearable,
+    val wearable: Device,
     val application: Application,
     val firmware: JSONObject,
     val firmwareVersion: String,
