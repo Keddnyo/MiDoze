@@ -16,12 +16,12 @@
         <ImageView
             android:id="@+id/deviceIconImageView"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="210dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/amazfit_bip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
@@ -31,8 +31,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:gravity="center"
+            android:background="@color/card_view_label"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 

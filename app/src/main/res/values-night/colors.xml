@@ -2,4 +2,5 @@
 <resources>
     <color name="foreground">@color/white</color>
     <color name="red">#FF9090</color>
+    <color name="card_view_label">#35332F</color>
 </resources>

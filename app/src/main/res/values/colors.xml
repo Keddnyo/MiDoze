@@ -10,4 +10,5 @@
     <color name="accent_light">#C57000</color>
     <color name="accent_dark">#ECBA55</color>
     <color name="background_light">@color/white</color>
+    <color name="card_view_label">#F1EAE3</color>
 </resources>

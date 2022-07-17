@@ -40,9 +40,7 @@ class FirmwareActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         runBlocking {
-            withContext(Dispatchers.IO) {
-                init(this@FirmwareActivity)
-            }
+            init(this@FirmwareActivity)
         }
     }
 
@@ -56,7 +54,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
-        if (DozeRequest().getHostReachable() != null) {
+        if (DozeRequest().isOnline(context)) {
             runOnUiThread {
                 firmwareDownloadButton.visibility = View.VISIBLE
             }

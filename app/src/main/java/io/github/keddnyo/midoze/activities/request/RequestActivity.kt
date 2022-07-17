@@ -92,11 +92,11 @@ class RequestActivity : AppCompatActivity() {
             appButton.visibility = View.GONE
         }
 
-        val isOnline = runBlocking(Dispatchers.IO) {
-            DozeRequest().getHostReachable() != null
-        }
-
         submitButton.setOnClickListener {
+            val isOnline = runBlocking(Dispatchers.Default) {
+                DozeRequest().getHostReachable() != null
+            }
+
             if (isOnline) {
                 val firmwareResponse = runBlocking {
                     DozeRequest().getFirmwareData(
