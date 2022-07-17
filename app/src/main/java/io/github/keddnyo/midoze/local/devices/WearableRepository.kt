@@ -8,132 +8,112 @@ import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.utils.PackageUtils
 
-class WearableRepository(context: Context, region: Region) {
+class WearableRepository(val context: Context, private val region: Region) {
+    private fun addWearable(
+        deviceSource: String,
+        productionSource: String,
+        isZeppLife: Boolean,
+        isChineseRegion: Boolean
+    ): Wearable {
+        return Wearable(
+            deviceSource = deviceSource,
+            productionSource = productionSource,
+            application = if (isZeppLife) {
+                Application(
+                    name = ZEPP_LIFE_NAME,
+                    version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
+                )
+            } else {
+                Application(
+                    name = ZEPP_NAME,
+                    version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+                )
+            },
+            region = if (isChineseRegion) {
+                Region(
+                    country = "CH",
+                    language = "zh_CH"
+                )
+            } else {
+                Region(
+                    country = region.country,
+                    language = region.language
+                )
+            }
+        )
+    }
+
     val wearables = arrayListOf(
         // Amazfit Bip (CH) / Zepp Life
-        Wearable(
+        addWearable(
             deviceSource = "12",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_LIFE_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
-            ),
-            region = Region(
-                country = "CH",
-                language = "zh_CH"
-            )
+            isZeppLife = true,
+            isChineseRegion = true
         ),
 
         // Amazfit Bip S / Zepp
-        Wearable(
+        addWearable(
             deviceSource = "20",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.language
-            )
+            isZeppLife = false,
+            isChineseRegion = false
         ),
 
         // Mi Band 4 NFC / Zepp Life
-        Wearable(
+        addWearable(
             deviceSource = "24",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_LIFE_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.country
-            )
+            isZeppLife = true,
+            isChineseRegion = false
         ),
 
         // Mi Band 4 GL / Zepp Life (Zepp)
-        Wearable(
+        addWearable(
             deviceSource = "25",
             productionSource = "257",
-            application = Application(
-                name = ZEPP_LIFE_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.country
-            )
+            isZeppLife = true,
+            isChineseRegion = false
         ),
 
         // Amazfit Bip S / Zepp
-        Wearable(
+        addWearable(
             deviceSource = "28",
             productionSource = "258",
-            application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.country
-            )
+            isZeppLife = false,
+            isChineseRegion = false
         ),
 
         // Amazfit Bip S Lite / Zepp
-        Wearable(
+        addWearable(
             deviceSource = "29",
             productionSource = "259",
-            application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
-            ),
-            region = Region(
-                country = "CH",
-                language = "zh_CH"
-            )
+            isZeppLife = false,
+            isChineseRegion = true
         ),
 
         // Amazfit Verge Lie GL / Zepp (Zepp Life)
-        Wearable(
+        addWearable(
             deviceSource = "30",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.language
-            )
+            isZeppLife = false,
+            isChineseRegion = false
         ),
 
         // Mi Band 3i / Zepp Life
-        Wearable(
+        addWearable(
             deviceSource = "31",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_LIFE_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.language
-            )
+            isZeppLife = true,
+            isChineseRegion = false
         ),
 
         // Amazfit GTR 47 CH / Zepp
-        Wearable(
+        addWearable(
             deviceSource = "35",
             productionSource = "256",
-            application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
-            ),
-            region = Region(
-                country = region.country,
-                language = region.language
-            )
-        )
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
     )
 }
