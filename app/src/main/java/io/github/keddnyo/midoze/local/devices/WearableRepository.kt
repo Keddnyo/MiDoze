@@ -252,5 +252,69 @@ class WearableRepository(val context: Context) {
             isZeppLife = true,
             isChineseRegion = false
         ),
+
+        // Zepp E Square CH / Zepp Life
+        addWearable(
+            deviceSource = "61",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Neo / Zepp Life
+        addWearable(
+            deviceSource = "62",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 2 CH / Zepp Life
+        addWearable(
+            deviceSource = "63",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 2 GL / Zepp Life
+        addWearable(
+            deviceSource = "64",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Ares / Zepp Life
+        addWearable(
+            deviceSource = "65",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Pop Pro / Zepp Life
+        addWearable(
+            deviceSource = "67",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Pop / Zepp Life
+        addWearable(
+            deviceSource = "68",
+            productionSource = "258",
+            isZeppLife = false,
+            isChineseRegion = true
+        ),
+
+        // Amazfit Bip U Pro / Zepp Life
+        addWearable(
+            deviceSource = "69",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
     )
 }
