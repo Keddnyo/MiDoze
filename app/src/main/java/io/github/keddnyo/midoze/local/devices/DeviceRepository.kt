@@ -59,7 +59,7 @@ class DeviceRepository {
             "82" -> Device("Zepp E Square GL", R.drawable.zepp_e_square)
             "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex) // TODO: May be replace
 
-            "92" -> Device("Amazfit GTS 2 mini", R.drawable.amazfit_gts_2_mini)
+            "92" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
             "104" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
