@@ -66,6 +66,48 @@ class WearableRepository(context: Context, region: Region) {
             )
         ),
 
+        // Amazfit Bip S / Zepp
+        Wearable(
+            deviceSource = "28",
+            productionSource = "258",
+            application = Application(
+                name = ZEPP_NAME,
+                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+            ),
+            region = Region(
+                country = region.country,
+                language = region.country
+            )
+        ),
+
+        // Amazfit Bip S Lite / Zepp
+        Wearable(
+            deviceSource = "29",
+            productionSource = "259",
+            application = Application(
+                name = ZEPP_NAME,
+                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+            ),
+            region = Region(
+                country = "CH",
+                language = "zh_CH"
+            )
+        ),
+
+        // Amazfit Verge Lie GL / Zepp (Zepp Life)
+        Wearable(
+            deviceSource = "30",
+            productionSource = "256",
+            application = Application(
+                name = ZEPP_NAME,
+                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+            ),
+            region = Region(
+                country = region.country,
+                language = region.language
+            )
+        ),
+
         // Amazfit Verge Lite / Zepp (Zepp Life)
         Wearable(
             deviceSource = "30",
