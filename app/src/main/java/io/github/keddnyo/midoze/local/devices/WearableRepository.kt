@@ -407,8 +407,112 @@ class WearableRepository(val context: Context) {
 
         // Amazfit GTS 2 mini / Zepp // TODO: May be replace
         addWearable(
-            deviceSource = "98",
+            deviceSource = "104",
             productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit T-Rex Pro GL / Zepp
+        addWearable(
+            deviceSource = "200",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 2e CH / Zepp
+        addWearable(
+            deviceSource = "206",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 2e CH / Zepp
+        addWearable(
+            deviceSource = "207",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 2e GL / Zepp
+        addWearable(
+            deviceSource = "209",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 2e GL / Zepp
+        addWearable(
+            deviceSource = "210",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 6 NFC / Zepp
+        addWearable(
+            deviceSource = "211",
+            productionSource = "256",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 6 GL / Zepp
+        addWearable(
+            deviceSource = "212",
+            productionSource = "257",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 3 CH / Zepp
+        addWearable(
+            deviceSource = "224",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 3 GL / Zepp
+        addWearable(
+            deviceSource = "225",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 3 CH / Zepp
+        addWearable(
+            deviceSource = "226",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 3 GL / Zepp
+        addWearable(
+            deviceSource = "227",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 3 Pro CH / Zepp
+        addWearable(
+            deviceSource = "229",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 3 Pro GL / Zepp
+        addWearable(
+            deviceSource = "230",
+            productionSource = "257",
             isZeppLife = false,
             isChineseRegion = false
         ),
