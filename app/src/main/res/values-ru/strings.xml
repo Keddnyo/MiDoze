@@ -35,10 +35,6 @@
     <string name="settings_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 
-    <string name="filters_search_title">Поиск</string>
-    <string name="filters_deep_scan">Глубокое сканирование</string>
-    <string name="filters_deep_search_summary">Может занять долгое время</string>
-
     <string name="settings_about_title">О приложении</string>
     <string name="settings_app_check_for_updates">Проверять обновления</string>
 </resources>

@@ -6,9 +6,6 @@
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>
 
-    <string name="title_mi_band" translatable="false">Mi Band</string>
-    <string name="title_zepp" translatable="false">Zepp</string>
-
     <string name="firmware_version">Firmware version</string>
 
     <string name="feed_title">Feed</string>
@@ -37,10 +34,6 @@
 
     <string name="settings_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
-
-    <string name="filters_search_title">Search</string>
-    <string name="filters_deep_scan">Deep scan</string>
-    <string name="filters_deep_search_summary">May take a very long time</string>
 
     <string name="settings_about_title">About</string>
     <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
