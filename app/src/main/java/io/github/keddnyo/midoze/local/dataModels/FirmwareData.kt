@@ -11,6 +11,5 @@ data class FirmwareData(
     val changeLog: String,
     val deviceSource: String,
     val productionSource: String,
-    val request: Request,
     val region: Region
 )

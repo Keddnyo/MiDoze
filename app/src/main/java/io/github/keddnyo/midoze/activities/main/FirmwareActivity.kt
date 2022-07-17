@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.DozeRequest
-import io.github.keddnyo.midoze.utils.Language
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.Dispatchers
@@ -93,7 +92,7 @@ class FirmwareActivity : AppCompatActivity() {
             firmwareChangelogLayout.visibility = View.GONE
         }
         if (firmwareResponse.has("lang")) {
-            firmwareLanguagesTextView.text = Language().getName(
+            firmwareLanguagesTextView.text = Display().getLanguageName(
                 firmwareResponse.getString("lang")
             )
         } else {

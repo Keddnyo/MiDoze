@@ -118,13 +118,8 @@ class FeedFragment : Fragment() {
 
                     if (isOnline()) {
                         val zeppDeviceArrayList =
-                            DozeRequest().getFirmwareLatest(context, getAppData(false))
-                        val zeppLifeDeviceArrayList =
-                            DozeRequest().getFirmwareLatest(context, getAppData(true))
+                            DozeRequest().getFirmwareLatest(context)
 
-                        for (i in zeppLifeDeviceArrayList) {
-                            deviceArrayList.add(i)
-                        }
                         for (i in zeppDeviceArrayList) {
                             deviceArrayList.add(i)
                         }
@@ -175,13 +170,7 @@ class FeedFragment : Fragment() {
                 val prefs: SharedPreferences =
                     PreferenceManager.getDefaultSharedPreferences(context)
 
-                val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
-
-                val request = firmwaresAdapter.getItems()[0].request
-
-                if (!(request.isAdvancedSearch == isAdvancedSearch)) {
-                    prefs.edit().putString("deviceArray", "").apply()
-                }
+                prefs.edit().putString("deviceArray", "").apply()
             }
 
             if (prefs.getBoolean("allow_exit", true)) {

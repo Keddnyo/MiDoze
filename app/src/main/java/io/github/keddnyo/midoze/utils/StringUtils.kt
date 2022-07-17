@@ -16,9 +16,9 @@ class StringUtils {
     }
 
     fun getLocalFirmwareDate(firmwareDate: String): String {
-        val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Language().getCurrent())
+        val dateFormat = SimpleDateFormat("yyyyMMddhhmm", LanguageUtils().currentLocale)
         val firmwareDateFormatted = dateFormat.parse(firmwareDate)
-        return DateFormat.getDateInstance(DateFormat.MEDIUM, Language().getCurrent())
+        return DateFormat.getDateInstance(DateFormat.MEDIUM, LanguageUtils().currentLocale)
             .format(firmwareDateFormatted!!)
     }
 }

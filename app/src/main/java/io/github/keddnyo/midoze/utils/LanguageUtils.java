@@ -12,6 +12,6 @@ public class LanguageUtils {
     }
 
     public String getCurrentLanguage() {
-        return getCurrentLocale().getLanguage();
+        return getCurrentLocale().toString();
     }
 }

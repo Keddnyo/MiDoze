@@ -17,6 +17,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
+import io.github.keddnyo.midoze.local.devices.WearableRepository
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
 import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
@@ -65,46 +66,27 @@ class DozeRequest {
     }
 
     fun getFirmwareLatest(
-        context: Context,
-        application: Application
+        context: Context
     ): ArrayList<FirmwareData> = with(context as Activity) {
         val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
-        val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
-
-        val productionSourceLimit = if (isAdvancedSearch) {
-            265
-        } else {
-            257
-        }
-
-        val deviceSourceLimit = if (isAdvancedSearch) {
-            345
-        } else {
-            95
-        }
-
-        for (productionSource in 256..productionSourceLimit) {
-            for (deviceSource in 12..deviceSourceLimit) {
-                fun getFirmwareRegionData(region: Region): FirmwareData? {
-                    return runBlocking(Dispatchers.IO) {
-                        DozeRequest().getFirmwareData(
-                            context = context,
-                            deviceSource = deviceSource.toString(),
-                            productionSource = productionSource.toString(),
-                            application = application,
-                            region = region
-                        )
-                    }
-                }
-
-                (getFirmwareRegionData(REGION_ARRAY[0]))?.let {
-                    deviceArrayList.add(
-                        it
+        for (i in WearableRepository(context).wearables) {
+            fun getFirmwareRegionData(region: Region): FirmwareData? {
+                return runBlocking(Dispatchers.IO) {
+                    DozeRequest().getFirmwareData(
+                        context = context,
+                        deviceSource = i.deviceSource,
+                        productionSource = i.productionSource,
+                        application = i.application,
+                        region = i.region
                     )
                 }
+            }
+
+            (getFirmwareRegionData(REGION_ARRAY[0]))?.let {
+                deviceArrayList.add(
+                    it
+                )
             }
         }
 
@@ -213,9 +195,6 @@ class DozeRequest {
                 changeLog = get("changeLog"),
                 deviceSource = get("deviceSource"),
                 productionSource = get("productionSource"),
-                request = Request(
-                    isAdvancedSearch = isAdvancedSearch,
-                ),
                 region = region
             )
         } else {
