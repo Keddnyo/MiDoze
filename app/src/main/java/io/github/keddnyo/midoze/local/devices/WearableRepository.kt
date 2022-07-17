@@ -172,5 +172,85 @@ class WearableRepository(val context: Context) {
             isZeppLife = true,
             isChineseRegion = true
         ),
+
+        // Amazfit GTR 47 Lite GL / Zepp
+        addWearable(
+            deviceSource = "46",
+            productionSource = "258",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit T-Rex / Zepp
+        addWearable(
+            deviceSource = "50",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 42 SWK / Zepp
+        addWearable(
+            deviceSource = "51",
+            productionSource = "260",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 42 SWK GL / Zepp
+        addWearable(
+            deviceSource = "52",
+            productionSource = "261",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit X CH / Zepp
+        addWearable(
+            deviceSource = "53",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 47 Disney / Zepp
+        addWearable(
+            deviceSource = "54",
+            productionSource = "259",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Zepp Z CH / Zepp
+        addWearable(
+            deviceSource = "56",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Zepp E Circle CH / Zepp
+        addWearable(
+            deviceSource = "57",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 5 NFC / Zepp Life
+        addWearable(
+            deviceSource = "58",
+            productionSource = "256",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 5 / Zepp Life
+        addWearable(
+            deviceSource = "59",
+            productionSource = "257",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
     )
 }

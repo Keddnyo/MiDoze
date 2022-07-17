@@ -26,7 +26,7 @@ class DeviceRepository {
             "40" -> Device("Amazfit GTS CH", R.drawable.amazfit_gts)
             "41" -> Device("Amazfit GTS GL", R.drawable.amazfit_gts)
             "42" -> Device("Amazfit Bip Lite GL", R.drawable.amazfit_bip)
-            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr) // Not Fount // TODO: May be replace
             "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
 
             "50" -> Device("Amazfit T-Rex", R.drawable.amazfit_t_rex)
