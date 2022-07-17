@@ -108,20 +108,32 @@ class WearableRepository(context: Context, region: Region) {
             )
         ),
 
-        // Amazfit Verge Lite / Zepp (Zepp Life)
+        // Mi Band 3i / Zepp Life
         Wearable(
-            deviceSource = "30",
+            deviceSource = "31",
             productionSource = "256",
             application = Application(
-                name = ZEPP_NAME,
-                version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+                name = ZEPP_LIFE_NAME,
+                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
             ),
             region = Region(
                 country = region.country,
-                language = region.country
+                language = region.language
             )
         ),
 
-
+        // Amazfit GTR 47 CH / Zepp
+        Wearable(
+            deviceSource = "35",
+            productionSource = "256",
+            application = Application(
+                name = ZEPP_NAME,
+                version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
+            ),
+            region = Region(
+                country = region.country,
+                language = region.language
+            )
+        )
     )
 }
