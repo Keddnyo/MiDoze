@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
+import java.util.*
 
 class Display {
     val tabTitles = arrayOf(
@@ -39,5 +40,23 @@ class Display {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+    }
+
+    fun getLanguageName(lang: String): String {
+        val arrayOfLanguageCodes = lang.split(",").toTypedArray()
+        val arrayOfLanguageNames = arrayListOf<String>()
+        val currentLanguage = Locale(LanguageUtils().currentLocale.language.toString())
+
+        for (i in arrayOfLanguageCodes) {
+            arrayOfLanguageNames.add(
+                Locale(i).getDisplayName(currentLanguage)
+            )
+        }
+
+        return arrayOfLanguageNames.toString()
+            .substring(1, arrayOfLanguageNames.toString().length - 1)
+            .replace(", pt-br", "")
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } +
+                "."
     }
 }

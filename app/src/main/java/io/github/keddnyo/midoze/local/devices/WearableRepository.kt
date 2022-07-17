@@ -6,9 +6,10 @@ import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.utils.LanguageUtils
 import io.github.keddnyo.midoze.utils.PackageUtils
 
-class WearableRepository(val context: Context, private val region: Region) {
+class WearableRepository(val context: Context) {
     private fun addWearable(
         deviceSource: String,
         productionSource: String,
@@ -36,8 +37,8 @@ class WearableRepository(val context: Context, private val region: Region) {
                 )
             } else {
                 Region(
-                    country = region.country,
-                    language = region.language
+                    country = LanguageUtils().currentCountry,
+                    language = LanguageUtils().currentLanguage
                 )
             }
         )
@@ -112,8 +113,64 @@ class WearableRepository(val context: Context, private val region: Region) {
         addWearable(
             deviceSource = "35",
             productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 47 GL / Zepp
+        addWearable(
+            deviceSource = "36",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 42 CH / Zepp
+        addWearable(
+            deviceSource = "37",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTR 42 GL / Zepp
+        addWearable(
+            deviceSource = "38",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Bip lite CH / Zepp Life (Zepp)
+        addWearable(
+            deviceSource = "39",
+            productionSource = "256",
             isZeppLife = true,
             isChineseRegion = false
+        ),
+
+        // Amazfit GTS CH / Zepp
+        addWearable(
+            deviceSource = "40",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS GL / Zepp
+        addWearable(
+            deviceSource = "41",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Bip Lite GL / Zepp Life (Zepp)
+        addWearable(
+            deviceSource = "42",
+            productionSource = "257",
+            isZeppLife = true,
+            isChineseRegion = true
         ),
     )
 }
