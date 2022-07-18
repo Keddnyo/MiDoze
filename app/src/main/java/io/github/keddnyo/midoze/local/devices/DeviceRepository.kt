@@ -9,11 +9,11 @@ class DeviceRepository {
         return when (deviceSource.toString()) {
             "12" -> Device("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "20" -> Device("Amazfit Bip S", R.drawable.amazfit_bip) // TODO: May be replace
+            "20" -> Device("Amazfit Bip S", R.drawable.amazfit_bip_s) // TODO: May be replace
             "24" -> Device("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
             "25" -> Device("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
-            "28" -> Device("Amazfit Bip S", R.drawable.amazfit_bip)
-            "29" -> Device("Amazfit Bip S Lite", R.drawable.amazfit_bip_s_lite)
+            "28" -> Device("Amazfit Bip S", R.drawable.amazfit_bip_s)
+            "29" -> Device("Amazfit Bip S Lite", R.drawable.amazfit_bip_s)
 
             "30" -> Device("Amazfit Verge Lite GL", R.drawable.amazfit_verge_lite)
             "31" -> Device("Xiaomi Mi Band 3i", R.drawable.mi_band_3i)

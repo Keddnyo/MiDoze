@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="menu_about" translatable="false">О приложении</string>
     <string name="compatibility_mode">Режим совместимости</string>
 
     <string name="update_dialog_title">Доступно обновление</string>
@@ -24,6 +25,6 @@
     <string name="extras_app_data">Вставить приложение</string>
     <string name="extras_import_button">Импорт</string>
 
-    <string name="settings_custom_request">Запрос</string>
+    <string name="menu_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 </resources>

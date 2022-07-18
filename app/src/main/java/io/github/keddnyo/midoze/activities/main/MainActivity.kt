@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Parcelable
@@ -23,6 +24,7 @@ import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.remote.DozeRequest
+import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.Display
 
 class MainActivity : AppCompatActivity() {
@@ -187,6 +189,11 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_request -> {
                 startActivity(Intent(context, RequestActivity::class.java))
+            }
+            R.id.action_about -> {
+                startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_APP_REPOSITORY))
+                )
             }
         }
         return super.onOptionsItemSelected(item)
