@@ -182,14 +182,11 @@ class DozeRequest {
                 }).toString()
             }
 
-            val isAdvancedSearch = prefs.getBoolean("filters_deep_scan", false)
-
             FirmwareData(
                 wearable = Device(deviceName, devicePreview),
                 application = application,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),
-                buildTime = get("buildTime"),
                 changeLog = get("changeLog"),
                 deviceSource = get("deviceSource"),
                 productionSource = get("productionSource"),

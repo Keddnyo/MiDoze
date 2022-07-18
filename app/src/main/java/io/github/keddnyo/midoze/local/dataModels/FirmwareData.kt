@@ -7,7 +7,6 @@ data class FirmwareData(
     val application: Application,
     val firmware: JSONObject,
     val firmwareVersion: String,
-    val buildTime: String,
     val changeLog: String,
     val deviceSource: String,
     val productionSource: String,
