@@ -4,8 +4,7 @@
 
     <item
         android:id="@+id/action_request"
-        android:icon="@drawable/ic_custom_request"
         android:title="@string/settings_custom_request"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>

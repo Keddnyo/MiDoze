@@ -183,7 +183,7 @@ class DozeRequest {
             }
 
             FirmwareData(
-                wearable = Device(deviceName, devicePreview),
+                device = Device(deviceName, devicePreview),
                 application = application,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),

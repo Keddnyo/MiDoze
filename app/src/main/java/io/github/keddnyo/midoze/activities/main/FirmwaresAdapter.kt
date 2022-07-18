@@ -37,8 +37,8 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.deviceNameTextView.text = firmwaresDataArray[position].wearable.name
-        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].wearable.image)
+        holder.deviceNameTextView.text = firmwaresDataArray[position].device.name
+        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].device.image)
         holder.firmwareReleaseDateTextView.text = StringUtils().getLocalFirmwareDate(firmwaresDataArray[position].buildTime)
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
 
@@ -52,8 +52,8 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 Intent(context, FirmwareActivity::class.java)
             }
 
-            intent.putExtra("deviceName", firmwaresDataArray[position].wearable.name)
-            intent.putExtra("deviceIcon", firmwaresDataArray[position].wearable.image)
+            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
+            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
             intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
 
             intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)

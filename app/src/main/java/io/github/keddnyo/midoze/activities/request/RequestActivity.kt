@@ -105,8 +105,8 @@ class RequestActivity : AppCompatActivity() {
                 val intent = Intent(context, FirmwareActivity::class.java)
 
                 if (firmwareResponse != null) {
-                    intent.putExtra("deviceName", firmwareResponse.wearable.name)
-                    intent.putExtra("deviceIcon", firmwareResponse.wearable.image)
+                    intent.putExtra("deviceName", firmwareResponse.device.name)
+                    intent.putExtra("deviceIcon", firmwareResponse.device.image)
                     intent.putExtra("firmwareData", firmwareResponse.firmware.toString())
 
                     intent.putExtra("productionSource", firmwareResponse.productionSource)
