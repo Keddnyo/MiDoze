@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/amazfit_bip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Amazfit Bip"
                 android:textSize="7pt"
                 android:textStyle="bold" />
 
@@ -50,16 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="1.1.7.02"
-                android:textSize="6pt" />
-
-            <TextView
-                android:id="@+id/firmwareReleaseDateTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="Jun 22, 2022"
                 android:textSize="6pt" />
 
         </LinearLayout>

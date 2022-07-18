@@ -22,8 +22,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             itemView.findViewById(R.id.deviceNameTextView)
         val deviceIconImageView: ImageView =
             itemView.findViewById(R.id.deviceIconImageView)
-        val firmwareReleaseDateTextView: TextView =
-            itemView.findViewById(R.id.firmwareReleaseDateTextView)
         val firmwareVersionTextView: TextView =
             itemView.findViewById(R.id.firmwareVersionTextView)
 
@@ -39,7 +37,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         holder.deviceNameTextView.text = firmwaresDataArray[position].device.name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].device.image)
-        holder.firmwareReleaseDateTextView.text = StringUtils().getLocalFirmwareDate(firmwaresDataArray[position].buildTime)
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
 
         fun openFirmwareActivity(
