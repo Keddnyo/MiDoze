@@ -27,7 +27,7 @@ class DeviceRepository {
             "41" -> Device("Amazfit GTS GL", R.drawable.amazfit_gts)
             "42" -> Device("Amazfit Bip Lite GL", R.drawable.amazfit_bip)
             "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr_42) // Not Fount // TODO: May be replace
-            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr_42) // TODO: May be replace
+            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
 
             "50" -> Device("Amazfit T-Rex", R.drawable.amazfit_t_rex)
             "51" -> Device("Amazfit GTR 42 SWK", R.drawable.amazfit_gtr_42) // TODO: May be replace
@@ -67,9 +67,9 @@ class DeviceRepository {
             // "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
             "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex) // TODO: May be replace
-            "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr)
+            "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr_2e)
             "207" -> Device("Amazfit GTS 2e CH", R.drawable.amazfit_gts_2)
-            "209" -> Device("Amazfit GTR 2e GL", R.drawable.amazfit_gtr)
+            "209" -> Device("Amazfit GTR 2e GL", R.drawable.amazfit_gtr_2e)
 
             "210" -> Device("Amazfit GTS 2e GL", R.drawable.amazfit_gts_2)
             "211" -> Device("Xiaomi Mi Band 6 NFC", R.drawable.mi_band_6)
@@ -83,19 +83,19 @@ class DeviceRepository {
 
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
-            "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3) // Not found
-            "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini) // Not found
-            "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr) // Not found
-            "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2) // Not found
+            "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
+            "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini)
+            "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr_2)
+            "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2)
 
-            "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_5) // TODO: May be replace
-            "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3) // Not found
-            "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3) // Not found
+            "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_5)
+            "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
+            "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3)
 
-            "262" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 257
-            "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 258
-            "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 259
-            "265" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // 260
+            "262" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+            "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+            "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+            "265" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
 
             else -> Device("Unknown $deviceSource $productionSource", R.drawable.unknown)
         }

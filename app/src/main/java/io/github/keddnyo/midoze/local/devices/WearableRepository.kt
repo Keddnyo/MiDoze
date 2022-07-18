@@ -359,6 +359,14 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
+        // Amazfit GTR 2 eSIM / Zepp
+        addWearable(
+            deviceSource = "98",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
         // Amazfit GTR 3 CH / Zepp
         addWearable(
             deviceSource = "226",
@@ -458,14 +466,6 @@ class WearableRepository(val context: Context) {
         // Amazfit GTS 2 Mini 2022 / Zepp
         addWearable(
             deviceSource = "243",
-            productionSource = "256",
-            isZeppLife = false,
-            isChineseRegion = false
-        ),
-
-        // Amazfit GTS 2 eSIM / Zepp
-        addWearable(
-            deviceSource = "98",
             productionSource = "256",
             isZeppLife = false,
             isChineseRegion = false
