@@ -21,8 +21,6 @@ class ResponseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.settings_server_response)
 
-        Display().switchDarkMode(this)
-
         if (intent.hasExtra("json")) {
             val responseTextView: TextView = findViewById(R.id.response_text)
             json = StringUtils().getExtrasFixed(intent.getStringExtra("json").toString())

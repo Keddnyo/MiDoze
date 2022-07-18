@@ -6,10 +6,6 @@
     <string name="update_dialog_title">Доступно обновление</string>
     <string name="update_dialog_button">Обновить</string>
 
-    <string name="firmware_version">Версия прошивки</string>
-
-    <string name="feed_title">Лента</string>
-
     <string name="feed_connectivity_error">Ошибка подключения</string>
     <string name="feed_devices_not_found">Устройства не найдены</string>
 
@@ -29,12 +25,6 @@
     <string name="extras_app_data">Вставить приложение</string>
     <string name="extras_import_button">Импорт</string>
 
-    <string name="settings_title">Настройки</string>
-    <string name="settings_dark_mode">Тёмный режим</string>
-
     <string name="settings_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-
-    <string name="settings_about_title">О приложении</string>
-    <string name="settings_app_check_for_updates">Проверять обновления</string>
 </resources>

@@ -10,11 +10,6 @@ import io.github.keddnyo.midoze.R
 import java.util.*
 
 class Display {
-    val tabTitles = arrayOf(
-        R.string.feed_title,
-        R.string.settings_title
-    )
-
     fun getGridLayoutIndex(
         context: Context,
         columnWidthDp: Int,
@@ -25,21 +20,7 @@ class Display {
     }
 
     fun showToast(context: Context, string: String) {
-        val toast = Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
-    }
-
-    fun switchDarkMode(context: Context) {
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
-
-        when (prefs.getBoolean("settings_dark_mode", false)) {
-            true -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            false -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 
     fun getLanguageName(lang: String): String {

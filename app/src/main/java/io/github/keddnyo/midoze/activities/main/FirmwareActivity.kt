@@ -21,8 +21,6 @@ import org.json.JSONObject
 
 class FirmwareActivity : AppCompatActivity() {
 
-    private val context = this@FirmwareActivity
-
     private var firmwareResponse = JSONObject()
     private var deviceNameValue: String = ""
 
@@ -68,18 +66,6 @@ class FirmwareActivity : AppCompatActivity() {
 
         deviceIconImageView.setImageResource(deviceIconValue)
 
-        /*when {
-            deviceNameValue.contains("Mi Band", true) -> {
-                deviceIconTextView.setImageResource(R.drawable.ic_xiaomi)
-            }
-            deviceNameValue.contains("Zepp", true) -> {
-                deviceIconTextView.setImageResource(R.drawable.ic_zepp)
-            }
-            else -> {
-                deviceIconTextView.setImageResource(R.drawable.ic_amazfit)
-            }
-        }*/
-
         firmwareVersionTextView.text = firmwareResponse.getString(
             "firmwareVersion"
         )
@@ -100,15 +86,15 @@ class FirmwareActivity : AppCompatActivity() {
 
         firmwareDownloadButton.setOnClickListener {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
-                val intent = Intent(context, ResponseActivity::class.java)
-                intent.putExtra("json", firmwareResponse.toString())
-                startActivity(intent)
-            } else {
                 if (DozeRequest().isOnline(context)) {
                     getFirmware(firmwareResponse, context, deviceNameValue)
                 } else {
                     Display().showToast(context, getString(R.string.feed_connectivity_error))
                 }
+            } else {
+                val intent = Intent(context, ResponseActivity::class.java)
+                intent.putExtra("json", firmwareResponse.toString())
+                startActivity(intent)
             }
         }
 

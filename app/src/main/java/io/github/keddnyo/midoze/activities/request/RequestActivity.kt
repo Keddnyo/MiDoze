@@ -32,8 +32,6 @@ class RequestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_request)
         title = getString(R.string.settings_custom_request)
 
-        Display().switchDarkMode(this)
-
         val extrasDeviceSourceEditText: TextInputEditText =
             findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =

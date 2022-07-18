@@ -84,7 +84,7 @@ class DeviceRepository {
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
             "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3) // Not found
-            "243" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3) // Not found
+            "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini) // Not found
             "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr) // Not found
             "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2) // Not found
 

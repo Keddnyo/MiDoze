@@ -6,10 +6,6 @@
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>
 
-    <string name="firmware_version">Firmware version</string>
-
-    <string name="feed_title">Feed</string>
-
     <string name="feed_connectivity_error">Connectivity error</string>
     <string name="feed_devices_not_found">Device(-s) not found</string>
 
@@ -29,13 +25,6 @@
     <string name="extras_app_data">Insert app data</string>
     <string name="extras_import_button">Import</string>
 
-    <string name="settings_title">Settings</string>
-    <string name="settings_dark_mode">Dark mode</string>
-
     <string name="settings_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
-
-    <string name="settings_about_title">About</string>
-    <string name="settings_about_summary" translatable="false">Keddnyo, Schakal</string>
-    <string name="settings_app_check_for_updates">Check for updates</string>
 </resources>

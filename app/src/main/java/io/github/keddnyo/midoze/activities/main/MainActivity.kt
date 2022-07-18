@@ -1,88 +1,58 @@
 package io.github.keddnyo.midoze.activities.main
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Parcelable
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.databinding.ActivityMainBinding
-import io.github.keddnyo.midoze.fragments.FeedFragment
-import io.github.keddnyo.midoze.fragments.SettingsFragment
+import io.github.keddnyo.midoze.fragments.FirmwaresAdapter
+import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.packages.PackageNames
+import io.github.keddnyo.midoze.local.packages.PackageVersions
 import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.PackageUtils
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewPager: ViewPager
+    private val firmwaresAdapter = FirmwaresAdapter()
+    private lateinit var deviceListRecyclerView: RecyclerView
+    private lateinit var prefs: SharedPreferences
+    private var state: Parcelable? = null
+
     val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Display().switchDarkMode(context)
         super.onCreate(savedInstanceState)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
-
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            val adapter = MyAdapter(this, supportFragmentManager)
-
-            viewPager = findViewById(R.id.viewPager)
-            viewPager.adapter = adapter
-
-            val bottomBar = binding.bottomBar
-
-            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrollStateChanged(state: Int) {}
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int,
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    when (position) {
-                        0 -> {
-                            bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
-                            title = getString(R.string.feed_title)
-                        }
-                        1 -> {
-                            bottomBar.menu.findItem(R.id.menu_settings).isChecked = true
-                            title = getString(R.string.settings_title)
-                        }
-                    }
-                }
-            })
-
-            bottomBar.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_feed -> viewPager.currentItem = 0
-                    R.id.menu_settings -> viewPager.currentItem = 1
-                    else -> viewPager.currentItem = 0
-                }
-                true
-            }
-
-            // Default tab
-            viewPager.currentItem = 0
-            title = getString(R.string.feed_title)
-
-            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+            prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            setContentView(R.layout.activity_main)
 
             if (DozeRequest().isOnline(context)) {
-                AppUpdates(prefs, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+                AppUpdates(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
             }
+
+            init()
         } else {
             finish()
             startActivity(Intent(this, RequestActivity::class.java))
@@ -90,73 +60,165 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /*override fun onResume() {
-        super.onResume()
+    private fun init() {
+        val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
+        val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
+        val feedConnectivityError: ConstraintLayout = findViewById(R.id.feedConnectivityError)
+        val feedDevicesNotFound: ConstraintLayout = findViewById(R.id.feedDevicesNotFound)
 
-        fun getCurrentLocale(): Locale {
-            return Language().getCurrent()
+        deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
+        deviceListRecyclerView.layoutManager =
+            GridLayoutManager(
+                this, Display()
+                    .getGridLayoutIndex(this, 200)
+            )
+
+        val adapter = firmwaresAdapter
+        deviceListRecyclerView.adapter = adapter
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = prefs.edit()
+
+        fun isOnline(): Boolean {
+            return DozeRequest().isOnline(context)
         }
 
-        fun setLocale(loc: Locale) {
-            val config = Configuration()
-            config.locale = loc
-            baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-        }
+        class FetchFirmwareData :
+            AsyncTask<Void?, Void?, Void>() {
 
-        val ruLocale = Locale("ru")
-        val beLocale = Locale("be")
-        val uaLocale = Locale("uk")
-        val enLocale = Locale("en")
+            val gson = Gson()
+            var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
-        when (getCurrentLocale()) {
-            ruLocale -> {
-                Locale.setDefault(ruLocale)
-                setLocale(ruLocale)
+            @Deprecated("Deprecated in Java")
+            override fun onPreExecute() {
+                super.onPreExecute()
+                firmwaresRefreshLayout.isRefreshing = false
+                feedProgressBar.visibility = View.VISIBLE
+                feedConnectivityError.visibility = View.GONE
+                feedDevicesNotFound.visibility = View.GONE
+                editor.putBoolean("allow_exit", false).apply()
             }
-            beLocale -> {
-                Locale.setDefault(ruLocale)
-                setLocale(ruLocale)
+
+            @Deprecated("Deprecated in Java")
+            override fun doInBackground(vararg p0: Void?): Void? {
+
+                val commonDeviceArrayListJson = prefs.getString("deviceArray", "")
+
+                if (commonDeviceArrayListJson != "") {
+                    deviceArrayList = GsonBuilder().create().fromJson(
+                        commonDeviceArrayListJson.toString(),
+                        object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                    )
+                } else {
+                    fun getAppData(zeppLife: Boolean): Application {
+                        return if (zeppLife) {
+                            Application(
+                                PackageNames.ZEPP_LIFE_NAME,
+                                PackageUtils().getPackageVersion(context,
+                                    PackageNames.ZEPP_LIFE_NAME
+                                ) ?: PackageVersions.ZEPP_LIFE_VERSION
+                            )
+                        } else {
+                            Application(
+                                PackageNames.ZEPP_NAME,
+                                PackageUtils().getPackageVersion(context,
+                                    PackageNames.ZEPP_NAME
+                                ) ?: PackageVersions.ZEPP_VERSION
+                            )
+                        }
+                    }
+
+                    if (isOnline()) {
+                        val zeppDeviceArrayList =
+                            DozeRequest().getFirmwareLatest(context)
+
+                        for (i in zeppDeviceArrayList) {
+                            deviceArrayList.add(i)
+                        }
+
+                        val commonDeviceArray = gson.toJson(deviceArrayList)
+                        editor.putString("deviceArray", commonDeviceArray.toString())
+                        editor.apply()
+                    } else {
+                        runOnUiThread {
+                            feedProgressBar.visibility = View.GONE
+                            feedConnectivityError.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                return null
             }
-            uaLocale -> {
-                Locale.setDefault(ruLocale)
-                setLocale((ruLocale))
-            }
-            else -> {
-                Locale.setDefault(enLocale)
-                setLocale(enLocale)
+
+            @Deprecated("Deprecated in Java")
+            override fun onPostExecute(result: Void?) {
+                super.onPostExecute(result)
+
+                firmwaresAdapter.addDevice(deviceArrayList)
+
+                deviceArrayList.forEachIndexed { index, _ ->
+                    firmwaresAdapter.notifyItemInserted(index)
+                }
+
+                feedProgressBar.visibility = View.GONE
+
+                if (isOnline() && firmwaresAdapter.itemCount == 0) {
+                    feedDevicesNotFound.visibility = View.VISIBLE
+                }
+
+                editor.putBoolean("allow_exit", true).apply()
             }
         }
-    }*/
 
-    class MyAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
-        override fun getCount(): Int {
-            return 2
+        fun setData() {
+            val itemCount = firmwaresAdapter.itemCount
+            firmwaresAdapter.clear()
+            firmwaresAdapter.notifyItemRangeRemoved(0, itemCount)
+            FetchFirmwareData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> FeedFragment()
-                1 -> SettingsFragment()
-                else -> FeedFragment()
+        firmwaresRefreshLayout.setOnRefreshListener {
+            if (firmwaresAdapter.itemCount != 0) {
+                val prefs: SharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(context)
+
+                prefs.edit().putString("deviceArray", "").apply()
             }
-        }
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return context.resources.getString(Display().tabTitles[position])
-        }
-    }
-
-    override fun onBackPressed() {
-        if (viewPager.currentItem != 0) {
-            viewPager.currentItem = 0
-        } else {
-            val prefs: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
             if (prefs.getBoolean("allow_exit", true)) {
-                super.onBackPressed()
+                setData()
             } else {
+                firmwaresRefreshLayout.isRefreshing = false
                 Display().showToast(context, getString(R.string.feed_wait_for_process))
             }
         }
+
+        setData()
+
+        if (state != null) {
+            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_request -> {
+                startActivity(Intent(context, RequestActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

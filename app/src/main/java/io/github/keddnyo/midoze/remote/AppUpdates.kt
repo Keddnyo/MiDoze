@@ -3,25 +3,21 @@ package io.github.keddnyo.midoze.remote
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.os.AsyncTask
 import androidx.appcompat.app.AlertDialog
-import io.github.keddnyo.midoze.BuildConfig
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
 
 @SuppressLint("StaticFieldLeak")
-class AppUpdates(private val prefs: SharedPreferences, val context: Context) :
+class AppUpdates(val context: Context) :
     AsyncTask<Void?, Void?, Void>() {
 
     var releaseData: JSONObject = JSONObject("{}")
 
     @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg p0: Void?): Void? = with(context) {
-        if (prefs.getBoolean("settings_app_check_updates",
-                true) && DozeRequest().getHostReachable() != null
-        ) {
+        if (DozeRequest().getHostReachable() != null) {
             releaseData = DozeRequest().getAppReleaseData()
         }
         return null
