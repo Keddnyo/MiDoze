@@ -19,12 +19,12 @@
 
         <include
             android:id="@+id/feedConnectivityError"
-            layout="@layout/fragment_feed_connectivity_error"
+            layout="@layout/fragment_connectivity_error"
             android:visibility="gone" />
 
         <include
             android:id="@+id/feedDevicesNotFound"
-            layout="@layout/fragment_feed_devices_not_found"
+            layout="@layout/fragment_devices_not_found"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:visibility="visible"
-            tools:listitem="@layout/fragment_feed_firmware" />
+            tools:listitem="@layout/fragment_firmware" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
