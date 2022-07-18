@@ -84,7 +84,7 @@ class RequestActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             val isOnline = runBlocking(Dispatchers.Default) {
-                DozeRequest().getHostReachable() != null
+                DozeRequest().isOnline(context)
             }
 
             if (isOnline) {
