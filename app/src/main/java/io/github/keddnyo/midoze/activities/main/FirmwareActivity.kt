@@ -63,6 +63,12 @@ class FirmwareActivity : AppCompatActivity() {
         firmwareResponse = JSONObject(intent.getStringExtra("firmwareData").toString())
         deviceNameTextView.text = deviceNameValue
 
+        fun openResponseActivity() {
+            val intent = Intent(context, ResponseActivity::class.java)
+            intent.putExtra("json", firmwareResponse.toString())
+            startActivity(intent)
+        }
+
         deviceIconImageView.setImageResource(deviceIconValue)
 
         firmwareVersionTextView.text = firmwareResponse.getString(
@@ -91,14 +97,17 @@ class FirmwareActivity : AppCompatActivity() {
                     Display().showToast(context, getString(R.string.feed_connectivity_error))
                 }
             } else {
-                val intent = Intent(context, ResponseActivity::class.java)
-                intent.putExtra("json", firmwareResponse.toString())
-                startActivity(intent)
+                openResponseActivity()
             }
         }
 
         firmwareDownloadButton.setOnLongClickListener {
             shareFirmware()
+            true
+        }
+
+        deviceNameTextView.setOnLongClickListener {
+            openResponseActivity()
             true
         }
     }

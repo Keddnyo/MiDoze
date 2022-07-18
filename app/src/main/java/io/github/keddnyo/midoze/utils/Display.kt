@@ -36,4 +36,9 @@ class Display {
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } +
                 "."
     }
+
+    fun getAppVersion(context: Context): String {
+        val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        return pInfo.versionName
+    }
 }

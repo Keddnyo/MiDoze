@@ -43,9 +43,9 @@ class DozeRequest {
         return false
     }
 
-    private fun isHostAvailable(host: String): Boolean {
+    fun isHostAvailable(host: String): Boolean {
         val connection: HttpURLConnection =
-            URL("https://$host").openConnection() as HttpURLConnection
+            URL(host).openConnection() as HttpURLConnection
         connection.requestMethod = "HEAD"
         val responseCode = runBlocking(Dispatchers.IO) {
             connection.responseCode
@@ -54,11 +54,11 @@ class DozeRequest {
     }
 
     fun getHostReachable(): String? {
-        return if (isHostAvailable(MIDOZE_HOST_FIRST)) {
+        return if (isHostAvailable("https://$MIDOZE_HOST_FIRST")) {
             MIDOZE_HOST_FIRST
-        } else if (isHostAvailable(MIDOZE_HOST_SECOND)) {
+        } else if (isHostAvailable("https://$MIDOZE_HOST_SECOND")) {
             MIDOZE_HOST_SECOND
-        } else if (isHostAvailable(MIDOZE_HOST_THIRD)) {
+        } else if (isHostAvailable("https://$MIDOZE_HOST_THIRD")) {
             MIDOZE_HOST_THIRD
         } else {
             null

@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.subtitle = Display().getAppVersion(context)
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             prefs = PreferenceManager.getDefaultSharedPreferences(context)

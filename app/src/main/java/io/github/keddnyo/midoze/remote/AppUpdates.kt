@@ -17,7 +17,7 @@ class AppUpdates(val context: Context) :
 
     @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg p0: Void?): Void? = with(context) {
-        if (DozeRequest().getHostReachable() != null) {
+        if (DozeRequest().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
             releaseData = DozeRequest().getAppReleaseData()
         }
         return null
@@ -37,10 +37,7 @@ class AppUpdates(val context: Context) :
                 releaseData.getJSONArray("assets").getJSONObject(0)
                     .getString("browser_download_url")
 
-            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            val appVersion = pInfo.versionName
-
-            if (appVersion < latestVersion) {
+            if (Display().getAppVersion(context) < latestVersion) {
                 fun showUpdateDialog() {
                     val builder = AlertDialog.Builder(context)
                         .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
