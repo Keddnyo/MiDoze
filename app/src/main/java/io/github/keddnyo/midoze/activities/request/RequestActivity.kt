@@ -12,7 +12,9 @@ import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.DozeRequest
