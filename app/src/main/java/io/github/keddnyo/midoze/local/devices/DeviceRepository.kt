@@ -19,19 +19,19 @@ class DeviceRepository {
             "31" -> Device("Xiaomi Mi Band 3i", R.drawable.mi_band_3i)
             "35" -> Device("Amazfit GTR 47 CH", R.drawable.amazfit_gtr)
             "36" -> Device("Amazfit GTR 47 GL", R.drawable.amazfit_gtr)
-            "37" -> Device("Amazfit GTR 42 CH", R.drawable.amazfit_gtr)
-            "38" -> Device("Amazfit GTR 42 GL", R.drawable.amazfit_gtr)
+            "37" -> Device("Amazfit GTR 42 CH", R.drawable.amazfit_gtr_42)
+            "38" -> Device("Amazfit GTR 42 GL", R.drawable.amazfit_gtr_42)
             "39" -> Device("Amazfit Bip Lite CH", R.drawable.amazfit_bip)
 
             "40" -> Device("Amazfit GTS CH", R.drawable.amazfit_gts)
             "41" -> Device("Amazfit GTS GL", R.drawable.amazfit_gts)
             "42" -> Device("Amazfit Bip Lite GL", R.drawable.amazfit_bip)
-            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr) // Not Fount // TODO: May be replace
-            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr_42) // Not Fount // TODO: May be replace
+            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr_42) // TODO: May be replace
 
             "50" -> Device("Amazfit T-Rex", R.drawable.amazfit_t_rex)
-            "51" -> Device("Amazfit GTR 42 SWK", R.drawable.amazfit_gtr) // TODO: May be replace
-            "52" -> Device("Amazfit GTR 42 SWK GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "51" -> Device("Amazfit GTR 42 SWK", R.drawable.amazfit_gtr_42) // TODO: May be replace
+            "52" -> Device("Amazfit GTR 42 SWK GL", R.drawable.amazfit_gtr_42) // TODO: May be replace
             "53" -> Device("Amazfit X CH", R.drawable.amazfit_x)
             "54" -> Device("Amazfit GTR 47 Disney", R.drawable.amazfit_gtr) // TODO: May be replace
             "56" -> Device("Zepp Z CH", R.drawable.zepp_z)
