@@ -20,15 +20,10 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.fragments.FirmwaresAdapter
-import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.packages.PackageNames
-import io.github.keddnyo.midoze.local.packages.PackageVersions
 import io.github.keddnyo.midoze.remote.AppUpdates
 import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
-import io.github.keddnyo.midoze.utils.PackageUtils
 
 class MainActivity : AppCompatActivity() {
     private val firmwaresAdapter = FirmwaresAdapter()

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.fragments
+package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,6 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.utils.StringUtils

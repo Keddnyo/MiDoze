@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.activities.request
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,14 +9,13 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
-import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
-import io.github.keddnyo.midoze.remote.DozeRequest
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
+import io.github.keddnyo.midoze.remote.DozeRequest
 import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.PackageUtils
 import kotlinx.coroutines.Dispatchers
