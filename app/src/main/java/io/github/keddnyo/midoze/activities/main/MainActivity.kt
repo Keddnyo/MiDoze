@@ -158,6 +158,8 @@ class MainActivity : AppCompatActivity() {
 
                 prefs.edit().putString("deviceArray", "").apply()
             }
+
+            setData()
         }
 
         setData()
