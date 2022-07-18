@@ -37,7 +37,10 @@ class AppUpdates(val context: Context) :
                 releaseData.getJSONArray("assets").getJSONObject(0)
                     .getString("browser_download_url")
 
-            if (BuildConfig.VERSION_NAME < latestVersion) {
+            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            val appVersion = pInfo.versionName
+
+            if (appVersion < latestVersion) {
                 fun showUpdateDialog() {
                     val builder = AlertDialog.Builder(context)
                         .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
