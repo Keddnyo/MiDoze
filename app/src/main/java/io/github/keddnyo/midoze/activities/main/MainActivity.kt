@@ -152,18 +152,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         firmwaresRefreshLayout.setOnRefreshListener {
-            if (firmwaresAdapter.itemCount != 0) {
+            if (isOnline() && firmwaresAdapter.itemCount != 0) {
                 val prefs: SharedPreferences =
                     PreferenceManager.getDefaultSharedPreferences(context)
 
                 prefs.edit().putString("deviceArray", "").apply()
-            }
-
-            if (prefs.getBoolean("allow_exit", true)) {
-                setData()
-            } else {
-                firmwaresRefreshLayout.isRefreshing = false
-                Display().showToast(context, getString(R.string.feed_wait_for_process))
             }
         }
 
