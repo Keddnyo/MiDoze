@@ -13,11 +13,4 @@ class StringUtils {
     fun getExtrasFixed(string: String): String {
         return string.replace("\\/", "/")
     }
-
-    fun getLocalFirmwareDate(firmwareDate: String): String {
-        val dateFormat = SimpleDateFormat("yyyyMMddhhmm", LanguageUtils().currentLocale)
-        val firmwareDateFormatted = dateFormat.parse(firmwareDate)
-        return DateFormat.getDateInstance(DateFormat.MEDIUM, LanguageUtils().currentLocale)
-            .format(firmwareDateFormatted!!)
-    }
 }
