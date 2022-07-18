@@ -10,11 +10,13 @@ import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 class PackageUtils {
     fun getPackageVersion(context: Context, packageName: String?): String? {
         return try {
-            val eInfo = context.packageManager.getPackageInfo(
-                packageName!!, 0
-            )
-            val version = eInfo.versionName
-            val build = eInfo.versionCode
+            val eInfo = packageName?.let {
+                context.packageManager.getPackageInfo(
+                    it, 0
+                )
+            }
+            val version = eInfo?.versionName
+            val build = eInfo?.versionCode
             version + "_" + build
         } catch (e: PackageManager.NameNotFoundException) {
             when (packageName) {
