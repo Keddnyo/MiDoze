@@ -18,9 +18,9 @@ import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
-import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_FIRST
-import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_SECOND
-import io.github.keddnyo.midoze.remote.Routes.MIDOZE_HOST_THIRD
+import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_FIRST
+import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_SECOND
+import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_THIRD
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -54,12 +54,12 @@ class DozeRequest {
     }
 
     fun getHostReachable(): String? {
-        return if (isHostAvailable("https://$MIDOZE_HOST_FIRST")) {
-            MIDOZE_HOST_FIRST
-        } else if (isHostAvailable("https://$MIDOZE_HOST_SECOND")) {
-            MIDOZE_HOST_SECOND
-        } else if (isHostAvailable("https://$MIDOZE_HOST_THIRD")) {
-            MIDOZE_HOST_THIRD
+        return if (isHostAvailable("https://$XIAOMI_HOST_FIRST")) {
+            XIAOMI_HOST_FIRST
+        } else if (isHostAvailable("https://$XIAOMI_HOST_SECOND")) {
+            XIAOMI_HOST_SECOND
+        } else if (isHostAvailable("https://$XIAOMI_HOST_THIRD")) {
+            XIAOMI_HOST_THIRD
         } else {
             null
         }
