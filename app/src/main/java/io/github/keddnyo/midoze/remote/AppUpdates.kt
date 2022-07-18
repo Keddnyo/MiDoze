@@ -13,7 +13,7 @@ import org.json.JSONObject
 class AppUpdates(val context: Context) :
     AsyncTask<Void?, Void?, Void>() {
 
-    var releaseData: JSONObject = JSONObject("{}")
+    private var releaseData: JSONObject = JSONObject("{}")
 
     @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg p0: Void?): Void? = with(context) {

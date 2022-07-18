@@ -6,7 +6,6 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
@@ -16,13 +15,11 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.databinding.ActivityMainBinding
 import io.github.keddnyo.midoze.fragments.FirmwaresAdapter
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
@@ -110,24 +107,6 @@ class MainActivity : AppCompatActivity() {
                         object : TypeToken<ArrayList<FirmwareData>>() {}.type
                     )
                 } else {
-                    fun getAppData(zeppLife: Boolean): Application {
-                        return if (zeppLife) {
-                            Application(
-                                PackageNames.ZEPP_LIFE_NAME,
-                                PackageUtils().getPackageVersion(context,
-                                    PackageNames.ZEPP_LIFE_NAME
-                                ) ?: PackageVersions.ZEPP_LIFE_VERSION
-                            )
-                        } else {
-                            Application(
-                                PackageNames.ZEPP_NAME,
-                                PackageUtils().getPackageVersion(context,
-                                    PackageNames.ZEPP_NAME
-                                ) ?: PackageVersions.ZEPP_VERSION
-                            )
-                        }
-                    }
-
                     if (isOnline()) {
                         val zeppDeviceArrayList =
                             DozeRequest().getFirmwareLatest(context)

@@ -8,10 +8,4 @@
         android:title="@string/settings_custom_request"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/action_dark_mode"
-        android:icon="@drawable/ic_dark_mode"
-        android:title="@string/settings_dark_mode"
-        app:showAsAction="ifRoom" />
-
 </menu>

@@ -2,16 +2,6 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_feed_shortcut"
-        android:shortcutId="Feed"
-        android:shortcutShortLabel="@string/feed_title">
-        <intent
-            android:action="FEED_SHORTCUT"
-            android:targetClass="io.github.keddnyo.midoze.activities.main.MainActivity"
-            android:targetPackage="io.github.keddnyo.midoze" />
-    </shortcut>
-    <shortcut
-        android:enabled="true"
         android:icon="@drawable/ic_custom_request_shortcut"
         android:shortcutId="CustomRequest"
         android:shortcutShortLabel="@string/settings_custom_request">

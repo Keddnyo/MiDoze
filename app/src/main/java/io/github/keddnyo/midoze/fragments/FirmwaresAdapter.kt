@@ -88,10 +88,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         return firmwaresDataArray.size
     }
 
-    fun getItems(): ArrayList<FirmwareData> {
-        return firmwaresDataArray
-    }
-
     fun addDevice(firmwareDataArray: ArrayList<FirmwareData>) {
         firmwaresDataArray = firmwareDataArray
     }

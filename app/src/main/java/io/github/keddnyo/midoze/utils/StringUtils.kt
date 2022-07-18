@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.utils
 
-import io.github.keddnyo.midoze.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 

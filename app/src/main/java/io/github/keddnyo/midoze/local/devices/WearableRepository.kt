@@ -5,7 +5,9 @@ import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
 import io.github.keddnyo.midoze.utils.LanguageUtils
 import io.github.keddnyo.midoze.utils.PackageUtils
 
@@ -22,12 +24,12 @@ class WearableRepository(val context: Context) {
             application = if (isZeppLife) {
                 Application(
                     name = ZEPP_LIFE_NAME,
-                    version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_NAME)
+                    version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME)
                 )
             } else {
                 Application(
                     name = ZEPP_NAME,
-                    version = PackageUtils().getPackageVersion(context, ZEPP_NAME)
+                    version = PackageUtils().getPackageVersion(context, ZEPP_PACKAGE_NAME)
                 )
             },
             region = if (isChineseRegion) {

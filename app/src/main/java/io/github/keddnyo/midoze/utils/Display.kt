@@ -1,12 +1,8 @@
 package io.github.keddnyo.midoze.utils
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.DisplayMetrics
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.preference.PreferenceManager
-import io.github.keddnyo.midoze.R
 import java.util.*
 
 class Display {

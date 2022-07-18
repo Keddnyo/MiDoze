@@ -175,10 +175,8 @@ class DozeRequest {
             val devicePreview = deviceData.image
 
             fun get(key: String): String {
-                val f = firmwareData
-
-                return if (f.has(key)) {
-                    f.getString(key)
+                return if (firmwareData.has(key)) {
+                    firmwareData.getString(key)
                 } else ({
                     null
                 }).toString()
