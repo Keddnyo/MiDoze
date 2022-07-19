@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -12,9 +11,7 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
-import androidx.preference.PreferenceManager
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.Region.REGION_ARRAY
 import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
@@ -53,7 +50,7 @@ class DozeRequest {
         return responseCode == 200
     }
 
-    fun getHostReachable(): String? {
+    private fun getXiaomiHostReachable(): String? {
         return if (isHostAvailable("https://$XIAOMI_HOST_FIRST")) {
             XIAOMI_HOST_FIRST
         } else if (isHostAvailable("https://$XIAOMI_HOST_SECOND")) {
@@ -100,7 +97,7 @@ class DozeRequest {
         val response = client.get {
             url {
                 protocol = URLProtocol.HTTPS
-                host = getHostReachable().toString()
+                host = getXiaomiHostReachable().toString()
                 appendPathSegments("devices", "ALL", "hasNewVersion")
                 parameter("productId", "0")
                 parameter("vendorSource", "0")
@@ -146,7 +143,7 @@ class DozeRequest {
                 append("v", "0")
                 append("apptoken", "0")
                 append("lang", region.language)
-                append("Host", getHostReachable().toString())
+                append("Host", getXiaomiHostReachable().toString())
                 append("Connection", "Keep-Alive")
                 append("accept-encoding", "gzip")
                 append("accept", "*/*")
