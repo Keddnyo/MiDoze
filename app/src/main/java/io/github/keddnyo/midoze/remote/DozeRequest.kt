@@ -70,20 +70,16 @@ class DozeRequest {
     ): ArrayList<FirmwareData> = with(context as Activity) {
         val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
-        for (i in WearableRepository(context).wearables) {
-            fun getFirmwareRegionData(region: Region): FirmwareData? {
-                return runBlocking(Dispatchers.IO) {
-                    DozeRequest().getFirmwareData(
-                        context = context,
-                        deviceSource = i.deviceSource,
-                        productionSource = i.productionSource,
-                        application = i.application,
-                        region = i.region
-                    )
-                }
-            }
-
-            (getFirmwareRegionData(REGION_ARRAY[0]))?.let {
+        WearableRepository(context).wearables.forEach { i ->
+            runBlocking(Dispatchers.IO) {
+                DozeRequest().getFirmwareData(
+                    context = context,
+                    deviceSource = i.deviceSource,
+                    productionSource = i.productionSource,
+                    application = i.application,
+                    region = i.region
+                )
+            }?.let {
                 deviceArrayList.add(
                     it
                 )
@@ -100,9 +96,6 @@ class DozeRequest {
         application: Application,
         region: Region
     ): FirmwareData? = with(context as Activity) {
-        val prefs: SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
-
         val client = HttpClient()
         val response = client.get {
             url {
