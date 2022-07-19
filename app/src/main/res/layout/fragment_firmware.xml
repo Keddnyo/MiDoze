@@ -11,13 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
 
         <ImageView
             android:id="@+id/deviceIconImageView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,9 +31,9 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/deviceIconImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deviceIconImageView">
 
             <TextView
                 android:id="@+id/deviceNameTextView"
