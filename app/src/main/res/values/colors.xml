@@ -10,6 +10,4 @@
     <color name="accent_light">#C57000</color>
     <color name="accent_dark">#ECBA55</color>
     <color name="background_light">@color/white</color>
-
-    <color name="nfc_label_text">@color/white</color>
 </resources>

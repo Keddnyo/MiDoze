@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
-    <string name="nfc_label" translatable="false">NFC</string>
     <string name="menu_about" translatable="false">About</string>
     <string name="compatibility_mode">Compatibility mode</string>
 

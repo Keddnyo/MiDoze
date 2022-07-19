@@ -23,7 +23,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
             itemView.findViewById(R.id.deviceIconImageView)
         val firmwareVersionTextView: TextView =
             itemView.findViewById(R.id.firmwareVersionTextView)
-        val nfcLabelCard: MaterialCardView = itemView.findViewById(R.id.nfc_label)
 
         val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
@@ -38,10 +37,6 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         holder.deviceNameTextView.text = firmwaresDataArray[position].device.name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].device.image)
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
-
-        if (firmwaresDataArray[position].device.name.contains("NFC")) {
-            holder.nfcLabelCard.visibility = View.VISIBLE
-        }
 
         fun openFirmwareActivity(
             context: Context,
