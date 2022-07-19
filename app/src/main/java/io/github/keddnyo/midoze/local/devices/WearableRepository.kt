@@ -63,7 +63,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit Band 7 / Zepp
+        // Amazfit Band 7 / Zepp // TODO: Not available
         addWearable(
             deviceSource = "254",
             productionSource = "259",
@@ -156,7 +156,7 @@ class WearableRepository(val context: Context) {
             deviceSource = "65",
             productionSource = "256",
             isZeppLife = false,
-            isChineseRegion = false
+            isChineseRegion = true
         ),
 
         // Amazfit Bip (CH) / Zepp Life
@@ -183,7 +183,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = true
         ),
 
-        // Amazfit Bip S / Zepp
+        // Amazfit Bip S CH / Zepp
         addWearable(
             deviceSource = "20",
             productionSource = "256",
@@ -191,7 +191,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit Bip S / Zepp
+        // Amazfit Bip S GL / Zepp
         addWearable(
             deviceSource = "28",
             productionSource = "258",
@@ -199,25 +199,9 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit Bip S Lite / Zepp
+        // Amazfit Bip S Lite GL / Zepp
         addWearable(
             deviceSource = "29",
-            productionSource = "259",
-            isZeppLife = false,
-            isChineseRegion = true
-        ),
-
-        // Amazfit Bip U Pro / Zepp
-        addWearable(
-            deviceSource = "69",
-            productionSource = "257",
-            isZeppLife = false,
-            isChineseRegion = false
-        ),
-
-        // Amazfit Bip U / Zepp
-        addWearable(
-            deviceSource = "70",
             productionSource = "259",
             isZeppLife = false,
             isChineseRegion = false
@@ -235,6 +219,22 @@ class WearableRepository(val context: Context) {
         addWearable(
             deviceSource = "67",
             productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = true
+        ),
+
+        // Amazfit Bip U / Zepp
+        addWearable(
+            deviceSource = "70",
+            productionSource = "259",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Bip U Pro / Zepp
+        addWearable(
+            deviceSource = "69",
+            productionSource = "257",
             isZeppLife = false,
             isChineseRegion = false
         ),
@@ -327,7 +327,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTR 2 CH / Zepp
+        // Amazfit GTR 2 CH / Zepp // TODO: Not found
         addWearable(
             deviceSource = "63",
             productionSource = "256",
@@ -431,7 +431,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTS 2 CH / Zepp
+        // Amazfit GTS 2 CH / Zepp // TODO: Not found
         addWearable(
             deviceSource = "77",
             productionSource = "256",
@@ -447,7 +447,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTS 2 mini / Zepp
+        // Amazfit GTS 2 Mini GL / Zepp
         addWearable(
             deviceSource = "92",
             productionSource = "257",
@@ -455,7 +455,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTS 2 Mini / Zepp // TODO: May be replace
+        // Amazfit GTS 2 Mini CH / Zepp // TODO: May be replace
         addWearable(
             deviceSource = "104",
             productionSource = "256",

@@ -9,11 +9,11 @@ class DeviceRepository {
         return when (deviceSource.toString()) {
             "12" -> Device("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "20" -> Device("Amazfit Bip S", R.drawable.amazfit_bip_s) // TODO: May be replace
+            "20" -> Device("Amazfit Bip S CH", R.drawable.amazfit_bip_s) // TODO: May be replace
             "24" -> Device("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
             "25" -> Device("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
-            "28" -> Device("Amazfit Bip S", R.drawable.amazfit_bip_s)
-            "29" -> Device("Amazfit Bip S Lite", R.drawable.amazfit_bip_s)
+            "28" -> Device("Amazfit Bip S GL", R.drawable.amazfit_bip_s)
+            "29" -> Device("Amazfit Bip S Lite GL", R.drawable.amazfit_bip_s)
 
             "30" -> Device("Amazfit Verge Lite GL", R.drawable.amazfit_verge_lite)
             "31" -> Device("Xiaomi Mi Band 3i", R.drawable.mi_band_3i)
@@ -59,10 +59,10 @@ class DeviceRepository {
             "82" -> Device("Zepp E Square GL", R.drawable.zepp_e_square)
             "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex) // TODO: May be replace
 
-            "92" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
+            "92" -> Device("Amazfit GTS 2 Mini GL", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
-            "104" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
+            "104" -> Device("Amazfit GTS 2 Mini CH", R.drawable.amazfit_gts_2_mini)
 
             // "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
 
