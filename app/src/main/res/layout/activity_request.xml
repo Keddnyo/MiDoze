@@ -106,7 +106,7 @@
             android:id="@+id/extrasSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@android:string/ok"
+            android:text="@android:string/searchview_description_submit"
             android:theme="@style/Button" />
 
         <com.google.android.material.button.MaterialButton

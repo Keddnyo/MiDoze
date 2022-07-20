@@ -3,13 +3,12 @@ package io.github.keddnyo.midoze.local.devices
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Device
 
-@Suppress("UNUSED_EXPRESSION")
 class DeviceRepository {
     fun getDeviceNameByCode(deviceSource: Int, productionSource: Int): Device {
         return when (deviceSource.toString()) {
             "12" -> Device("Amazfit Bip", R.drawable.amazfit_bip)
 
-            "20" -> Device("Amazfit Bip S CH", R.drawable.amazfit_bip_s) // TODO: May be replace
+            "20" -> Device("Amazfit Bip S CH", R.drawable.amazfit_bip_s)
             "24" -> Device("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
             "25" -> Device("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
             "28" -> Device("Amazfit Bip S GL", R.drawable.amazfit_bip_s)
@@ -26,14 +25,14 @@ class DeviceRepository {
             "40" -> Device("Amazfit GTS CH", R.drawable.amazfit_gts)
             "41" -> Device("Amazfit GTS GL", R.drawable.amazfit_gts)
             "42" -> Device("Amazfit Bip Lite GL", R.drawable.amazfit_bip)
-            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr_42) // Not Fount // TODO: May be replace
-            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr) // TODO: May be replace
+            "44" -> Device("Amazfit GTR 42 Lite GL", R.drawable.amazfit_gtr_42)
+            "46" -> Device("Amazfit GTR 47 Lite GL", R.drawable.amazfit_gtr)
 
             "50" -> Device("Amazfit T-Rex", R.drawable.amazfit_t_rex)
-            "51" -> Device("Amazfit GTR 42 SWK", R.drawable.amazfit_gtr_42) // TODO: May be replace
-            "52" -> Device("Amazfit GTR 42 SWK GL", R.drawable.amazfit_gtr_42) // TODO: May be replace
+            "51" -> Device("Amazfit GTR 42 SWK CH", R.drawable.amazfit_gtr_42)
+            "52" -> Device("Amazfit GTR 42 SWK GL", R.drawable.amazfit_gtr_42)
             "53" -> Device("Amazfit X CH", R.drawable.amazfit_x)
-            "54" -> Device("Amazfit GTR 47 Disney", R.drawable.amazfit_gtr) // TODO: May be replace
+            "54" -> Device("Amazfit GTR 47 Disney", R.drawable.amazfit_gtr)
             "56" -> Device("Zepp Z CH", R.drawable.zepp_z)
             "57" -> Device("Zepp E Circle CH", R.drawable.zepp_e_circle)
             "58" -> Device("Xiaomi Mi Band 5 NFC", R.drawable.mi_band_5_nfc)
@@ -57,16 +56,14 @@ class DeviceRepository {
 
             "81" -> Device("Zepp E Circle GL", R.drawable.zepp_e_circle)
             "82" -> Device("Zepp E Square GL", R.drawable.zepp_e_square)
-            "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex) // TODO: May be replace
+            "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex)
 
             "92" -> Device("Amazfit GTS 2 Mini GL", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
             "104" -> Device("Amazfit GTS 2 Mini CH", R.drawable.amazfit_gts_2_mini)
 
-            // "113" -> DeviceData("Amazfit Bip", R.drawable.amazfit_bip)
-
-            "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex) // TODO: May be replace
+            "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex)
             "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr_2e)
             "207" -> Device("Amazfit GTS 2e CH", R.drawable.amazfit_gts_2)
             "209" -> Device("Amazfit GTR 2e GL", R.drawable.amazfit_gtr_2e)

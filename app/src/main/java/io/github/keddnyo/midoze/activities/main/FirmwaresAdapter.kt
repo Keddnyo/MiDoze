@@ -29,7 +29,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_firmware, parent, false)
+            .inflate(R.layout.device, parent, false)
         return DeviceListViewHolder(view)
     }
 
