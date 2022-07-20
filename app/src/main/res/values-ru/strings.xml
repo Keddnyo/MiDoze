@@ -20,7 +20,7 @@
     <string name="extras_production_source">Код продукции</string>
     <string name="extras_app_name">Код приложения</string>
     <string name="extras_app_version">Версия приложения</string>
-    <string name="extras_app_country">Страна</string>
+    <string name="extras_app_country">Код страны</string>
     <string name="extras_app_lang">Код языка</string>
     <string name="extras_app_data">Вставить код приложения</string>
     <string name="extras_import_button">Импорт</string>
