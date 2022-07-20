@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
     <string name="menu_about" translatable="false">About</string>
+    <string name="feed_connectivity_error">Connectivity error</string>
+    <string name="feed_devices_not_found">Device(-s) not found</string>
     <string name="compatibility_mode">Compatibility mode</string>
 
     <string name="update_dialog_title">Update available</string>
     <string name="update_dialog_button">Update</string>
-
-    <string name="feed_connectivity_error">Connectivity error</string>
-    <string name="feed_devices_not_found">Device(-s) not found</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_changelog">Changelog</string>
@@ -16,6 +15,7 @@
     <string name="firmware_not_found">Not found</string>
     <string name="firmware_try_switch_region">Try switching the region</string>
     <string name="firmware_share">Share</string>
+
     <string name="extras_device_source">Device source</string>
     <string name="extras_production_source">Production source</string>
     <string name="extras_app_name">App name</string>
