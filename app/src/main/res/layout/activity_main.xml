@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:visibility="visible"
-            tools:listitem="@layout/device" />
+            tools:listitem="@layout/fragment_firmware" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

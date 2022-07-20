@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_share_content"
-        android:icon="@android:drawable/ic_menu_share"
-        android:title="@android:string/share"
+        android:id="@+id/action_share_firmware"
+        android:icon="@drawable/ic_share"
+        android:title="@string/firmware_share"
         app:showAsAction="ifRoom" />
 
 </menu>

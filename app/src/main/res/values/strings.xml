@@ -1,23 +1,30 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
+    <string name="menu_about" translatable="false">About</string>
     <string name="compatibility_mode">Compatibility mode</string>
+
+    <string name="update_dialog_title">Update available</string>
+    <string name="update_dialog_button">Update</string>
+
     <string name="feed_connectivity_error">Connectivity error</string>
     <string name="feed_devices_not_found">Device(-s) not found</string>
-    <string name="update_dialog_title">Update available</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_changelog">Changelog</string>
     <string name="firmware_languages">Languages</string>
     <string name="downloading_toast">Downloading…</string>
-    
+    <string name="firmware_not_found">Not found</string>
+    <string name="firmware_try_switch_region">Try switching the region</string>
+    <string name="firmware_share">Share</string>
     <string name="extras_device_source">Device source</string>
     <string name="extras_production_source">Production source</string>
-    <string name="extras_app_name">App package name</string>
+    <string name="extras_app_name">App name</string>
     <string name="extras_app_version">App version</string>
-    <string name="extras_app_country">Country code</string>
-    <string name="extras_app_lang">Language code</string>
+    <string name="extras_app_country">Country</string>
+    <string name="extras_app_lang">Language</string>
     <string name="extras_app_data">Insert app data</string>
     <string name="extras_import_button">Import</string>
 
+    <string name="menu_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
 </resources>

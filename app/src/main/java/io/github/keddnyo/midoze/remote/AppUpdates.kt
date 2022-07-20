@@ -44,7 +44,7 @@ class AppUpdates(val context: Context) :
                         .setMessage(releaseChangelog)
                         .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
-                    builder.setPositiveButton(android.R.string.autofill_update_yes) { _: DialogInterface?, _: Int ->
+                    builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
                         DozeRequest().getFirmwareFile(context,
                             latestVersionLink,
                             getString(R.string.app_name))
