@@ -82,7 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLength="2" />
+                android:maxLength="2"
+                android:textAllCaps="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,8 +115,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/extras_import_button"
-            android:visibility="gone"
-            android:theme="@style/Button" />
+            android:theme="@style/Button"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extras_app_button"

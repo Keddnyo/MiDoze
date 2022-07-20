@@ -18,11 +18,11 @@
 
     <string name="extras_device_source">Код устройства</string>
     <string name="extras_production_source">Код продукции</string>
-    <string name="extras_app_name">Имя приложения</string>
+    <string name="extras_app_name">Код приложения</string>
     <string name="extras_app_version">Версия приложения</string>
     <string name="extras_app_country">Страна</string>
-    <string name="extras_app_lang">Язык</string>
-    <string name="extras_app_data">Вставить приложение</string>
+    <string name="extras_app_lang">Код языка</string>
+    <string name="extras_app_data">Вставить код приложения</string>
     <string name="extras_import_button">Импорт</string>
 
     <string name="menu_custom_request">Запрос</string>
