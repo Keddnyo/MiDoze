@@ -40,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.subtitle = Display().getAppVersion(context)
 
         setContentView(R.layout.activity_main)
-        //AppUpdates(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            AppUpdates(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        }
         init()
     }
 

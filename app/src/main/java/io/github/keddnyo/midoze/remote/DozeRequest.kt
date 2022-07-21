@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -11,6 +12,7 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.startActivity
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
@@ -204,19 +206,25 @@ class DozeRequest {
                 1
             )
         } else {
-            val downloadManager =
-                context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            val fileName = URLUtil.guessFileName(fileUrl, "?", "?")
-            val request = DownloadManager.Request(Uri.parse(fileUrl))
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                val downloadManager =
+                    context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                val fileName = URLUtil.guessFileName(fileUrl, "?", "?")
+                val request = DownloadManager.Request(Uri.parse(fileUrl))
 
-            request.setTitle(fileName)
-            request.setNotificationVisibility(1)
-            request.setDestinationInExternalPublicDir(
-                Environment.DIRECTORY_DOWNLOADS,
-                "${context.getString(R.string.app_name)}/$subName/$fileName"
-            )
+                request.setTitle(fileName)
+                request.setNotificationVisibility(1)
+                request.setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "${context.getString(R.string.app_name)}/$subName/$fileName"
+                )
 
-            downloadManager.enqueue(request)
+                downloadManager.enqueue(request)
+            } else {
+                context.startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl))
+                )
+            }
         }
     }
 

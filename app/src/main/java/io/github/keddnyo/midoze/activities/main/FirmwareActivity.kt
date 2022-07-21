@@ -90,14 +90,10 @@ class FirmwareActivity : AppCompatActivity() {
         }
 
         firmwareDownloadButton.setOnClickListener {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                if (DozeRequest().isOnline(context)) {
-                    getFirmware(firmwareResponse, context, deviceNameValue)
-                } else {
-                    Display().showToast(context, getString(R.string.feed_connectivity_error))
-                }
+            if (DozeRequest().isOnline(context)) {
+                getFirmware(firmwareResponse, context, deviceNameValue)
             } else {
-                openResponseActivity()
+                Display().showToast(context, getString(R.string.feed_connectivity_error))
             }
         }
 
