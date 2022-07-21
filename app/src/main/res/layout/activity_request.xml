@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -51,8 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLength="20"
-                app:textLocale="en_US" />
+                android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,9 +83,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:maxLength="2"
-                android:textAllCaps="true"
-                app:textAllCaps="true"
-                app:textLocale="en_US" />
+                android:textAllCaps="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -103,8 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLength="5"
-                app:textLocale="en_US" />
+                android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
