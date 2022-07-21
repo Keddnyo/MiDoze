@@ -57,10 +57,10 @@
                         android:id="@+id/firmwareDownloadButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:text="@string/firmware_download"
                         android:textSize="8pt"
-                        android:theme="@style/Button" />
+                        android:theme="@style/Button"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -85,14 +85,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="8pt"
+                    android:textSize="9pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="7pt" />
+                    android:textSize="8pt" />
 
             </LinearLayout>
 
@@ -115,14 +115,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="8pt"
+                    android:textSize="9pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="7pt" />
+                    android:textSize="8pt" />
 
             </LinearLayout>
 
