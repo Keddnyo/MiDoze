@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="20dp">
+            app:contentPadding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,8 +25,8 @@
 
                 <ImageView
                     android:id="@+id/deviceIconImageView"
-                    android:layout_width="80dp"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="90dp"
                     android:src="@drawable/zepp_e_square"
                     tools:ignore="ContentDescription" />
 
@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="DeviceName"
-                        android:textSize="10pt"
+                        android:textSize="9pt"
                         android:textStyle="bold" />
 
                     <TextView
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="1.1.7.02"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/firmwareDownloadButton"
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone"
                         android:text="@string/firmware_download"
-                        android:textSize="10pt"
+                        android:textSize="8pt"
                         android:theme="@style/Button" />
 
                 </LinearLayout>
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="20dp">
+            app:contentPadding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,14 +85,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_languages"
-                    android:textSize="10pt"
+                    android:textSize="8pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareLanguagesTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="8pt" />
+                    android:textSize="7pt" />
 
             </LinearLayout>
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="20dp">
+            app:contentPadding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,14 +115,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/firmware_changelog"
-                    android:textSize="10pt"
+                    android:textSize="8pt"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/firmwareChangelogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="8pt" />
+                    android:textSize="7pt" />
 
             </LinearLayout>
 
