@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,7 +14,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_device_source">
+            android:hint="deviceSource"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasDeviceSourceEditText"
@@ -27,8 +29,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_production_source"
-            android:paddingTop="5dp">
+            android:hint="productionSource"
+            android:paddingTop="5dp"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasProductionSourceEditText"
@@ -42,8 +45,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_name"
-            android:paddingTop="5dp">
+            android:hint="appname"
+            android:paddingTop="5dp"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasAppNameEditText"
@@ -57,9 +61,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_version"
+            android:hint="appVersion"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasAppVersionEditText"
@@ -73,9 +78,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_country"
+            android:hint="country"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasCountryEditText"
@@ -90,9 +96,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/extras_app_lang"
+            android:hint="lang"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/extrasLangEditText"
@@ -107,23 +114,20 @@
             android:id="@+id/extrasSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@android:string/ok"
-            android:theme="@style/Button" />
+            android:text="@android:string/ok" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extrasImportButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/extras_import_button"
-            android:theme="@style/Button"
             android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/extras_app_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/extras_app_data"
-            android:theme="@style/Button" />
+            android:text="@string/extras_app_data" />
 
     </LinearLayout>
 

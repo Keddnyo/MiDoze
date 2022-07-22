@@ -31,13 +31,11 @@ class MainActivity : AppCompatActivity() {
     private val firmwaresAdapter = FirmwaresAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
     private lateinit var prefs: SharedPreferences
-    private var state: Parcelable? = null
 
     val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.subtitle = Display().getAppVersion(context)
 
         setContentView(R.layout.activity_main)
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -49,8 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         val firmwaresRefreshLayout: SwipeRefreshLayout = findViewById(R.id.firmwaresRefreshLayout)
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
-        val feedConnectivityError: ConstraintLayout = findViewById(R.id.feedConnectivityError)
-        val feedDevicesNotFound: ConstraintLayout = findViewById(R.id.feedDevicesNotFound)
+        val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
         deviceListRecyclerView.layoutManager =
@@ -80,8 +77,7 @@ class MainActivity : AppCompatActivity() {
                 super.onPreExecute()
                 firmwaresRefreshLayout.isRefreshing = false
                 feedProgressBar.visibility = View.VISIBLE
-                feedConnectivityError.visibility = View.GONE
-                feedDevicesNotFound.visibility = View.GONE
+                emptyResponse.visibility = View.GONE
                 editor.putBoolean("allow_exit", false).apply()
             }
 
@@ -110,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         runOnUiThread {
                             feedProgressBar.visibility = View.GONE
-                            feedConnectivityError.visibility = View.VISIBLE
+                            emptyResponse.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -131,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                 feedProgressBar.visibility = View.GONE
 
                 if (isOnline() && firmwaresAdapter.itemCount == 0) {
-                    feedDevicesNotFound.visibility = View.VISIBLE
+                    emptyResponse.visibility = View.VISIBLE
                 }
 
                 editor.putBoolean("allow_exit", true).apply()
@@ -157,17 +153,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         setData()
-
-        if (state != null) {
-            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

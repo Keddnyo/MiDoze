@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/firmwaresRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -18,13 +17,8 @@
             android:visibility="gone" />
 
         <include
-            android:id="@+id/feedConnectivityError"
-            layout="@layout/fragment_connectivity_error"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/feedDevicesNotFound"
-            layout="@layout/fragment_devices_not_found"
+            android:id="@+id/emptyResponse"
+            layout="@layout/empty_response"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -32,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:visibility="visible"
-            tools:listitem="@layout/device" />
+            android:visibility="visible" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

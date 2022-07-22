@@ -48,8 +48,6 @@ class AppUpdates(val context: Context) :
                         DozeRequest().getFirmwareFile(context,
                             latestVersionLink,
                             getString(R.string.app_name))
-                        Display().showToast(context,
-                            getString(R.string.downloading_toast))
                         DialogInterface.BUTTON_POSITIVE
                     }
                     builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->

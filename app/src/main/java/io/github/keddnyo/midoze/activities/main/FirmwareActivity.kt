@@ -93,7 +93,7 @@ class FirmwareActivity : AppCompatActivity() {
             if (DozeRequest().isOnline(context)) {
                 getFirmware(firmwareResponse, context, deviceNameValue)
             } else {
-                Display().showToast(context, getString(R.string.feed_connectivity_error))
+                Display().showToast(context, getString(R.string.empty_response))
             }
         }
 
@@ -119,7 +119,6 @@ class FirmwareActivity : AppCompatActivity() {
                 DozeRequest().getFirmwareFile(context, urlString, deviceName)
             }
         }
-        Display().showToast(context, getString(R.string.downloading_toast))
     }
 
     private fun shareFirmware() {

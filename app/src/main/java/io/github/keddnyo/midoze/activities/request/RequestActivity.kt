@@ -118,10 +118,10 @@ class RequestActivity : AppCompatActivity() {
 
                     context.startActivity(intent)
                 } else {
-                    Display().showToast(context, getString(R.string.not_found))
+                    Display().showToast(context, getString(R.string.empty_response))
                 }
             } else {
-                Display().showToast(context, getString(R.string.feed_connectivity_error))
+                Display().showToast(context, getString(R.string.empty_response))
             }
         }
 
