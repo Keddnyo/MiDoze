@@ -511,6 +511,22 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
+        // Amazfit T-Rex 2 CH / Zepp
+        addWearable(
+            deviceSource = "418",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit T-Rex 2 GL / Zepp
+        addWearable(
+            deviceSource = "419",
+            productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
         // Amazfit T-Rex Pro CH / Zepp
         addWearable(
             deviceSource = "83",
