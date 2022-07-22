@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/feed_devices_not_found"
+        android:text="@string/not_found"
         android:textColor="@color/foreground"
         android:textSize="10pt"
         android:textStyle="bold"

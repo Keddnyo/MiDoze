@@ -118,7 +118,7 @@ class RequestActivity : AppCompatActivity() {
 
                     context.startActivity(intent)
                 } else {
-                    Display().showToast(context, getString(R.string.feed_devices_not_found))
+                    Display().showToast(context, getString(R.string.not_found))
                 }
             } else {
                 Display().showToast(context, getString(R.string.feed_connectivity_error))

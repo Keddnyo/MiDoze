@@ -28,7 +28,7 @@ class ResponseActivity : AppCompatActivity() {
             responseTextView.requestFocus()
         } else {
             runOnUiThread {
-                Display().showToast(context, getString(R.string.firmware_not_found))
+                Display().showToast(context, getString(R.string.not_found))
             }
             finish()
         }

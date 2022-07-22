@@ -56,14 +56,14 @@ class DeviceRepository {
 
             "81" -> Device("Zepp E Circle GL", R.drawable.zepp_e_circle)
             "82" -> Device("Zepp E Square GL", R.drawable.zepp_e_square)
-            "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex)
+            "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex_pro)
 
             "92" -> Device("Amazfit GTS 2 Mini GL", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
             "104" -> Device("Amazfit GTS 2 Mini CH", R.drawable.amazfit_gts_2_mini)
 
-            "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex)
+            "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex_pro)
             "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr_2e)
             "207" -> Device("Amazfit GTS 2e CH", R.drawable.amazfit_gts_2)
             "209" -> Device("Amazfit GTR 2e GL", R.drawable.amazfit_gtr_2e)
