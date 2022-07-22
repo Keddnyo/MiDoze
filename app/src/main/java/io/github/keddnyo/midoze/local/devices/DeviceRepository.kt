@@ -80,12 +80,14 @@ class DeviceRepository {
 
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
+            // "233" -> Device("Amazfit Band 7", R.drawable.amazfit_band_7)
+
             "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
             "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini)
             "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr_2)
             "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2)
 
-            "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_5)
+            "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_7)
             "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
             "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3)
 
@@ -93,6 +95,9 @@ class DeviceRepository {
             "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             "265" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+
+            "418" -> Device("Amazfit T-Rex 2 CH", R.drawable.amazfit_t_rex_2)
+            "419" -> Device("Amazfit T-Rex 2 GL", R.drawable.amazfit_t_rex_2)
 
             else -> Device("Unknown $deviceSource $productionSource", R.drawable.unknown)
         }
