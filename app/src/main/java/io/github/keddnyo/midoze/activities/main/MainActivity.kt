@@ -39,7 +39,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GetAppUpdate(context).execute()
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            GetAppUpdate(context).execute()
+        }
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
