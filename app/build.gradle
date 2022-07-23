@@ -38,9 +38,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.preference:preference:1.2.0'
     implementation 'com.google.android.material:material:1.6.1'
-    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'io.ktor:ktor-client-android:2.0.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
 }

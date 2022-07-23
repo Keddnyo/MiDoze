@@ -5,20 +5,15 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
@@ -30,7 +25,6 @@ import io.github.keddnyo.midoze.utils.Display
 class MainActivity : AppCompatActivity() {
     private val firmwaresAdapter = FirmwaresAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
-    private lateinit var prefs: SharedPreferences
 
     val context = this@MainActivity
 
@@ -59,9 +53,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = firmwaresAdapter
         deviceListRecyclerView.adapter = adapter
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val editor = prefs.edit()
-
         fun isOnline(): Boolean {
             return DozeRequest().isOnline(context)
         }
@@ -69,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         class FetchFirmwareData :
             AsyncTask<Void?, Void?, Void>() {
 
-            val gson = Gson()
             var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
 
             @Deprecated("Deprecated in Java")
@@ -78,36 +68,21 @@ class MainActivity : AppCompatActivity() {
                 firmwaresRefreshLayout.isRefreshing = false
                 feedProgressBar.visibility = View.VISIBLE
                 emptyResponse.visibility = View.GONE
-                editor.putBoolean("allow_exit", false).apply()
             }
 
             @Deprecated("Deprecated in Java")
             override fun doInBackground(vararg p0: Void?): Void? {
+                if (isOnline()) {
+                    val zeppDeviceArrayList =
+                        DozeRequest().getFirmwareLatest(context)
 
-                val commonDeviceArrayListJson = prefs.getString("deviceArray", "")
-
-                if (commonDeviceArrayListJson != "") {
-                    deviceArrayList = GsonBuilder().create().fromJson(
-                        commonDeviceArrayListJson.toString(),
-                        object : TypeToken<ArrayList<FirmwareData>>() {}.type
-                    )
+                    for (i in zeppDeviceArrayList) {
+                        deviceArrayList.add(i)
+                    }
                 } else {
-                    if (isOnline()) {
-                        val zeppDeviceArrayList =
-                            DozeRequest().getFirmwareLatest(context)
-
-                        for (i in zeppDeviceArrayList) {
-                            deviceArrayList.add(i)
-                        }
-
-                        val commonDeviceArray = gson.toJson(deviceArrayList)
-                        editor.putString("deviceArray", commonDeviceArray.toString())
-                        editor.apply()
-                    } else {
-                        runOnUiThread {
-                            feedProgressBar.visibility = View.GONE
-                            emptyResponse.visibility = View.VISIBLE
-                        }
+                    runOnUiThread {
+                        feedProgressBar.visibility = View.GONE
+                        emptyResponse.visibility = View.VISIBLE
                     }
                 }
 
@@ -129,8 +104,6 @@ class MainActivity : AppCompatActivity() {
                 if (isOnline() && firmwaresAdapter.itemCount == 0) {
                     emptyResponse.visibility = View.VISIBLE
                 }
-
-                editor.putBoolean("allow_exit", true).apply()
             }
         }
 
@@ -142,13 +115,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         firmwaresRefreshLayout.setOnRefreshListener {
-            if (isOnline() && firmwaresAdapter.itemCount != 0) {
-                val prefs: SharedPreferences =
-                    PreferenceManager.getDefaultSharedPreferences(context)
-
-                prefs.edit().putString("deviceArray", "").apply()
-            }
-
             setData()
         }
 
