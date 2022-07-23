@@ -229,6 +229,8 @@ class DozeRequest {
     }
 
     fun getAppReleaseData(): JSONObject {
-        return JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
+        return runBlocking(Dispatchers.IO) {
+            JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
+        }
     }
 }
