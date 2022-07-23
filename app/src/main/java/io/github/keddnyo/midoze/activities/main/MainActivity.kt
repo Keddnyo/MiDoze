@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private val firmwaresAdapter = FirmwaresAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@MainActivity
-    private var state: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,17 +117,6 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
 
             GetDevices(context).execute()
-        }
-
-        if (state != null) {
-            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
         }
     }
 

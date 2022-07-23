@@ -53,7 +53,7 @@
                 android:id="@+id/extrasAppNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -70,7 +70,7 @@
                 android:id="@+id/extrasAppVersionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:maxLength="20" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +87,7 @@
                 android:id="@+id/extrasCountryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:maxLength="2"
                 android:textAllCaps="true" />
 
@@ -105,7 +105,7 @@
                 android:id="@+id/extrasLangEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
