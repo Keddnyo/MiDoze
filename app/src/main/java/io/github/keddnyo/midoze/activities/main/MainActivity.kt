@@ -114,6 +114,9 @@ class MainActivity : AppCompatActivity() {
                 firmwaresAdapter.clear()
                 firmwaresAdapter.notifyDataSetChanged()
 
+                editor.putString("deviceArrayListString", "")
+                editor.apply()
+
                 GetDevices(context).execute()
             }
         }
