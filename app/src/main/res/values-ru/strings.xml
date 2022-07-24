@@ -1,48 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_title">Ошибка подключения</string>
-    <string name="compatibility_mode">Режим совместимости</string>
+    <string name="menu_about" translatable="false">О приложении</string>
+    <string name="empty_response">Результат пуст</string>
 
-    <string name="update_dialog_title">Доступно обновление</string>
-    <string name="update_dialog_button">Обновить</string>
-
-    <string name="firmware_version">Версия прошивки</string>
-    <string name="search">Поиск</string>
-
-    <string name="feed_title">Лента</string>
-    <string name="settings_feed_cache_use">Загружать из кэша</string>
-    <string name="settings_feed_cache_use_summary">Отображать ленту без интернета</string>
-    <string name="settings_feed_cache_clear">Очистить кэш ленты</string>
-    <string name="settings_feed_cache_cleared">Готово</string>
-
-    <string name="firmware_connectivity_error">Ошибка подключения</string>
+    <string name="update_title">Обновление %1$s</string>
+    <string name="update_button">Обновить</string>
 
     <string name="firmware_download">Скачать</string>
-    <string name="firmware_changelog">Список изменений</string>
     <string name="firmware_languages">Языки</string>
-    <string name="downloading_toast">Загрузка…</string>
-    <string name="firmware_not_found">Не найдено</string>
-    <string name="firmware_try_switch_region">Попробуйте сменить регион</string>
-    <string name="firmware_share">Поделиться</string>
+    <string name="firmware_changelog">Список изменений</string>
+
+    <string name="extras_app_data">Вставить код приложения</string>
     <string name="extras_import_button">Импорт</string>
 
-    <string name="settings_title">Настройки</string>
-    <string name="settings_dark_mode">Тёмный режим</string>
-    <string name="settings_requests">Запросы</string>
-    <string name="settings_request_region">Регион запроса</string>
-    <string name="settings_request_host">Хост запроса</string>
-    <string name="settings_app_check_for_updates">Проверять обновления</string>
-
-    <string name="settings_custom_request">Ручной запрос</string>
+    <string name="menu_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-
-    <string name="settings_about">О приложении</string>
-    <string name="settings_json_storage_title">Хранилище JSON</string>
-
-    <string-array name="request_region_entries">
-        <item>США</item>
-        <item>Китай</item>
-        <item>Россия</item>
-        <item>ОАЭ</item>
-    </string-array>
 </resources>

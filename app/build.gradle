@@ -29,20 +29,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
     namespace 'io.github.keddnyo.midoze'
 }
 
 dependencies {
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
-    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'io.ktor:ktor-client-android:2.0.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
 }

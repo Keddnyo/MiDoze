@@ -1,173 +1,141 @@
 package io.github.keddnyo.midoze.activities.main
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.os.AsyncTask
+import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
-import androidx.viewpager.widget.ViewPager
-import io.github.keddnyo.midoze.BuildConfig
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.databinding.ActivityMainBinding
-import io.github.keddnyo.midoze.fragments.FeedFragment
-import io.github.keddnyo.midoze.fragments.SettingsFragment
-import io.github.keddnyo.midoze.utils.DozeRequest
-import io.github.keddnyo.midoze.utils.StringUtils
-import io.github.keddnyo.midoze.utils.UiUtils
-import org.json.JSONObject
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.remote.Requests
+import io.github.keddnyo.midoze.remote.Updates
+import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.Display
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewPager: ViewPager
-    val context = this@MainActivity
+    private val firmwaresAdapter = FirmwaresAdapter()
+    private lateinit var deviceListRecyclerView: RecyclerView
+    private val context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        UiUtils().switchDarkMode(context)
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+
+        val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
+        val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = prefs.edit()
+        val gson = Gson()
+
+        deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
+        deviceListRecyclerView.layoutManager =
+            GridLayoutManager(
+                this, Display()
+                    .getGridLayoutIndex(this, 200)
+            )
+
+        val adapter = firmwaresAdapter
+        deviceListRecyclerView.adapter = adapter
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Updates(context).execute()
+        }
 
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            val adapter = MyAdapter(this, supportFragmentManager)
-
-            viewPager = findViewById(R.id.viewPager)
-            viewPager.adapter = adapter
-
-            val bottomBar = binding.bottomBar
-
-            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrollStateChanged(state: Int) {}
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int,
-                ) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    when (position) {
-                        0 -> {
-                            bottomBar.menu.findItem(R.id.menu_feed).isChecked = true
-                            title = getString(R.string.feed_title)
+        class GetDevices(val context: Context) : AsyncTask() {
+            var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
+            override fun execute() {
+                if (prefs.getBoolean("allowUpdate", true)) {
+                    Executors.newSingleThreadExecutor().execute {
+                        mainHandler.post {
+                            refreshLayout.isRefreshing = false
+                            feedProgressBar.visibility = View.VISIBLE
+                            emptyResponse.visibility = View.GONE
                         }
-                        1 -> {
-                            bottomBar.menu.findItem(R.id.menu_settings).isChecked = true
-                            title = getString(R.string.settings_title)
-                        }
-                    }
-                }
-            })
 
-            bottomBar.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_feed -> viewPager.currentItem = 0
-                    R.id.menu_settings -> viewPager.currentItem = 1
-                    else -> viewPager.currentItem = 0
-                }
-                true
-            }
+                        var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
 
-            // Default tab
-            viewPager.currentItem = 0
-            title = getString(R.string.feed_title)
-
-            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-
-            class LoadDataForActivity :
-                AsyncTask<Void?, Void?, Void>() {
-
-                var releaseData: JSONObject = JSONObject("{}")
-
-                @Deprecated("Deprecated in Java")
-                override fun doInBackground(vararg p0: Void?): Void? {
-                    if (prefs.getBoolean("settings_app_check_updates",
-                            true) && DozeRequest().isOnline(context)
-                    ) {
-                        releaseData = DozeRequest().getApplicationLatestReleaseInfo(context)
-                    }
-                    return null
-                }
-
-                @SuppressLint("InlinedApi")
-                @Deprecated("Deprecated in Java")
-                override fun onPostExecute(result: Void?) {
-                    super.onPostExecute(result)
-
-                    if (releaseData.has("tag_name") && releaseData.getJSONArray("assets")
-                            .toString() != "[]"
-                    ) {
-                        val latestVersion = releaseData.getString("tag_name")
-                        val releaseChangelog = releaseData.getString("body")
-                        val latestVersionLink =
-                            releaseData.getJSONArray("assets").getJSONObject(0)
-                                .getString("browser_download_url")
-
-                        if (BuildConfig.VERSION_NAME < latestVersion) {
-                            fun showUpdateDialog() {
-                                val builder = AlertDialog.Builder(context)
-                                    .setTitle("${getString(R.string.update_dialog_title)} $latestVersion")
-                                    .setMessage(releaseChangelog)
-                                    .setIcon(R.drawable.ic_info)
-                                    .setCancelable(false)
-                                builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
-                                    DozeRequest().getFirmwareFile(context,
-                                        latestVersionLink,
-                                        getString(R.string.app_name))
-                                    UiUtils().showToast(context,
-                                        getString(R.string.downloading_toast))
-                                    DialogInterface.BUTTON_POSITIVE
-                                }
-                                builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->
-                                    DialogInterface.BUTTON_NEGATIVE
-                                }
-                                builder.show()
+                        if (deviceArrayListBackup != "") {
+                            deviceArrayList = GsonBuilder().create().fromJson(
+                                deviceArrayListBackup.toString(),
+                                object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                            )
+                        } else if (Requests().isOnline(context)) {
+                            Requests().getFirmwareLatest(context).forEach { device ->
+                                deviceArrayList.add(device)
                             }
-                            showUpdateDialog()
+
+                            deviceArrayListBackup = gson.toJson(deviceArrayList)
+                            editor.putString(
+                                "deviceArrayListString",
+                                deviceArrayListBackup.toString()
+                            )
+                            editor.apply()
                         }
+
+                        mainHandler.post {
+                            firmwaresAdapter.addDevice(deviceArrayList)
+                            deviceArrayList.forEachIndexed { index, _ ->
+                                firmwaresAdapter.notifyItemInserted(index)
+                            }
+
+                            feedProgressBar.visibility = View.GONE
+
+                            if (firmwaresAdapter.itemCount == 0) {
+                                emptyResponse.visibility = View.VISIBLE
+                            }
+                        }
+
+                        editor.putBoolean("allowUpdate", true)
+                        editor.apply()
                     }
                 }
             }
-            LoadDataForActivity().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-        } else {
-            finish()
-            startActivity(Intent(this, RequestActivity::class.java))
-            UiUtils().showToast(context, getString(R.string.compatibility_mode))
+        }
+
+        GetDevices(context).execute()
+
+        refreshLayout.setOnRefreshListener {
+            editor.putBoolean("allowUpdate", false)
+            editor.apply()
+
+            GetDevices(context).execute()
         }
     }
 
-    class MyAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
-        override fun getCount(): Int {
-            return 2
-        }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> FeedFragment()
-                1 -> SettingsFragment()
-                else -> FeedFragment()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_request -> {
+                startActivity(Intent(context, RequestActivity::class.java))
+            }
+            R.id.action_about -> {
+                startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_APP_REPOSITORY))
+                )
             }
         }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return context.resources.getString(StringUtils().tabTitles[position])
-        }
-    }
-
-    override fun onBackPressed() {
-        if (viewPager.currentItem != 0) {
-            viewPager.currentItem = 0
-        } else {
-            super.onBackPressed()
-        }
+        return super.onOptionsItemSelected(item)
     }
 }

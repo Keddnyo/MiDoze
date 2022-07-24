@@ -2,14 +2,25 @@ package io.github.keddnyo.midoze.activities.request
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.utils.DozeRequest
-import io.github.keddnyo.midoze.utils.UiUtils
+import io.github.keddnyo.midoze.activities.main.FirmwareActivity
+import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.Region
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
+import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
+import io.github.keddnyo.midoze.remote.Requests
+import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.PackageUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class RequestActivity : AppCompatActivity() {
@@ -19,29 +30,32 @@ class RequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
-        title = getString(R.string.settings_custom_request)
+        title = getString(R.string.menu_custom_request)
 
-        UiUtils().switchDarkMode(this)
-
-        val extrasDeviceSourceEditText: TextInputEditText = findViewById(R.id.extrasDeviceSourceEditText)
+        val extrasDeviceSourceEditText: TextInputEditText =
+            findViewById(R.id.extrasDeviceSourceEditText)
         val extrasProductionSourceEditText: TextInputEditText =
             findViewById(R.id.extrasProductionSourceEditText)
         val extrasAppNameEditText: TextInputEditText = findViewById(R.id.extrasAppNameEditText)
-        val extrasAppVersionEditText: TextInputEditText = findViewById(R.id.extrasAppVersionEditText)
+        val extrasAppVersionEditText: TextInputEditText =
+            findViewById(R.id.extrasAppVersionEditText)
+        val extrasCountryEditText: TextInputEditText = findViewById(R.id.extrasCountryEditText)
+        val extrasLangEditText: TextInputEditText = findViewById(R.id.extrasLangEditText)
         val submitButton: MaterialButton = findViewById(R.id.extrasSubmitButton)
+        val appButton: MaterialButton = findViewById(R.id.extras_app_button)
         val importButton: MaterialButton = findViewById(R.id.extrasImportButton)
 
-        val sharedPreferences =
+        val prefs =
             PreferenceManager.getDefaultSharedPreferences(context)
-        val editor = sharedPreferences.edit()
+        val editor = prefs.edit()
 
-        if ((sharedPreferences.getString(
+        if ((prefs.getString(
                 "productionSource",
                 ""
-            ) != "") || (sharedPreferences.getString(
+            ) != "") || (prefs.getString(
                 "deviceSource",
                 ""
-            ) != "") || (sharedPreferences.getString(
+            ) != "") || (prefs.getString(
                 "appVersion",
                 ""
             ) != "")
@@ -52,36 +66,62 @@ class RequestActivity : AppCompatActivity() {
         }
 
         // Get Intent
-        if (intent.getIntExtra("deviceSource", 0) != 0) {
-            val deviceSourceValue = intent.getIntExtra("deviceSource", 0).toString()
+        if (intent.getStringExtra("deviceSource")?.isNotBlank() == true) {
+            val deviceSourceValue = intent.getStringExtra("deviceSource").toString()
             val productionSourceValue = intent.getStringExtra("productionSource").toString()
-            val appNameValue = intent.getStringExtra("appname").toString()
+            val appNameValue = intent.getStringExtra("appName").toString()
             val appVersionValue = intent.getStringExtra("appVersion").toString()
+            val countryValue = intent.getStringExtra("country").toString()
+            val langValue = intent.getStringExtra("lang").toString()
 
             extrasDeviceSourceEditText.setText(deviceSourceValue)
             extrasProductionSourceEditText.setText(productionSourceValue)
             extrasAppNameEditText.setText(appNameValue)
             extrasAppVersionEditText.setText(appVersionValue)
+            extrasCountryEditText.setText(countryValue)
+            extrasLangEditText.setText(langValue)
         }
 
         submitButton.setOnClickListener {
-            if (DozeRequest().isOnline(context)) {
-                val firmwareResponse =
-                    runBlocking {
-                        DozeRequest().getFirmwareLinks(
-                            extrasProductionSourceEditText.text.toString(),
-                            extrasDeviceSourceEditText.text.toString(),
-                            extrasAppVersionEditText.text.toString(),
-                            extrasAppNameEditText.text.toString(),
-                            context
-                        )
-                    }
+            val isOnline = runBlocking(Dispatchers.Default) {
+                Requests().isOnline(context)
+            }
 
-                val intent = Intent(context, ResponseActivity::class.java)
-                intent.putExtra("json", firmwareResponse.toString())
-                startActivity(intent)
+            if (isOnline) {
+                val firmwareResponse = runBlocking {
+                    Requests().getFirmwareData(
+                        context,
+                        extrasDeviceSourceEditText.text.toString().trim(),
+                        extrasProductionSourceEditText.text.toString().trim(),
+                        Application(
+                            extrasAppNameEditText.text.toString().trim(),
+                            extrasAppVersionEditText.text.toString().trim()
+                        ),
+                        Region(
+                            extrasCountryEditText.text.toString().trim(),
+                            extrasLangEditText.text.toString().trim()
+                        )
+                    )
+                }
+
+                val intent = Intent(context, FirmwareActivity::class.java)
+
+                if (firmwareResponse != null) {
+                    intent.putExtra("deviceName", firmwareResponse.device.name)
+                    intent.putExtra("deviceIcon", firmwareResponse.device.image)
+                    intent.putExtra("firmwareData", firmwareResponse.firmware.toString())
+
+                    intent.putExtra("productionSource", firmwareResponse.productionSource)
+                    intent.putExtra("deviceSource", firmwareResponse.deviceSource)
+                    intent.putExtra("appName", firmwareResponse.application.name)
+                    intent.putExtra("appVersion", firmwareResponse.application.version)
+
+                    context.startActivity(intent)
+                } else {
+                    Display().showToast(context, getString(R.string.empty_response))
+                }
             } else {
-                UiUtils().showToast(context, getString(R.string.firmware_connectivity_error))
+                Display().showToast(context, getString(R.string.empty_response))
             }
         }
 
@@ -90,16 +130,51 @@ class RequestActivity : AppCompatActivity() {
             editor.putString("deviceSource", extrasDeviceSourceEditText.text.toString())
             editor.putString("appVersion", extrasAppVersionEditText.text.toString())
             editor.putString("appname", extrasAppNameEditText.text.toString())
+            editor.putString("country", extrasCountryEditText.text.toString())
+            editor.putString("lang", extrasLangEditText.text.toString())
             editor.apply()
             importButton.visibility = View.VISIBLE
             true
         }
 
+        fun setZeppAppData() {
+            extrasAppNameEditText.setText(ZEPP_NAME)
+            extrasAppVersionEditText.setText(
+                PackageUtils().getPackageVersion(context, ZEPP_PACKAGE_NAME) ?: ZEPP_VERSION
+            )
+        }
+
+        fun setZeppLifeAppData() {
+            extrasAppNameEditText.setText(ZEPP_LIFE_NAME)
+            extrasAppVersionEditText.setText(
+                PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME) ?: ZEPP_LIFE_VERSION
+            )
+        }
+
+        appButton.setOnClickListener {
+            if (prefs.getString("filters_app_name", "Zepp") == "Zepp") {
+                setZeppAppData()
+            } else {
+                setZeppLifeAppData()
+            }
+        }
+
+        appButton.setOnLongClickListener {
+            if (prefs.getString("filters_app_name", "Zepp") == "Zepp") {
+                setZeppLifeAppData()
+            } else {
+                setZeppAppData()
+            }
+            true
+        }
+
         importButton.setOnClickListener {
-            extrasProductionSourceEditText.setText(sharedPreferences.getString("productionSource", ""))
-            extrasDeviceSourceEditText.setText(sharedPreferences.getString("deviceSource", ""))
-            extrasAppVersionEditText.setText(sharedPreferences.getString("appVersion", ""))
-            extrasAppNameEditText.setText(sharedPreferences.getString("appname", ""))
+            extrasProductionSourceEditText.setText(prefs.getString("productionSource", ""))
+            extrasDeviceSourceEditText.setText(prefs.getString("deviceSource", ""))
+            extrasAppVersionEditText.setText(prefs.getString("appVersion", ""))
+            extrasAppNameEditText.setText(prefs.getString("appname", ""))
+            extrasCountryEditText.setText(prefs.getString("country", ""))
+            extrasLangEditText.setText(prefs.getString("lang", ""))
         }
 
         importButton.setOnLongClickListener {
@@ -107,6 +182,8 @@ class RequestActivity : AppCompatActivity() {
             editor.remove("deviceSource")
             editor.remove("appVersion")
             editor.remove("appname")
+            editor.remove("country")
+            editor.remove("lang")
             editor.apply()
             importButton.visibility = View.GONE
             true

@@ -1,78 +1,18 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
-    <string name="error_title">Connection error</string>
-    <string name="compatibility_mode">Compatibility mode</string>
+    <string name="menu_about" translatable="false">About</string>
+    <string name="empty_response">Empty response</string>
 
-    <string name="update_dialog_title">Update available</string>
-    <string name="update_dialog_button">Update</string>
-
-    <string name="title_mi_band" translatable="false">Mi Band</string>
-    <string name="title_zepp" translatable="false">Zepp</string>
-
-    <string name="firmware_version">Firmware version</string>
-    <string name="search">Search</string>
-
-    <string name="feed_title">Feed</string>
-    <string name="settings_feed_cache_use">Load from cache</string>
-    <string name="settings_feed_cache_use_summary">Show feed w/o connection</string>
-    <string name="settings_feed_cache_clear">Clear feed cache</string>
-    <string name="settings_feed_cache_cleared">Cleared</string>
-
-    <string name="firmware_connectivity_error">Connectivity error</string>
+    <string name="update_title">Update %1$s</string>
+    <string name="update_button">Update</string>
 
     <string name="firmware_download">Download</string>
-    <string name="firmware_changelog">Changelog</string>
     <string name="firmware_languages">Languages</string>
-    <string name="downloading_toast">Downloading…</string>
-    <string name="firmware_not_found">Not found</string>
-    <string name="firmware_try_switch_region">Try switching the region</string>
-    <string name="firmware_share">Share</string>
-    <string name="extras_device_source" translatable="false">deviceSource</string>
-    <string name="extras_production_source" translatable="false">productionSource</string>
-    <string name="extras_app_name" translatable="false">appname</string>
-    <string name="extras_app_version" translatable="false">appVersion</string>
+    <string name="firmware_changelog">Changelog</string>
+
+    <string name="extras_app_data">Insert app data</string>
     <string name="extras_import_button">Import</string>
 
-    <string name="settings_title">Settings</string>
-    <string name="settings_dark_mode">Dark mode</string>
-    <string name="settings_requests">Requests</string>
-    <string name="settings_request_region">Request region</string>
-    <string name="settings_request_host">Request host</string>
-    <string name="settings_app_check_for_updates">Check for updates</string>
-
-    <string name="settings_custom_request">Custom request</string>
+    <string name="menu_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
-
-    <string name="settings_about">About</string>
-    <string name="settings_keddnyo" translatable="false">Keddnyo</string>
-    <string name="settings_json_storage_title">JSONs storage</string>
-    <string name="settings_schakal" translatable="false">Schakal</string>
-
-    <string name="request_host_first" translatable="false">api.amazfit.com</string>
-    <string name="request_host_second" translatable="false">api-mifit-ru.huami.com</string>
-    <string name="request_host_third" translatable="false">api-mifit-us2.huami.com</string>
-
-    <string-array name="request_host_entries">
-        <item>@string/request_host_first</item>
-        <item>@string/request_host_second</item>
-        <item>@string/request_host_third</item>
-    </string-array>
-    <string-array name="request_host_selector_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="request_region_entries">
-        <item>USA</item>
-        <item>China</item>
-        <item>Russia</item>
-        <item>UAE</item>
-    </string-array>
-    <string-array name="request_region_selector_entryValues">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
 </resources>

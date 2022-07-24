@@ -2,20 +2,23 @@
 
     <style name="Theme.MiDoze" parent="Theme.Material3.Dark">
         <item name="android:colorBackground">@color/black</item>
-        <item name="colorSurface">@color/black</item>
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor" tools:targetApi="l">@android:color/transparent</item>
+
+        <item name="colorSurface">@color/black</item>
     </style>
 
     <style name="Theme.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
-        <item name="colorSurface">@color/black</item>
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
+        <item name="android:colorBackground">@color/black</item>
     </style>
 
-    <style name="Theme.Dialog.Firmware" parent="Theme.Dialog">
+    <style name="Theme.Dialog.Firmware" parent="Theme.Material3.Dark.Dialog.Alert">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">#00000000</item>
+
+        <item name="colorSurface">@color/black</item>
     </style>
 
 </resources>
