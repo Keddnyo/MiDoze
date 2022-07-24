@@ -22,7 +22,7 @@ The easiest way to download firmwares for Xiaomi wearables
   <img src="https://user-images.githubusercontent.com/65981689/180642442-8874c645-a82b-4ce1-ab0c-d353b9b7878c.png">
 </p>
 
-## Screenshots Android 5.0+ Phone
+## Screenshots Android 7.0+ Phone
 <p align="center">
   <img src="https://user-images.githubusercontent.com/65981689/180642259-9e3d99ec-93e5-472c-a601-063175dbd063.jpg" max-width="100%" width="33%">
   <img src="https://user-images.githubusercontent.com/65981689/180642261-afe34dcd-40fa-4917-a13f-fd24c51cef45.jpg" max-width="100%" width="33%">
