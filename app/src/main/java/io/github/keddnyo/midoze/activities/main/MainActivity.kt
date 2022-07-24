@@ -64,9 +64,6 @@ class MainActivity : AppCompatActivity() {
             var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
-                    editor.putBoolean("allowUpdate", false)
-                    editor.apply()
-
                     mainHandler.post {
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
@@ -104,9 +101,6 @@ class MainActivity : AppCompatActivity() {
                             emptyResponse.visibility = View.VISIBLE
                         }
                     }
-
-                    editor.putBoolean("allowUpdate", true)
-                    editor.apply()
                 }
             }
         }
@@ -116,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false
 
-            if (prefs.getBoolean("allowUpdate", true)) {
+            if (Requests().isOnline(context)) {
                 firmwaresAdapter.clear()
                 firmwaresAdapter.notifyDataSetChanged()
 
