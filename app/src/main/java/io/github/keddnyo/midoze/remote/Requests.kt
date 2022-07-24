@@ -12,7 +12,6 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.startActivity
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
@@ -29,7 +28,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.net.*
 
-class DozeRequest {
+class Requests {
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -71,7 +70,7 @@ class DozeRequest {
 
         WearableRepository(context).wearables.forEach { i ->
             runBlocking(Dispatchers.IO) {
-                DozeRequest().getFirmwareData(
+                Requests().getFirmwareData(
                     context = context,
                     deviceSource = i.deviceSource,
                     productionSource = i.productionSource,

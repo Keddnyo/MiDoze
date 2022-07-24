@@ -17,7 +17,7 @@ import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
-import io.github.keddnyo.midoze.remote.DozeRequest
+import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.PackageUtils
 import kotlinx.coroutines.Dispatchers
@@ -84,12 +84,12 @@ class RequestActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             val isOnline = runBlocking(Dispatchers.Default) {
-                DozeRequest().isOnline(context)
+                Requests().isOnline(context)
             }
 
             if (isOnline) {
                 val firmwareResponse = runBlocking {
-                    DozeRequest().getFirmwareData(
+                    Requests().getFirmwareData(
                         context,
                         extrasDeviceSourceEditText.text.toString().trim(),
                         extrasProductionSourceEditText.text.toString().trim(),

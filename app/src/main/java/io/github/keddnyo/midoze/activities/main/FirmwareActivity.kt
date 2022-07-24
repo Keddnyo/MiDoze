@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
-import io.github.keddnyo.midoze.remote.DozeRequest
+import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +52,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
-        if (DozeRequest().isOnline(context)) {
+        if (Requests().isOnline(context)) {
             runOnUiThread {
                 firmwareDownloadButton.visibility = View.VISIBLE
             }
@@ -90,7 +90,7 @@ class FirmwareActivity : AppCompatActivity() {
         }
 
         firmwareDownloadButton.setOnClickListener {
-            if (DozeRequest().isOnline(context)) {
+            if (Requests().isOnline(context)) {
                 getFirmware(firmwareResponse, context, deviceNameValue)
             } else {
                 Display().showToast(context, getString(R.string.empty_response))
@@ -116,7 +116,7 @@ class FirmwareActivity : AppCompatActivity() {
         for (i in responseFirmwareTagsArray) {
             if (jsonObject.has(i)) {
                 val urlString = jsonObject.getString(i)
-                DozeRequest().getFirmwareFile(context, urlString, deviceName)
+                Requests().getFirmwareFile(context, urlString, deviceName)
             }
         }
     }

@@ -8,13 +8,13 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
 
-class GetAppUpdate(val context: Context) : AsyncTask() {
+class Updates(val context: Context) : AsyncTask() {
     override fun execute() {
         super.execute()
 
         var releaseData = JSONObject("{}")
-        if (DozeRequest().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
-            releaseData = DozeRequest().getAppReleaseData()
+        if (Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+            releaseData = Requests().getAppReleaseData()
         }
 
         mainHandler.post {
@@ -29,12 +29,12 @@ class GetAppUpdate(val context: Context) : AsyncTask() {
 
                 if (Display().getAppVersion(context) < latestVersion) {
                     val builder = AlertDialog.Builder(context)
-                        .setTitle("${context.getString(R.string.update_dialog_title)} $latestVersion")
+                        .setTitle(context.getString(R.string.update_title, latestVersion))
                         .setMessage(releaseChangelog)
                         .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
-                    builder.setPositiveButton(R.string.update_dialog_button) { _: DialogInterface?, _: Int ->
-                        DozeRequest().getFirmwareFile(context,
+                    builder.setPositiveButton(R.string.update_button) { _: DialogInterface?, _: Int ->
+                        Requests().getFirmwareFile(context,
                             latestVersionLink,
                             context.getString(R.string.app_name))
                         DialogInterface.BUTTON_POSITIVE

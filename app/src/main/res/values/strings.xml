@@ -3,8 +3,8 @@
     <string name="menu_about" translatable="false">About</string>
     <string name="empty_response">Empty response</string>
 
-    <string name="update_dialog_title">Update available</string>
-    <string name="update_dialog_button">Update</string>
+    <string name="update_title">Update %1$s</string>
+    <string name="update_button">Update</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_languages">Languages</string>

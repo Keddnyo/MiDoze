@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,8 +20,8 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.remote.DozeRequest
-import io.github.keddnyo.midoze.remote.GetAppUpdate
+import io.github.keddnyo.midoze.remote.Requests
+import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         deviceListRecyclerView.adapter = adapter
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
-            GetAppUpdate(context).execute()
+            Updates(context).execute()
         }
 
         class GetDevices(val context: Context) : AsyncTask() {
@@ -77,8 +76,8 @@ class MainActivity : AppCompatActivity() {
                                 deviceArrayListBackup.toString(),
                                 object : TypeToken<ArrayList<FirmwareData>>() {}.type
                             )
-                        } else if (DozeRequest().isOnline(context)) {
-                            DozeRequest().getFirmwareLatest(context).forEach { device ->
+                        } else if (Requests().isOnline(context)) {
+                            Requests().getFirmwareLatest(context).forEach { device ->
                                 deviceArrayList.add(device)
                             }
 
