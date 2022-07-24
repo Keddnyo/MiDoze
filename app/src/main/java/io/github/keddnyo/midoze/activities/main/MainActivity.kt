@@ -101,6 +101,9 @@ class MainActivity : AppCompatActivity() {
                             emptyResponse.visibility = View.VISIBLE
                         }
                     }
+
+                    editor.putBoolean("allowUpdate", true)
+                    editor.apply()
                 }
             }
         }
@@ -110,11 +113,12 @@ class MainActivity : AppCompatActivity() {
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false
 
-            if (Requests().isOnline(context)) {
+            if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
                 firmwaresAdapter.clear()
                 firmwaresAdapter.notifyDataSetChanged()
 
                 editor.putString("deviceArrayListString", "")
+                editor.putBoolean("allowUpdate", false)
                 editor.apply()
 
                 GetDevices(context).execute()
