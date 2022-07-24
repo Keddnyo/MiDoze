@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.activities.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@MainActivity
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,50 +63,50 @@ class MainActivity : AppCompatActivity() {
         class GetDevices(val context: Context) : AsyncTask() {
             var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
             override fun execute() {
-                if (prefs.getBoolean("allowUpdate", true)) {
-                    Executors.newSingleThreadExecutor().execute {
-                        mainHandler.post {
-                            refreshLayout.isRefreshing = false
-                            feedProgressBar.visibility = View.VISIBLE
-                            emptyResponse.visibility = View.GONE
+                Executors.newSingleThreadExecutor().execute {
+                    editor.putBoolean("allowUpdate", false)
+                    editor.apply()
+
+                    mainHandler.post {
+                        feedProgressBar.visibility = View.VISIBLE
+                        emptyResponse.visibility = View.GONE
+                    }
+
+                    var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
+
+                    if (deviceArrayListBackup != "") {
+                        deviceArrayList = GsonBuilder().create().fromJson(
+                            deviceArrayListBackup.toString(),
+                            object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                        )
+                    } else if (Requests().isOnline(context)) {
+                        Requests().getFirmwareLatest(context).forEach { device ->
+                            deviceArrayList.add(device)
                         }
 
-                        var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
-
-                        if (deviceArrayListBackup != "") {
-                            deviceArrayList = GsonBuilder().create().fromJson(
-                                deviceArrayListBackup.toString(),
-                                object : TypeToken<ArrayList<FirmwareData>>() {}.type
-                            )
-                        } else if (Requests().isOnline(context)) {
-                            Requests().getFirmwareLatest(context).forEach { device ->
-                                deviceArrayList.add(device)
-                            }
-
-                            deviceArrayListBackup = gson.toJson(deviceArrayList)
-                            editor.putString(
-                                "deviceArrayListString",
-                                deviceArrayListBackup.toString()
-                            )
-                            editor.apply()
-                        }
-
-                        mainHandler.post {
-                            firmwaresAdapter.addDevice(deviceArrayList)
-                            deviceArrayList.forEachIndexed { index, _ ->
-                                firmwaresAdapter.notifyItemInserted(index)
-                            }
-
-                            feedProgressBar.visibility = View.GONE
-
-                            if (firmwaresAdapter.itemCount == 0) {
-                                emptyResponse.visibility = View.VISIBLE
-                            }
-                        }
-
-                        editor.putBoolean("allowUpdate", true)
+                        deviceArrayListBackup = gson.toJson(deviceArrayList)
+                        editor.putString(
+                            "deviceArrayListString",
+                            deviceArrayListBackup.toString()
+                        )
                         editor.apply()
                     }
+
+                    mainHandler.post {
+                        firmwaresAdapter.addDevice(deviceArrayList)
+                        deviceArrayList.forEachIndexed { index, _ ->
+                            firmwaresAdapter.notifyItemInserted(index)
+                        }
+
+                        feedProgressBar.visibility = View.GONE
+
+                        if (firmwaresAdapter.itemCount == 0) {
+                            emptyResponse.visibility = View.VISIBLE
+                        }
+                    }
+
+                    editor.putBoolean("allowUpdate", true)
+                    editor.apply()
                 }
             }
         }
@@ -112,10 +114,14 @@ class MainActivity : AppCompatActivity() {
         GetDevices(context).execute()
 
         refreshLayout.setOnRefreshListener {
-            editor.putBoolean("allowUpdate", false)
-            editor.apply()
+            refreshLayout.isRefreshing = false
 
-            GetDevices(context).execute()
+            if (prefs.getBoolean("allowUpdate", true)) {
+                firmwaresAdapter.clear()
+                firmwaresAdapter.notifyDataSetChanged()
+
+                GetDevices(context).execute()
+            }
         }
     }
 
