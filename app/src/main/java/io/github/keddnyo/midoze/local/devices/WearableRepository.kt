@@ -471,14 +471,6 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTS 2 Mini / Zepp
-        addWearable(
-            deviceSource = "104",
-            productionSource = "256",
-            isZeppLife = false,
-            isChineseRegion = false
-        ),
-
         // Amazfit GTS 2 Mini 2022 / Zepp
         addWearable(
             deviceSource = "243",
@@ -651,6 +643,14 @@ class WearableRepository(val context: Context) {
         addWearable(
             deviceSource = "76",
             productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit Smart Scale / Zepp
+        addWearable(
+            deviceSource = "104",
+            productionSource = "256",
             isZeppLife = false,
             isChineseRegion = false
         )

@@ -62,7 +62,7 @@ class DeviceRepository {
             "92" -> Device("Amazfit GTS 2 Mini GL", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
-            "104" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
+            "104" -> Device("Amazfit Smart Scale", R.drawable.amazfit_smart_scale)
 
             "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex_pro)
             "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr_2e)
