@@ -105,6 +105,14 @@ class WearableRepository(val context: Context) {
 
         // Mi Band 7 / Zepp Life
         addWearable(
+            deviceSource = "260",
+            productionSource = "256",
+            isZeppLife = true,
+            isChineseRegion = false
+        ),
+
+        // Mi Band 7 / Zepp Life
+        addWearable(
             deviceSource = "262",
             productionSource = "258",
             isZeppLife = true,
@@ -447,6 +455,14 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
+        // Amazfit GTS 2 Mini CH / Zepp
+        addWearable(
+            deviceSource = "91",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
         // Amazfit GTS 2 Mini GL / Zepp
         addWearable(
             deviceSource = "92",
@@ -455,7 +471,7 @@ class WearableRepository(val context: Context) {
             isChineseRegion = false
         ),
 
-        // Amazfit GTS 2 Mini CH / Zepp // TODO: May be replace
+        // Amazfit GTS 2 Mini / Zepp
         addWearable(
             deviceSource = "104",
             productionSource = "256",
@@ -499,6 +515,22 @@ class WearableRepository(val context: Context) {
         addWearable(
             deviceSource = "225",
             productionSource = "257",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 4 Mini CH / Zepp
+        addWearable(
+            deviceSource = "246",
+            productionSource = "256",
+            isZeppLife = false,
+            isChineseRegion = false
+        ),
+
+        // Amazfit GTS 4 Mini GL / Zepp
+        addWearable(
+            deviceSource = "247",
+            productionSource = "259",
             isZeppLife = false,
             isChineseRegion = false
         ),

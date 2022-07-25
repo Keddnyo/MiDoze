@@ -58,10 +58,11 @@ class DeviceRepository {
             "82" -> Device("Zepp E Square GL", R.drawable.zepp_e_square)
             "83" -> Device("Amazfit T-Rex Pro CH", R.drawable.amazfit_t_rex_pro)
 
+            "91" -> Device("Amazfit GTS 2 Mini CH", R.drawable.amazfit_gts_2_mini)
             "92" -> Device("Amazfit GTS 2 Mini GL", R.drawable.amazfit_gts_2_mini)
             "98" -> Device("Amazfit GTR 2 eSIM", R.drawable.amazfit_gtr)
 
-            "104" -> Device("Amazfit GTS 2 Mini CH", R.drawable.amazfit_gts_2_mini)
+            "104" -> Device("Amazfit GTS 2 Mini", R.drawable.amazfit_gts_2_mini)
 
             "200" -> Device("Amazfit T-Rex Pro GL", R.drawable.amazfit_t_rex_pro)
             "206" -> Device("Amazfit GTR 2e CH", R.drawable.amazfit_gtr_2e)
@@ -86,11 +87,14 @@ class DeviceRepository {
             "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini)
             "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr_2)
             "245" -> Device("Amazfit GTS 2", R.drawable.amazfit_gts_2)
+            "246" -> Device("Amazfit GTS 4 Mini CH", R.drawable.amazfit_gts_4_mini)
+            "247" -> Device("Amazfit GTS 4 Mini GL", R.drawable.amazfit_gts_4_mini)
 
             "254" -> Device("Amazfit Band 7", R.drawable.amazfit_band_7)
             "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
             "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3)
 
+            "260" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             "262" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
