@@ -460,7 +460,7 @@ class WearableRepository(val context: Context) {
             deviceSource = "91",
             productionSource = "256",
             isZeppLife = false,
-            isChineseRegion = false
+            isChineseRegion = true
         ),
 
         // Amazfit GTS 2 Mini GL / Zepp
