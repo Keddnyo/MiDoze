@@ -108,7 +108,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        GetDevices(context).execute()
+        val versionCode = BuildConfig.VERSION_CODE
+        if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
+            GetDevices(context).execute()
+
+            editor.putInt("VERSION_CODE", versionCode)
+            editor.apply()
+        }
 
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false
