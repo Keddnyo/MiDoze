@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 200)
+                    .getGridLayoutIndex(this, 300)
             )
 
         val adapter = firmwaresAdapter

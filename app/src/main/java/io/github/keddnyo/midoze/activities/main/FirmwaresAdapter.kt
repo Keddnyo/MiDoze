@@ -14,7 +14,7 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import kotlin.collections.ArrayList
 
-class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
+class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>() {
     private var firmwaresDataArray = ArrayList<FirmwareDataStack>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,7 +30,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.device, parent, false)
+            .inflate(R.layout.brand, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -90,9 +90,5 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
 
     fun clear() {
         firmwaresDataArray.clear()
-    }
-
-    override fun getFilter(): Filter {
-        TODO("Not yet implemented")
     }
 }
