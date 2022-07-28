@@ -10,8 +10,8 @@ android {
         applicationId "io.github.keddnyo.midoze"
         minSdk 14
         targetSdk 32
-        versionCode 11
-        versionName "5.1.0"
+        versionCode 12
+        versionName "6.0.0"
     }
 
     buildTypes {

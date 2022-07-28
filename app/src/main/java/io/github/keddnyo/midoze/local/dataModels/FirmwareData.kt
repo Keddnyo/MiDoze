@@ -4,11 +4,8 @@ import org.json.JSONObject
 
 data class FirmwareData(
     val device: Device,
-    val application: Application,
+    val wearable: Wearable,
     val firmware: JSONObject,
     val firmwareVersion: String,
-    val changeLog: String,
-    val deviceSource: String,
-    val productionSource: String,
-    val region: Region
+    val changeLog: String
 )

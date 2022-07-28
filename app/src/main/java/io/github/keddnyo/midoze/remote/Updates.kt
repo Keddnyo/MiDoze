@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
@@ -27,7 +28,7 @@ class Updates(val context: Context) : AsyncTask() {
                     releaseData.getJSONArray("assets").getJSONObject(0)
                         .getString("browser_download_url")
 
-                if (Display().getAppVersion(context) < latestVersion) {
+                if (AppVersion(context).name < latestVersion) {
                     val builder = AlertDialog.Builder(context)
                         .setTitle(context.getString(R.string.update_title, latestVersion))
                         .setMessage(releaseChangelog)

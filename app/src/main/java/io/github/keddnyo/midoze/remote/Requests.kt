@@ -65,34 +65,38 @@ class Requests {
 
     fun getFirmwareLatest(
         context: Context
-    ): ArrayList<FirmwareData> = with(context as Activity) {
-        val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
+    ): ArrayList<FirmwareDataStack> = with(context as Activity) {
+        val deviceArrayListArray: ArrayList<FirmwareDataStack> = arrayListOf()
 
-        WearableRepository(context).wearables.forEach { i ->
-            runBlocking(Dispatchers.IO) {
-                Requests().getFirmwareData(
-                    context = context,
-                    deviceSource = i.deviceSource,
-                    productionSource = i.productionSource,
-                    application = i.application,
-                    region = i.region
-                )
-            }?.let {
-                deviceArrayList.add(
-                    it
-                )
+        WearableRepository(context).wearables.forEach { wearableStack ->
+            val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
+            wearableStack.wearableStack.forEach { wearable ->
+                runBlocking(Dispatchers.IO) {
+                    Requests().getFirmwareData(
+                        context = context,
+                        wearable = wearable
+                    )
+                }?.let {
+                    deviceArrayList.add(
+                        it
+                    )
+                }
             }
+            deviceArrayListArray.add(
+                FirmwareDataStack(
+                    name = wearableStack.name,
+                    image = wearableStack.image,
+                    deviceStack = deviceArrayList
+                )
+            )
         }
 
-        return deviceArrayList
+        return deviceArrayListArray
     }
 
     suspend fun getFirmwareData(
         context: Context,
-        deviceSource: String,
-        productionSource: String,
-        application: Application,
-        region: Region
+        wearable: Wearable
     ): FirmwareData? = with(context as Activity) {
         val client = HttpClient()
         val response = client.get {
@@ -106,13 +110,13 @@ class Requests {
                 parameter("firmwareFlag", "0")
                 parameter("vendorId", "0")
                 parameter("resourceFlag", "0")
-                parameter("productionSource", productionSource)
+                parameter("productionSource", wearable.productionSource)
                 parameter("userid", "0")
                 parameter("userId", "0")
-                parameter("deviceSource", deviceSource)
+                parameter("deviceSource", wearable.deviceSource)
                 parameter("fontVersion", "0")
                 parameter("fontFlag", "0")
-                parameter("appVersion", application.version)
+                parameter("appVersion", wearable.application.version)
                 parameter("appid", "0")
                 parameter("callid", "0")
                 parameter("channel", "0")
@@ -132,7 +136,7 @@ class Requests {
             }
             headers {
                 append("hm-privacy-diagnostics", "false")
-                append("country", region.country)
+                append("country", wearable.region.country)
                 append("appplatform", "android_phone")
                 append("hm-privacy-ceip", "0")
                 append("x-request-id", "0")
@@ -140,10 +144,10 @@ class Requests {
                 append("channel", "0")
                 append("user-agent", "0")
                 append("cv", "0")
-                append("appname", application.name)
+                append("appname", wearable.application.name)
                 append("v", "0")
                 append("apptoken", "0")
-                append("lang", region.language)
+                append("lang", wearable.region.language)
                 append("Host", getXiaomiHostReachable().toString())
                 append("Connection", "Keep-Alive")
                 append("accept-encoding", "gzip")
@@ -156,8 +160,8 @@ class Requests {
         return if (firmwareData.has("firmwareVersion")) {
             val deviceData =
                 DeviceRepository().getDeviceNameByCode(
-                    deviceSource.toInt(),
-                    productionSource.toInt()
+                    wearable.deviceSource.toInt(),
+                    wearable.productionSource.toInt()
                 )
 
             val deviceName =
@@ -175,13 +179,10 @@ class Requests {
 
             FirmwareData(
                 device = Device(deviceName, devicePreview),
-                application = application,
+                wearable = wearable,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),
-                changeLog = get("changeLog"),
-                deviceSource = get("deviceSource"),
-                productionSource = get("productionSource"),
-                region = region
+                changeLog = get("changeLog")
             )
         } else {
             null

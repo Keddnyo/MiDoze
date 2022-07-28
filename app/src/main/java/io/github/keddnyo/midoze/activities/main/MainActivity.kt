@@ -21,9 +21,11 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         class GetDevices(val context: Context) : AsyncTask() {
-            var deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
+            var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
@@ -108,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val versionCode = BuildConfig.VERSION_CODE
+        val versionCode = AppVersion(context).code
         if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
             GetDevices(context).execute()
 

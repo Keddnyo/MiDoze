@@ -11,6 +11,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.FirmwareActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
+import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
@@ -91,15 +92,17 @@ class RequestActivity : AppCompatActivity() {
                 val firmwareResponse = runBlocking {
                     Requests().getFirmwareData(
                         context,
-                        extrasDeviceSourceEditText.text.toString().trim(),
-                        extrasProductionSourceEditText.text.toString().trim(),
-                        Application(
-                            extrasAppNameEditText.text.toString().trim(),
-                            extrasAppVersionEditText.text.toString().trim()
-                        ),
-                        Region(
-                            extrasCountryEditText.text.toString().trim(),
-                            extrasLangEditText.text.toString().trim()
+                        wearable = Wearable(
+                            extrasDeviceSourceEditText.text.toString().trim(),
+                            extrasProductionSourceEditText.text.toString().trim(),
+                            Application(
+                                extrasAppNameEditText.text.toString().trim(),
+                                extrasAppVersionEditText.text.toString().trim()
+                            ),
+                            Region(
+                                extrasCountryEditText.text.toString().trim(),
+                                extrasLangEditText.text.toString().trim()
+                            )
                         )
                     )
                 }
@@ -111,10 +114,10 @@ class RequestActivity : AppCompatActivity() {
                     intent.putExtra("deviceIcon", firmwareResponse.device.image)
                     intent.putExtra("firmwareData", firmwareResponse.firmware.toString())
 
-                    intent.putExtra("productionSource", firmwareResponse.productionSource)
-                    intent.putExtra("deviceSource", firmwareResponse.deviceSource)
-                    intent.putExtra("appName", firmwareResponse.application.name)
-                    intent.putExtra("appVersion", firmwareResponse.application.version)
+                    intent.putExtra("productionSource", firmwareResponse.wearable.productionSource)
+                    intent.putExtra("deviceSource", firmwareResponse.wearable.deviceSource)
+                    intent.putExtra("appName", firmwareResponse.wearable.application.name)
+                    intent.putExtra("appVersion", firmwareResponse.wearable.application.version)
 
                     context.startActivity(intent)
                 } else {
@@ -147,7 +150,8 @@ class RequestActivity : AppCompatActivity() {
         fun setZeppLifeAppData() {
             extrasAppNameEditText.setText(ZEPP_LIFE_NAME)
             extrasAppVersionEditText.setText(
-                PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME) ?: ZEPP_LIFE_VERSION
+                PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME)
+                    ?: ZEPP_LIFE_VERSION
             )
         }
 

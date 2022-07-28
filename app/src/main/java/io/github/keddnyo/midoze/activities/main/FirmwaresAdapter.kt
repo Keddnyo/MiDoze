@@ -11,10 +11,11 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import kotlin.collections.ArrayList
 
 class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>(), Filterable {
-    private var firmwaresDataArray = ArrayList<FirmwareData>()
+    private var firmwaresDataArray = ArrayList<FirmwareDataStack>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceNameTextView: TextView =
@@ -34,9 +35,9 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.deviceNameTextView.text = firmwaresDataArray[position].device.name
-        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].device.image)
-        holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
+        holder.deviceNameTextView.text = firmwaresDataArray[position].name
+        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].image)
+        holder.firmwareVersionTextView.text = firmwaresDataArray[position].deviceStack.size.toString()
 
         fun openFirmwareActivity(
             context: Context,
@@ -48,17 +49,17 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
                 Intent(context, FirmwareActivity::class.java)
             }
 
-            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
-            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
-            intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
+//            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
+//            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
+//            intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
 
-            intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)
-            intent.putExtra("deviceSource", firmwaresDataArray[position].deviceSource)
-            intent.putExtra("appName", firmwaresDataArray[position].application.name)
-            intent.putExtra("appVersion", firmwaresDataArray[position].application.version)
-
-            intent.putExtra("country", firmwaresDataArray[position].region.country)
-            intent.putExtra("lang", firmwaresDataArray[position].region.language)
+//            intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)
+//            intent.putExtra("deviceSource", firmwaresDataArray[position].deviceSource)
+//            intent.putExtra("appName", firmwaresDataArray[position].application.name)
+//            intent.putExtra("appVersion", firmwaresDataArray[position].application.version)
+//
+//            intent.putExtra("country", firmwaresDataArray[position].region.country)
+//            intent.putExtra("lang", firmwaresDataArray[position].region.language)
 
             context.startActivity(intent)
         }
@@ -83,7 +84,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         return firmwaresDataArray.size
     }
 
-    fun addDevice(firmwareDataArray: ArrayList<FirmwareData>) {
+    fun addDevice(firmwareDataArray: ArrayList<FirmwareDataStack>) {
         firmwaresDataArray = firmwareDataArray
     }
 
