@@ -20,7 +20,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Updates
@@ -31,7 +30,7 @@ import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
-    private val firmwaresAdapter = FirmwaresAdapter()
+    private val deviceStackAdapter = DeviceStackAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@MainActivity
 
@@ -52,10 +51,10 @@ class MainActivity : AppCompatActivity() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 300)
+                    .getGridLayoutIndex(this, 200)
             )
 
-        val adapter = firmwaresAdapter
+        val adapter = deviceStackAdapter
         deviceListRecyclerView.adapter = adapter
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     if (deviceArrayListBackup != "") {
                         deviceArrayList = GsonBuilder().create().fromJson(
                             deviceArrayListBackup.toString(),
-                            object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                            object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
                         )
                     } else if (Requests().isOnline(context)) {
                         Requests().getFirmwareLatest(context).forEach { device ->
@@ -92,14 +91,14 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     mainHandler.post {
-                        firmwaresAdapter.addDevice(deviceArrayList)
+                        deviceStackAdapter.addDevice(deviceArrayList)
                         deviceArrayList.forEachIndexed { index, _ ->
-                            firmwaresAdapter.notifyItemInserted(index)
+                            deviceStackAdapter.notifyItemInserted(index)
                         }
 
                         feedProgressBar.visibility = View.GONE
 
-                        if (firmwaresAdapter.itemCount == 0) {
+                        if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
                         }
                     }
@@ -122,8 +121,8 @@ class MainActivity : AppCompatActivity() {
             refreshLayout.isRefreshing = false
 
             if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
-                firmwaresAdapter.clear()
-                firmwaresAdapter.notifyDataSetChanged()
+                deviceStackAdapter.clear()
+                deviceStackAdapter.notifyDataSetChanged()
 
                 editor.putString("deviceArrayListString", "")
                 editor.putBoolean("allowUpdate", false)

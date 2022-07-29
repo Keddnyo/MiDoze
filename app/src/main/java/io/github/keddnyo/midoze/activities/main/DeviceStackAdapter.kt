@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import kotlin.collections.ArrayList
 
-class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHolder>() {
+class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
     private var firmwaresDataArray = ArrayList<FirmwareDataStack>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,7 +30,7 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.brand, parent, false)
+            .inflate(R.layout.device, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -65,10 +65,15 @@ class FirmwaresAdapter : RecyclerView.Adapter<FirmwaresAdapter.DeviceListViewHol
         }
 
         holder.downloadLayout.setOnClickListener {
-            openFirmwareActivity(
-                holder.downloadLayout.context,
-                false
-            )
+//            openFirmwareActivity(
+//                holder.downloadLayout.context,
+//                false
+//            )
+
+            val gson = Gson()
+            val intent = Intent(holder.downloadLayout.context, DeviceListActivity::class.java)
+            intent.putExtra("DEVICE_ARRAY", gson.toJson(firmwaresDataArray[position].deviceStack))
+            holder.downloadLayout.context.startActivity(intent)
         }
 
         holder.downloadLayout.setOnLongClickListener {

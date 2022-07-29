@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/deviceIconImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
             android:src="@drawable/amazfit_bip"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Amazfit Bip"
-            android:textSize="12pt"
+            android:textSize="10pt"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/firmwareVersionTextView"
