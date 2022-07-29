@@ -58,8 +58,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
             intent.putExtra("appName", firmwaresDataArray[position].wearable.application.name)
             intent.putExtra("appVersion", firmwaresDataArray[position].wearable.application.version)
 
-            intent.putExtra("country", firmwaresDataArray[position].region.country)
-            intent.putExtra("lang", firmwaresDataArray[position].region.language)
+            intent.putExtra("country", firmwaresDataArray[position].wearable.region.country)
+            intent.putExtra("lang", firmwaresDataArray[position].wearable.region.language)
 
             context.startActivity(intent)
         }
