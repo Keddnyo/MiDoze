@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 200)
+                    .getGridLayoutIndex(this, 400)
             )
 
         val adapter = deviceStackAdapter
@@ -101,6 +101,8 @@ class MainActivity : AppCompatActivity() {
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
                         }
+
+                        title = "Catalog"
                     }
 
                     editor.putBoolean("allowUpdate", true)

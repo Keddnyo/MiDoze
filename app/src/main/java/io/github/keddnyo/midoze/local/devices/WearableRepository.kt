@@ -51,7 +51,7 @@ class WearableRepository(val context: Context) {
     val wearables = arrayListOf(
         // Amazfit Bands
         WearableStack(
-            name = "Amazfit Bands",
+            name = "Amazfit Band",
             image = R.drawable.amazfit_band_5,
             wearableStack = arrayListOf(
                 // Amazfit Band 5 / Zepp
@@ -74,7 +74,7 @@ class WearableRepository(val context: Context) {
 
         // Xiaomi Bands
         WearableStack(
-            name = "Xiaomi Bands",
+            name = "Xiaomi Mi Band",
             image = R.drawable.mi_band_7,
             wearableStack = arrayListOf(
                 // Mi Band 3i / Zepp Life
@@ -177,17 +177,9 @@ class WearableRepository(val context: Context) {
 
         // Amazfit Bip Watches
         WearableStack(
-            name = "Amazfit Bip",
+            name = "Amazfit Bip / Pop",
             image = R.drawable.amazfit_bip,
             wearableStack = arrayListOf(
-                // Amazfit Ares / Zepp
-                addWearable(
-                    deviceSource = "65",
-                    productionSource = "256",
-                    isZeppLife = false,
-                    isChineseRegion = true
-                ),
-
                 // Amazfit Bip (CH) / Zepp Life
                 addWearable(
                     deviceSource = "12",
@@ -564,61 +556,6 @@ class WearableRepository(val context: Context) {
             )
         ),
 
-        // Zepp
-        WearableStack(
-            name = "Zepp",
-            image = R.drawable.zepp_e_circle,
-            wearableStack = arrayListOf(
-                // Zepp E Circle CH / Zepp
-                addWearable(
-                    deviceSource = "57",
-                    productionSource = "256",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Zepp E Circle GL / Zepp
-                addWearable(
-                    deviceSource = "81",
-                    productionSource = "257",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Zepp E Square CH / Zepp
-                addWearable(
-                    deviceSource = "61",
-                    productionSource = "256",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Zepp E Square GL / Zepp
-                addWearable(
-                    deviceSource = "82",
-                    productionSource = "257",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Zepp Z CH / Zepp
-                addWearable(
-                    deviceSource = "56",
-                    productionSource = "256",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Zepp Z GL / Zepp
-                addWearable(
-                    deviceSource = "76",
-                    productionSource = "257",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                )
-            )
-        ),
-
         // Amazfit T-Rex Watches
         WearableStack(
             name = "Amazfit T-Rex",
@@ -666,22 +603,84 @@ class WearableRepository(val context: Context) {
             )
         ),
 
-        // Other
+        // Zepp E
         WearableStack(
-            name = "Other",
-            image = R.drawable.amazfit_neo,
+            name = "Zepp E",
+            image = R.drawable.zepp_e_circle,
             wearableStack = arrayListOf(
-                // Amazfit Neo / Zepp
+                // Zepp E Circle CH / Zepp
                 addWearable(
-                    deviceSource = "62",
+                    deviceSource = "57",
                     productionSource = "256",
                     isZeppLife = false,
                     isChineseRegion = false
                 ),
 
-                // Amazfit Verge Lie GL / Zepp (Zepp Life)
+                // Zepp E Circle GL / Zepp
                 addWearable(
-                    deviceSource = "30",
+                    deviceSource = "81",
+                    productionSource = "257",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                ),
+
+                // Zepp E Square CH / Zepp
+                addWearable(
+                    deviceSource = "61",
+                    productionSource = "256",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                ),
+
+                // Zepp E Square GL / Zepp
+                addWearable(
+                    deviceSource = "82",
+                    productionSource = "257",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                )
+            )
+        ),
+
+        // Zepp Z
+        WearableStack(
+            name = "Zepp Z",
+            image = R.drawable.zepp_e_circle,
+            wearableStack = arrayListOf(
+                // Zepp Z CH / Zepp
+                addWearable(
+                    deviceSource = "56",
+                    productionSource = "256",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                ),
+
+                // Zepp Z GL / Zepp
+                addWearable(
+                    deviceSource = "76",
+                    productionSource = "257",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                )
+            )
+        ),
+
+        // Other
+        WearableStack(
+            name = "Other",
+            image = R.drawable.amazfit_neo,
+            wearableStack = arrayListOf(
+                // Amazfit Ares / Zepp
+                addWearable(
+                    deviceSource = "65",
+                    productionSource = "256",
+                    isZeppLife = false,
+                    isChineseRegion = true
+                ),
+
+                // Amazfit Neo / Zepp
+                addWearable(
+                    deviceSource = "62",
                     productionSource = "256",
                     isZeppLife = false,
                     isChineseRegion = false
@@ -699,6 +698,15 @@ class WearableRepository(val context: Context) {
                 addWearable(
                     deviceSource = "71",
                     productionSource = "257",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                ),
+
+
+                // Amazfit Verge Lie GL / Zepp (Zepp Life)
+                addWearable(
+                    deviceSource = "30",
+                    productionSource = "256",
                     isZeppLife = false,
                     isChineseRegion = false
                 )

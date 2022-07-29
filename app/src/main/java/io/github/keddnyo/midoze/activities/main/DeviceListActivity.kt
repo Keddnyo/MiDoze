@@ -30,6 +30,7 @@ class DeviceListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = intent.getStringExtra("NAME")
         setContentView(R.layout.activity_device_list)
 
         val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceListRecyclerView)
