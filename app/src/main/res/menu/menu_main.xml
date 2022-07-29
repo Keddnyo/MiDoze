@@ -4,12 +4,14 @@
 
     <item
         android:id="@+id/action_request"
+        android:icon="@drawable/ic_request"
         android:title="@string/menu_custom_request"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_about"
+        android:icon="@drawable/ic_info"
         android:title="@string/menu_about"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 </menu>

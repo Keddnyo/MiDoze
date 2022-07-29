@@ -85,7 +85,6 @@ class Requests {
             deviceArrayListArray.add(
                 FirmwareDataStack(
                     name = wearableStack.name,
-                    image = wearableStack.image,
                     deviceStack = deviceArrayList
                 )
             )

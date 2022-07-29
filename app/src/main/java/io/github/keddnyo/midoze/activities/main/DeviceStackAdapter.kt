@@ -30,7 +30,7 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.brand, parent, false)
+            .inflate(R.layout.device_stack, parent, false)
         return DeviceListViewHolder(view)
     }
 

@@ -101,8 +101,6 @@ class MainActivity : AppCompatActivity() {
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
                         }
-
-                        title = "Catalog"
                     }
 
                     editor.putBoolean("allowUpdate", true)
