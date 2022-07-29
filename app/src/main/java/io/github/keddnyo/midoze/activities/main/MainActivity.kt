@@ -111,11 +111,12 @@ class MainActivity : AppCompatActivity() {
 
         val versionCode = AppVersion(context).code
         if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
-            GetDevices(context).execute()
-
             editor.putInt("VERSION_CODE", versionCode)
+            editor.putString("deviceArrayListString", "")
             editor.apply()
         }
+
+        GetDevices(context).execute()
 
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false

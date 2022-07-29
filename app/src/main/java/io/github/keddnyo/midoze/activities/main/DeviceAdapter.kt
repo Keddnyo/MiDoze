@@ -49,17 +49,17 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
                 Intent(context, FirmwareActivity::class.java)
             }
 
-//            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
-//            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
-//            intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
+            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
+            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
+            intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
 
-//            intent.putExtra("productionSource", firmwaresDataArray[position].productionSource)
-//            intent.putExtra("deviceSource", firmwaresDataArray[position].deviceSource)
-//            intent.putExtra("appName", firmwaresDataArray[position].application.name)
-//            intent.putExtra("appVersion", firmwaresDataArray[position].application.version)
-//
-//            intent.putExtra("country", firmwaresDataArray[position].region.country)
-//            intent.putExtra("lang", firmwaresDataArray[position].region.language)
+            intent.putExtra("productionSource", firmwaresDataArray[position].wearable.productionSource)
+            intent.putExtra("deviceSource", firmwaresDataArray[position].wearable.deviceSource)
+            intent.putExtra("appName", firmwaresDataArray[position].wearable.application.name)
+            intent.putExtra("appVersion", firmwaresDataArray[position].wearable.application.version)
+
+            intent.putExtra("country", firmwaresDataArray[position].region.country)
+            intent.putExtra("lang", firmwaresDataArray[position].region.language)
 
             context.startActivity(intent)
         }
