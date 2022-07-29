@@ -20,10 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
-            android:name=".activities.main.DeviceListActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
