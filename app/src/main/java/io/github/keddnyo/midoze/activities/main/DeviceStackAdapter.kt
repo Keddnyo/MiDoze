@@ -1,18 +1,14 @@
-package io.github.keddnyo.midoze.fragments
+package io.github.keddnyo.midoze.activities.main
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.add
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Device
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import kotlin.collections.ArrayList
 
@@ -34,7 +30,7 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.device_stack, parent, false)
+            .inflate(R.layout.brand, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -46,17 +42,10 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
         holder.downloadLayout.setOnClickListener {
             val gson = Gson()
-
-            val deviceListFragment = DeviceListFragment()
-            val args = Bundle()
-            args.putString("DEVICE_ARRAY", gson.toJson(firmwaresDataArray[position].deviceStack))
-            deviceListFragment.arguments = args
-
-            (holder.downloadLayout.context as AppCompatActivity).supportFragmentManager
-                .beginTransaction()
-                .add(R.id.deviceListFrame, deviceListFragment)
-                .addToBackStack("deviceListFrame")
-                .commit()
+            val intent = Intent(holder.downloadLayout.context, DeviceListActivity::class.java)
+            intent.putExtra("NAME", firmwaresDataArray[position].name)
+            intent.putExtra("DEVICE_ARRAY", gson.toJson(firmwaresDataArray[position].deviceStack))
+            holder.downloadLayout.context.startActivity(intent)
         }
     }
 

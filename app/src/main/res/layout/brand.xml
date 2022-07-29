@@ -19,7 +19,7 @@
             android:layout_height="80dp"
             android:src="@drawable/amazfit_bip"
             tools:ignore="ContentDescription"
-            android:alpha="0.15"
+            android:alpha="0.10"
             android:rotation="20"
             android:layout_marginEnd="30dp"
             android:layout_gravity="top|end"/>
