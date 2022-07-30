@@ -5,6 +5,7 @@
     <item
         android:id="@+id/action_share_firmware"
         android:icon="@drawable/ic_share"
+        android:title="@string/firmware_share"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -12,6 +12,7 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.Requests
+import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.Dispatchers
@@ -130,7 +131,7 @@ class FirmwareActivity : AppCompatActivity() {
             }
         }
 
-        val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}"
+        val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}\n\n${getString(R.string.firmware_share_get_it_on, getString(R.string.app_name))}\n${GITHUB_APP_REPOSITORY}"
 
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
