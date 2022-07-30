@@ -20,8 +20,6 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
             itemView.findViewById(R.id.deviceNameTextView)
         val deviceIconImageView: ImageView =
             itemView.findViewById(R.id.deviceIconImageView)
-        val deviceIconImageViewDecorate: ImageView =
-            itemView.findViewById(R.id.deviceIconImageViewDecorate)
         val firmwareVersionTextView: TextView =
             itemView.findViewById(R.id.firmwareVersionTextView)
 
@@ -37,7 +35,6 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         holder.deviceNameTextView.text = firmwaresDataArray[position].name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].deviceStack[firmwaresDataArray[position].deviceStack.lastIndex].device.image)
-        holder.deviceIconImageViewDecorate.setImageResource(firmwaresDataArray[position].deviceStack[firmwaresDataArray[position].deviceStack.lastIndex].device.image)
         holder.firmwareVersionTextView.text = firmwaresDataArray[position].deviceStack.size.toString()
 
         holder.downloadLayout.setOnClickListener {
