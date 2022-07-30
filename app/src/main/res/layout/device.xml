@@ -17,7 +17,7 @@
         android:layout_marginBottom="5dp">
 
         <ImageView
-            android:id="@+id/deviceIconImageView"
+            android:id="@+id/stackImageView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,10 +35,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/deviceIconImageView">
+            app:layout_constraintTop_toBottomOf="@id/stackImageView">
 
             <TextView
-                android:id="@+id/deviceNameTextView"
+                android:id="@+id/stackNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -46,7 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/firmwareVersionTextView"
+                android:id="@+id/stackCountTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

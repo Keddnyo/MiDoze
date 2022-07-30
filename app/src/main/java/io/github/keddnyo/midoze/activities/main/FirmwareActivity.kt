@@ -21,7 +21,6 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class FirmwareActivity : AppCompatActivity() {
-
     private var firmwareResponse = JSONObject()
     private var deviceNameValue: String = ""
 
@@ -44,9 +43,9 @@ class FirmwareActivity : AppCompatActivity() {
     }
 
     private suspend fun init(context: Context) = withContext(Dispatchers.IO) {
-        val deviceNameTextView: TextView = findViewById(R.id.deviceNameTextView)
-        val deviceIconImageView: ImageView = findViewById(R.id.deviceIconImageView)
-        val firmwareVersionTextView: TextView = findViewById(R.id.firmwareVersionTextView)
+        val deviceNameTextView: TextView = findViewById(R.id.stackNameTextView)
+        val deviceIconImageView: ImageView = findViewById(R.id.stackImageView)
+        val firmwareVersionTextView: TextView = findViewById(R.id.stackCountTextView)
         val firmwareChangelogTextView: TextView = findViewById(R.id.firmwareChangelogTextView)
         val firmwareChangelogLayout: MaterialCardView = findViewById(R.id.firmwareChangelogLayout)
         val firmwareLanguagesTextView: TextView = findViewById(R.id.firmwareLanguagesTextView)
@@ -131,7 +130,10 @@ class FirmwareActivity : AppCompatActivity() {
             }
         }
 
-        val shareContent = "$deviceNameValue\n${firmwareLinks.joinToString("\n")}\n\n${getString(R.string.firmware_share_get_it_on, getString(R.string.app_name))}\n${GITHUB_APP_REPOSITORY}"
+        val shareContent = "$deviceNameValue\n" +
+                "${firmwareLinks.joinToString("\n")}\n\n" +
+                "${getString(R.string.firmware_share_get_it_on, getString(R.string.app_name))}\n" +
+                GITHUB_APP_REPOSITORY
 
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

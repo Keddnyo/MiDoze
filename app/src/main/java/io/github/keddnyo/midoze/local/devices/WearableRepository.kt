@@ -1,7 +1,6 @@
 package io.github.keddnyo.midoze.local.devices
 
 import android.content.Context
-import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable

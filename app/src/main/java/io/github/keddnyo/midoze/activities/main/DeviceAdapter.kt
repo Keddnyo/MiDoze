@@ -11,21 +11,20 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import kotlin.collections.ArrayList
 
 class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>() {
-    private var firmwaresDataArray = ArrayList<FirmwareData>()
+    private var deviceArray = ArrayList<FirmwareData>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val deviceNameTextView: TextView =
-            itemView.findViewById(R.id.deviceNameTextView)
-        val deviceIconImageView: ImageView =
-            itemView.findViewById(R.id.deviceIconImageView)
-        val firmwareVersionTextView: TextView =
-            itemView.findViewById(R.id.firmwareVersionTextView)
+        val name: TextView =
+            itemView.findViewById(R.id.stackNameTextView)
+        val image: ImageView =
+            itemView.findViewById(R.id.stackImageView)
+        val fwVersion: TextView =
+            itemView.findViewById(R.id.stackCountTextView)
 
-        val downloadLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
+        val deviceLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
@@ -35,9 +34,9 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.deviceNameTextView.text = firmwaresDataArray[position].device.name
-        holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].device.image)
-        holder.firmwareVersionTextView.text = firmwaresDataArray[position].firmwareVersion
+        holder.name.text = deviceArray[position].device.name
+        holder.image.setImageResource(deviceArray[position].device.image)
+        holder.fwVersion.text = deviceArray[position].firmwareVersion
 
         fun openFirmwareActivity(
             context: Context,
@@ -49,31 +48,31 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
                 Intent(context, FirmwareActivity::class.java)
             }
 
-            intent.putExtra("deviceName", firmwaresDataArray[position].device.name)
-            intent.putExtra("deviceIcon", firmwaresDataArray[position].device.image)
-            intent.putExtra("firmwareData", firmwaresDataArray[position].firmware.toString())
+            intent.putExtra("deviceName", deviceArray[position].device.name)
+            intent.putExtra("deviceIcon", deviceArray[position].device.image)
+            intent.putExtra("firmwareData", deviceArray[position].firmware.toString())
 
-            intent.putExtra("productionSource", firmwaresDataArray[position].wearable.productionSource)
-            intent.putExtra("deviceSource", firmwaresDataArray[position].wearable.deviceSource)
-            intent.putExtra("appName", firmwaresDataArray[position].wearable.application.name)
-            intent.putExtra("appVersion", firmwaresDataArray[position].wearable.application.version)
+            intent.putExtra("productionSource", deviceArray[position].wearable.productionSource)
+            intent.putExtra("deviceSource", deviceArray[position].wearable.deviceSource)
+            intent.putExtra("appName", deviceArray[position].wearable.application.name)
+            intent.putExtra("appVersion", deviceArray[position].wearable.application.version)
 
-            intent.putExtra("country", firmwaresDataArray[position].wearable.region.country)
-            intent.putExtra("lang", firmwaresDataArray[position].wearable.region.language)
+            intent.putExtra("country", deviceArray[position].wearable.region.country)
+            intent.putExtra("lang", deviceArray[position].wearable.region.language)
 
             context.startActivity(intent)
         }
 
-        holder.downloadLayout.setOnClickListener {
+        holder.deviceLayout.setOnClickListener {
             openFirmwareActivity(
-                holder.downloadLayout.context,
+                holder.deviceLayout.context,
                 false
             )
         }
 
-        holder.downloadLayout.setOnLongClickListener {
+        holder.deviceLayout.setOnLongClickListener {
             openFirmwareActivity(
-                holder.downloadLayout.context,
+                holder.deviceLayout.context,
                 true
             )
             true
@@ -81,14 +80,10 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
     }
 
     override fun getItemCount(): Int {
-        return firmwaresDataArray.size
+        return deviceArray.size
     }
 
     fun addDevice(firmwareDataArray: ArrayList<FirmwareData>) {
-        firmwaresDataArray = firmwareDataArray
-    }
-
-    fun clear() {
-        firmwaresDataArray.clear()
+        deviceArray = firmwareDataArray
     }
 }
