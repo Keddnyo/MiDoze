@@ -71,9 +71,9 @@ class WearableRepository(val context: Context) {
             )
         ),
 
-        // Xiaomi Bands
+        // Mi Band
         WearableStack(
-            name = "Xiaomi Mi Band",
+            name = "Mi Band",
             wearableStack = arrayListOf(
                 // Mi Band 3i / Zepp Life
                 addWearable(
@@ -257,9 +257,9 @@ class WearableRepository(val context: Context) {
             )
         ),
 
-        // Amazfit Bip U / Pop
+        // Amazfit Pop
         WearableStack(
-            name = "Amazfit Bip U / Pop",
+            name = "Amazfit Pop",
             wearableStack = arrayListOf(
                 // Amazfit Pop / Zepp
                 addWearable(

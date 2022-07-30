@@ -10,6 +10,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.ktor.client.engine.*
 import kotlin.collections.ArrayList
 
 class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
@@ -33,9 +34,11 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
+        val deviceCount = firmwaresDataArray[position].deviceStack.size.toString()
+
         holder.deviceNameTextView.text = firmwaresDataArray[position].name
         holder.deviceIconImageView.setImageResource(firmwaresDataArray[position].deviceStack[firmwaresDataArray[position].deviceStack.lastIndex].device.image)
-        holder.firmwareVersionTextView.text = firmwaresDataArray[position].deviceStack.size.toString()
+        holder.firmwareVersionTextView.text = holder.downloadLayout.context.getString(R.string.items, deviceCount)
 
         holder.downloadLayout.setOnClickListener {
             val gson = Gson()
