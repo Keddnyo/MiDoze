@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val deviceStackAdapter = DeviceStackAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@MainActivity
+    private var state: Parcelable? = null
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,6 +103,10 @@ class MainActivity : AppCompatActivity() {
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
                         }
+
+                        if (state != null) {
+                            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+                        }
                     }
 
                     editor.putBoolean("allowUpdate", true)
@@ -152,5 +158,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
+        }
     }
 }

@@ -11,16 +11,16 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="35dp">
 
         <ImageView
             android:id="@+id/deviceIconImageViewDecorate"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="top|start"
+            android:rotation="-10"
             android:src="@drawable/amazfit_bip"
-            tools:ignore="ContentDescription"
-            android:rotation="-15"
-            android:layout_gravity="top|start"/>
+            tools:ignore="ContentDescription" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,11 +34,11 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/amazfit_bip"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription"
-                android:visibility="gone"/>
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/deviceNameTextView"
@@ -46,11 +46,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="Amazfit Bip"
-                android:textSize="8pt"
+                android:textSize="7pt"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/deviceIconImageView"
+                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

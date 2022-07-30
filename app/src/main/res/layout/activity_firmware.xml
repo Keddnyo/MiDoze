@@ -27,7 +27,6 @@
                     android:id="@+id/deviceIconImageView"
                     android:layout_width="70dp"
                     android:layout_height="90dp"
-                    android:src="@drawable/zepp_e_square"
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout
@@ -41,7 +40,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="DeviceName"
                         android:textSize="9pt"
                         android:textStyle="bold" />
 
@@ -50,7 +48,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1.1.7.02"
                         android:textSize="7pt" />
 
                     <com.google.android.material.button.MaterialButton
