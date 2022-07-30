@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.main.adapters.DeviceAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.utils.Display
 
-class DeviceListActivity : AppCompatActivity() {
+class DeviceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

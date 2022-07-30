@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze">
         <activity
-            android:name=".activities.main.DeviceListActivity"
+            android:name=".activities.main.DeviceActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
@@ -38,7 +38,7 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog.Firmware" />
         <activity
-            android:name=".activities.main.MainActivity"
+            android:name=".activities.main.DeviceStackActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>

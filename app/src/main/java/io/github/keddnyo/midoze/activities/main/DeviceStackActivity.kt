@@ -20,6 +20,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.main.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
@@ -30,10 +31,10 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+class DeviceStackActivity : AppCompatActivity() {
     private val deviceStackAdapter = DeviceStackAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
-    private val context = this@MainActivity
+    private val context = this@DeviceStackActivity
     private var state: Parcelable? = null
 
     @SuppressLint("NotifyDataSetChanged")
