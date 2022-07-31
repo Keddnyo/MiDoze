@@ -60,7 +60,7 @@ class DeviceStackActivity : AppCompatActivity() {
         } else {
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 200)
+                    .getGridLayoutIndex(this, 250)
             )
         }
 
