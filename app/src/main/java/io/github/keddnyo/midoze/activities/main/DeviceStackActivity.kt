@@ -40,14 +40,13 @@ class DeviceStackActivity : AppCompatActivity() {
     private val context = this@DeviceStackActivity
     private var state: Parcelable? = null
 
-    private var isDualPane = false
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+        val deviceFragment: FrameLayout? = findViewById(R.id.deviceFragmentTablet) // TODO: Fix crash
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
@@ -77,6 +76,9 @@ class DeviceStackActivity : AppCompatActivity() {
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
+                        if (isTablet()) {
+                            deviceFragment?.visibility = View.GONE
+                        }
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
                     }
@@ -118,15 +120,16 @@ class DeviceStackActivity : AppCompatActivity() {
                         }
 
                         if (isTablet()) {
-                            val deviceFragment = DeviceFragment()
+                            val fr = DeviceFragment()
                             val args = Bundle()
                             args.putString("DEVICE_ARRAY", gson.toJson(deviceArrayList[0].deviceStack))
-                            deviceFragment.arguments = args
+                            fr.arguments = args
 
                             supportFragmentManager
                                 .beginTransaction()
-                                .replace(R.id.deviceFragmentTablet, deviceFragment)
+                                .replace(R.id.deviceFragmentTablet, fr)
                                 .commit()
+                            deviceFragment?.visibility = View.VISIBLE
 
                             title = deviceArrayList[0].name
                         }
