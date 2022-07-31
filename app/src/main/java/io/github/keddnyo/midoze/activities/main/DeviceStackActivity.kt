@@ -9,16 +9,19 @@ import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import io.github.keddnyo.midoze.DeviceFragment
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
@@ -37,10 +40,12 @@ class DeviceStackActivity : AppCompatActivity() {
     private val context = this@DeviceStackActivity
     private var state: Parcelable? = null
 
+    private var isDualPane = false
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_device_stack)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
 
@@ -51,11 +56,14 @@ class DeviceStackActivity : AppCompatActivity() {
         val gson = Gson()
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
-        deviceListRecyclerView.layoutManager =
+        deviceListRecyclerView.layoutManager = if (isTablet()) {
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        } else {
             GridLayoutManager(
                 this, Display()
                     .getGridLayoutIndex(this, 400)
             )
+        }
 
         val adapter = deviceStackAdapter
         deviceListRecyclerView.adapter = adapter
@@ -107,6 +115,20 @@ class DeviceStackActivity : AppCompatActivity() {
 
                         if (state != null) {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+                        }
+
+                        if (isTablet()) {
+                            val deviceFragment = DeviceFragment()
+                            val args = Bundle()
+                            args.putString("DEVICE_ARRAY", gson.toJson(deviceArrayList[0].deviceStack))
+                            deviceFragment.arguments = args
+
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.deviceFragmentTablet, deviceFragment)
+                                .commit()
+
+                            title = deviceArrayList[0].name
                         }
                     }
 
@@ -166,5 +188,9 @@ class DeviceStackActivity : AppCompatActivity() {
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
         }
+    }
+
+    private fun isTablet(): Boolean {
+        return resources.getBoolean(R.bool.isTablet)
     }
 }
