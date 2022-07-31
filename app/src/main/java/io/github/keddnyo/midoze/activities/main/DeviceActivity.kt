@@ -22,6 +22,10 @@ class DeviceActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.deviceFragmentPhone, deviceFragment)
             .commit()
+
+        if (resources.getBoolean(R.bool.isTablet)) {
+            finish()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
