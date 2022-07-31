@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.Display
 import org.json.JSONObject
 
 class Updates(val context: Context) : AsyncTask() {

@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.github.keddnyo.midoze.DeviceFragment
+import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.R
 
 class DeviceActivity : AppCompatActivity() {

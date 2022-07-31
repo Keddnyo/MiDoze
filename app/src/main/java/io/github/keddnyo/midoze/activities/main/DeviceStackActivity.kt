@@ -21,14 +21,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import io.github.keddnyo.midoze.DeviceFragment
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
+import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
@@ -46,7 +46,7 @@ class DeviceStackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_device_stack)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
-        val deviceFragment: FrameLayout? = findViewById(R.id.deviceFragmentTablet) // TODO: Fix crash
+        val deviceFragment: FrameLayout? = findViewById(R.id.deviceFragmentTablet)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
@@ -76,6 +76,7 @@ class DeviceStackActivity : AppCompatActivity() {
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
+                        deviceListRecyclerView.visibility = View.GONE
                         if (isTablet()) {
                             deviceFragment?.visibility = View.GONE
                         }
@@ -118,6 +119,7 @@ class DeviceStackActivity : AppCompatActivity() {
                         if (state != null) {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                         }
+                        deviceListRecyclerView.visibility = View.VISIBLE
 
                         if (isTablet()) {
                             val fr = DeviceFragment()
@@ -161,6 +163,7 @@ class DeviceStackActivity : AppCompatActivity() {
                 editor.putBoolean("allowUpdate", false)
                 editor.apply()
 
+                title = getString(R.string.app_name)
                 GetDevices(context).execute()
             }
         }
