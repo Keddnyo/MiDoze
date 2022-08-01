@@ -39,10 +39,8 @@
             android:theme="@style/Theme.Dialog.Firmware" />
         <activity
             android:name=".activities.main.DeviceStackActivity"
-            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
-            android:resumeWhilePausing="true"
             tools:targetApi="lollipop">
 
             <intent-filter>

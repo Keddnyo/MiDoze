@@ -13,6 +13,7 @@ android {
         versionCode 12
         versionName "6.0.0"
         resConfigs "en", "ru"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -40,6 +41,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'io.ktor:ktor-client-android:2.0.3'
