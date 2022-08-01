@@ -40,6 +40,10 @@ class DeviceStackActivity : AppCompatActivity() {
     private val context = this@DeviceStackActivity
     private var state: Parcelable? = null
 
+    fun isOnline(): Boolean {
+        return Requests().isOnline(context)
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +95,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             deviceArrayListBackup.toString(),
                             object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
                         )
-                    } else if (Requests().isOnline(context)) {
+                    } else if (isOnline()) {
                         Requests().getFirmwareLatest(context).forEach { device ->
                             deviceArrayList.add(device)
                         }
@@ -124,7 +128,10 @@ class DeviceStackActivity : AppCompatActivity() {
                         if (isTablet()) {
                             val fr = DeviceFragment()
                             val args = Bundle()
-                            args.putString("DEVICE_ARRAY", gson.toJson(deviceArrayList[0].deviceStack))
+                            args.putString(
+                                "DEVICE_ARRAY",
+                                gson.toJson(deviceArrayList[0].deviceStack)
+                            )
                             fr.arguments = args
 
                             supportFragmentManager
@@ -155,7 +162,7 @@ class DeviceStackActivity : AppCompatActivity() {
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = false
 
-            if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
+            if (prefs.getBoolean("allowUpdate", true) && isOnline()) {
                 deviceStackAdapter.clear()
                 deviceStackAdapter.notifyDataSetChanged()
 

@@ -41,10 +41,12 @@
             android:name=".activities.main.DeviceStackActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:resumeWhilePausing="true"
+            tools:targetApi="lollipop">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 

@@ -9,11 +9,16 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import org.json.JSONObject
 
 class Updates(val context: Context) : AsyncTask() {
+    private var releaseData = JSONObject("{}")
+
+    private fun isHostAvailable(): Boolean {
+        return Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)
+    }
+
     override fun execute() {
         super.execute()
 
-        var releaseData = JSONObject("{}")
-        if (Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+        if (isHostAvailable()) {
             releaseData = Requests().getAppReleaseData()
         }
 
@@ -34,9 +39,11 @@ class Updates(val context: Context) : AsyncTask() {
                         .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
                     builder.setPositiveButton(R.string.update_button) { _: DialogInterface?, _: Int ->
-                        Requests().getFirmwareFile(context,
+                        Requests().getFirmwareFile(
+                            context,
                             latestVersionLink,
-                            context.getString(R.string.app_name))
+                            context.getString(R.string.app_name)
+                        )
                         DialogInterface.BUTTON_POSITIVE
                     }
                     builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->

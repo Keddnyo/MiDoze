@@ -7,13 +7,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.*
+import io.github.keddnyo.midoze.local.dataModels.Device
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
 import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_FIRST
@@ -26,19 +28,15 @@ import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
-import java.net.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 class Requests {
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val info = connectivityManager.allNetworkInfo
-        for (i in info.indices) {
-            if (info[i].state == NetworkInfo.State.CONNECTED) {
-                return true
-            }
-        }
-        return false
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork?.isConnected ?: false
     }
 
     fun isHostAvailable(host: String): Boolean {

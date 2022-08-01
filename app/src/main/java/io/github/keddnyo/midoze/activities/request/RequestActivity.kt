@@ -2,9 +2,9 @@ package io.github.keddnyo.midoze.activities.request
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
@@ -31,6 +31,7 @@ class RequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
+
         title = getString(R.string.menu_custom_request)
 
         val extrasDeviceSourceEditText: TextInputEditText =
