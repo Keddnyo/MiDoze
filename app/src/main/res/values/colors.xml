@@ -7,6 +7,6 @@
 
     <color name="red">#FFCC0000</color>
 
-    <color name="leftSidePaneColor">?attr/colorPrimary</color>
-    <color name="rightSidePaneColor">?attr/colorPrimaryContainer</color>
+    <color name="leftSidePaneColor">#6750A4</color>
+    <color name="rightSidePaneColor">#BCA5F9</color>
 </resources>
