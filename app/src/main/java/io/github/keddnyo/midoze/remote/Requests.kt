@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
@@ -35,8 +36,13 @@ class Requests {
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork?.isConnected ?: false
+        val info = connectivityManager.allNetworkInfo
+        for (i in info.indices) {
+            if (info[i].state == NetworkInfo.State.CONNECTED) {
+                return true
+            }
+        }
+        return false
     }
 
     fun isHostAvailable(host: String): Boolean {
