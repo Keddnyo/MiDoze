@@ -14,7 +14,6 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -31,7 +30,6 @@ import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -50,7 +48,7 @@ class DeviceStackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_device_stack)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
-        val deviceFragment: FrameLayout? = findViewById(R.id.deviceFragmentTablet)
+        val deviceFragment: FrameLayout = findViewById(R.id.deviceFragmentTablet)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
@@ -59,14 +57,7 @@ class DeviceStackActivity : AppCompatActivity() {
         val gson = Gson()
 
         deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
-        deviceListRecyclerView.layoutManager = if (isTablet()) {
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        } else {
-            GridLayoutManager(
-                this, Display()
-                    .getGridLayoutIndex(this, 400)
-            )
-        }
+        deviceListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val adapter = deviceStackAdapter
         deviceListRecyclerView.adapter = adapter
@@ -81,9 +72,7 @@ class DeviceStackActivity : AppCompatActivity() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
                         deviceListRecyclerView.visibility = View.GONE
-                        if (isTablet() && deviceFragment != null) {
-                            deviceFragment.visibility = View.GONE
-                        }
+                        deviceFragment.visibility = View.GONE
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
                     }
@@ -103,7 +92,7 @@ class DeviceStackActivity : AppCompatActivity() {
                         deviceArrayListBackup = gson.toJson(deviceArrayList)
                         editor.putString(
                             "deviceArrayListString",
-                            deviceArrayListBackup.toString()
+                            deviceArrayListBackup
                         )
                         editor.apply()
                     }
@@ -127,7 +116,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                         }
 
-                        if (isOnline() && isTablet() && deviceFragment != null) {
+                        if (deviceArrayList.isNotEmpty()) {
                             val fr = DeviceFragment()
                             val args = Bundle()
                             args.putString(
@@ -203,9 +192,5 @@ class DeviceStackActivity : AppCompatActivity() {
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
         }
-    }
-
-    private fun isTablet(): Boolean {
-        return resources.getBoolean(R.bool.isTablet)
     }
 }

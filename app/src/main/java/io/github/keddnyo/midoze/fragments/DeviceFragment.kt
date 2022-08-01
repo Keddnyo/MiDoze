@@ -31,7 +31,7 @@ class DeviceFragment : Fragment() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 250)
+                    .getGridLayoutIndex(this, 200)
             )
 
         val adapter = DeviceAdapter()

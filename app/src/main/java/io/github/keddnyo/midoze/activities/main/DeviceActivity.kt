@@ -2,8 +2,8 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.fragments.DeviceFragment
 
 class DeviceActivity : AppCompatActivity() {
 
@@ -22,10 +22,6 @@ class DeviceActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.deviceFragmentPhone, deviceFragment)
             .commit()
-
-        if (resources.getBoolean(R.bool.isTablet)) {
-            finish()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
