@@ -81,8 +81,8 @@ class DeviceStackActivity : AppCompatActivity() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
                         deviceListRecyclerView.visibility = View.GONE
-                        if (isTablet()) {
-                            deviceFragment?.visibility = View.GONE
+                        if (isTablet() && deviceFragment != null) {
+                            deviceFragment.visibility = View.GONE
                         }
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
@@ -127,7 +127,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                         }
 
-                        if (isOnline() && isTablet()) {
+                        if (isOnline() && isTablet() && deviceFragment != null) {
                             val fr = DeviceFragment()
                             val args = Bundle()
                             args.putString(
@@ -140,7 +140,7 @@ class DeviceStackActivity : AppCompatActivity() {
                                 .beginTransaction()
                                 .replace(R.id.deviceFragmentTablet, fr)
                                 .commit()
-                            deviceFragment?.visibility = View.VISIBLE
+                            deviceFragment.visibility = View.VISIBLE
 
                             title = deviceArrayList[0].name
                         }
