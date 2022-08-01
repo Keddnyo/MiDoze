@@ -10,7 +10,7 @@ class DeviceRepository {
 
             "20" -> Device("Amazfit Bip S CN", R.drawable.amazfit_bip_s)
             "24" -> Device("Xiaomi Mi Band 4 NFC", R.drawable.mi_band_4_nfc)
-            "25" -> Device("Xiaomi Mi Band 4 GL", R.drawable.mi_band_4)
+            "25" -> Device("Xiaomi Mi Smart Band 4 GL", R.drawable.mi_band_4)
             "28" -> Device("Amazfit Bip S GL", R.drawable.amazfit_bip_s)
             "29" -> Device("Amazfit Bip S Lite GL", R.drawable.amazfit_bip_s)
 
@@ -36,7 +36,7 @@ class DeviceRepository {
             "56" -> Device("Zepp Z CN", R.drawable.zepp_z)
             "57" -> Device("Zepp E Circle CN", R.drawable.zepp_e_circle)
             "58" -> Device("Xiaomi Mi Band 5 NFC", R.drawable.mi_band_5_nfc)
-            "59" -> Device("Xiaomi Mi Band 5", R.drawable.mi_band_5_nfc)
+            "59" -> Device("Xiaomi Mi Smart Band 5", R.drawable.mi_band_5_nfc)
 
             "61" -> Device("Zepp E Square CN", R.drawable.zepp_e_square)
             "62" -> Device("Amazfit Neo", R.drawable.amazfit_neo)
@@ -71,7 +71,7 @@ class DeviceRepository {
 
             "210" -> Device("Amazfit GTS 2e GL", R.drawable.amazfit_gts_2)
             "211" -> Device("Xiaomi Mi Band 6 NFC", R.drawable.mi_band_6)
-            "212" -> Device("Xiaomi Mi Band 6 GL", R.drawable.mi_band_6)
+            "212" -> Device("Xiaomi Mi Smart Band 6 GL", R.drawable.mi_band_6)
 
             "224" -> Device("Amazfit GTS 3 CN", R.drawable.amazfit_gts_3)
             "225" -> Device("Amazfit GTS 3 GL", R.drawable.amazfit_gts_3)
@@ -80,8 +80,6 @@ class DeviceRepository {
             "229" -> Device("Amazfit GTR 3 Pro CN", R.drawable.amazfit_gtr_3)
 
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
-
-            // "233" -> Device("Amazfit Band 7", R.drawable.amazfit_band_7)
 
             "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
             "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini)
@@ -94,12 +92,12 @@ class DeviceRepository {
             "256" -> Device("Amazfit Bip 3 Pro", R.drawable.amazfit_bip_3)
             "257" -> Device("Amazfit Bip 3", R.drawable.amazfit_bip_3)
 
-            "260" -> Device("Xiaomi Smart Band 7 CN NFC", R.drawable.mi_band_7) // +
+            "260" -> Device("Xiaomi Smart Band 7 CN NFC", R.drawable.mi_band_7)
             // "261" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
-            "262" -> Device("Xiaomi Smart Band 7 CN", R.drawable.mi_band_7) // +
-            "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // +
-            "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // +
-            "265" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7) // +
+            "262" -> Device("Xiaomi Smart Band 7 CN", R.drawable.mi_band_7)
+            "263" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+            "264" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
+            "265" -> Device("Xiaomi Smart Band 7", R.drawable.mi_band_7)
             // "266" -> Device("Xiaomi Smart Band 7 IN", R.drawable.mi_band_7)
 
             "418" -> Device("Amazfit T-Rex 2 CN", R.drawable.amazfit_t_rex_2)
