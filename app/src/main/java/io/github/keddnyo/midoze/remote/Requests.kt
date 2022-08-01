@@ -36,13 +36,8 @@ class Requests {
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val info = connectivityManager.allNetworkInfo
-        for (i in info.indices) {
-            if (info[i].state == NetworkInfo.State.CONNECTED) {
-                return true
-            }
-        }
-        return false
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork?.isConnected ?: false
     }
 
     fun isHostAvailable(host: String): Boolean {

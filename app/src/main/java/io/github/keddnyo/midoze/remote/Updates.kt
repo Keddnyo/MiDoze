@@ -9,16 +9,11 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import org.json.JSONObject
 
 class Updates(val context: Context) : AsyncTask() {
-    private var releaseData = JSONObject("{}")
-
-    private fun isHostAvailable(): Boolean {
-        return Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)
-    }
-
     override fun execute() {
         super.execute()
+        var releaseData = JSONObject("{}")
 
-        if (isHostAvailable()) {
+        if (Requests().isOnline(context) && Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
             releaseData = Requests().getAppReleaseData()
         }
 

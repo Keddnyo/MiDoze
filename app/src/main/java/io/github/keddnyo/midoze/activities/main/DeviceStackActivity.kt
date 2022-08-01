@@ -117,15 +117,17 @@ class DeviceStackActivity : AppCompatActivity() {
                         feedProgressBar.visibility = View.GONE
 
                         if (deviceStackAdapter.itemCount == 0) {
+                            deviceListRecyclerView.visibility = View.GONE
                             emptyResponse.visibility = View.VISIBLE
+                        } else {
+                            deviceListRecyclerView.visibility = View.VISIBLE
                         }
 
                         if (state != null) {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                         }
-                        deviceListRecyclerView.visibility = View.VISIBLE
 
-                        if (isTablet()) {
+                        if (isOnline() && isTablet()) {
                             val fr = DeviceFragment()
                             val args = Bundle()
                             args.putString(
