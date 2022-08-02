@@ -1,16 +1,17 @@
 package io.github.keddnyo.midoze.activities.main.adapters
 
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.main.DeviceActivity
+import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 
 class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
@@ -42,10 +43,25 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
         holder.stackLayout.setOnClickListener {
             val gson = Gson()
-            val intent = Intent(holder.stackLayout.context, DeviceActivity::class.java)
-            intent.putExtra("NAME", stackArray[position].name)
-            intent.putExtra("DEVICE_ARRAY", gson.toJson(stackArray[position].deviceStack))
-            holder.stackLayout.context.startActivity(intent)
+//            val intent = Intent(holder.stackLayout.context, DeviceActivity::class.java)
+//            intent.putExtra("NAME", stackArray[position].name)
+//            intent.putExtra("DEVICE_ARRAY", gson.toJson(stackArray[position].deviceStack))
+//            holder.stackLayout.context.startActivity(intent)
+
+            val deviceFragment = DeviceFragment()
+            val args = Bundle()
+            args.putString(
+                "deviceArray",
+                gson.toJson(stackArray[position].deviceStack)
+            )
+
+            deviceFragment.arguments = args
+            val fm = (holder.stackLayout.context as AppCompatActivity).supportFragmentManager
+            if (!fm.isDestroyed) {
+                fm.beginTransaction()
+                    .replace(R.id.deviceFrame, deviceFragment)
+                    .commit()
+            }
         }
     }
 
