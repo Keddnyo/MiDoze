@@ -9,6 +9,7 @@ import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,10 +23,11 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
+import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
@@ -40,8 +42,9 @@ class DeviceStackActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_device_stack)
 
+        val deviceFrame: FrameLayout = findViewById(R.id.deviceFrame)
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
@@ -107,6 +110,21 @@ class DeviceStackActivity : AppCompatActivity() {
 
                         if (state != null) {
                             deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
+                        }
+
+                        if (deviceArrayList.isNotEmpty()) {
+                            val deviceFragment = DeviceFragment()
+                            val args = Bundle()
+                            args.putString(
+                                "deviceArray",
+                                gson.toJson(deviceArrayList[0].deviceStack[0])
+                            )
+                            deviceFragment.arguments = args
+
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.deviceFrame, deviceFragment)
+                                .commit()
                         }
                     }
 

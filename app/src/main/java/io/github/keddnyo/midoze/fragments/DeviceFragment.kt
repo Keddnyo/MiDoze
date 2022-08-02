@@ -1,7 +1,10 @@
-package io.github.keddnyo.midoze.activities.main
+package io.github.keddnyo.midoze.fragments
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -11,13 +14,17 @@ import io.github.keddnyo.midoze.activities.main.adapters.DeviceAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.utils.Display
 
-class DeviceActivity : AppCompatActivity() {
+class DeviceFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_device, container, false)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = intent.getStringExtra("NAME")
+    override fun onCreate(savedInstanceState: Bundle?) = with(requireActivity()) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_device)
 
         val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceListRecyclerView)
         deviceListRecyclerView.layoutManager =
@@ -30,15 +37,10 @@ class DeviceActivity : AppCompatActivity() {
         deviceListRecyclerView.adapter = adapter
 
         val firmwaresDataArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
-            intent.getStringExtra("DEVICE_ARRAY"),
+            arguments?.getString("deviceArray"),
             object : TypeToken<ArrayList<FirmwareData>>() {}.type
         )
 
         adapter.addDevice(firmwaresDataArray)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }
