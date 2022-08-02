@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main.adapters
+package io.github.keddnyo.midoze.adapters
 
 import android.content.Context
 import android.content.Intent

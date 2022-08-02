@@ -20,7 +20,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.main.adapters.DeviceStackAdapter
+import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack

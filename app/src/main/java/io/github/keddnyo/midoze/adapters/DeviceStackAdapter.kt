@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main.adapters
+package io.github.keddnyo.midoze.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,11 +18,11 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
     private var stackArray = ArrayList<FirmwareDataStack>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView =
+        val name: TextView? =
             itemView.findViewById(R.id.stackNameTextView)
         val image: ImageView =
             itemView.findViewById(R.id.stackImageView)
-        val count: TextView =
+        val count: TextView? =
             itemView.findViewById(R.id.stackCountTextView)
 
         val stackLayout: MaterialCardView = itemView.findViewById(R.id.downloadLayout)
@@ -37,9 +37,9 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         val deviceCount = stackArray[position].deviceStack.size.toString()
 
-        holder.name.text = stackArray[position].name
+        holder.name?.text = stackArray[position].name
         holder.image.setImageResource(stackArray[position].deviceStack[stackArray[position].deviceStack.lastIndex].device.image)
-        holder.count.text = holder.stackLayout.context.getString(R.string.items, deviceCount)
+        holder.count?.text = holder.stackLayout.context.getString(R.string.items, deviceCount)
 
         holder.stackLayout.setOnClickListener {
             val gson = Gson()
