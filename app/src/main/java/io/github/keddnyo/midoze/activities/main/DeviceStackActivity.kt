@@ -117,7 +117,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             val args = Bundle()
                             args.putString(
                                 "deviceArray",
-                                gson.toJson(deviceArrayList[0].deviceStack[0])
+                                gson.toJson(deviceArrayList[0].deviceStack)
                             )
                             deviceFragment.arguments = args
 
