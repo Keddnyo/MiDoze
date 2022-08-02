@@ -19,7 +19,7 @@ class DeviceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_device)
 
-        val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceListRecyclerView)
+        val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceRecyclerView)
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()

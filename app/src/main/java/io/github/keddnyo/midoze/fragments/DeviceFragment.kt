@@ -23,10 +23,10 @@ class DeviceFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_device, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) = with(requireActivity()) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireContext()) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceListRecyclerView)
+        val deviceListRecyclerView: RecyclerView = view.findViewById(R.id.deviceRecyclerView)
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()

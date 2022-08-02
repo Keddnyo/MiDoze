@@ -4,14 +4,14 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.main.DeviceActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
-import kotlin.collections.ArrayList
 
 class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
     private var stackArray = ArrayList<FirmwareDataStack>()
@@ -55,6 +55,7 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
     fun addDevice(firmwareDataArray: ArrayList<FirmwareDataStack>) {
         stackArray = firmwareDataArray
+        notifyItemRangeInserted(0, stackArray.size)
     }
 
     fun clear() {

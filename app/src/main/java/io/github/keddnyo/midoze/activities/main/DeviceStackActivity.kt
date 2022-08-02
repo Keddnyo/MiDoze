@@ -9,7 +9,6 @@ import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +43,6 @@ class DeviceStackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
-        val deviceFrame: FrameLayout = findViewById(R.id.deviceFrame)
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
@@ -53,7 +51,7 @@ class DeviceStackActivity : AppCompatActivity() {
         val editor = prefs.edit()
         val gson = Gson()
 
-        deviceListRecyclerView = findViewById(R.id.deviceListRecyclerView)
+        deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
@@ -98,18 +96,11 @@ class DeviceStackActivity : AppCompatActivity() {
 
                     mainHandler.post {
                         deviceStackAdapter.addDevice(deviceArrayList)
-                        deviceArrayList.forEachIndexed { index, _ ->
-                            deviceStackAdapter.notifyItemInserted(index)
-                        }
 
                         feedProgressBar.visibility = View.GONE
 
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
-                        }
-
-                        if (state != null) {
-                            deviceListRecyclerView.layoutManager?.onRestoreInstanceState(state)
                         }
 
                         if (deviceArrayList.isNotEmpty()) {
@@ -121,10 +112,12 @@ class DeviceStackActivity : AppCompatActivity() {
                             )
                             deviceFragment.arguments = args
 
-                            supportFragmentManager
-                                .beginTransaction()
-                                .replace(R.id.deviceFrame, deviceFragment)
-                                .commit()
+                            val fm = supportFragmentManager
+                            if (!fm.isDestroyed) {
+                                fm.beginTransaction()
+                                    .replace(R.id.deviceFrame, deviceFragment)
+                                    .commit()
+                            }
                         }
                     }
 
