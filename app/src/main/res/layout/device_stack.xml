@@ -31,7 +31,7 @@
             android:textSize="9pt"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/stackCountTextView"
             app:layout_constraintStart_toEndOf="@+id/stackImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
