@@ -52,7 +52,15 @@ class DeviceStackActivity : AppCompatActivity() {
         val gson = Gson()
 
         deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
-        deviceListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        deviceListRecyclerView.layoutManager = resources.getBoolean(R.bool.isLeftSidePane).let {
+            if (it) {
+                LinearLayoutManager.VERTICAL
+            } else {
+                LinearLayoutManager.HORIZONTAL
+            }.let { orientation ->
+                LinearLayoutManager(this, orientation, false)
+            }
+        }
 
         val adapter = deviceStackAdapter
         deviceListRecyclerView.adapter = adapter
