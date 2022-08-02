@@ -20,23 +20,27 @@
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/mainDataLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/deviceStackRecyclerView"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/pane_side_left" />
 
             <View
                 android:layout_width="1.5dp"
                 android:layout_height="match_parent"
-                android:background="@color/black"/>
+                android:background="@color/black" />
 
             <FrameLayout
                 android:id="@+id/deviceFrame"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/pane_side_right" />
 
         </LinearLayout>
 

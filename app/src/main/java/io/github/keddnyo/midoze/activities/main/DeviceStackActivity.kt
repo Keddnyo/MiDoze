@@ -9,6 +9,7 @@ import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +21,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.activities.request.RequestActivity
+import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.fragments.DeviceFragment
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
@@ -43,6 +44,7 @@ class DeviceStackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
+        val mainDataLayout: LinearLayout = findViewById(R.id.mainDataLayout)
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
@@ -72,6 +74,7 @@ class DeviceStackActivity : AppCompatActivity() {
                     mainHandler.post {
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
+                        mainDataLayout.visibility = View.GONE
                     }
 
                     var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
@@ -119,6 +122,8 @@ class DeviceStackActivity : AppCompatActivity() {
                                     .commit()
                             }
                         }
+
+                        mainDataLayout.visibility = View.VISIBLE
                     }
 
                     editor.putBoolean("allowUpdate", true)
