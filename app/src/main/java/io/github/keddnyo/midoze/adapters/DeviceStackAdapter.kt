@@ -42,6 +42,7 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
         holder.count?.text = holder.stackLayout.context.getString(R.string.items, deviceCount)
 
         holder.stackLayout.setOnClickListener {
+            val context = holder.stackLayout.context as AppCompatActivity
             val gson = Gson()
 //            val intent = Intent(holder.stackLayout.context, DeviceActivity::class.java)
 //            intent.putExtra("NAME", stackArray[position].name)
@@ -56,12 +57,14 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
             )
 
             deviceFragment.arguments = args
-            val fm = (holder.stackLayout.context as AppCompatActivity).supportFragmentManager
+            val fm = context.supportFragmentManager
             if (!fm.isDestroyed) {
                 fm.beginTransaction()
                     .replace(R.id.deviceFrame, deviceFragment)
                     .commit()
             }
+
+            context.title = stackArray[position].name
         }
     }
 

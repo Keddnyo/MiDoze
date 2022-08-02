@@ -9,12 +9,11 @@ import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
@@ -30,7 +29,6 @@ import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -44,7 +42,7 @@ class DeviceStackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
-        val mainDataLayout: LinearLayout = findViewById(R.id.mainDataLayout)
+        val mainDataLayout: ConstraintLayout = findViewById(R.id.mainDataLayout)
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
 
         val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
@@ -54,11 +52,7 @@ class DeviceStackActivity : AppCompatActivity() {
         val gson = Gson()
 
         deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
-        deviceListRecyclerView.layoutManager =
-            GridLayoutManager(
-                this, Display()
-                    .getGridLayoutIndex(this, 400)
-            )
+        deviceListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val adapter = deviceStackAdapter
         deviceListRecyclerView.adapter = adapter
@@ -72,6 +66,8 @@ class DeviceStackActivity : AppCompatActivity() {
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
+                        title = getString(R.string.app_name)
+
                         feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
                         mainDataLayout.visibility = View.GONE
@@ -122,6 +118,8 @@ class DeviceStackActivity : AppCompatActivity() {
                                     .commit()
                             }
                         }
+
+                        title = deviceArrayList[0].name
 
                         mainDataLayout.visibility = View.VISIBLE
                     }
