@@ -27,7 +27,6 @@ import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -47,8 +46,8 @@ class DeviceStackActivity : AppCompatActivity() {
         val editor = prefs.edit()
         val gson = Gson()
 
-        deviceListRecyclerView.layoutManager = resources.getBoolean(R.bool.isLeftSidePane).let {
-            if (it) {
+        deviceListRecyclerView.layoutManager = resources.getBoolean(R.bool.isLeftSidePane).let { left ->
+            if (left) {
                 LinearLayoutManager.VERTICAL
             } else {
                 LinearLayoutManager.HORIZONTAL
@@ -72,10 +71,10 @@ class DeviceStackActivity : AppCompatActivity() {
                         emptyResponse.visibility = View.GONE
                     }
 
-                    prefs.getString("deviceArrayListString", "").let { deviceStackCache ->
-                        if (deviceStackCache != "") {
+                    prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
+                        if (deviceStackCache.isNotEmpty()) {
                             deviceArrayList = GsonBuilder().create().fromJson(
-                                deviceStackCache.toString(),
+                                deviceStackCache,
                                 object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
                             )
                         } else if (Requests().isOnline(context)) {
@@ -88,7 +87,7 @@ class DeviceStackActivity : AppCompatActivity() {
                                     arrayList.add(device)
 
                                     editor.putString(
-                                        "deviceArrayListString",
+                                        "deviceStackCache",
                                         gson.toJson(arrayList).toString()
                                     )
                                     editor.apply()
@@ -127,36 +126,27 @@ class DeviceStackActivity : AppCompatActivity() {
 
                         refreshLayout.isRefreshing = false
                     }
-
-                    editor.putBoolean("allowUpdate", true)
-                    editor.apply()
                 }
             }
+        }
+
+        refreshLayout.setOnRefreshListener {
+            if (Requests().isOnline(context)) {
+                editor.putString("deviceStackCache", "")
+                editor.apply()
+            }
+            GetDevices(context).execute()
         }
 
         val versionCode = AppVersion(context).code
         if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
             editor.putInt("VERSION_CODE", versionCode)
-            editor.putString("deviceArrayListString", "")
+            editor.putString("deviceStackCache", "")
             editor.apply()
         }
 
         GetDevices(context).execute()
-        refreshLayout.isRefreshing  = true
-
-        refreshLayout.setOnRefreshListener {
-            if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
-                if (deviceStackAdapter.itemCount != 0) {
-                    Display().showToast(this, getString(R.string.background_update))
-                }
-
-                editor.putString("deviceArrayListString", "")
-                editor.putBoolean("allowUpdate", false)
-                editor.apply()
-            }
-
-            GetDevices(context).execute()
-        }
+        refreshLayout.isRefreshing = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
