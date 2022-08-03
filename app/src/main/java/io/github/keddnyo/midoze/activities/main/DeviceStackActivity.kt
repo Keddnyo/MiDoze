@@ -175,9 +175,9 @@ class DeviceStackActivity : AppCompatActivity() {
                 editor.putString("deviceArrayListString", "")
                 editor.putBoolean("allowUpdate", false)
                 editor.apply()
-
-                GetDevices(context).execute()
             }
+
+            GetDevices(context).execute()
         }
     }
 
