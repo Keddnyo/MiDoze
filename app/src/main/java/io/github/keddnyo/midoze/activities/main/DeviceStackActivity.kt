@@ -29,6 +29,7 @@ import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -74,11 +75,14 @@ class DeviceStackActivity : AppCompatActivity() {
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
-                        title = getString(R.string.app_name)
+                        if (adapter.itemCount == 0) {
+                            refreshLayout.isRefreshing = false
+                            title = getString(R.string.app_name)
+                            feedProgressBar.visibility = View.VISIBLE
+                            mainDataLayout.visibility = View.GONE
+                        }
 
-                        feedProgressBar.visibility = View.VISIBLE
                         emptyResponse.visibility = View.GONE
-                        mainDataLayout.visibility = View.GONE
                     }
 
                     var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
@@ -102,6 +106,7 @@ class DeviceStackActivity : AppCompatActivity() {
                     }
 
                     mainHandler.post {
+                        deviceStackAdapter.clear()
                         deviceStackAdapter.addDevice(deviceArrayList)
 
                         feedProgressBar.visibility = View.GONE
@@ -127,6 +132,8 @@ class DeviceStackActivity : AppCompatActivity() {
                             }
 
                             title = deviceArrayList[0].name
+
+                            refreshLayout.isRefreshing = false
                         }
 
                         mainDataLayout.visibility = View.VISIBLE
@@ -148,11 +155,10 @@ class DeviceStackActivity : AppCompatActivity() {
         GetDevices(context).execute()
 
         refreshLayout.setOnRefreshListener {
-            refreshLayout.isRefreshing = false
-
             if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
-                deviceStackAdapter.clear()
-                deviceStackAdapter.notifyDataSetChanged()
+                if (adapter.itemCount != 0) {
+                    Display().showToast(this, getString(R.string.background_update))
+                }
 
                 editor.putString("deviceArrayListString", "")
                 editor.putBoolean("allowUpdate", false)
