@@ -48,28 +48,6 @@ class WearableRepository(val context: Context) {
     }
 
     val wearables = arrayListOf(
-        // Amazfit Bands
-        WearableStack(
-            name = "Amazfit Band",
-            wearableStack = arrayListOf(
-                // Amazfit Band 5 / Zepp
-                addWearable(
-                    deviceSource = "73",
-                    productionSource = "256",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                ),
-
-                // Amazfit Band 7 / Zepp
-                addWearable(
-                    deviceSource = "254",
-                    productionSource = "259",
-                    isZeppLife = false,
-                    isChineseRegion = false
-                )
-            )
-        ),
-
         // Xiaomi Mi Band
         WearableStack(
             name = "Xiaomi Mi Band",
@@ -167,6 +145,28 @@ class WearableRepository(val context: Context) {
                     deviceSource = "265",
                     productionSource = "261",
                     isZeppLife = true,
+                    isChineseRegion = false
+                )
+            )
+        ),
+
+        // Amazfit Bands
+        WearableStack(
+            name = "Amazfit Band",
+            wearableStack = arrayListOf(
+                // Amazfit Band 5 / Zepp
+                addWearable(
+                    deviceSource = "73",
+                    productionSource = "256",
+                    isZeppLife = false,
+                    isChineseRegion = false
+                ),
+
+                // Amazfit Band 7 / Zepp
+                addWearable(
+                    deviceSource = "254",
+                    productionSource = "259",
+                    isZeppLife = false,
                     isChineseRegion = false
                 )
             )

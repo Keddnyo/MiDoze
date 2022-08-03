@@ -38,7 +38,7 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
         val deviceCount = stackArray[position].deviceStack.size.toString()
 
         holder.name?.text = stackArray[position].name
-        holder.image.setImageResource(stackArray[position].deviceStack[stackArray[position].deviceStack.lastIndex].device.image)
+        holder.image.setImageResource(stackArray[position].deviceStack[0].device.image)
         holder.count?.text = holder.stackLayout.context.getString(R.string.items, deviceCount)
 
         holder.stackLayout.setOnClickListener {
