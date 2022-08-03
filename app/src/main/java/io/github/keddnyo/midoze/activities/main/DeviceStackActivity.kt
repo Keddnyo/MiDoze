@@ -72,6 +72,7 @@ class DeviceStackActivity : AppCompatActivity() {
 
         class GetDevices(val context: Context) : AsyncTask() {
             var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
+            var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     mainHandler.post {
@@ -94,15 +95,27 @@ class DeviceStackActivity : AppCompatActivity() {
                         )
                     } else if (Requests().isOnline(context)) {
                         Requests().getFirmwareLatest(context).forEach { device ->
-                            deviceArrayList.add(device)
-                        }
+                            if (adapter.itemCount == 0) {
+                                deviceArrayList
+                            } else {
+                                deviceArrayListSlot
+                            }.let {
+                                if (it.isNotEmpty()) {
+                                    it.add(device)
 
-                        deviceArrayListBackup = gson.toJson(deviceArrayList)
-                        editor.putString(
-                            "deviceArrayListString",
-                            deviceArrayListBackup.toString()
-                        )
-                        editor.apply()
+                                    deviceArrayListBackup = gson.toJson(it)
+                                    editor.putString(
+                                        "deviceArrayListString",
+                                        deviceArrayListBackup.toString()
+                                    )
+                                    editor.apply()
+                                }
+                            }
+                        }
+                        
+                        if (deviceArrayListSlot.isNotEmpty() && deviceArrayListSlot != deviceArrayList) {
+                            deviceArrayList = deviceArrayListSlot
+                        }
                     }
 
                     mainHandler.post {
