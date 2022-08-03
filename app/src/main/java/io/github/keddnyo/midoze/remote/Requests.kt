@@ -13,7 +13,10 @@ import android.os.Environment
 import android.webkit.URLUtil
 import androidx.core.app.ActivityCompat
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.*
+import io.github.keddnyo.midoze.local.dataModels.Device
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
 import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_FIRST
@@ -26,7 +29,8 @@ import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
-import java.net.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 class Requests {
     fun isOnline(context: Context): Boolean {

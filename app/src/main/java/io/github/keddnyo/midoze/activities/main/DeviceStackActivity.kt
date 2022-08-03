@@ -125,9 +125,9 @@ class DeviceStackActivity : AppCompatActivity() {
                                     .replace(R.id.deviceFrame, deviceFragment)
                                     .commit()
                             }
-                        }
 
-                        title = deviceArrayList[0].name
+                            title = deviceArrayList[0].name
+                        }
 
                         mainDataLayout.visibility = View.VISIBLE
                     }

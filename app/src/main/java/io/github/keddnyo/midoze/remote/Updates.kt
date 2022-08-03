@@ -13,7 +13,7 @@ class Updates(val context: Context) : AsyncTask() {
         super.execute()
 
         var releaseData = JSONObject("{}")
-        if (Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+        if (Requests().isOnline(context) && Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
             releaseData = Requests().getAppReleaseData()
         }
 
