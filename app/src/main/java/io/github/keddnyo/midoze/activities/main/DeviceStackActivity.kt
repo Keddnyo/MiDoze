@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
@@ -33,26 +31,22 @@ import io.github.keddnyo.midoze.utils.Display
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
-    private val deviceStackAdapter = DeviceStackAdapter()
     private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@DeviceStackActivity
-    private var state: Parcelable? = null
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
-        val mainDataLayout: ConstraintLayout = findViewById(R.id.mainDataLayout)
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
-
-        val feedProgressBar: ProgressBar = findViewById(R.id.firmwaresProgressBar)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
+        deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
+
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
 
-        deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
         deviceListRecyclerView.layoutManager = resources.getBoolean(R.bool.isLeftSidePane).let {
             if (it) {
                 LinearLayoutManager.VERTICAL
@@ -63,72 +57,56 @@ class DeviceStackActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = deviceStackAdapter
-        deviceListRecyclerView.adapter = adapter
-
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            Updates(context).execute()
-        }
+        val deviceStackAdapter = DeviceStackAdapter()
+        deviceListRecyclerView.adapter = deviceStackAdapter
 
         class GetDevices(val context: Context) : AsyncTask() {
             var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
             var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
-                    mainHandler.post {
-                        if (adapter.itemCount == 0) {
-                            refreshLayout.isRefreshing = false
-                            title = getString(R.string.app_name)
-                            feedProgressBar.visibility = View.VISIBLE
-                            mainDataLayout.visibility = View.GONE
-                        }
+                    Updates(context).execute()
 
+                    mainHandler.post {
+                        title = getString(R.string.app_name)
                         emptyResponse.visibility = View.GONE
                     }
 
-                    var deviceArrayListBackup = prefs.getString("deviceArrayListString", "")
+                    prefs.getString("deviceArrayListString", "").let { deviceStackCache ->
+                        if (deviceStackCache != "") {
+                            deviceArrayList = GsonBuilder().create().fromJson(
+                                deviceStackCache.toString(),
+                                object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
+                            )
+                        } else if (Requests().isOnline(context)) {
+                            Requests().getFirmwareLatest(context).forEach { device ->
+                                if (deviceStackAdapter.itemCount == 0) {
+                                    deviceArrayList
+                                } else {
+                                    deviceArrayListSlot
+                                }.let { arrayList ->
+                                    arrayList.add(device)
 
-                    if (deviceArrayListBackup != "") {
-                        deviceArrayList = GsonBuilder().create().fromJson(
-                            deviceArrayListBackup.toString(),
-                            object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
-                        )
-                    } else if (Requests().isOnline(context)) {
-                        Requests().getFirmwareLatest(context).forEach { device ->
-                            if (adapter.itemCount == 0) {
-                                deviceArrayList
-                            } else {
-                                deviceArrayListSlot
-                            }.let {
-                                if (it.isNotEmpty()) {
-                                    it.add(device)
-
-                                    deviceArrayListBackup = gson.toJson(it)
                                     editor.putString(
                                         "deviceArrayListString",
-                                        deviceArrayListBackup.toString()
+                                        gson.toJson(arrayList).toString()
                                     )
                                     editor.apply()
                                 }
                             }
-                        }
-                        
-                        if (deviceArrayListSlot.isNotEmpty() && deviceArrayListSlot != deviceArrayList) {
-                            deviceArrayList = deviceArrayListSlot
+
+                            if (deviceArrayListSlot.isNotEmpty() && deviceArrayListSlot != deviceArrayList) {
+                                deviceArrayList = deviceArrayListSlot
+                            }
                         }
                     }
 
                     mainHandler.post {
-                        deviceStackAdapter.clear()
                         deviceStackAdapter.addDevice(deviceArrayList)
-
-                        feedProgressBar.visibility = View.GONE
 
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
-                        }
-
-                        if (deviceArrayList.isNotEmpty()) {
+                        } else {
                             val deviceFragment = DeviceFragment()
                             val args = Bundle()
                             args.putString(
@@ -148,7 +126,6 @@ class DeviceStackActivity : AppCompatActivity() {
                         }
 
                         refreshLayout.isRefreshing = false
-                        mainDataLayout.visibility = View.VISIBLE
                     }
 
                     editor.putBoolean("allowUpdate", true)
@@ -165,10 +142,11 @@ class DeviceStackActivity : AppCompatActivity() {
         }
 
         GetDevices(context).execute()
+        refreshLayout.isRefreshing  = true
 
         refreshLayout.setOnRefreshListener {
             if (prefs.getBoolean("allowUpdate", true) && Requests().isOnline(context)) {
-                if (adapter.itemCount != 0) {
+                if (deviceStackAdapter.itemCount != 0) {
                     Display().showToast(this, getString(R.string.background_update))
                 }
 
@@ -199,12 +177,5 @@ class DeviceStackActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            state = deviceListRecyclerView.layoutManager?.onSaveInstanceState()
-        }
     }
 }

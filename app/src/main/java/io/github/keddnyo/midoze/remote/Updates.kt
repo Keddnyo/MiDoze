@@ -18,8 +18,10 @@ class Updates(val context: Context) : AsyncTask() {
         }
 
         mainHandler.post {
-            if (releaseData.has("tag_name") && releaseData.getJSONArray("assets")
-                    .toString() != "[]"
+            if (
+                android.os.Build.VERSION.SDK_INT >= 21 &&
+                releaseData.has("tag_name") &&
+                releaseData.getJSONArray("assets").toString() != "[]"
             ) {
                 val latestVersion = releaseData.getString("tag_name")
                 val releaseChangelog = releaseData.getString("body")

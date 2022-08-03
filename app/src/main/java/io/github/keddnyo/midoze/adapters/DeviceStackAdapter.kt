@@ -73,13 +73,11 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
     }
 
     fun addDevice(firmwareDataArray: ArrayList<FirmwareDataStack>) {
-        stackArray = firmwareDataArray
-        notifyItemRangeInserted(0, stackArray.size)
-    }
-
-    fun clear() {
         val count = itemCount
         stackArray.clear()
         notifyItemRangeRemoved(0, count)
+
+        stackArray = firmwareDataArray
+        notifyItemRangeInserted(0, stackArray.size)
     }
 }
