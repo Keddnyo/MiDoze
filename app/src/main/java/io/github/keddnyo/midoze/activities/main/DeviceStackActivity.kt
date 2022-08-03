@@ -145,10 +145,9 @@ class DeviceStackActivity : AppCompatActivity() {
                             }
 
                             title = deviceArrayList[0].name
-
-                            refreshLayout.isRefreshing = false
                         }
 
+                        refreshLayout.isRefreshing = false
                         mainDataLayout.visibility = View.VISIBLE
                     }
 
