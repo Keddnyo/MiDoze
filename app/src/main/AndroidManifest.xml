@@ -14,15 +14,10 @@
     </queries>
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.MiDoze">
-        <activity
-            android:name=".activities.main.DeviceActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
         <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"

@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
-import io.github.keddnyo.midoze.fragments.DeviceFragment
+import io.github.keddnyo.midoze.fragments.DeviceContainer
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
@@ -105,22 +105,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             emptyResponse.visibility = View.VISIBLE
                         } else {
                             emptyResponse.visibility = View.GONE
-
-                            DeviceFragment().let { deviceFragment ->
-                                deviceFragment.arguments = Bundle().apply {
-                                    putString(
-                                        "deviceArray",
-                                        gson.toJson(deviceArrayList[0].deviceStack)
-                                    )
-                                }
-
-                                supportFragmentManager
-                                    .beginTransaction()
-                                    .replace(R.id.deviceFrame, deviceFragment)
-                                    .commit()
-
-                                title = deviceArrayList[0].name
-                            }
+                            DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
                         }
 
                         refreshLayout.isRefreshing = false
@@ -139,7 +124,7 @@ class DeviceStackActivity : AppCompatActivity() {
             }
         }
 
-        GetDevices(context).let {
+        GetDevices(context).run {
             refreshLayout.setOnRefreshListener {
                 if (Requests().isOnline(context)) {
                     editor.apply {
@@ -148,10 +133,10 @@ class DeviceStackActivity : AppCompatActivity() {
                     }
                 }
 
-                it.execute()
+                execute()
             }
 
-            it.execute()
+            execute()
             refreshLayout.isRefreshing = true
         }
     }
