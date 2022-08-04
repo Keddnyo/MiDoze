@@ -19,4 +19,8 @@
 
     <string name="menu_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
+
+    <string name="toolbox_title">Меню</string>
+    <string name="app_downloads">Загрузки</string>
+    <string name="app_uninstall">Деинсталляция</string>
 </resources>

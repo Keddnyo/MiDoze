@@ -17,7 +17,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.fragments.DeviceContainer
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
@@ -149,8 +148,8 @@ class DeviceStackActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_request -> {
-                startActivity(Intent(context, RequestActivity::class.java))
+            R.id.action_toolbox -> {
+                startActivity(Intent(context, ToolboxActivity::class.java))
             }
             R.id.action_about -> {
                 startActivity(
