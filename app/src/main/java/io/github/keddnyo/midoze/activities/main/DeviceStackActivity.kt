@@ -139,24 +139,4 @@ class DeviceStackActivity : AppCompatActivity() {
             refreshLayout.isRefreshing = true
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_toolbox -> {
-                startActivity(Intent(context, ToolboxActivity::class.java))
-            }
-            R.id.action_about -> {
-                startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_APP_REPOSITORY))
-                )
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }

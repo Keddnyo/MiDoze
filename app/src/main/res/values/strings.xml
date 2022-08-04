@@ -21,6 +21,7 @@
     <string name="settings_server_response">Server response</string>
 
     <string name="menu_title">Menu</string>
+    <string name="menu_explore_firmwares">Explore firmwares</string>
     <string name="app_downloads">Downloads</string>
     <string name="clear_cache">Clear cache</string>
     <string name="app_uninstall">Uninstall app</string>

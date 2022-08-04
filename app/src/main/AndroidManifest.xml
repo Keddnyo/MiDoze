@@ -33,10 +33,19 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.MiDoze">
         <activity
-            android:name=".activities.main.ToolboxActivity"
-            android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Dialog" />
+            android:name=".activities.main.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
         <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"
@@ -53,17 +62,8 @@
             android:theme="@style/Theme.Dialog.Firmware" />
         <activity
             android:name=".activities.main.DeviceStackActivity"
-            android:exported="true"
+            android:exported="false"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
     </application>
 

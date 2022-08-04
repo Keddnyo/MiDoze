@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_toolbox"
-        android:icon="@drawable/ic_toolbox"
-        android:title="@string/menu_title"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_info"
         android:title="@string/menu_about"

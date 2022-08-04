@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.main.DeviceStackActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.Toolbox
 
@@ -40,11 +42,20 @@ class ToolboxAdapter : RecyclerView.Adapter<ToolboxAdapter.DeviceListViewHolder>
 
         holder.layout.setOnClickListener {
             when (toolboxArray[position].tag) {
+                "Explore_firmwares" -> {
+                    context.startActivity(Intent(context, DeviceStackActivity::class.java))
+                }
                 "Request" -> {
                     context.startActivity(Intent(context, RequestActivity::class.java))
                 }
                 "Downloads" -> {
                     context.startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
+                }
+                "Clear_cache" -> {
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().apply {
+                        remove("deviceStackCache")
+                        apply()
+                    }
                 }
                 "Uninstall" -> {
                     context.startActivity(

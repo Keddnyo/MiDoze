@@ -92,6 +92,12 @@ class ToolboxRepository(val context: Context) {
         ),
 
         Toolbox(
+            icon = R.drawable.ic_toolbox,
+            title = context.resources.getString(R.string.menu_explore_firmwares),
+            tag = "Explore_firmwares",
+            isApp = false
+        ),
+        Toolbox(
             icon = R.drawable.ic_request,
             title = context.resources.getString(R.string.menu_custom_request),
             tag = "Request",

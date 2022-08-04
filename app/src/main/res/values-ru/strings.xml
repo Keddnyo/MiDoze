@@ -21,6 +21,7 @@
     <string name="settings_server_response">Ответ сервера</string>
 
     <string name="menu_title">Меню</string>
+    <string name="menu_explore_firmwares">Найти прошивки</string>
     <string name="app_downloads">Загрузки</string>
     <string name="clear_cache">Очистить кэш</string>
     <string name="app_uninstall">Деинсталляция</string>
