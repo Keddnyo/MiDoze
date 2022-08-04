@@ -34,15 +34,17 @@ import java.net.URL
 
 class Requests {
     fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val info = connectivityManager.allNetworkInfo
-        for (i in info.indices) {
-            if (info[i].state == NetworkInfo.State.CONNECTED) {
-                return true
+        return runBlocking(Dispatchers.Default) {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val info = connectivityManager.allNetworkInfo
+            for (i in info.indices) {
+                if (info[i].state == NetworkInfo.State.CONNECTED) {
+                    return@runBlocking true
+                }
             }
+            false
         }
-        return false
     }
 
     fun isHostAvailable(host: String): Boolean {

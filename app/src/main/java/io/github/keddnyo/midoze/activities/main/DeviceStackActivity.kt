@@ -130,19 +130,19 @@ class DeviceStackActivity : AppCompatActivity() {
             }
         }
 
+        val versionCode = AppVersion(context).code
+        if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
+            editor.putInt("VERSION_CODE", versionCode)
+            editor.putString("deviceStackCache", "")
+            editor.apply()
+        }
+
         refreshLayout.setOnRefreshListener {
             if (Requests().isOnline(context)) {
                 editor.putString("deviceStackCache", "")
                 editor.apply()
             }
             GetDevices(context).execute()
-        }
-
-        val versionCode = AppVersion(context).code
-        if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
-            editor.putInt("VERSION_CODE", versionCode)
-            editor.putString("deviceStackCache", "")
-            editor.apply()
         }
 
         GetDevices(context).execute()

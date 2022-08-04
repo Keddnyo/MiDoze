@@ -84,11 +84,7 @@ class RequestActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-            val isOnline = runBlocking(Dispatchers.Default) {
-                Requests().isOnline(context)
-            }
-
-            if (isOnline) {
+            if (Requests().isOnline(context)) {
                 val firmwareResponse = runBlocking {
                     Requests().getFirmwareData(
                         context,
