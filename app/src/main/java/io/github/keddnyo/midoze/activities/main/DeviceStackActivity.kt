@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.activities.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -30,31 +29,30 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
-    private lateinit var deviceListRecyclerView: RecyclerView
     private val context = this@DeviceStackActivity
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
-        deviceListRecyclerView = findViewById(R.id.deviceStackRecyclerView)
+        val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceStackRecyclerView)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
 
-        deviceListRecyclerView.layoutManager = resources.getBoolean(R.bool.isLeftSidePane).let { left ->
-            if (left) {
-                LinearLayoutManager.VERTICAL
-            } else {
-                LinearLayoutManager.HORIZONTAL
-            }.let { orientation ->
-                LinearLayoutManager(this, orientation, false)
+        deviceListRecyclerView.layoutManager =
+            resources.getBoolean(R.bool.isLeftSidePane).let { left ->
+                if (left) {
+                    LinearLayoutManager.VERTICAL
+                } else {
+                    LinearLayoutManager.HORIZONTAL
+                }.let { orientation ->
+                    LinearLayoutManager(this, orientation, false)
+                }
             }
-        }
 
         val deviceStackAdapter = DeviceStackAdapter()
         deviceListRecyclerView.adapter = deviceStackAdapter
@@ -62,14 +60,10 @@ class DeviceStackActivity : AppCompatActivity() {
         class GetDevices(val context: Context) : AsyncTask() {
             var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
             var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
+
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
                     Updates(context).execute()
-
-                    mainHandler.post {
-                        title = getString(R.string.app_name)
-                        emptyResponse.visibility = View.GONE
-                    }
 
                     prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
                         if (deviceStackCache.isNotEmpty()) {
@@ -86,16 +80,20 @@ class DeviceStackActivity : AppCompatActivity() {
                                 }.let { arrayList ->
                                     arrayList.add(device)
 
-                                    editor.putString(
-                                        "deviceStackCache",
-                                        gson.toJson(arrayList).toString()
-                                    )
-                                    editor.apply()
+                                    editor.apply {
+                                        putString(
+                                            "deviceStackCache",
+                                            gson.toJson(arrayList).toString()
+                                        )
+                                        apply()
+                                    }
                                 }
                             }
 
-                            if (deviceArrayListSlot.isNotEmpty() && deviceArrayListSlot != deviceArrayList) {
-                                deviceArrayList = deviceArrayListSlot
+                            deviceArrayListSlot.let {
+                                if (it.isNotEmpty() && it != deviceArrayList) {
+                                    deviceArrayList = it
+                                }
                             }
                         }
                     }
@@ -106,22 +104,23 @@ class DeviceStackActivity : AppCompatActivity() {
                         if (deviceStackAdapter.itemCount == 0) {
                             emptyResponse.visibility = View.VISIBLE
                         } else {
-                            val deviceFragment = DeviceFragment()
-                            val args = Bundle()
-                            args.putString(
-                                "deviceArray",
-                                gson.toJson(deviceArrayList[0].deviceStack)
-                            )
-                            deviceFragment.arguments = args
+                            emptyResponse.visibility = View.GONE
 
-                            val fm = supportFragmentManager
-                            if (!fm.isDestroyed) {
-                                fm.beginTransaction()
+                            DeviceFragment().let { deviceFragment ->
+                                deviceFragment.arguments = Bundle().apply {
+                                    putString(
+                                        "deviceArray",
+                                        gson.toJson(deviceArrayList[0].deviceStack)
+                                    )
+                                }
+
+                                supportFragmentManager
+                                    .beginTransaction()
                                     .replace(R.id.deviceFrame, deviceFragment)
                                     .commit()
-                            }
 
-                            title = deviceArrayList[0].name
+                                title = deviceArrayList[0].name
+                            }
                         }
 
                         refreshLayout.isRefreshing = false
@@ -130,23 +129,31 @@ class DeviceStackActivity : AppCompatActivity() {
             }
         }
 
-        val versionCode = AppVersion(context).code
-        if (prefs.getInt("VERSION_CODE", 0) != versionCode) {
-            editor.putInt("VERSION_CODE", versionCode)
-            editor.putString("deviceStackCache", "")
-            editor.apply()
-        }
-
-        refreshLayout.setOnRefreshListener {
-            if (Requests().isOnline(context)) {
-                editor.putString("deviceStackCache", "")
-                editor.apply()
+        AppVersion(context).code.let {
+            if (prefs.getInt("VERSION_CODE", 0) != it) {
+                editor.apply {
+                    putInt("VERSION_CODE", it)
+                    remove("deviceStackCache")
+                    apply()
+                }
             }
-            GetDevices(context).execute()
         }
 
-        GetDevices(context).execute()
-        refreshLayout.isRefreshing = true
+        GetDevices(context).let {
+            refreshLayout.setOnRefreshListener {
+                if (Requests().isOnline(context)) {
+                    editor.apply {
+                        remove("deviceStackCache")
+                        apply()
+                    }
+                }
+
+                it.execute()
+            }
+
+            it.execute()
+            refreshLayout.isRefreshing = true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
