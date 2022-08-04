@@ -7,6 +7,25 @@ import io.github.keddnyo.midoze.local.dataModels.Toolbox
 class ToolboxRepository(val context: Context) {
     val items = arrayListOf(
         Toolbox(
+            icon = R.drawable.ic_toolbox,
+            title = context.resources.getString(R.string.menu_explore_firmwares),
+            tag = "Explore_firmwares",
+            isApp = false
+        ),
+        Toolbox(
+            icon = R.drawable.ic_request,
+            title = context.resources.getString(R.string.menu_custom_request),
+            tag = "Request",
+            isApp = false
+        ),
+        Toolbox(
+            icon = R.drawable.ic_download,
+            title = context.resources.getString(R.string.app_downloads),
+            tag = "Downloads",
+            isApp = false
+        ),
+
+        Toolbox(
             icon = R.drawable.ic_zepp,
             title = "Zepp",
             tag = "com.huami.watch.hmwatchmanager",
@@ -91,24 +110,6 @@ class ToolboxRepository(val context: Context) {
             isApp = true
         ),
 
-        Toolbox(
-            icon = R.drawable.ic_toolbox,
-            title = context.resources.getString(R.string.menu_explore_firmwares),
-            tag = "Explore_firmwares",
-            isApp = false
-        ),
-        Toolbox(
-            icon = R.drawable.ic_request,
-            title = context.resources.getString(R.string.menu_custom_request),
-            tag = "Request",
-            isApp = false
-        ),
-        Toolbox(
-            icon = R.drawable.ic_download,
-            title = context.resources.getString(R.string.app_downloads),
-            tag = "Downloads",
-            isApp = false
-        ),
         Toolbox(
             icon = R.drawable.ic_delete,
             title = context.resources.getString(R.string.clear_cache),
