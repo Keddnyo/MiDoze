@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_toolbox"
         android:icon="@drawable/ic_toolbox"
-        android:title="@string/toolbox_title"
+        android:title="@string/menu_title"
         app:showAsAction="ifRoom" />
 
     <item

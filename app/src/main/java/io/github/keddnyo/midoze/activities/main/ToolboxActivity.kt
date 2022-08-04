@@ -13,11 +13,13 @@ class ToolboxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = getString(R.string.toolbox_title)
+        title = getString(R.string.menu_title)
         setContentView(R.layout.activity_toolbox)
 
         val toolboxRecyclerView: RecyclerView = findViewById(R.id.toolboxRecyclerView)
-        toolboxRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        toolboxRecyclerView.layoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.VERTICAL, false
+        )
         val adapter = ToolboxAdapter()
         toolboxRecyclerView.adapter = adapter
 

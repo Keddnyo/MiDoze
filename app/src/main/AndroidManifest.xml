@@ -12,6 +12,19 @@
     <queries>
         <package android:name="com.xiaomi.hm.health" />
         <package android:name="com.huami.watch.hmwatchmanager" />
+        <package android:name="com.xiaomi.wearable" />
+        <package android:name="com.mc.mibandlite1" />
+        <package android:name="com.mc.notify" />
+        <package android:name="com.mc.amazfit1" />
+        <package android:name="com.mc.miband1" />
+        <package android:name="blacknote.amazfitmaster" />
+        <package android:name="blacknote.amazfitmaster" />
+        <package android:name="com.lumaticsoft.watchdroidassistant" />
+        <package android:name="cz.zdenekhorak.amazfittools" />
+        <package android:name="cz.zdenekhorak.mibandtools" />
+        <package android:name="hu.tiborsosdevs.mibandage" />
+        <package android:name="nodomain.freeyourgadget.gadgetbridge" />
+        <package android:name="nodomain.nopackage.huafetcher" />
     </queries>
 
     <application

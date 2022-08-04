@@ -20,7 +20,8 @@
     <string name="menu_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
 
-    <string name="toolbox_title">Toolbox</string>
+    <string name="menu_title">Menu</string>
     <string name="app_downloads">Downloads</string>
+    <string name="clear_cache">Clear cache</string>
     <string name="app_uninstall">Uninstall app</string>
 </resources>
