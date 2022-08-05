@@ -2,11 +2,12 @@ package io.github.keddnyo.midoze.activities.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.AppsAdapter
 import io.github.keddnyo.midoze.local.packages.PackageRepository
+import io.github.keddnyo.midoze.utils.Display
 
 class AppsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +16,9 @@ class AppsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_apps)
 
         findViewById<RecyclerView>(R.id.appsRecyclerView).let { RecyclerView ->
-            RecyclerView.layoutManager = LinearLayoutManager(
-                this, LinearLayoutManager.VERTICAL, false
+            RecyclerView.layoutManager = GridLayoutManager(
+                this, Display()
+                    .getGridLayoutIndex(this, 400)
             )
 
             AppsAdapter().let { adapter ->
