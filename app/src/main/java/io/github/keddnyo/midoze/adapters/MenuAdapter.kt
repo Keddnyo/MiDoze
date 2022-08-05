@@ -17,6 +17,7 @@ import io.github.keddnyo.midoze.activities.main.DeviceStackActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.MainMenu
 import io.github.keddnyo.midoze.remote.Routes
+import io.github.keddnyo.midoze.utils.AndroidVersion
 
 class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
     private var mainMenuArray = ArrayList<MainMenu>()
@@ -70,6 +71,10 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
                     )
                 }
             }
+        }
+
+        if (!AndroidVersion().isLollipopOrHigher) {
+            holder.icon.visibility = View.GONE
         }
     }
 

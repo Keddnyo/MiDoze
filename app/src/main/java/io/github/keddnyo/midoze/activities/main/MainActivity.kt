@@ -8,6 +8,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.MenuAdapter
 import io.github.keddnyo.midoze.local.menu.MenuRepository
 import io.github.keddnyo.midoze.remote.Updates
+import io.github.keddnyo.midoze.utils.AndroidVersion
 import io.github.keddnyo.midoze.utils.Display
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                if (AndroidVersion().isLollipopOrHigher) {
                     Updates(context).execute()
                 }
             }

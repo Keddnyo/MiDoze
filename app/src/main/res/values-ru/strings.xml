@@ -2,7 +2,6 @@
 <resources>
     <string name="background_update">Обновление в фоне</string>
     <string name="items">%1$s шт.</string>
-    <string name="menu_about" translatable="false">О приложении</string>
     <string name="empty_response">Результат пуст</string>
 
     <string name="update_title">Обновление %1$s</string>

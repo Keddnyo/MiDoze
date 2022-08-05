@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">MiDoze</string>
     <string name="background_update">Update in background</string>
     <string name="items">%1$s it.</string>
-    <string name="menu_about" translatable="false">About</string>
+    <string name="menu_github" translatable="false">GitHub</string>
     <string name="empty_response">Empty response</string>
 
     <string name="update_title">Update %1$s</string>

@@ -28,7 +28,7 @@ class MenuRepository(val context: Context) {
         ),
         MainMenu(
             icon = R.drawable.ic_info,
-            title = context.resources.getString(R.string.menu_about),
+            title = context.resources.getString(R.string.menu_github),
             tag = "About"
         ),
         MainMenu(
