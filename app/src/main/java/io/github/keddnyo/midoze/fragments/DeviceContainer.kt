@@ -17,10 +17,13 @@ class DeviceContainer {
                     )
                 }
 
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.deviceFrame, deviceFragment)
-                    .commit()
+                supportFragmentManager.let {
+                    if (!it.isDestroyed) {
+                        it.beginTransaction()
+                            .replace(R.id.deviceFrame, deviceFragment)
+                            .commit()
+                    }
+                }
 
                 title = stackArray[position].name
             }
