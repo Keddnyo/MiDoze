@@ -13,6 +13,7 @@ import io.github.keddnyo.midoze.utils.Display
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = getString(R.string.menu_apps)
         setContentView(R.layout.activity_main)
 
         findViewById<RecyclerView>(R.id.menuRecyclerView).let { RecyclerView ->
