@@ -1,8 +1,7 @@
 package io.github.keddnyo.midoze.local.dataModels
 
-data class Toolbox(
+data class MainMenu(
     val icon: Int,
     val title: String,
-    val tag: String,
-    val isApp: Boolean
+    val tag: String
 )

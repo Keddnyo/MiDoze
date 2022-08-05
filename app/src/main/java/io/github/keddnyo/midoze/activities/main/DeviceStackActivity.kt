@@ -1,11 +1,7 @@
 package io.github.keddnyo.midoze.activities.main
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,8 +17,6 @@ import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.fragments.DeviceContainer
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
-import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import java.util.concurrent.Executors
@@ -31,6 +25,7 @@ class DeviceStackActivity : AppCompatActivity() {
     private val context = this@DeviceStackActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
@@ -62,8 +57,6 @@ class DeviceStackActivity : AppCompatActivity() {
 
             override fun execute() {
                 Executors.newSingleThreadExecutor().execute {
-                    Updates(context).execute()
-
                     prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
                         if (deviceStackCache.isNotEmpty()) {
                             deviceArrayList = GsonBuilder().create().fromJson(
@@ -138,5 +131,10 @@ class DeviceStackActivity : AppCompatActivity() {
             execute()
             refreshLayout.isRefreshing = true
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

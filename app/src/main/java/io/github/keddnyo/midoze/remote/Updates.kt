@@ -12,10 +12,12 @@ class Updates(val context: Context) : AsyncTask() {
     override fun execute() {
         super.execute()
 
-        var releaseData = JSONObject("{}")
-        if (Requests().isOnline(context) && Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
-            releaseData = Requests().getAppReleaseData()
-        }
+        val releaseData =
+            if (Requests().isOnline(context) && Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+                Requests().getAppReleaseData()
+            } else {
+                JSONObject("{}")
+            }
 
         mainHandler.post {
             if (
@@ -36,9 +38,11 @@ class Updates(val context: Context) : AsyncTask() {
                         .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
                     builder.setPositiveButton(R.string.update_button) { _: DialogInterface?, _: Int ->
-                        Requests().getFirmwareFile(context,
+                        Requests().getFirmwareFile(
+                            context,
                             latestVersionLink,
-                            context.getString(R.string.app_name))
+                            context.getString(R.string.app_name)
+                        )
                         DialogInterface.BUTTON_POSITIVE
                     }
                     builder.setNegativeButton(android.R.string.cancel) { _: DialogInterface?, _: Int ->

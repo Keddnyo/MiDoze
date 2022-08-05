@@ -20,9 +20,8 @@
     <string name="menu_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
 
-    <string name="menu_title">Меню</string>
-    <string name="menu_explore_firmwares">Найти прошивки</string>
-    <string name="app_downloads">Загрузки</string>
-    <string name="clear_cache">Очистить кэш</string>
-    <string name="app_uninstall">Деинсталляция</string>
+    <string name="menu_apps">Приложения</string>
+    <string name="menu_firmwares">Прошивки</string>
+    <string name="menu_downloads">Загрузки</string>
+    <string name="menu_uninstall">Деинсталляция</string>
 </resources>

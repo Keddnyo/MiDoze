@@ -63,8 +63,11 @@
         <activity
             android:name=".activities.main.DeviceStackActivity"
             android:exported="false"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activities.main.AppsActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

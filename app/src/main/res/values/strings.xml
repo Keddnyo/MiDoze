@@ -20,9 +20,8 @@
     <string name="menu_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
 
-    <string name="menu_title">Menu</string>
-    <string name="menu_explore_firmwares">Explore firmwares</string>
-    <string name="app_downloads">Downloads</string>
-    <string name="clear_cache">Clear cache</string>
-    <string name="app_uninstall">Uninstall app</string>
+    <string name="menu_apps">Apps</string>
+    <string name="menu_firmwares">Firmwares</string>
+    <string name="menu_downloads">Downloads</string>
+    <string name="menu_uninstall">Uninstall</string>
 </resources>
