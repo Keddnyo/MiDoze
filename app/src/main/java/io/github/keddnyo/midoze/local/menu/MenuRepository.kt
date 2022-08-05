@@ -7,12 +7,12 @@ import io.github.keddnyo.midoze.local.dataModels.MainMenu
 class MenuRepository(val context: Context) {
     val items = arrayListOf(
         MainMenu(
-            icon = R.mipmap.ic_launcher,
+            icon = R.drawable.ic_apps,
             title = context.resources.getString(R.string.menu_apps),
             tag = "Apps"
         ),
         MainMenu(
-            icon = R.drawable.ic_toolbox,
+            icon = R.drawable.ic_firmware,
             title = context.resources.getString(R.string.menu_firmwares),
             tag = "Firmwares"
         ),
