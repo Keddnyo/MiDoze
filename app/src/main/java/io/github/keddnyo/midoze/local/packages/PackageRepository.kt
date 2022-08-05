@@ -3,7 +3,7 @@ package io.github.keddnyo.midoze.local.packages
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.MainMenu
 
-data class PackageRepository(
+class PackageRepository {
     val packages: ArrayList<MainMenu> = arrayListOf(
         MainMenu(
             icon = R.drawable.ic_zepp,
@@ -76,4 +76,4 @@ data class PackageRepository(
             tag = "cz.zdenekhorak.mibandtools"
         ),
     )
-)
+}

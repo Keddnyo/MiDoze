@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
 
-                Updates(context).execute()
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    Updates(context).execute()
+                }
             }
         }
     }
