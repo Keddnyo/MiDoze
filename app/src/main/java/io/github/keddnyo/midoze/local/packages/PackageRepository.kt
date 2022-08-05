@@ -28,12 +28,12 @@ data class PackageRepository(
         MainMenu(
             icon = R.drawable.ic_notify_mi_band,
             title = "Notify for Mi Band",
-            tag = "com.mc.amazfit1"
+            tag = "com.mc.miband1"
         ),
         MainMenu(
             icon = R.drawable.ic_notify_amazfit,
             title = "Notify for Amazfit",
-            tag = "com.mc.miband1"
+            tag = "com.mc.amazfit1"
         ),
         MainMenu(
             icon = R.drawable.ic_mi_bandage,
