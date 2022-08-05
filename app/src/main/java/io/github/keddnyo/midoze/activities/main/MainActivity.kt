@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.menuRecyclerView).let { RecyclerView ->
             RecyclerView.layoutManager = GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 230)
+                    .getGridLayoutIndex(this, 200)
             )
 
             this@MainActivity.let { context ->
