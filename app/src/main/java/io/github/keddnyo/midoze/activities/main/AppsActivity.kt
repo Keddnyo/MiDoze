@@ -11,6 +11,7 @@ import io.github.keddnyo.midoze.utils.Display
 
 class AppsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        title = getString(R.string.menu_apps)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apps)
