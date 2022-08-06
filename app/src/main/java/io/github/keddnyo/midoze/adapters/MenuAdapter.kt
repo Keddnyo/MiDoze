@@ -18,6 +18,7 @@ import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.MainMenu
 import io.github.keddnyo.midoze.remote.Routes
 import io.github.keddnyo.midoze.utils.AndroidVersion
+import io.github.keddnyo.midoze.utils.PackageUtils
 
 class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
     private var mainMenuArray = ArrayList<MainMenu>()
@@ -59,11 +60,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
                     startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
                 }
                 "Uninstall" -> {
-                    startActivity(
-                        Intent(Intent.ACTION_DELETE).apply {
-                            data = Uri.parse("package:${context.packageName}")
-                        }
-                    )
+                    PackageUtils(context).removePackage(context.packageName)
                 }
                 "About" -> {
                     startActivity(

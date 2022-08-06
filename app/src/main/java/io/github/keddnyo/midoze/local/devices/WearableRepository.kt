@@ -25,12 +25,12 @@ class WearableRepository(val context: Context) {
             application = if (isZeppLife) {
                 Application(
                     name = ZEPP_LIFE_NAME,
-                    version = PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME)
+                    version = PackageUtils(context).getPackageVersion(ZEPP_LIFE_PACKAGE_NAME)
                 )
             } else {
                 Application(
                     name = ZEPP_NAME,
-                    version = PackageUtils().getPackageVersion(context, ZEPP_PACKAGE_NAME)
+                    version = PackageUtils(context).getPackageVersion(ZEPP_PACKAGE_NAME)
                 )
             },
             region = if (isChineseRegion) {

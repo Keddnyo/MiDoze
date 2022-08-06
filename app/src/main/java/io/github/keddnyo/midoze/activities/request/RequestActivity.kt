@@ -139,14 +139,14 @@ class RequestActivity : AppCompatActivity() {
         fun setZeppAppData() {
             extrasAppNameEditText.setText(ZEPP_NAME)
             extrasAppVersionEditText.setText(
-                PackageUtils().getPackageVersion(context, ZEPP_PACKAGE_NAME) ?: ZEPP_VERSION
+                PackageUtils(context).getPackageVersion(ZEPP_PACKAGE_NAME) ?: ZEPP_VERSION
             )
         }
 
         fun setZeppLifeAppData() {
             extrasAppNameEditText.setText(ZEPP_LIFE_NAME)
             extrasAppVersionEditText.setText(
-                PackageUtils().getPackageVersion(context, ZEPP_LIFE_PACKAGE_NAME)
+                PackageUtils(context).getPackageVersion(ZEPP_LIFE_PACKAGE_NAME)
                     ?: ZEPP_LIFE_VERSION
             )
         }

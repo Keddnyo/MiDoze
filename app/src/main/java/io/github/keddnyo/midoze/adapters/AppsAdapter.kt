@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.MainMenu
+import io.github.keddnyo.midoze.utils.PackageUtils
 
 class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
     private var appsArray = ArrayList<MainMenu>()
@@ -67,17 +68,35 @@ class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
                             }
                             else -> {
                                 try {
-                                    startActivity(Intent(Intent.ACTION_VIEW,
-                                        Uri.parse("market://details?id=${application.tag}")))
+                                    startActivity(
+                                        Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse("market://details?id=${application.tag}")
+                                        )
+                                    )
                                 } catch (e: ActivityNotFoundException) {
-                                    startActivity(Intent(Intent.ACTION_VIEW,
-                                        Uri.parse("https://play.google.com/store/apps/details?id=${application.tag}")))
+                                    startActivity(
+                                        Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse("https://play.google.com/store/apps/details?id=${application.tag}")
+                                        )
+                                    )
                                 }
                             }
                         }
                     }
                 }
             }
+        }
+
+        holder.layout.setOnLongClickListener {
+            appsArray.forEach { application ->
+                if (appsArray[position].tag == application.tag) {
+                    PackageUtils(context).removePackage(application.tag)
+                }
+            }
+
+            true
         }
     }
 
