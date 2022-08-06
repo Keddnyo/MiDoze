@@ -2,9 +2,9 @@ package io.github.keddnyo.midoze.activities.request
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
@@ -21,7 +21,6 @@ import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.PackageUtils
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class RequestActivity : AppCompatActivity() {
