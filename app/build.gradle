@@ -12,7 +12,7 @@ android {
         targetSdk 32
         versionCode 12
         versionName "6.0.0"
-        resConfigs "en", "ru"
+        resConfigs 'en', 'ru'
     }
 
     buildTypes {
