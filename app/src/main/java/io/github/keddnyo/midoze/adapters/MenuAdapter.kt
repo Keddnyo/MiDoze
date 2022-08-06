@@ -70,7 +70,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
             }
         }
 
-        if (!AndroidVersion().isLollipopOrHigher) {
+        if (!AndroidVersion().isLollipopOrAbove) {
             holder.icon.visibility = View.GONE
         }
     }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
 
-                if (AndroidVersion().isLollipopOrHigher) {
+                if (AndroidVersion().isLollipopOrAbove) {
                     Updates(context).execute()
                 }
             }
