@@ -5,7 +5,7 @@
     android:id="@+id/toolboxItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/menu_layout_margin"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"

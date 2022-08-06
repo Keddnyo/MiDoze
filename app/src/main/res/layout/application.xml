@@ -5,7 +5,7 @@
     android:id="@+id/applicationLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/menu_layout_margin"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
