@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
-    <string name="background_update">Update in background</string>
-    <string name="items">%1$s it.</string>
+
+    <string name="menu_apps">Apps</string>
+    <string name="menu_firmwares">Firmwares</string>
+    <string name="menu_request">Request</string>
+    <string name="menu_downloads">Downloads</string>
     <string name="menu_github" translatable="false">GitHub</string>
-    <string name="empty_response">Empty response</string>
+    <string name="menu_uninstall">Uninstall</string>
 
     <string name="update_title">Update %1$s</string>
     <string name="update_button">Update</string>
+
+    <string name="items">%1$s it.</string>
+    <string name="empty_response">Empty response</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_languages">Languages</string>
@@ -14,14 +20,8 @@
     <string name="firmware_share">Share</string>
     <string name="firmware_share_get_it_on">Get it on %1$s</string>
 
-    <string name="extras_app_data">Insert app data</string>
-    <string name="extras_import_button">Import</string>
+    <string name="request_app_data">Insert app data</string>
+    <string name="request_import_button">Import</string>
 
-    <string name="menu_custom_request">Request</string>
     <string name="settings_server_response">Server response</string>
-
-    <string name="menu_apps">Apps</string>
-    <string name="menu_firmwares">Firmwares</string>
-    <string name="menu_downloads">Downloads</string>
-    <string name="menu_uninstall">Uninstall</string>
 </resources>

@@ -30,7 +30,7 @@
             android:id="@+id/mainMenuItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu_custom_request"
+            android:text="@string/menu_request"
             android:textSize="11pt"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

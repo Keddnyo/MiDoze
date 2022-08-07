@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="background_update">Обновление в фоне</string>
-    <string name="items">%1$s шт.</string>
-    <string name="empty_response">Результат пуст</string>
+    <string name="menu_apps">Приложения</string>
+    <string name="menu_firmwares">Прошивки</string>
+    <string name="menu_request">Запрос</string>
+    <string name="menu_downloads">Загрузки</string>
+    <string name="menu_uninstall">Деинсталляция</string>
 
     <string name="update_title">Обновление %1$s</string>
     <string name="update_button">Обновить</string>
+
+    <string name="items">%1$s шт.</string>
+    <string name="empty_response">Результат пуст</string>
 
     <string name="firmware_download">Скачать</string>
     <string name="firmware_languages">Языки</string>
@@ -13,14 +18,8 @@
     <string name="firmware_share">Отправить</string>
     <string name="firmware_share_get_it_on">Доступно в %1$s</string>
 
-    <string name="extras_app_data">Вставить код приложения</string>
-    <string name="extras_import_button">Импорт</string>
+    <string name="request_app_data">Вставить код приложения</string>
+    <string name="request_import_button">Импорт</string>
 
-    <string name="menu_custom_request">Запрос</string>
     <string name="settings_server_response">Ответ сервера</string>
-
-    <string name="menu_apps">Приложения</string>
-    <string name="menu_firmwares">Прошивки</string>
-    <string name="menu_downloads">Загрузки</string>
-    <string name="menu_uninstall">Деинсталляция</string>
 </resources>

@@ -18,7 +18,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasDeviceSourceEditText"
+                android:id="@+id/requestDeviceSourceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -34,7 +34,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasProductionSourceEditText"
+                android:id="@+id/requestProductionSourceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -50,7 +50,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasAppNameEditText"
+                android:id="@+id/requestAppNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions"
@@ -67,7 +67,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasAppVersionEditText"
+                android:id="@+id/requestAppVersionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions"
@@ -84,7 +84,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasCountryEditText"
+                android:id="@+id/requestCountryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions"
@@ -102,7 +102,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/extrasLangEditText"
+                android:id="@+id/requestLangEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textNoSuggestions"
@@ -111,23 +111,23 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/extrasSubmitButton"
+            android:id="@+id/requestSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@android:string/ok" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/extrasImportButton"
+            android:id="@+id/requestImportButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/extras_import_button"
+            android:text="@string/request_import_button"
             android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/extras_app_button"
+            android:id="@+id/request_app_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/extras_app_data" />
+            android:text="@string/request_app_data" />
 
     </LinearLayout>
 

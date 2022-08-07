@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main
+package io.github.keddnyo.midoze.activities.firmware
 
 import android.content.Context
 import android.content.Intent
@@ -13,8 +13,8 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
-import io.github.keddnyo.midoze.utils.StringUtils
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.StringUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext

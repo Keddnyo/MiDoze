@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main
+package io.github.keddnyo.midoze.activities.firmware
 
 import android.content.Context
 import android.os.Bundle

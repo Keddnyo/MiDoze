@@ -56,12 +56,12 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog" />
         <activity
-            android:name=".activities.main.FirmwareActivity"
+            android:name=".activities.firmware.FirmwareActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog.Firmware" />
         <activity
-            android:name=".activities.main.DeviceStackActivity"
+            android:name=".activities.firmware.DeviceStackActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
