@@ -14,6 +14,7 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
+import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
 import io.ktor.client.*
@@ -183,6 +184,7 @@ class Requests {
             if (isWriteExternalStoragePermissionAvailable()) {
                 downloadFile()
             } else {
+                Display().showToast(context, context.getString(R.string.permission_not_granted))
                 requestWriteExternalStoragePermission()
             }
         }
