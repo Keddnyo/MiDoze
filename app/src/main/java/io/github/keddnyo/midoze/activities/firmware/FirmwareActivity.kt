@@ -14,6 +14,7 @@ import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -52,7 +53,7 @@ class FirmwareActivity : AppCompatActivity() {
         val firmwareLanguagesLayout: MaterialCardView = findViewById(R.id.firmwareLanguagesLayout)
         val firmwareDownloadButton: Button = findViewById(R.id.firmwareDownloadButton)
 
-        if (Requests().isOnline(context)) {
+        if (OnlineStatus(context).isOnline) {
             runOnUiThread {
                 firmwareDownloadButton.visibility = View.VISIBLE
             }
@@ -90,7 +91,7 @@ class FirmwareActivity : AppCompatActivity() {
         }
 
         firmwareDownloadButton.setOnClickListener {
-            if (Requests().isOnline(context)) {
+            if (OnlineStatus(context).isOnline) {
                 getFirmware(firmwareResponse, context, deviceNameValue)
             } else {
                 Display().showToast(context, getString(R.string.empty_response))

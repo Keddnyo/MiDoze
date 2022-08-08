@@ -1,17 +1,12 @@
 package io.github.keddnyo.midoze.remote
 
-import android.Manifest
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
-import androidx.core.app.ActivityCompat
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Device
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
@@ -19,9 +14,8 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
-import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_FIRST
-import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_SECOND
-import io.github.keddnyo.midoze.remote.Routes.XIAOMI_HOST_THIRD
+import io.github.keddnyo.midoze.utils.OnlineStatus
+import io.github.keddnyo.midoze.utils.Permissions
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -29,46 +23,9 @@ import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
-import java.net.HttpURLConnection
 import java.net.URL
 
 class Requests {
-    fun isOnline(context: Context): Boolean {
-        return runBlocking(Dispatchers.Default) {
-            val connectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val info = connectivityManager.allNetworkInfo
-            for (i in info.indices) {
-                if (info[i].state == NetworkInfo.State.CONNECTED) {
-                    return@runBlocking true
-                }
-            }
-            false
-        }
-    }
-
-    fun isHostAvailable(host: String): Boolean {
-        val connection: HttpURLConnection =
-            URL(host).openConnection() as HttpURLConnection
-        connection.requestMethod = "HEAD"
-        val responseCode = runBlocking(Dispatchers.IO) {
-            connection.responseCode
-        }
-        return responseCode == 200
-    }
-
-    private fun getXiaomiHostReachable(): String? {
-        return if (isHostAvailable("https://$XIAOMI_HOST_FIRST")) {
-            XIAOMI_HOST_FIRST
-        } else if (isHostAvailable("https://$XIAOMI_HOST_SECOND")) {
-            XIAOMI_HOST_SECOND
-        } else if (isHostAvailable("https://$XIAOMI_HOST_THIRD")) {
-            XIAOMI_HOST_THIRD
-        } else {
-            null
-        }
-    }
-
     fun getFirmwareLatest(
         context: Context
     ): ArrayList<FirmwareDataStack> = with(context as Activity) {
@@ -104,10 +61,11 @@ class Requests {
         wearable: Wearable
     ): FirmwareData? = with(context as Activity) {
         val client = HttpClient()
+        val targetHost = OnlineStatus(context).getXiaomiHostReachable().toString()
         val response = client.get {
             url {
                 protocol = URLProtocol.HTTPS
-                host = getXiaomiHostReachable().toString()
+                host = targetHost
                 appendPathSegments("devices", "ALL", "hasNewVersion")
                 parameter("productId", "0")
                 parameter("vendorSource", "0")
@@ -153,7 +111,7 @@ class Requests {
                 append("v", "0")
                 append("apptoken", "0")
                 append("lang", wearable.region.language)
-                append("Host", getXiaomiHostReachable().toString())
+                append("Host", targetHost)
                 append("Connection", "Keep-Alive")
                 append("accept-encoding", "gzip")
                 append("accept", "*/*")
@@ -199,36 +157,33 @@ class Requests {
         fileUrl: String,
         subName: String,
     ) {
-        val permissionCheck = ActivityCompat.checkSelfPermission(
-            context,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
+        Permissions(context).run {
+            fun downloadFile() {
+                if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    val downloadManager =
+                        context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                    val fileName = URLUtil.guessFileName(fileUrl, "?", "?")
+                    val request = DownloadManager.Request(Uri.parse(fileUrl))
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                context as Activity,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                1
-            )
-        } else {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                val downloadManager =
-                    context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                val fileName = URLUtil.guessFileName(fileUrl, "?", "?")
-                val request = DownloadManager.Request(Uri.parse(fileUrl))
+                    request.setTitle(fileName)
+                    request.setNotificationVisibility(1)
+                    request.setDestinationInExternalPublicDir(
+                        Environment.DIRECTORY_DOWNLOADS,
+                        "${context.getString(R.string.app_name)}/$subName/$fileName"
+                    )
 
-                request.setTitle(fileName)
-                request.setNotificationVisibility(1)
-                request.setDestinationInExternalPublicDir(
-                    Environment.DIRECTORY_DOWNLOADS,
-                    "${context.getString(R.string.app_name)}/$subName/$fileName"
-                )
+                    downloadManager.enqueue(request)
+                } else {
+                    context.startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl))
+                    )
+                }
+            }
 
-                downloadManager.enqueue(request)
+            if (isWriteExternalStoragePermissionAvailable()) {
+                downloadFile()
             } else {
-                context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl))
-                )
+                requestWriteExternalStoragePermission()
             }
         }
     }

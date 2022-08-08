@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.OnlineStatus
 import org.json.JSONObject
 
 class Updates(val context: Context) : AsyncTask() {
@@ -13,10 +14,12 @@ class Updates(val context: Context) : AsyncTask() {
         super.execute()
 
         val releaseData =
-            if (Requests().isOnline(context) && Requests().isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
-                Requests().getAppReleaseData()
-            } else {
-                JSONObject("{}")
+            OnlineStatus(context).run {
+                if (isOnline && isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+                    Requests().getAppReleaseData()
+                } else {
+                    JSONObject("{}")
+                }
             }
 
         mainHandler.post {

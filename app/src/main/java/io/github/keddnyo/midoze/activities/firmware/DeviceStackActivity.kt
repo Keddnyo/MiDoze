@@ -19,6 +19,7 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.OnlineStatus
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -51,85 +52,87 @@ class DeviceStackActivity : AppCompatActivity() {
         val deviceStackAdapter = DeviceStackAdapter()
         deviceListRecyclerView.adapter = deviceStackAdapter
 
-        class GetDevices(val context: Context) : AsyncTask() {
-            var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
-            var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
+        OnlineStatus(context).run {
+            class GetDevices(val context: Context) : AsyncTask() {
+                var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
+                var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
 
-            override fun execute() {
-                Executors.newSingleThreadExecutor().execute {
-                    prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
-                        if (deviceStackCache.isNotEmpty()) {
-                            deviceArrayList = GsonBuilder().create().fromJson(
-                                deviceStackCache,
-                                object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
-                            )
-                        } else if (Requests().isOnline(context)) {
-                            Requests().getFirmwareLatest(context).forEach { device ->
-                                if (deviceStackAdapter.itemCount == 0) {
-                                    deviceArrayList
-                                } else {
-                                    deviceArrayListSlot
-                                }.let { arrayList ->
-                                    arrayList.add(device)
+                override fun execute() {
+                    Executors.newSingleThreadExecutor().execute {
+                        prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
+                            if (deviceStackCache.isNotEmpty()) {
+                                deviceArrayList = GsonBuilder().create().fromJson(
+                                    deviceStackCache,
+                                    object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
+                                )
+                            } else if (isOnline) {
+                                Requests().getFirmwareLatest(context).forEach { device ->
+                                    if (deviceStackAdapter.itemCount == 0) {
+                                        deviceArrayList
+                                    } else {
+                                        deviceArrayListSlot
+                                    }.let { arrayList ->
+                                        arrayList.add(device)
 
-                                    editor.apply {
-                                        putString(
-                                            "deviceStackCache",
-                                            gson.toJson(arrayList).toString()
-                                        )
-                                        apply()
+                                        editor.apply {
+                                            putString(
+                                                "deviceStackCache",
+                                                gson.toJson(arrayList).toString()
+                                            )
+                                            apply()
+                                        }
+                                    }
+                                }
+
+                                deviceArrayListSlot.let {
+                                    if (it.isNotEmpty() && it != deviceArrayList) {
+                                        deviceArrayList = it
                                     }
                                 }
                             }
+                        }
 
-                            deviceArrayListSlot.let {
-                                if (it.isNotEmpty() && it != deviceArrayList) {
-                                    deviceArrayList = it
-                                }
+                        mainHandler.post {
+                            deviceStackAdapter.addDevice(deviceArrayList)
+
+                            if (deviceStackAdapter.itemCount == 0) {
+                                emptyResponse.visibility = View.VISIBLE
+                            } else {
+                                emptyResponse.visibility = View.GONE
+                                DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
                             }
+
+                            refreshLayout.isRefreshing = false
                         }
-                    }
-
-                    mainHandler.post {
-                        deviceStackAdapter.addDevice(deviceArrayList)
-
-                        if (deviceStackAdapter.itemCount == 0) {
-                            emptyResponse.visibility = View.VISIBLE
-                        } else {
-                            emptyResponse.visibility = View.GONE
-                            DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
-                        }
-
-                        refreshLayout.isRefreshing = false
                     }
                 }
             }
-        }
 
-        AppVersion(context).code.let {
-            if (prefs.getInt("VERSION_CODE", 0) != it) {
-                editor.apply {
-                    putInt("VERSION_CODE", it)
-                    remove("deviceStackCache")
-                    apply()
-                }
-            }
-        }
-
-        GetDevices(context).run {
-            refreshLayout.setOnRefreshListener {
-                if (Requests().isOnline(context)) {
+            AppVersion(context).code.let {
+                if (prefs.getInt("VERSION_CODE", 0) != it) {
                     editor.apply {
+                        putInt("VERSION_CODE", it)
                         remove("deviceStackCache")
                         apply()
                     }
                 }
-
-                execute()
             }
 
-            execute()
-            refreshLayout.isRefreshing = true
+            GetDevices(context).run {
+                refreshLayout.setOnRefreshListener {
+                    if (isOnline) {
+                        editor.apply {
+                            remove("deviceStackCache")
+                            apply()
+                        }
+                    }
+
+                    execute()
+                }
+
+                execute()
+                refreshLayout.isRefreshing = true
+            }
         }
     }
 

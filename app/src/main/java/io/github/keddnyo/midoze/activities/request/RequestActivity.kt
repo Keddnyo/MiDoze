@@ -20,6 +20,7 @@ import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.Display
+import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.PackageUtils
 import kotlinx.coroutines.runBlocking
 
@@ -84,7 +85,7 @@ class RequestActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-            if (Requests().isOnline(context)) {
+            if (OnlineStatus(context).isOnline) {
                 val firmwareResponse = runBlocking {
                     Requests().getFirmwareData(
                         context,

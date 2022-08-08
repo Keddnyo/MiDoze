@@ -12,8 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.main.AppsActivity
 import io.github.keddnyo.midoze.activities.firmware.DeviceStackActivity
+import io.github.keddnyo.midoze.activities.main.AppsActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.MainMenu
 import io.github.keddnyo.midoze.remote.Routes
