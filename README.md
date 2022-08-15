@@ -8,15 +8,11 @@ ROMs and APPs for Xiaomi wearables
 [Показать на русском](https://github.com/Keddnyo/MiDoze/blob/master/README.ru-RU.md)
 
 ## Features
-| Features | Android 4.0.4+ | Android 5.0+ | Android 7.0+ |
-| --- | --- | --- | --- |
-| Shortcuts | No | No | Yes |
-| Dark Mode | No | No | Yes |
-| Open apps | Yes | Yes | Yes |
-| Firmwares | Yes | Yes | Yes |
-| Custom request | Yes | Yes | Yes |
-| English | Yes | Yes | Yes |
-| Russian | Yes | Yes | Yes |
+1. Explore firmwares
+2. Compose custom request
+3. Dark mode
+4. Shurtcuts
+5. English and Russian langs
 
 ## Screenshots Android 4.0.4+ Phone
 <p align="center">
