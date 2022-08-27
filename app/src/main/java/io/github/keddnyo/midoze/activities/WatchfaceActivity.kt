@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.WatchfaceAdapter
+import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
+import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
@@ -24,7 +27,7 @@ class WatchfaceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_watchfaces)
 
         Thread {
-            val watchfaceArray = arrayListOf<Watchface>()
+            val watchfaceArrayStack = arrayListOf<WatchfaceStack>()
 
             val content = runBlocking(Dispatchers.IO) {
                 Requests().getWatchfaceData()
@@ -35,6 +38,7 @@ class WatchfaceActivity : AppCompatActivity() {
 
             for (d in 0 until data.length()) {
                 val list = data.getJSONObject(d).getJSONArray("list")
+                val watchfaceArray = arrayListOf<Watchface>()
 
                 for (l in 0 until list.length()) {
                     val url = URL(list.getJSONObject(l).getString("icon"))
@@ -48,20 +52,24 @@ class WatchfaceActivity : AppCompatActivity() {
                         )
                     )
                 }
+
+                watchfaceArrayStack.add(
+                    WatchfaceStack(
+                        title = data.getJSONObject(d).getString("tab_name"),
+                        stack = watchfaceArray
+                    )
+                )
             }
 
             runOnUiThread {
                 findViewById<RecyclerView>(R.id.watchfaceRecyclerView).let { RecyclerView ->
-                    RecyclerView.layoutManager = GridLayoutManager(
-                        this@WatchfaceActivity, Display()
-                            .getGridLayoutIndex(this@WatchfaceActivity, 200)
-                    )
+                    RecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-                    WatchfaceAdapter().let { adapter ->
+                    WatchfaceStackAdapter().let { adapter ->
                         RecyclerView.adapter = adapter
 
                         adapter.addWatchfaceList(
-                            watchfaceArray
+                            watchfaceArrayStack
                         )
                     }
                 }

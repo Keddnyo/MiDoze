@@ -73,9 +73,12 @@ class Requests {
                 parameter("model", "hqbd3.watch.l67")
             }
             headers {
-                append("Accept-Language", "en-US,en")
-                append("Content-Language", "en")
+//                append("Accept-Language", "en-US,en")
+//                append("Content-Language", "en")
                 append("Watch-Appstore-Common", "_locale=US&_language=en&_devtype=1&_ver=3.6.0i")
+                append("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 11; 2201117TY Build/RKQ1.211001.001)")
+                append("Accept-Encoding", "gzip, deflate")
+                append("Connection", "close")
             }
         }.bodyAsText()
     }

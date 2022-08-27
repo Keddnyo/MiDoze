@@ -12,7 +12,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 
 class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListViewHolder>() {
-    private var appsArray = ArrayList<Watchface>()
+    private var watchfaceArray = ArrayList<Watchface>()
     private lateinit var context: Context
 
     class WatchfaceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,16 +33,16 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
     override fun onBindViewHolder(holder: WatchfaceListViewHolder, position: Int) {
         context = holder.layout.context
 
-        holder.title.text = appsArray[position].title
-        holder.icon.setImageBitmap(appsArray[position].preview)
+        holder.title.text = watchfaceArray[position].title
+        holder.icon.setImageBitmap(watchfaceArray[position].preview)
 
     }
 
     override fun getItemCount(): Int {
-        return appsArray.size
+        return watchfaceArray.size
     }
 
     fun addWatchfaceList(watchfaceList: ArrayList<Watchface>) {
-        appsArray = watchfaceList
+        watchfaceArray = watchfaceList
     }
 }
