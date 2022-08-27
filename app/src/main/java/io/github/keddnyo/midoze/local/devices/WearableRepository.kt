@@ -9,7 +9,7 @@ import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
-import io.github.keddnyo.midoze.utils.LanguageUtils
+import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
 
 class WearableRepository(val context: Context) {
@@ -40,8 +40,8 @@ class WearableRepository(val context: Context) {
                 )
             } else {
                 Region(
-                    country = LanguageUtils().currentCountry,
-                    language = LanguageUtils().currentLanguage
+                    country = DozeLocale().currentCountry,
+                    language = DozeLocale().currentLanguage
                 )
             }
         )

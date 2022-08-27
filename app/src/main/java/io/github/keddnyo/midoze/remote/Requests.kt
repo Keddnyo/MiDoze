@@ -14,6 +14,7 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
+import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
@@ -59,26 +60,20 @@ class Requests {
     }
 
     suspend fun getWatchfaceData(): String {
-        val client = HttpClient {
-            install(HttpCookies) {
-                storage = ConstantCookiesStorage(Cookie(name = "locale", value = "en_us"))
-            }
-        }
+        val client = HttpClient()
         val targetHost = "watch-appstore.iot.mi.com"
+        val country = DozeLocale().currentCountry
+        val language = DozeLocale().currentLanguage
+
         return client.get {
             url {
                 protocol = URLProtocol.HTTPS
                 host = targetHost
                 appendPathSegments("api", "watchface", "prize", "tabs")
-                parameter("model", "hqbd3.watch.l67")
+                parameter("model", "hmpace.watch.v7")
             }
             headers {
-//                append("Accept-Language", "en-US,en")
-//                append("Content-Language", "en")
-                append("Watch-Appstore-Common", "_locale=US&_language=en&_devtype=1&_ver=3.6.0i")
-                append("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 11; 2201117TY Build/RKQ1.211001.001)")
-                append("Accept-Encoding", "gzip, deflate")
-                append("Connection", "close")
+                append("Watch-Appstore-Common", "_locale=$country&_language=$language")
             }
         }.bodyAsText()
     }

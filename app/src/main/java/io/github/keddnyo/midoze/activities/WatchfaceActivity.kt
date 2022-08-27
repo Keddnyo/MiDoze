@@ -1,21 +1,15 @@
 package io.github.keddnyo.midoze.activities
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.WatchfaceAdapter
 import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.Display
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
@@ -23,6 +17,7 @@ import java.net.URL
 
 class WatchfaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchfaces)
 
@@ -75,5 +70,10 @@ class WatchfaceActivity : AppCompatActivity() {
                 }
             }
         }.start()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
