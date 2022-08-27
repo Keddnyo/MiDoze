@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.WatchfaceActivity
 import io.github.keddnyo.midoze.activities.firmware.DeviceStackActivity
 import io.github.keddnyo.midoze.activities.main.AppsActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
@@ -55,6 +56,9 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
                 }
                 "Request" -> {
                     startActivity(Intent(context, RequestActivity::class.java))
+                }
+                "Watchface" -> {
+                    startActivity(Intent(context, WatchfaceActivity::class.java))
                 }
                 "Downloads" -> {
                     startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))

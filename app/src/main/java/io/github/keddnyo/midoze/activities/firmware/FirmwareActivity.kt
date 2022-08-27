@@ -13,9 +13,10 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
-import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.OnlineStatus
-import io.github.keddnyo.midoze.utils.StringUtils
+import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
+import io.github.keddnyo.midoze.utils.StringUtils.toChangelog
+import io.github.keddnyo.midoze.utils.StringUtils.toLanguageList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -76,16 +77,12 @@ class FirmwareActivity : AppCompatActivity() {
             "firmwareVersion"
         )
         if (firmwareResponse.has("changeLog")) {
-            firmwareChangelogTextView.text = StringUtils().getChangelogFixed(
-                firmwareResponse.getString("changeLog")
-            )
+            firmwareChangelogTextView.text = firmwareResponse.getString("changeLog").toChangelog()
         } else {
             firmwareChangelogLayout.visibility = View.GONE
         }
         if (firmwareResponse.has("lang")) {
-            firmwareLanguagesTextView.text = Display().getLanguageName(
-                firmwareResponse.getString("lang")
-            )
+            firmwareLanguagesTextView.text = firmwareResponse.getString("lang").toLanguageList()
         } else {
             firmwareLanguagesLayout.visibility = View.GONE
         }
@@ -94,7 +91,7 @@ class FirmwareActivity : AppCompatActivity() {
             if (OnlineStatus(context).isOnline) {
                 getFirmware(firmwareResponse, context, deviceNameValue)
             } else {
-                Display().showToast(context, getString(R.string.empty_response))
+                getString(R.string.empty_response).showAsToast(context)
             }
         }
 

@@ -22,6 +22,11 @@ class MenuRepository(val context: Context) {
             tag = "Request"
         ),
         MainMenu(
+            icon = R.drawable.ic_watchface,
+            title = context.resources.getString(R.string.menu_watchface),
+            tag = "Watchface"
+        ),
+        MainMenu(
             icon = R.drawable.ic_download,
             title = context.resources.getString(R.string.menu_downloads),
             tag = "Downloads"

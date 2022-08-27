@@ -47,7 +47,11 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".activities.request.ResponseActivity"
+            android:name=".activities.main.AppsActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activities.firmware.DeviceStackActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
@@ -56,18 +60,18 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog" />
         <activity
+            android:name=".activities.request.ResponseActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activities.WatchfaceActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".activities.firmware.FirmwareActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog.Firmware" />
-        <activity
-            android:name=".activities.firmware.DeviceStackActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activities.main.AppsActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
     </application>
 
 </manifest>

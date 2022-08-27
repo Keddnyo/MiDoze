@@ -14,10 +14,11 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
-import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
+import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import io.ktor.client.*
+import io.ktor.client.plugins.cookies.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -55,6 +56,28 @@ class Requests {
         }
 
         return deviceArrayListArray
+    }
+
+    suspend fun getWatchfaceData(): String {
+        val client = HttpClient {
+            install(HttpCookies) {
+                storage = ConstantCookiesStorage(Cookie(name = "locale", value = "en_us"))
+            }
+        }
+        val targetHost = "watch-appstore.iot.mi.com"
+        return client.get {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = targetHost
+                appendPathSegments("api", "watchface", "prize", "tabs")
+                parameter("model", "hqbd3.watch.l67")
+            }
+            headers {
+                append("Accept-Language", "en-US,en")
+                append("Content-Language", "en")
+                append("Watch-Appstore-Common", "_locale=US&_language=en&_devtype=1&_ver=3.6.0i")
+            }
+        }.bodyAsText()
     }
 
     suspend fun getFirmwareData(
@@ -184,7 +207,7 @@ class Requests {
             if (isWriteExternalStoragePermissionAvailable()) {
                 downloadFile()
             } else {
-                Display().showToast(context, context.getString(R.string.permission_not_granted))
+                context.getString(R.string.permission_not_granted).showAsToast(context)
                 requestWriteExternalStoragePermission()
             }
         }

@@ -19,9 +19,9 @@ import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
 import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.OnlineStatus
-import io.github.keddnyo.midoze.utils.PackageUtils
+import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
+import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import kotlinx.coroutines.runBlocking
 
 class RequestActivity : AppCompatActivity() {
@@ -118,10 +118,10 @@ class RequestActivity : AppCompatActivity() {
 
                     context.startActivity(intent)
                 } else {
-                    Display().showToast(context, getString(R.string.empty_response))
+                    getString(R.string.empty_response).showAsToast(context)
                 }
             } else {
-                Display().showToast(context, getString(R.string.empty_response))
+                getString(R.string.empty_response).showAsToast(context)
             }
         }
 
@@ -140,14 +140,15 @@ class RequestActivity : AppCompatActivity() {
         fun setZeppAppData() {
             requestAppNameEditText.setText(ZEPP_NAME)
             requestAppVersionEditText.setText(
-                PackageUtils(context).getPackageVersion(ZEPP_PACKAGE_NAME) ?: ZEPP_VERSION
+                ZEPP_PACKAGE_NAME.getPackageVersion(context)
+                    ?: ZEPP_VERSION
             )
         }
 
         fun setZeppLifeAppData() {
             requestAppNameEditText.setText(ZEPP_LIFE_NAME)
             requestAppVersionEditText.setText(
-                PackageUtils(context).getPackageVersion(ZEPP_LIFE_PACKAGE_NAME)
+                ZEPP_LIFE_PACKAGE_NAME.getPackageVersion(context)
                     ?: ZEPP_LIFE_VERSION
             )
         }
