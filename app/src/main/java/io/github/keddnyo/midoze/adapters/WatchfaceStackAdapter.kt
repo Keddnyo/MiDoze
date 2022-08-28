@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
-import io.github.keddnyo.midoze.utils.Display
 
 class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.WatchfaceStackViewHolder>() {
     private var watchfaceStackArray = ArrayList<WatchfaceStack>()

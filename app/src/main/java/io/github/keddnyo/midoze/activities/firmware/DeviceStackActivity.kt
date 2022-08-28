@@ -30,7 +30,7 @@ class DeviceStackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_stack)
 
-        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
         val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceStackRecyclerView)
 

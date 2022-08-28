@@ -2,42 +2,40 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/watchfaceLayout"
-    android:layout_width="wrap_content"
+    android:id="@+id/watchfaceCommonStackLayout"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/menu_layout_margin"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        tools:ignore="UseCompoundDrawables">
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
 
         <ImageView
-            android:id="@+id/watchfacePreview"
-            android:layout_width="120dp"
-            android:layout_height="180dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/watchfaceCommonStackIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/watchfaceTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/watchfaceCommonStackTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textSize="7pt"
+            android:textSize="8pt"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/watchfacePreview" />
+            app:layout_constraintStart_toEndOf="@id/watchfaceCommonStackIcon"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

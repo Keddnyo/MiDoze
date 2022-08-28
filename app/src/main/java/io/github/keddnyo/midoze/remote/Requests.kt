@@ -19,7 +19,6 @@ import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import io.ktor.client.*
-import io.ktor.client.plugins.cookies.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -59,7 +58,7 @@ class Requests {
         return deviceArrayListArray
     }
 
-    suspend fun getWatchfaceData(): String {
+    suspend fun getWatchfaceData(deviceName: String): String {
         val client = HttpClient()
         val targetHost = "watch-appstore.iot.mi.com"
         val country = DozeLocale().currentCountry
@@ -70,7 +69,7 @@ class Requests {
                 protocol = URLProtocol.HTTPS
                 host = targetHost
                 appendPathSegments("api", "watchface", "prize", "tabs")
-                parameter("model", "hmpace.watch.v7")
+                parameter("model", deviceName)
             }
             headers {
                 append("Watch-Appstore-Common", "_locale=$country&_language=$language")
