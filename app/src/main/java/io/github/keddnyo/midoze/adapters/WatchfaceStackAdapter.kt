@@ -4,12 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
+import io.github.keddnyo.midoze.utils.Display
 
 class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.WatchfaceStackViewHolder>() {
     private var watchfaceStackArray = ArrayList<WatchfaceStack>()
@@ -35,10 +38,21 @@ class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.Watchfa
 
         holder.title.text = watchfaceStackArray[position].title
         holder.stack.let { RecyclerView ->
-            RecyclerView.layoutManager = LinearLayoutManager(holder.layout.context, LinearLayoutManager.HORIZONTAL, false)
+            RecyclerView.layoutManager = if (watchfaceStackArray[position].hasCategories){
+                LinearLayoutManager(holder.layout.context, LinearLayoutManager.HORIZONTAL, false)
+            } else {
+                GridLayoutManager(
+                    holder.layout.context, Display()
+                        .getGridLayoutIndex(holder.layout.context, 160)
+                )
+            }
 
             WatchfaceAdapter().let { adapter ->
                 RecyclerView.adapter = adapter
+
+                if (!watchfaceStackArray[position].hasCategories) {
+                    adapter.setHasCategories(false)
+                }
 
                 adapter.addWatchfaceList(
                     watchfaceStackArray[position].stack

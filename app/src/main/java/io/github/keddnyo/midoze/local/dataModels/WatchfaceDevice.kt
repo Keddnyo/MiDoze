@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.local.dataModels
 
-data class WatchfaceStack(
+data class WatchfaceDevice(
     val title: String,
-    val stack: ArrayList<Watchface>,
+    val alias: String,
     val hasCategories: Boolean
 )

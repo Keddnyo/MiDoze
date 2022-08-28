@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import io.github.keddnyo.midoze.adapters.WatchfaceCommonAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
-import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceStack
+import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceDeviceStack
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watchface)
+        setContentView(R.layout.activity_common_watchface)
 
         val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
 
@@ -35,9 +36,9 @@ class WatchfaceStackActivity : AppCompatActivity() {
 
                 val watchfaceCommonStackArray = arrayListOf<WatchfaceCommonStack>()
 
-                for (a in watchfaceStack) {
+                for (a in watchfaceDeviceStack) {
                     val content = runBlocking(Dispatchers.IO) {
-                        Requests().getWatchfaceData(a)
+                        Requests().getWatchfaceData(a.alias)
                     }
 
                     val json = JSONObject(content)
@@ -65,21 +66,22 @@ class WatchfaceStackActivity : AppCompatActivity() {
                         watchfaceArrayStack.add(
                             WatchfaceStack(
                                 title = data.getJSONObject(d).getString("tab_name"),
-                                stack = watchfaceArray
+                                stack = watchfaceArray,
+                                hasCategories = a.hasCategories
                             )
                         )
                     }
 
                     watchfaceCommonStackArray.add(
                         WatchfaceCommonStack(
-                            title = a,
-                            alias = a,
+                            title = a.title,
+                            alias = a.alias,
                             stack = watchfaceArrayStack
                         )
                     )
 
                     runOnUiThread {
-                        findViewById<RecyclerView>(R.id.watchfaceRecyclerView).let { RecyclerView ->
+                        findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).let { RecyclerView ->
                             RecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
                             WatchfaceCommonAdapter().let { adapter ->
