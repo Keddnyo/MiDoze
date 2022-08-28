@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 
@@ -23,7 +21,7 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
             itemView.findViewById(R.id.watchfaceLayout)
         val title: TextView =
             itemView.findViewById(R.id.watchfaceTitle)
-        val icon: ImageView =
+        val preview: ImageView =
             itemView.findViewById(R.id.watchfacePreview)
     }
 
@@ -37,10 +35,11 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
         context = holder.layout.context
 
         holder.title.text = watchfaceArray[position].title
-        holder.icon.setImageBitmap(watchfaceArray[position].preview)
+        holder.preview.setImageBitmap(watchfaceArray[position].preview)
 
         if (!hasCategories) {
             holder.layout.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
+            holder.preview.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
         }
 
     }
