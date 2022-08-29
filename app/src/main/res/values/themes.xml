@@ -2,6 +2,7 @@
 
     <style name="Theme.MiDoze" parent="Theme.Material3.Light">
         <item name="android:navigationBarColor" tools:ignore="NewApi">?attr/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
 
     <style name="Theme.Dialog" parent="Theme.Material3.Light.Dialog.Alert">

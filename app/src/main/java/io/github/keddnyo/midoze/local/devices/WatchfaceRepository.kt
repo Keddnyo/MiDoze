@@ -77,7 +77,7 @@ object WatchfaceRepository {
         WatchfaceDevice(
             title = "midr.watch.k65",
             alias = "midr.watch.k65",
-            hasCategories = true
+            hasCategories = false
         ),
         WatchfaceDevice(
             title = "midr.watch.k65in",

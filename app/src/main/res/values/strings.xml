@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
 
-    <string name="menu_apps">Apps</string>
-    <string name="menu_firmwares">Firmwares</string>
+    <string name="menu_apps">APPs</string>
+    <string name="menu_firmwares">ROMs</string>
     <string name="menu_request">Request</string>
     <string name="menu_watchface">Dials</string>
     <string name="menu_downloads">Downloads</string>
