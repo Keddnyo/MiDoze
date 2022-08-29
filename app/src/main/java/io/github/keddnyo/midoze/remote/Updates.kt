@@ -44,6 +44,7 @@ class Updates(val context: Context) : AsyncTask() {
                         Requests().getFirmwareFile(
                             context,
                             latestVersionLink,
+                            context.getString(R.string.app_name),
                             context.getString(R.string.app_name)
                         )
                         DialogInterface.BUTTON_POSITIVE

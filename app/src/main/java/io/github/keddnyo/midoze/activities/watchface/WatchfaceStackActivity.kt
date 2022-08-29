@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities
+package io.github.keddnyo.midoze.activities.watchface
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -30,7 +30,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.menu_watchface)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_common_watchface)
+        setContentView(R.layout.activity_watchface_common)
 
         val context = this@WatchfaceStackActivity
         val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
@@ -81,7 +81,9 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                         watchfaceArray.add(
                                             Watchface(
                                                 title = list.getJSONObject(l).getString("display_name"),
+                                                deviceName = a.title,
                                                 preview = encodedPreview,
+                                                introduction = list.getJSONObject(l).getString("introduction"),
                                                 url = list.getJSONObject(l).getString("config_file")
                                             )
                                         )

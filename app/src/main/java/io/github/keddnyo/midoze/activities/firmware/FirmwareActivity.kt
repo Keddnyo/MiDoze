@@ -114,7 +114,12 @@ class FirmwareActivity : AppCompatActivity() {
         for (i in responseFirmwareTagsArray) {
             if (jsonObject.has(i)) {
                 val urlString = jsonObject.getString(i)
-                Requests().getFirmwareFile(context, urlString, deviceName)
+                Requests().getFirmwareFile(
+                    context,
+                    urlString,
+                    deviceName,
+                    getString(R.string.menu_firmwares)
+                )
             }
         }
     }

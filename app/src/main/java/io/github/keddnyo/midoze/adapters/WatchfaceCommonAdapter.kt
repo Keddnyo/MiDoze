@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.WatchfaceActivity
+import io.github.keddnyo.midoze.activities.watchface.WatchfaceActivity
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
 import io.github.keddnyo.midoze.utils.BitmapCache
 

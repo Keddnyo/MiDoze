@@ -1,6 +1,7 @@
 package io.github.keddnyo.midoze.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.watchface.WatchfaceDownloadActivity
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.utils.BitmapCache
 
@@ -49,6 +51,16 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
 
             if ((preview.height > (preview.width - (preview.width / 4))) && (preview.height < (preview.width + (preview.width / 4)))) {
                 holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+            }
+
+            holder.layout.setOnClickListener {
+                val intent = Intent(context, WatchfaceDownloadActivity::class.java)
+                intent.putExtra("watchface_download_title", watchface.title)
+                intent.putExtra("watchface_download_device_name", watchface.deviceName)
+                intent.putExtra("watchface_download_preview", watchface.preview)
+                intent.putExtra("watchface_download_introduction", watchface.introduction)
+                intent.putExtra("watchface_download_link", watchface.url)
+                context.startActivity(intent)
             }
         }
     }

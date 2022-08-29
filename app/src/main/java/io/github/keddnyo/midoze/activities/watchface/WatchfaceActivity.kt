@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities
+package io.github.keddnyo.midoze.activities.watchface
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +15,7 @@ class WatchfaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watchface)
+        setContentView(R.layout.activity_watchface_stack)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 

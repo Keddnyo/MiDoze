@@ -66,13 +66,18 @@
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.WatchfaceActivity"
+            android:name=".activities.watchface.WatchfaceStackActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.WatchfaceStackActivity"
+            android:name=".activities.watchface.WatchfaceActivity"
             android:exported="false"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".activities.watchface.WatchfaceDownloadActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Dialog.Firmware"/>
         <activity
             android:name=".activities.firmware.FirmwareActivity"
             android:exported="false"

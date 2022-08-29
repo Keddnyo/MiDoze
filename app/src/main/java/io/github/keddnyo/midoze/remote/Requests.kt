@@ -176,6 +176,7 @@ class Requests {
         context: Context,
         fileUrl: String,
         subName: String,
+        fileType: String
     ) {
         Permissions(context).run {
             fun downloadFile() {
@@ -189,7 +190,7 @@ class Requests {
                     request.setNotificationVisibility(1)
                     request.setDestinationInExternalPublicDir(
                         Environment.DIRECTORY_DOWNLOADS,
-                        "${context.getString(R.string.app_name)}/$subName/$fileName"
+                        "${context.getString(R.string.app_name)}/$fileType/$subName/$fileName"
                     )
 
                     downloadManager.enqueue(request)
