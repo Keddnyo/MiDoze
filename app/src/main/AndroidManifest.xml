@@ -77,7 +77,7 @@
             android:name=".activities.watchface.WatchfaceDownloadActivity"
             android:exported="false"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.Dialog.Firmware"/>
+            android:theme="@style/Watchface"/>
         <activity
             android:name=".activities.firmware.FirmwareActivity"
             android:exported="false"

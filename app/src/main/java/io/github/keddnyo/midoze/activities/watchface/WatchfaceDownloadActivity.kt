@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.BitmapCache
@@ -13,22 +15,20 @@ import io.github.keddnyo.midoze.utils.OnlineStatus
 
 class WatchfaceDownloadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchface_download)
 
         val context = this@WatchfaceDownloadActivity
 
         if (intent.hasExtra("watchface_download_link")) {
-            val watchfaceDownloadTitle: TextView = findViewById(R.id.watchfaceDownloadTitle)
-            val watchfaceDownloadDeviceName: TextView =
-                findViewById(R.id.watchfaceDownloadDeviceName)
             val watchfaceDownloadPreview: ImageView = findViewById(R.id.watchfaceDownloadPreview)
             val watchfaceDownloadIntroduction: TextView =
                 findViewById(R.id.watchfaceDownloadIntroduction)
-            val watchfaceDownloadButton: Button = findViewById(R.id.watchfaceDownloadButton)
+            val watchfaceDownloadButton: FloatingActionButton = findViewById(R.id.watchfaceDownloadButton)
 
-            watchfaceDownloadTitle.text = intent.getStringExtra("watchface_download_title")
-            watchfaceDownloadDeviceName.text = intent.getStringExtra("watchface_download_device_name")
+            title = intent.getStringExtra("watchface_download_device_name")
+            supportActionBar?.subtitle = intent.getStringExtra("watchface_download_title")
             watchfaceDownloadPreview.setImageBitmap(
                 BitmapCache().decode(
                     intent.getStringExtra("watchface_download_preview").toString()
@@ -58,5 +58,10 @@ class WatchfaceDownloadActivity : AppCompatActivity() {
                 watchfaceDownloadButton.isEnabled = false
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
