@@ -4,7 +4,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Device
 
 class DeviceRepository {
-    fun getDeviceNameByCode(deviceSource: Int, productionSource: Int): Device {
+    fun getDeviceNameByCode(deviceSource: Int): Device {
         return when (deviceSource.toString()) {
             "12" -> Device("Amazfit Bip", R.drawable.amazfit_bip)
 
@@ -81,8 +81,6 @@ class DeviceRepository {
 
             "230" -> Device("Amazfit GTR 3 Pro GL", R.drawable.amazfit_gtr_3)
 
-            // "233" -> Device("Amazfit Band 7", R.drawable.amazfit_band_7)
-
             "242" -> Device("Amazfit GTR 3 Pro Ltd", R.drawable.amazfit_gtr_3)
             "243" -> Device("Amazfit GTS 2 Mini 2022", R.drawable.amazfit_gts_2_mini)
             "244" -> Device("Amazfit GTR 2", R.drawable.amazfit_gtr_2)
@@ -105,7 +103,7 @@ class DeviceRepository {
             "418" -> Device("Amazfit T-Rex 2 CN", R.drawable.amazfit_t_rex_2)
             "419" -> Device("Amazfit T-Rex 2 GL", R.drawable.amazfit_t_rex_2)
 
-            else -> Device("Unknown $deviceSource $productionSource", R.drawable.unknown)
+            else -> Device("Unknown $deviceSource", R.drawable.unknown)
         }
     }
 }

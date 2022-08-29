@@ -33,15 +33,19 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
 
     override fun onBindViewHolder(holder: WatchfaceListViewHolder, position: Int) {
         context = holder.layout.context
+        val watchface = watchfaceArray[position]
 
-        holder.title.text = watchfaceArray[position].title
-        holder.preview.setImageBitmap(watchfaceArray[position].preview)
+        holder.title.text = watchface.title
+        holder.preview.setImageBitmap(watchface.preview)
 
         if (!hasCategories) {
             holder.layout.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
             holder.preview.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
         }
 
+        if ((watchface.preview.height > (watchface.preview.width - (watchface.preview.width / 4))) && (watchface.preview.height < (watchface.preview.width + (watchface.preview.width / 4)))) {
+            holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+        }
     }
 
     override fun getItemCount(): Int {

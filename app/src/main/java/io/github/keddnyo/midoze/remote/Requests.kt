@@ -144,8 +144,7 @@ class Requests {
         return if (firmwareData.has("firmwareVersion")) {
             val deviceData =
                 DeviceRepository().getDeviceNameByCode(
-                    wearable.deviceSource.toInt(),
-                    wearable.productionSource.toInt()
+                    wearable.deviceSource.toInt()
                 )
 
             val deviceName =
