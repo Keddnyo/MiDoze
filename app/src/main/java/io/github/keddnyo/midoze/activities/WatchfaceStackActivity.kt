@@ -1,9 +1,7 @@
 package io.github.keddnyo.midoze.activities
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,26 +11,24 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
 import io.github.keddnyo.midoze.adapters.WatchfaceCommonAdapter
 import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
 import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceDeviceStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.BitmapCache
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.net.URL
-import java.util.concurrent.Executors
 
 class WatchfaceStackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.menu_watchface)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_common_watchface)
 
@@ -80,11 +76,12 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                     for (l in 0 until list.length()) {
                                         val url = URL(list.getJSONObject(l).getString("icon"))
                                         val preview = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                                        val encodedPreview = BitmapCache().encode(preview)
 
                                         watchfaceArray.add(
                                             Watchface(
                                                 title = list.getJSONObject(l).getString("display_name"),
-                                                preview = preview,
+                                                preview = encodedPreview,
                                                 url = list.getJSONObject(l).getString("config_file")
                                             )
                                         )

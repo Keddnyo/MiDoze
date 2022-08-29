@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.WatchfaceActivity
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
+import io.github.keddnyo.midoze.utils.BitmapCache
 
 class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.DeviceListViewHolder>() {
     private var watchfaceCommonStackArray = ArrayList<WatchfaceCommonStack>()
@@ -37,13 +39,16 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
         context = holder.layout.context
 
         val gson = Gson()
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val preview = watchfaceCommonStackArray[position].stack[0].stack[0].preview
 
         holder.title.text = watchfaceCommonStackArray[position].title
-        holder.icon.setImageBitmap(watchfaceCommonStackArray[position].stack[0].stack[0].preview)
+        holder.icon.setImageBitmap(BitmapCache().decode(preview))
 
         holder.layout.setOnClickListener {
             val intent = Intent(context, WatchfaceActivity::class.java)
-            intent.putExtra("WatchfaceStack", gson.toJson(watchfaceCommonStackArray[position].stack).toString())
+            prefs.edit().putString("WatchfaceStack", gson.toJson(watchfaceCommonStackArray[position].stack).toString()).apply()
+            intent.putExtra("name", watchfaceCommonStackArray[position].title)
             context.startActivity(intent)
         }
 

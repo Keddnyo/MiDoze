@@ -10,6 +10,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Watchface
+import io.github.keddnyo.midoze.utils.BitmapCache
 
 class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListViewHolder>() {
     private var watchfaceArray = ArrayList<Watchface>()
@@ -35,16 +36,20 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
         context = holder.layout.context
         val watchface = watchfaceArray[position]
 
-        holder.title.text = watchface.title
-        holder.preview.setImageBitmap(watchface.preview)
+        val preview = BitmapCache().decode(watchface.preview)
 
-        if (!hasCategories) {
-            holder.layout.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-            holder.preview.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-        }
+        if (preview != null) {
+            holder.title.text = watchface.title
+            holder.preview.setImageBitmap(preview)
 
-        if ((watchface.preview.height > (watchface.preview.width - (watchface.preview.width / 4))) && (watchface.preview.height < (watchface.preview.width + (watchface.preview.width / 4)))) {
-            holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+            if (!hasCategories) {
+                holder.layout.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
+                holder.preview.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
+            }
+
+            if ((preview.height > (preview.width - (preview.width / 4))) && (preview.height < (preview.width + (preview.width / 4)))) {
+                holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
+            }
         }
     }
 

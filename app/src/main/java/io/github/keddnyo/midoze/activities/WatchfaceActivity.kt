@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -16,21 +17,30 @@ class WatchfaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchface)
 
-        intent.getStringExtra("WatchfaceStack").toString().let { WatchfaceCommonStackPreference ->
-            val watchfaceArrayStack: ArrayList<WatchfaceStack> = GsonBuilder().create().fromJson(
-                WatchfaceCommonStackPreference,
-                object : TypeToken<ArrayList<WatchfaceStack>>() {}.type
-            )
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-            findViewById<RecyclerView>(R.id.watchfaceRecyclerView).let { RecyclerView ->
-                RecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        if (intent.hasExtra("name")) {
+            title = intent.getStringExtra("name")
+            prefs.getString("WatchfaceStack", "").toString().let { WatchfaceCommonStackPreference ->
+                if (WatchfaceCommonStackPreference.isNotEmpty()) {
+                    val watchfaceArrayStack: ArrayList<WatchfaceStack> =
+                        GsonBuilder().create().fromJson(
+                            WatchfaceCommonStackPreference,
+                            object : TypeToken<ArrayList<WatchfaceStack>>() {}.type
+                        )
 
-                WatchfaceStackAdapter().let { adapter ->
-                    RecyclerView.adapter = adapter
+                    findViewById<RecyclerView>(R.id.watchfaceRecyclerView).let { RecyclerView ->
+                        RecyclerView.layoutManager =
+                            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-                    adapter.addWatchfaceList(
-                        watchfaceArrayStack
-                    )
+                        WatchfaceStackAdapter().let { adapter ->
+                            RecyclerView.adapter = adapter
+
+                            adapter.addWatchfaceList(
+                                watchfaceArrayStack
+                            )
+                        }
+                    }
                 }
             }
         }

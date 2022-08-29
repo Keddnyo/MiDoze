@@ -4,6 +4,6 @@ import android.graphics.Bitmap
 
 data class Watchface(
     val title: String,
-    val preview: Bitmap,
+    val preview: String,
     val url: String
 )
