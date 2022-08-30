@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.activities.watchface
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -51,7 +52,13 @@ class WatchfaceDownloadActivity : AppCompatActivity() {
                         )
                     )
 
-                    description.text = intent.getStringExtra("description").toString()
+                    intent.getStringExtra("description").toString().let { content ->
+                        if (content.isNotBlank() && content != "null") {
+                            description.text = content
+                        } else {
+                            description.visibility = View.GONE
+                        }
+                    }
                     payload.text = intent.getStringExtra("payload").toString()
                 }
 
