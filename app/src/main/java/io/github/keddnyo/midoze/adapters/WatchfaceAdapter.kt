@@ -58,6 +58,7 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
                 intent.putExtra("watchface_download_title", watchface.title)
                 intent.putExtra("watchface_download_device_name", watchface.deviceName)
                 intent.putExtra("watchface_download_preview", watchface.preview)
+                intent.putExtra("watchface_download_size", watchface.size)
                 intent.putExtra("watchface_download_introduction", watchface.introduction)
                 intent.putExtra("watchface_download_link", watchface.url)
                 context.startActivity(intent)

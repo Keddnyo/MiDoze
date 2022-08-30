@@ -21,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.lang.StringBuilder
 
 class FirmwareActivity : AppCompatActivity() {
     private var firmwareResponse = JSONObject()
@@ -133,10 +134,14 @@ class FirmwareActivity : AppCompatActivity() {
             }
         }
 
-        val shareContent = "$deviceNameValue\n" +
-                "${firmwareLinks.joinToString("\n")}\n\n" +
-                "${getString(R.string.firmware_share_get_it_on, getString(R.string.app_name))}\n" +
-                GITHUB_APP_REPOSITORY
+        val shareContent = StringBuilder().append(deviceNameValue)
+            .append("\n")
+            .append(firmwareLinks.joinToString("\n"))
+            .append("\n")
+            .append(getString(R.string.firmware_share_get_it_on, getString(R.string.app_name)))
+            .append("\n")
+            .append(GITHUB_APP_REPOSITORY)
+            .toString()
 
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

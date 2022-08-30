@@ -7,5 +7,6 @@ data class Watchface(
     val deviceName: String,
     val preview: String,
     val introduction: String,
-    val url: String
+    val url: String,
+    val size: String
 )
