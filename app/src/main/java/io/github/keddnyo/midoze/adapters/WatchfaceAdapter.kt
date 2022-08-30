@@ -55,12 +55,12 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
 
             holder.layout.setOnClickListener {
                 val intent = Intent(context, WatchfaceDownloadActivity::class.java)
-                intent.putExtra("watchface_download_title", watchface.title)
-                intent.putExtra("watchface_download_device_name", watchface.deviceName)
-                intent.putExtra("watchface_download_preview", watchface.preview)
-                intent.putExtra("watchface_download_size", watchface.size)
-                intent.putExtra("watchface_download_introduction", watchface.introduction)
-                intent.putExtra("watchface_download_link", watchface.url)
+                intent.putExtra("title", watchface.title)
+                intent.putExtra("subtitle", watchface.deviceName)
+                intent.putExtra("preview", watchface.preview)
+                intent.putExtra("description", watchface.introduction)
+                intent.putExtra("payload", watchface.size)
+                intent.putExtra("download", watchface.url)
                 context.startActivity(intent)
             }
         }

@@ -14,6 +14,7 @@
 
     <string name="items">%1$s it.</string>
     <string name="empty_response">Empty response</string>
+    <string name="connectivity_error">Connectivity error</string>
 
     <string name="firmware_download">Download</string>
     <string name="firmware_languages">Languages</string>

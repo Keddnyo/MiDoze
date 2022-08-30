@@ -12,6 +12,7 @@
 
     <string name="items">%1$s шт.</string>
     <string name="empty_response">Результат пуст</string>
+    <string name="connectivity_error">Ошибка подключения</string>
 
     <string name="firmware_download">Скачать</string>
     <string name="firmware_languages">Языки</string>
