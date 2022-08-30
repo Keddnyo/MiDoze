@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.activities.watchface
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +43,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
         val gson = Gson()
 
         OnlineStatus(context).run {
-            class GetWatchfaceList(val context: Context) : AsyncTask() {
+            class GetWatchfaceList : AsyncTask() {
                 override fun execute() {
                     super.execute()
 
@@ -147,7 +146,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                 }
             }
 
-            GetWatchfaceList(context).run {
+            GetWatchfaceList().run {
                 refreshWatchfaceLayout.setOnRefreshListener {
                     if (isOnline) {
                         editor.apply {

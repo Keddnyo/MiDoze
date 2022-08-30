@@ -30,11 +30,6 @@ object StringUtils {
         return this.replace("\\/", "/")
     }
 
-    fun String.toChangelog(): String {
-        return this.substringBefore('#')
-            .replace(";", "")
-    }
-
     fun String.showAsToast(context: Context) {
         Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
     }

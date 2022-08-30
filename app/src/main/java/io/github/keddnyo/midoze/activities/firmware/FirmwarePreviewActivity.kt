@@ -11,16 +11,13 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
-import io.github.keddnyo.midoze.utils.BitmapCache
 import io.github.keddnyo.midoze.utils.FirmwarePreview
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
-import io.github.keddnyo.midoze.utils.StringUtils.toChangelog
 import io.github.keddnyo.midoze.utils.StringUtils.toLanguageList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
-import java.lang.StringBuilder
 
 class FirmwarePreviewActivity : AppCompatActivity() {
     private var firmwareResponse = JSONObject()
