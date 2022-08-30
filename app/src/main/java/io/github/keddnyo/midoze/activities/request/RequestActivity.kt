@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwareActivity
@@ -29,6 +30,7 @@ class RequestActivity : AppCompatActivity() {
     private val context = this@RequestActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request)
         title = getString(R.string.menu_request)
@@ -42,9 +44,9 @@ class RequestActivity : AppCompatActivity() {
             findViewById(R.id.requestAppVersionEditText)
         val requestCountryEditText: TextInputEditText = findViewById(R.id.requestCountryEditText)
         val requestLangEditText: TextInputEditText = findViewById(R.id.requestLangEditText)
-        val submitButton: MaterialButton = findViewById(R.id.requestSubmitButton)
-        val appButton: MaterialButton = findViewById(R.id.request_app_button)
-        val importButton: MaterialButton = findViewById(R.id.requestImportButton)
+        val submitButton: FloatingActionButton = findViewById(R.id.requestSubmitButton)
+        val appButton: FloatingActionButton = findViewById(R.id.request_app_button)
+        val importButton: FloatingActionButton = findViewById(R.id.requestImportButton)
 
         val prefs =
             PreferenceManager.getDefaultSharedPreferences(context)
@@ -81,7 +83,6 @@ class RequestActivity : AppCompatActivity() {
             requestAppVersionEditText.setText(appVersionValue)
             requestCountryEditText.setText(countryValue)
             requestLangEditText.setText(langValue)
-            appButton.visibility = View.GONE
         }
 
         submitButton.setOnClickListener {
@@ -194,5 +195,10 @@ class RequestActivity : AppCompatActivity() {
     
     private fun getIntentExtra(key: String): String {
         return intent.getStringExtra(key).toString()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

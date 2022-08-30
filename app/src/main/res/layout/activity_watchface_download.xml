@@ -8,14 +8,13 @@
         android:id="@+id/watchfaceDownloadPreview"
         android:layout_width="250dp"
         android:layout_height="250dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/watchfaceDownloadBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/watchfaceDownloadBottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray"

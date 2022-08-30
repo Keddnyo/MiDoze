@@ -60,7 +60,7 @@
             android:name=".activities.request.RequestActivity"
             android:exported="false"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.Dialog" />
+            android:theme="@style/Watchface" />
         <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"
