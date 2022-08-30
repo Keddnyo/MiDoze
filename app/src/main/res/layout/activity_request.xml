@@ -135,30 +135,35 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/request_app_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:src="@drawable/ic_apps"
                 android:text="@string/request_app_data"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/requestImportButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/requestImportButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_request"
+                android:src="@drawable/ic_download"
+                android:layout_margin="20dp"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/requestSubmitButton"
-                app:layout_constraintStart_toEndOf="@+id/request_app_button" />
+                app:layout_constraintEnd_toStartOf="@+id/requestSubmitButton" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/requestSubmitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_download"
+                android:src="@drawable/ic_send"
+                android:layout_margin="20dp"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
