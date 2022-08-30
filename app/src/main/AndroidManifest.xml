@@ -74,7 +74,12 @@
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.watchface.FirmwarePreviewActivity"
+            android:name=".activities.firmware.FirmwarePreviewActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Watchface"/>
+        <activity
+            android:name=".activities.watchface.WatchfacePreviewActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Watchface"/>

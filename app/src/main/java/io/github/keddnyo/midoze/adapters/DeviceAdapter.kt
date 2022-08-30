@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwareActivity
+import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import kotlin.collections.ArrayList
@@ -46,12 +47,12 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
             val intent = if (custom) {
                 Intent(context, RequestActivity::class.java)
             } else {
-                Intent(context, FirmwareActivity::class.java)
+                Intent(context, FirmwarePreviewActivity::class.java)
             }
 
-            intent.putExtra("deviceName", deviceArray[position].device.name)
-            intent.putExtra("deviceIcon", deviceArray[position].device.image)
-            intent.putExtra("firmwareData", deviceArray[position].firmware.toString())
+            intent.putExtra("title", deviceArray[position].device.name)
+            intent.putExtra("preview", deviceArray[position].device.image)
+            intent.putExtra("data", deviceArray[position].firmware.toString())
 
             intent.putExtra("productionSource", deviceArray[position].wearable.productionSource)
             intent.putExtra("deviceSource", deviceArray[position].wearable.deviceSource)
@@ -60,6 +61,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
 
             intent.putExtra("country", deviceArray[position].wearable.region.country)
             intent.putExtra("lang", deviceArray[position].wearable.region.language)
+
+            intent.putExtra("buildTime", deviceArray[position].buildTime)
 
             context.startActivity(intent)
         }

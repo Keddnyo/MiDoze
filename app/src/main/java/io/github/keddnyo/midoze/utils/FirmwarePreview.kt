@@ -12,16 +12,4 @@ abstract class FirmwarePreview {
     open lateinit var downloadContent: String
 
     open fun main() {}
-
-    open fun setOnShareClickListener(unit: () -> Unit) {
-        share.setOnClickListener {
-            unit()
-        }
-    }
-
-    open fun setOnDownloadClickListener(unit: () -> Unit) {
-        download.setOnClickListener {
-            unit()
-        }
-    }
 }

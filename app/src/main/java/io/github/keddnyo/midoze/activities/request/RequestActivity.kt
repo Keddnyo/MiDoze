@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwareActivity
+import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable
@@ -106,17 +107,19 @@ class RequestActivity : AppCompatActivity() {
                     )
                 }
 
-                val intent = Intent(context, FirmwareActivity::class.java)
+                val intent = Intent(context, FirmwarePreviewActivity::class.java)
 
                 if (firmwareResponse != null) {
-                    intent.putExtra("deviceName", firmwareResponse.device.name)
-                    intent.putExtra("deviceIcon", firmwareResponse.device.image)
-                    intent.putExtra("firmwareData", firmwareResponse.firmware.toString())
+                    intent.putExtra("title", firmwareResponse.device.name)
+                    intent.putExtra("preview", firmwareResponse.device.image)
+                    intent.putExtra("data", firmwareResponse.firmware.toString())
 
                     intent.putExtra("productionSource", firmwareResponse.wearable.productionSource)
                     intent.putExtra("deviceSource", firmwareResponse.wearable.deviceSource)
                     intent.putExtra("appName", firmwareResponse.wearable.application.name)
                     intent.putExtra("appVersion", firmwareResponse.wearable.application.version)
+                    
+                    intent.putExtra("buildTime", firmwareResponse.buildTime)
 
                     context.startActivity(intent)
                 } else {

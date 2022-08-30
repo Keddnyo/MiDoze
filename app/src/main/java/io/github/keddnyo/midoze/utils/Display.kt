@@ -2,6 +2,8 @@ package io.github.keddnyo.midoze.utils
 
 import android.content.Context
 import android.util.DisplayMetrics
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class Display {
     fun getGridLayoutIndex(
@@ -18,5 +20,12 @@ class Display {
         bytes >= 1 shl 20 -> "%.1f MB".format(bytes / (1 shl 20))
         bytes >= 1 shl 10 -> "%.0f kB".format(bytes / (1 shl 10))
         else -> "$bytes bytes"
+    }
+
+    fun getLocaleFirmwareDate(firmwareDate: String): String {
+        val dateFormat = SimpleDateFormat("yyyyMMddhhmm", DozeLocale().currentLocale)
+        val firmwareDateFormatted = dateFormat.parse(firmwareDate)
+        return DateFormat.getDateInstance(DateFormat.MEDIUM, DozeLocale().currentLocale)
+            .format(firmwareDateFormatted!!)
     }
 }

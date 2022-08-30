@@ -14,13 +14,13 @@ import io.github.keddnyo.midoze.utils.FirmwarePreview
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 
-class FirmwarePreviewActivity : AppCompatActivity() {
+class WatchfacePreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware_preview)
 
-        val context = this@FirmwarePreviewActivity
+        val context = this@WatchfacePreviewActivity
 
         if (intent.hasExtra("download")) {
             val title = intent.getStringExtra("title").toString()
@@ -59,47 +59,44 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                         }
                     }
                     payload.text = intent.getStringExtra("payload").toString()
-                }
 
-                override fun setOnShareClickListener(unit: () -> Unit) {
-                    super.setOnShareClickListener(unit)
-                    val stringBuilder = StringBuilder()
-                    val shareContent = stringBuilder.append(title)
-                        .append("\n")
-                        .append(downloadContent)
-                        .append("\n")
-                        .append(
-                            getString(
-                                R.string.firmware_share_get_it_on,
-                                getString(R.string.app_name)
+                    share.setOnClickListener {
+                        val stringBuilder = StringBuilder()
+                        val shareContent = stringBuilder.append(title)
+                            .append("\n")
+                            .append(downloadContent)
+                            .append("\n")
+                            .append(
+                                getString(
+                                    R.string.firmware_share_get_it_on,
+                                    getString(R.string.app_name)
+                                )
                             )
-                        )
-                        .append("\n")
-                        .append(GITHUB_APP_REPOSITORY)
-                        .toString()
+                            .append("\n")
+                            .append(GITHUB_APP_REPOSITORY)
+                            .toString()
 
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, shareContent)
-                        type = "text/plain"
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, shareContent)
+                            type = "text/plain"
+                        }
+
+                        val shareIntent = Intent.createChooser(sendIntent, title)
+                        startActivity(shareIntent)
                     }
 
-                    val shareIntent = Intent.createChooser(sendIntent, title)
-                    startActivity(shareIntent)
-                }
-
-                override fun setOnDownloadClickListener(unit: () -> Unit) {
-                    super.setOnDownloadClickListener(unit)
-
-                    if (OnlineStatus(context).isOnline) {
-                        Requests().getFirmwareFile(
-                            context,
-                            downloadContent,
-                            title,
-                            getString(R.string.menu_watchface)
-                        )
-                    } else {
-                        getString(R.string.connectivity_error).showAsToast(context)
+                    download.setOnClickListener {
+                        if (OnlineStatus(context).isOnline) {
+                            Requests().getFirmwareFile(
+                                context,
+                                downloadContent,
+                                title,
+                                getString(R.string.menu_watchface)
+                            )
+                        } else {
+                            getString(R.string.connectivity_error).showAsToast(context)
+                        }
                     }
                 }
             }

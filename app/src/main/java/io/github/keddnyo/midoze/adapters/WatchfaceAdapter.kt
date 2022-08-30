@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.watchface.FirmwarePreviewActivity
+import io.github.keddnyo.midoze.activities.watchface.WatchfacePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.utils.BitmapCache
 
@@ -54,7 +54,7 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
             }
 
             holder.layout.setOnClickListener {
-                val intent = Intent(context, FirmwarePreviewActivity::class.java)
+                val intent = Intent(context, WatchfacePreviewActivity::class.java)
                 intent.putExtra("title", watchface.title)
                 intent.putExtra("subtitle", watchface.deviceName)
                 intent.putExtra("preview", watchface.preview)

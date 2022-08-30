@@ -14,6 +14,7 @@ import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
+import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
@@ -165,7 +166,8 @@ class Requests {
                 wearable = wearable,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),
-                changeLog = get("changeLog")
+                changeLog = get("changeLog"),
+                buildTime = Display().getLocaleFirmwareDate(get("buildTime"))
             )
         } else {
             null
