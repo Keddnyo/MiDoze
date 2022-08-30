@@ -13,15 +13,14 @@ import io.github.keddnyo.midoze.utils.BitmapCache
 import io.github.keddnyo.midoze.utils.FirmwarePreview
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
-import java.io.File
 
-class WatchfaceDownloadActivity : AppCompatActivity() {
+class FirmwarePreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watchface_download)
+        setContentView(R.layout.activity_firmware_preview)
 
-        val context = this@WatchfaceDownloadActivity
+        val context = this@FirmwarePreviewActivity
 
         if (intent.hasExtra("download")) {
             val title = intent.getStringExtra("title").toString()
@@ -32,15 +31,15 @@ class WatchfaceDownloadActivity : AppCompatActivity() {
 
             class Preview : FirmwarePreview() {
                 override var preview: ImageView =
-                    findViewById(R.id.watchfaceDownloadPreview)
+                    findViewById(R.id.preview)
                 override var description: TextView =
-                    findViewById(R.id.watchfaceDownloadIntroduction)
+                    findViewById(R.id.description)
                 override var payload: TextView =
-                    findViewById(R.id.watchfaceDownloadSize)
+                    findViewById(R.id.payload)
                 override var share: ImageView =
-                    findViewById(R.id.watchfaceShareButton)
+                    findViewById(R.id.share)
                 override var download: ImageView =
-                    findViewById(R.id.watchfaceDownloadButton)
+                    findViewById(R.id.download)
                 override var downloadContent: String = intent.getStringExtra("download").toString()
 
                 override fun main() {
