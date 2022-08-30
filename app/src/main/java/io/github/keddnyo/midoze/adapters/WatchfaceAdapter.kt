@@ -55,8 +55,8 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
 
             holder.layout.setOnClickListener {
                 val intent = Intent(context, WatchfacePreviewActivity::class.java)
-                intent.putExtra("title", watchface.title)
-                intent.putExtra("subtitle", watchface.deviceName)
+                intent.putExtra("title", watchface.deviceName)
+                intent.putExtra("subtitle", watchface.title)
                 intent.putExtra("preview", watchface.preview)
                 intent.putExtra("description", watchface.introduction)
                 intent.putExtra("payload", watchface.size)

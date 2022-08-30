@@ -118,7 +118,7 @@ class RequestActivity : AppCompatActivity() {
                     intent.putExtra("deviceSource", firmwareResponse.wearable.deviceSource)
                     intent.putExtra("appName", firmwareResponse.wearable.application.name)
                     intent.putExtra("appVersion", firmwareResponse.wearable.application.version)
-                    
+
                     intent.putExtra("buildTime", firmwareResponse.buildTime)
 
                     context.startActivity(intent)
