@@ -32,8 +32,8 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         context = this@WatchfacePreviewActivity
 
         if (intent.hasExtra("download")) {
-            title = intent.getStringExtra("title").toString()
-            val subtitle = intent.getStringExtra("subtitle").toString()
+            title = intent.getStringExtra("deviceName").toString()
+            val subtitle = intent.getStringExtra("title").toString()
 
             supportActionBar?.title = title
             supportActionBar?.subtitle = subtitle
@@ -50,8 +50,9 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                     super.main()
 
                     preview.setImageBitmap(
-                        BitmapCache().decode(
-                            intent.getStringExtra("preview").toString()
+                        BitmapCache(context).decode(
+                            intent.getStringExtra("deviceAlias").toString(),
+                            subtitle
                         )
                     )
 

@@ -65,7 +65,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                 }.let { arrayList ->
                                     for (a in watchfaceDeviceStack) {
                                         val content = runBlocking(Dispatchers.IO) {
-                                            Requests().getWatchfaceData(a.alias)
+                                            Requests().getWatchfaceData(a.deviceAlias)
                                         }
 
                                         val json = JSONObject(content)
@@ -80,15 +80,16 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                             for (l in 0 until list.length()) {
                                                 val url = URL(list.getJSONObject(l).getString("icon"))
                                                 val preview = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                                                val encodedPreview = BitmapCache().encode(preview)
 
                                                 fun getItem(name: String) = list.getJSONObject(l).getString(name)
+
+                                                BitmapCache(context).encode(a.deviceAlias, getItem("display_name"), preview)
 
                                                 watchfaceArray.add(
                                                     Watchface(
                                                         title = getItem("display_name"),
-                                                        deviceName = a.title,
-                                                        preview = encodedPreview,
+                                                        deviceName = a.deviceName,
+                                                        deviceAlias = a.deviceAlias,
                                                         introduction = getItem("introduction"),
                                                         url = getItem("config_file"),
                                                         size = Display().bytesToHumanReadableSize(getItem("file_size").toDouble())
@@ -107,8 +108,8 @@ class WatchfaceStackActivity : AppCompatActivity() {
 
                                         arrayList.add(
                                             WatchfaceCommonStack(
-                                                title = a.title,
-                                                alias = a.alias,
+                                                title = a.deviceName,
+                                                alias = a.deviceAlias,
                                                 stack = watchfaceArrayStack
                                             )
                                         )

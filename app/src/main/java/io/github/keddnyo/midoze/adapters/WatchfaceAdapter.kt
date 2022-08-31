@@ -38,7 +38,7 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
         context = holder.layout.context
         val watchface = watchfaceArray[position]
 
-        val preview = BitmapCache().decode(watchface.preview)
+        val preview = BitmapCache(context).decode(watchface.deviceAlias, watchface.title)
 
         if (preview != null) {
             holder.title.text = watchface.title
@@ -55,9 +55,9 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
 
             holder.layout.setOnClickListener {
                 val intent = Intent(context, WatchfacePreviewActivity::class.java)
-                intent.putExtra("title", watchface.deviceName)
-                intent.putExtra("subtitle", watchface.title)
-                intent.putExtra("preview", watchface.preview)
+                intent.putExtra("deviceName", watchface.deviceName)
+                intent.putExtra("deviceAlias", watchface.deviceAlias)
+                intent.putExtra("title", watchface.title)
                 intent.putExtra("description", watchface.introduction)
                 intent.putExtra("download", watchface.url)
                 context.startActivity(intent)
