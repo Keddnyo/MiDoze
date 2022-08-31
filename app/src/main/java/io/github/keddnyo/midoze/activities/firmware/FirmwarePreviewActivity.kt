@@ -3,6 +3,8 @@ package io.github.keddnyo.midoze.activities.firmware
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,6 +22,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 
 class FirmwarePreviewActivity : AppCompatActivity() {
+    private lateinit var context: Context
     private var firmwareResponse = JSONObject()
 
     private val responseFirmwareTagsArray = arrayOf(
@@ -30,12 +33,14 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         "gpsUrl"
     )
 
+    private lateinit var title: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware_preview)
 
-        val context = this@FirmwarePreviewActivity
+        context = this@FirmwarePreviewActivity
 
         fun openResponseActivity() {
             val intent = Intent(context, ResponseActivity::class.java)
@@ -47,7 +52,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         firmwareResponse = JSONObject(intent.getStringExtra("data").toString())
 
         if (intent.hasExtra("preview")) {
-            val title = intent.getStringExtra("title").toString()
+            title = intent.getStringExtra("title").toString().trim()
             val subtitle = firmwareResponse.getString("firmwareVersion")
 
             supportActionBar?.title = title
@@ -58,12 +63,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                     findViewById(R.id.preview)
                 override var description: TextView =
                     findViewById(R.id.description)
-                override var payload: TextView =
-                    findViewById(R.id.payload)
-                override var share: ImageView =
-                    findViewById(R.id.share)
-                override var download: ImageView =
-                    findViewById(R.id.download)
                 override var downloadContent: String = intent.getStringExtra("download").toString()
 
                 override fun main() {
@@ -78,23 +77,8 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                     } else {
                         description.visibility = View.GONE
                     }
-                    payload.text = intent.getStringExtra("buildTime").toString()
 
-                    share.setOnClickListener {
-                        shareFirmware()
-                    }
-
-                    download.setOnClickListener {
-                        if (OnlineStatus(context).isOnline) {
-                            runBlocking(Dispatchers.IO) {
-                                getFirmware(firmwareResponse, context, title)
-                            }
-                        } else {
-                            getString(R.string.connectivity_error).showAsToast(context)
-                        }
-                    }
-
-                    download.setOnLongClickListener {
+                    preview.setOnLongClickListener {
                         openResponseActivity()
                         true
                     }
@@ -137,7 +121,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
 
     private fun getFirmware(
         jsonObject: JSONObject,
-        context: Context,
         deviceName: String,
     ) {
         for (i in responseFirmwareTagsArray) {
@@ -151,6 +134,29 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_preview, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.preview_share -> {
+                shareFirmware()
+            }
+            R.id.preview_download -> {
+                if (OnlineStatus(context).isOnline) {
+                    runBlocking(Dispatchers.IO) {
+                        getFirmware(firmwareResponse, title)
+                    }
+                } else {
+                    getString(R.string.connectivity_error).showAsToast(context)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -4,7 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
@@ -127,7 +127,10 @@ class WatchfaceStackActivity : AppCompatActivity() {
 
                         mainHandler.post {
                             findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).let { RecyclerView ->
-                                RecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                                RecyclerView.layoutManager = GridLayoutManager(
+                                    context, Display()
+                                        .getGridLayoutIndex(context, 230)
+                                )
 
                                 WatchfaceCommonAdapter().let { adapter ->
                                     RecyclerView.adapter = adapter

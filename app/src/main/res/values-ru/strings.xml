@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menu_apps">Приложения</string>
     <string name="menu_firmwares">Прошивки</string>
-    <string name="menu_request">Запрос</string>
     <string name="menu_watchface">Циферблаты</string>
+    <string name="menu_apps">Приложения</string>
+    <string name="menu_request">Запрос</string>
     <string name="menu_downloads">Загрузки</string>
     <string name="menu_uninstall">Деинсталляция</string>
 

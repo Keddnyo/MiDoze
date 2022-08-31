@@ -59,8 +59,7 @@
         <activity
             android:name=".activities.request.RequestActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Watchface" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"
@@ -76,13 +75,11 @@
         <activity
             android:name=".activities.firmware.FirmwarePreviewActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Watchface"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.watchface.WatchfacePreviewActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Watchface"/>
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>
