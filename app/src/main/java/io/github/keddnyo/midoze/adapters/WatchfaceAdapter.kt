@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.watchface.WatchfacePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.Watchface
@@ -53,13 +54,12 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
                 holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
             }
 
+            val gson = Gson()
+
             holder.layout.setOnClickListener {
                 val intent = Intent(context, WatchfacePreviewActivity::class.java)
-                intent.putExtra("deviceName", watchface.deviceName)
-                intent.putExtra("deviceAlias", watchface.deviceAlias)
-                intent.putExtra("title", watchface.title)
-                intent.putExtra("description", watchface.introduction)
-                intent.putExtra("download", watchface.url)
+                intent.putExtra("position", position)
+                intent.putExtra("watchfaceArray", gson.toJson(watchfaceArray).toString())
                 context.startActivity(intent)
             }
         }

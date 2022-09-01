@@ -55,16 +55,14 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             supportActionBar?.title = title
             supportActionBar?.subtitle = subtitle
 
-            val preview: ImageView =
-                findViewById(R.id.preview)
             val description: TextView =
                 findViewById(R.id.description)
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
-            preview.setImageResource(
-                deviceIconValue
-            )
+//            preview.setImageResource(
+//                deviceIconValue
+//            )
 
             if (firmwareResponse.has("changeLog")) {
                 description.text = firmwareResponse.getString("lang").toLanguageList()
@@ -91,10 +89,10 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 }
             }
 
-            preview.setOnLongClickListener {
-                openResponseActivity()
-                true
-            }
+//            preview.setOnLongClickListener {
+//                openResponseActivity()
+//                true
+//            }
         } else {
             finish()
         }

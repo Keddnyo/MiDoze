@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.adapters.PagerAdapter
+import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.BitmapCache
@@ -19,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class WatchfacePreviewActivity : AppCompatActivity() {
-    private lateinit var title: String
     private lateinit var downloadContent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,54 +33,64 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
         val context = this@WatchfacePreviewActivity
 
-        if (intent.hasExtra("download")) {
-            title = intent.getStringExtra("deviceName").toString()
-            val subtitle = intent.getStringExtra("title").toString().trim()
+        if (intent.hasExtra("watchfaceArray")) {
+            val position = intent.getIntExtra("position", 0)
 
-            supportActionBar?.title = title
-            supportActionBar?.subtitle = subtitle
+            val watchfaceArray: ArrayList<Watchface> = GsonBuilder().create().fromJson(
+                intent.getStringExtra("watchfaceArray").toString(),
+                object : TypeToken<ArrayList<Watchface>>() {}.type
+            )
 
-            downloadContent = intent.getStringExtra("download").toString()
-
-            val preview: ImageView =
-                findViewById(R.id.preview)
             val description: TextView =
                 findViewById(R.id.description)
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
-            preview.setImageBitmap(
-                BitmapCache(context).decode(
-                    intent.getStringExtra("deviceAlias").toString(),
-                    subtitle
-                )
-            )
+            supportActionBar?.subtitle = watchfaceArray[position].deviceName
 
-            if (OnlineStatus(context).isOnline) {
-                download.isEnabled = true
-                download.setOnClickListener {
-                    runBlocking(Dispatchers.IO) {
-                        if (OnlineStatus(context).isOnline) {
-                            Requests().getFirmwareFile(
-                                context,
-                                downloadContent,
-                                title,
-                                getString(R.string.menu_watchface)
-                            )
+            val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
+            val adapter = PagerAdapter(watchfaceArray)
+            viewPager.adapter = adapter
+
+            viewPager.setCurrentItem(position, false)
+            title = watchfaceArray[position].title
+
+            viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    val watchface = watchfaceArray[position]
+
+                    title = watchface.title
+                    downloadContent = watchface.url
+
+                    watchface.introduction.let { content ->
+                        if (content.isNotBlank() && content != "null") {
+                            description.text = content
                         } else {
-                            getString(R.string.connectivity_error).showAsToast(context)
+                            description.visibility = View.GONE
+                        }
+                    }
+
+                    if (OnlineStatus(context).isOnline) {
+                        download.isEnabled = true
+                        download.setOnClickListener {
+                            runBlocking(Dispatchers.IO) {
+                                if (OnlineStatus(context).isOnline) {
+                                    Requests().getFirmwareFile(
+                                        context,
+                                        watchface.url,
+                                        watchface.title,
+                                        getString(R.string.menu_watchface)
+                                    )
+                                } else {
+                                    getString(R.string.connectivity_error).showAsToast(context)
+                                }
+                            }
                         }
                     }
                 }
-            }
-
-            intent.getStringExtra("description").toString().let { content ->
-                if (content.isNotBlank() && content != "null") {
-                    description.text = content
-                } else {
-                    description.visibility = View.GONE
-                }
-            }
+            })
         } else {
             finish()
         }
