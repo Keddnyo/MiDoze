@@ -48,7 +48,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val deviceIconValue = intent.getIntExtra("preview", R.drawable.amazfit_bip)
         firmwareResponse = JSONObject(intent.getStringExtra("data").toString())
 
-        if (intent.hasExtra("firmwareVersion")) {
+        if (intent.hasExtra("data")) {
             title = intent.getStringExtra("title").toString().trim()
             val subtitle = firmwareResponse.getString("firmwareVersion")
 
