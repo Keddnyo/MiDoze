@@ -206,8 +206,10 @@ class Requests {
             if (isWriteExternalStoragePermissionAvailable()) {
                 downloadFile()
             } else {
-                context.getString(R.string.permission_not_granted).showAsToast(context)
-                requestWriteExternalStoragePermission()
+                (context as Activity).runOnUiThread {
+                    context.getString(R.string.permission_not_granted).showAsToast(context)
+                    requestWriteExternalStoragePermission()
+                }
             }
         }
     }

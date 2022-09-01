@@ -30,9 +30,8 @@ object StringUtils {
         return this.replace("\\/", "/")
     }
 
-    fun String.showAsToast(context: Context) {
+    fun String.showAsToast(context: Context) =
         Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
-    }
 
     fun String.getPackageVersion(context: Context): String? = with(context) {
         return try {

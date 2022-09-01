@@ -1,6 +1,5 @@
 package io.github.keddnyo.midoze.activities.watchface
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -9,18 +8,17 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.BitmapCache
-import io.github.keddnyo.midoze.utils.FirmwarePreview
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class WatchfacePreviewActivity : AppCompatActivity() {
-    private lateinit var context: Context
     private lateinit var title: String
     private lateinit var downloadContent: String
 
@@ -29,57 +27,58 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firmware_preview)
 
-        context = this@WatchfacePreviewActivity
+        val context = this@WatchfacePreviewActivity
 
         if (intent.hasExtra("download")) {
             title = intent.getStringExtra("deviceName").toString()
-            val subtitle = intent.getStringExtra("title").toString()
+            val subtitle = intent.getStringExtra("title").toString().trim()
 
             supportActionBar?.title = title
             supportActionBar?.subtitle = subtitle
 
             downloadContent = intent.getStringExtra("download").toString()
 
-            class Preview : FirmwarePreview() {
-                override var preview: ImageView =
-                    findViewById(R.id.preview)
-                override var description: TextView =
-                    findViewById(R.id.description)
+            val preview: ImageView =
+                findViewById(R.id.preview)
+            val description: TextView =
+                findViewById(R.id.description)
+            val download: ExtendedFloatingActionButton =
+                findViewById(R.id.download)
 
-                override fun main() {
-                    super.main()
+            preview.setImageBitmap(
+                BitmapCache(context).decode(
+                    intent.getStringExtra("deviceAlias").toString(),
+                    subtitle
+                )
+            )
 
-                    preview.setImageBitmap(
-                        BitmapCache(context).decode(
-                            intent.getStringExtra("deviceAlias").toString(),
-                            subtitle
-                        )
-                    )
-
-                    intent.getStringExtra("description").toString().let { content ->
-                        if (content.isNotBlank() && content != "null") {
-                            description.text = content
+            if (OnlineStatus(context).isOnline) {
+                download.isEnabled = true
+                download.setOnClickListener {
+                    runBlocking(Dispatchers.IO) {
+                        if (OnlineStatus(context).isOnline) {
+                            Requests().getFirmwareFile(
+                                context,
+                                downloadContent,
+                                title,
+                                getString(R.string.menu_watchface)
+                            )
                         } else {
-                            description.visibility = View.GONE
+                            getString(R.string.connectivity_error).showAsToast(context)
                         }
                     }
                 }
             }
 
-            Preview().main()
-        }
-    }
-
-    private fun downloadContent() {
-        if (OnlineStatus(context).isOnline) {
-            Requests().getFirmwareFile(
-                context,
-                downloadContent,
-                title,
-                getString(R.string.menu_watchface)
-            )
+            intent.getStringExtra("description").toString().let { content ->
+                if (content.isNotBlank() && content != "null") {
+                    description.text = content
+                } else {
+                    description.visibility = View.GONE
+                }
+            }
         } else {
-            getString(R.string.connectivity_error).showAsToast(context)
+            finish()
         }
     }
 
@@ -110,23 +109,14 @@ class WatchfacePreviewActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_preview, menu)
+        menuInflater.inflate(R.menu.menu_response, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.preview_share -> {
+            R.id.action_share_firmware -> {
                 shareContent()
-            }
-            R.id.preview_download -> {
-                if (OnlineStatus(context).isOnline) {
-                    runBlocking(Dispatchers.IO) {
-                        downloadContent()
-                    }
-                } else {
-                    getString(R.string.connectivity_error).showAsToast(context)
-                }
             }
         }
         return super.onOptionsItemSelected(item)
