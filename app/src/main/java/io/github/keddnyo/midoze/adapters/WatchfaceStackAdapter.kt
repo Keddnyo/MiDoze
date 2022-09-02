@@ -42,7 +42,7 @@ class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.Watchfa
             } else {
                 GridLayoutManager(
                     holder.layout.context, Display()
-                        .getGridLayoutIndex(holder.layout.context, 160)
+                        .getGridLayoutIndex(holder.layout.context, 225)
                 )
             }
 

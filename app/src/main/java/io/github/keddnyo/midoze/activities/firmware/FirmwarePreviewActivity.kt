@@ -67,8 +67,8 @@ class FirmwarePreviewActivity : AppCompatActivity() {
 
                 val deviceRepository = DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
 
-                supportActionBar?.title = deviceRepository.name
-                supportActionBar?.subtitle = device.firmwareVersion
+                supportActionBar?.title = device.firmwareVersion
+                supportActionBar?.subtitle = deviceRepository.name
 
                 shareTitle = deviceRepository.name
                 downloadContent = JSONObject(device.firmware.toString())

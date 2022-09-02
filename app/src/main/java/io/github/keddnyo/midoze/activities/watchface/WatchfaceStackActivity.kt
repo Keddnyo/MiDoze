@@ -129,7 +129,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                             findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).let { RecyclerView ->
                                 RecyclerView.layoutManager = GridLayoutManager(
                                     context, Display()
-                                        .getGridLayoutIndex(context, 230)
+                                        .getGridLayoutIndex(context, 225)
                                 )
 
                                 WatchfaceCommonAdapter().let { adapter ->
