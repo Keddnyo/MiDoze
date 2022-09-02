@@ -2,7 +2,6 @@ package io.github.keddnyo.midoze.utils
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
 import android.widget.Toast
 import io.github.keddnyo.midoze.local.packages.PackageNames
 import io.github.keddnyo.midoze.local.packages.PackageVersions

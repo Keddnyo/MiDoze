@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 
-class PackageUtils(val context: Context, val packageName: String) {
+class PackageUtils(val context: Context, private val packageName: String) {
     private val packageInfo = context.packageManager.getPackageInfo(packageName, 0)
 
     fun getPackageVersionName(): String = packageInfo.versionName
