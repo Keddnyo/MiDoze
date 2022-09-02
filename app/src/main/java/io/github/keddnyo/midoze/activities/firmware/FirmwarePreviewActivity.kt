@@ -14,7 +14,6 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.adapters.FirmwarePreviewAdapter
-import io.github.keddnyo.midoze.adapters.WatchfacePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
@@ -58,7 +57,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 findViewById(R.id.download)
 
             val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
-            val adapter = FirmwarePreviewAdapter(deviceArray, downloadContent.toString())
+            val adapter = FirmwarePreviewAdapter(deviceArray)
             viewPager.adapter = adapter
 
             viewPager.setCurrentItem(position, false)
@@ -97,6 +96,13 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                                 }
                             }
                         }
+                    }
+                    download.setOnLongClickListener {
+                        val intent = Intent(context, ResponseActivity::class.java)
+                        intent.putExtra("json", downloadContent.toString())
+                        context.startActivity(intent)
+
+                        true
                     }
                 }
             }

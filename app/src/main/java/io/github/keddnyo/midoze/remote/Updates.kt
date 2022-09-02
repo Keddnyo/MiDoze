@@ -7,6 +7,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.PackageUtils
+import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
 import org.json.JSONObject
 
 class Updates(val context: Context) : AsyncTask() {
@@ -34,7 +35,7 @@ class Updates(val context: Context) : AsyncTask() {
                     releaseData.getJSONArray("assets").getJSONObject(0)
                         .getString("browser_download_url")
 
-                if (PackageUtils(context, context.packageName).getPackageVersionName() < latestVersion) {
+                if (context.getPackageVersion() < latestVersion) {
                     val builder = AlertDialog.Builder(context)
                         .setTitle(context.getString(R.string.update_title, latestVersion))
                         .setMessage(releaseChangelog)

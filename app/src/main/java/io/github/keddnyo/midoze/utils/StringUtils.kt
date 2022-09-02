@@ -33,9 +33,11 @@ object StringUtils {
     fun String.showAsToast(context: Context) =
         Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 
+    fun Context.getPackageVersion(): String = PackageUtils(this, this.packageName).getPackageVersionName()
+
     fun String.getPackageVersion(context: Context): String? {
         return try {
-            PackageUtils(context, context.packageName).getPackageVersionNameAndBuild()
+            PackageUtils(context, this).getPackageVersionNameAndBuild()
         } catch (e: PackageManager.NameNotFoundException) {
             when (this@getPackageVersion) {
                 PackageNames.ZEPP_PACKAGE_NAME -> {

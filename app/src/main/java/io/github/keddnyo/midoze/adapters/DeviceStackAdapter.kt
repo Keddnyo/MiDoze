@@ -12,8 +12,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.fragments.DeviceContainer
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 
-class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
-    private var stackArray = ArrayList<FirmwareDataStack>()
+class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareDataStack> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val container: MaterialCardView =
@@ -47,15 +46,5 @@ class DeviceStackAdapter : RecyclerView.Adapter<DeviceStackAdapter.DeviceListVie
 
     override fun getItemCount(): Int {
         return stackArray.size
-    }
-
-    fun addDevice(firmwareDataArray: ArrayList<FirmwareDataStack>) {
-        itemCount.let {
-            stackArray.clear()
-            notifyItemRangeRemoved(0, it)
-        }
-
-        stackArray = firmwareDataArray
-        notifyItemRangeInserted(0, stackArray.size)
     }
 }

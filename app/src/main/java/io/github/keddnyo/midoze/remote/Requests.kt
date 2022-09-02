@@ -42,9 +42,9 @@ class Requests {
                         context = context,
                         wearable = wearable
                     )
-                }?.let {
+                }?.let { device ->
                     deviceArrayList.add(
-                        it
+                        device
                     )
                 }
             }
@@ -138,20 +138,18 @@ class Requests {
                 append("accept-encoding", "gzip")
                 append("accept", "*/*")
             }
-        }
+        }.bodyAsText()
 
-        val firmwareData = JSONObject(response.bodyAsText())
+        val firmwareData = JSONObject(response)
 
         return if (firmwareData.has("firmwareVersion")) {
-            val deviceData =
+            val device =
                 DeviceRepository().getDeviceNameByCode(
                     wearable.deviceSource.toInt()
                 )
 
-            val deviceName =
-                deviceData.name
-
-            val devicePreview = deviceData.image
+            val deviceName = device.name
+            val devicePreview = device.image
 
             fun get(key: String): String {
                 return if (firmwareData.has(key)) {
@@ -161,18 +159,12 @@ class Requests {
                 }).toString()
             }
 
-            val lang = if (firmwareData.has("lang")) {
-                get("lang")
-            } else {
-                null
-            }
-
             FirmwareData(
                 device = Device(deviceName, devicePreview),
                 wearable = wearable,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),
-                language = lang,
+                language = get("lang"),
                 changeLog = get("changeLog"),
                 buildTime = Display().getLocaleFirmwareDate(get("buildTime"))
             )

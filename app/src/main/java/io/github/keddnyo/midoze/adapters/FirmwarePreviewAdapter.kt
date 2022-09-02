@@ -11,7 +11,7 @@ import io.github.keddnyo.midoze.activities.request.ResponseActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.utils.BitmapCache
 
-class FirmwarePreviewAdapter(private val deviceList: ArrayList<FirmwareData>, private val downloadContent: String) : RecyclerView.Adapter<FirmwarePreviewAdapter.PreviewViewHolder>() {
+class FirmwarePreviewAdapter(private val deviceList: ArrayList<FirmwareData>) : RecyclerView.Adapter<FirmwarePreviewAdapter.PreviewViewHolder>() {
     inner class PreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreviewViewHolder {
@@ -20,21 +20,9 @@ class FirmwarePreviewAdapter(private val deviceList: ArrayList<FirmwareData>, pr
     }
 
     override fun onBindViewHolder(holder: PreviewViewHolder, position: Int) {
-        holder.itemView.context.let { context ->
+        holder.itemView.context.let {
             deviceList[position].let { device ->
-                fun openResponseActivity() {
-                    val intent = Intent(context, ResponseActivity::class.java)
-                    intent.putExtra("json", device.toString())
-                    context.startActivity(intent)
-                }
-
-                holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).let { preview ->
-                    preview.setImageResource(device.device.image)
-                    preview.setOnLongClickListener {
-                        openResponseActivity()
-                        true
-                    }
-                }
+                holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).setImageResource(device.device.image)
             }
         }
     }

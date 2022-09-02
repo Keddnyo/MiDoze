@@ -11,6 +11,10 @@ public class DozeLocale {
         return getCurrentLocale().getLanguage();
     }
 
+    public String getCurrentLocaleString() {
+        return getCurrentLocale().toString();
+    }
+
     public String getCurrentCountry() {
         return getCurrentLocale().getCountry();
     }

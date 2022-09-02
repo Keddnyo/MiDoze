@@ -41,7 +41,7 @@ class WearableRepository(val context: Context) {
             } else {
                 Region(
                     country = DozeLocale().currentCountry,
-                    language = DozeLocale().currentLanguage
+                    language = DozeLocale().currentLocaleString
                 )
             }
         )

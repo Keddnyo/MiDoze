@@ -49,7 +49,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
 
                     Executors.newSingleThreadExecutor().execute {
                         prefs.getString("watchfaceStackCache", "").toString().let { watchfaceStackCache ->
-                            if (watchfaceStackCache.isNotEmpty()) {
+                            if (watchfaceStackCache.isNotBlank() && watchfaceStackCache != "null") {
                                 watchfaceArrayList = GsonBuilder().create().fromJson(
                                     watchfaceStackCache,
                                     object : TypeToken<ArrayList<WatchfaceCommonStack>>() {}.type

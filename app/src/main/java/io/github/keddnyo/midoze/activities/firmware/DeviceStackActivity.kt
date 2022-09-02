@@ -49,57 +49,41 @@ class DeviceStackActivity : AppCompatActivity() {
                 }
             }
 
-        val deviceStackAdapter = DeviceStackAdapter()
-        deviceListRecyclerView.adapter = deviceStackAdapter
-
         OnlineStatus(context).run {
             class GetDevices(val context: Context) : AsyncTask() {
                 var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
-                var deviceArrayListSlot: ArrayList<FirmwareDataStack> = arrayListOf()
 
                 override fun execute() {
                     Executors.newSingleThreadExecutor().execute {
                         prefs.getString("deviceStackCache", "").toString().let { deviceStackCache ->
-                            if (deviceStackCache.isNotEmpty()) {
+                            if (deviceStackCache.isNotBlank() && deviceStackCache != "null") {
                                 deviceArrayList = GsonBuilder().create().fromJson(
                                     deviceStackCache,
                                     object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
                                 )
                             } else if (isOnline) {
-                                Requests().getFirmwareLatest(context).forEach { device ->
-                                    if (deviceStackAdapter.itemCount == 0) {
-                                        deviceArrayList
-                                    } else {
-                                        deviceArrayListSlot
-                                    }.let { arrayList ->
-                                        arrayList.add(device)
+                                deviceArrayList = Requests().getFirmwareLatest(context)
 
-                                        editor.apply {
-                                            putString(
-                                                "deviceStackCache",
-                                                gson.toJson(arrayList).toString()
-                                            )
-                                            apply()
-                                        }
-                                    }
-                                }
-
-                                deviceArrayListSlot.let {
-                                    if (it.isNotEmpty() && it != deviceArrayList) {
-                                        deviceArrayList = it
-                                    }
+                                editor.apply {
+                                    putString(
+                                        "deviceStackCache",
+                                        gson.toJson(deviceArrayList).toString()
+                                    )
+                                    apply()
                                 }
                             }
                         }
 
                         mainHandler.post {
-                            deviceStackAdapter.addDevice(deviceArrayList)
+                            DeviceStackAdapter(deviceArrayList).let { adapter ->
+                                deviceListRecyclerView.adapter = adapter
 
-                            if (deviceStackAdapter.itemCount == 0) {
-                                emptyResponse.visibility = View.VISIBLE
-                            } else {
-                                emptyResponse.visibility = View.GONE
-                                DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
+                                if (adapter.itemCount == 0) {
+                                    emptyResponse.visibility = View.VISIBLE
+                                } else {
+                                    emptyResponse.visibility = View.GONE
+                                    DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
+                                }
                             }
 
                             refreshLayout.isRefreshing = false
