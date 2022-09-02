@@ -92,7 +92,7 @@ class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
         holder.layout.setOnLongClickListener {
             appsArray.forEach { application ->
                 if (appsArray[position].tag == application.tag) {
-                    PackageUtils(context).removePackage(application.tag)
+                    PackageUtils(context, application.tag).removePackage()
                 }
             }
 

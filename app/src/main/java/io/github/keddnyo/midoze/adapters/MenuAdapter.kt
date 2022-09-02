@@ -64,7 +64,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
                     startActivity(Intent(DownloadManager.ACTION_VIEW_DOWNLOADS))
                 }
                 "Uninstall" -> {
-                    PackageUtils(context).removePackage(context.packageName)
+                    PackageUtils(context, context.packageName).removePackage()
                 }
                 "About" -> {
                     startActivity(

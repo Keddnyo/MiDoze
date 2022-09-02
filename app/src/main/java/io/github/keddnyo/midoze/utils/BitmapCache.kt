@@ -27,7 +27,6 @@ class BitmapCache(val context: Context) {
         val options = BitmapFactory.Options().apply {
             inJustDecodeBounds = false
             inPreferredConfig = Bitmap.Config.RGB_565
-            inDither = true
         }
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size, options)
     }

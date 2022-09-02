@@ -55,8 +55,8 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             fun initializeViewPager(position: Int) {
                 val watchface = watchfaceArray[position]
 
-                title = watchface.title.trim().capitalize(Locale.ROOT)
-                supportActionBar?.subtitle = watchface.categoryName.trim().capitalize(Locale.ROOT)
+                title = watchface.title.trim().replaceFirstChar { it.uppercase() }
+                supportActionBar?.subtitle = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
                 shareTitle = watchface.title
                 downloadContent = watchface.url
 

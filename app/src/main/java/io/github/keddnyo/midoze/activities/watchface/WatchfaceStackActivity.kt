@@ -18,10 +18,7 @@ import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
 import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceDeviceStack
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.utils.AsyncTask
-import io.github.keddnyo.midoze.utils.BitmapCache
-import io.github.keddnyo.midoze.utils.Display
-import io.github.keddnyo.midoze.utils.OnlineStatus
+import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
@@ -145,6 +142,16 @@ class WatchfaceStackActivity : AppCompatActivity() {
                         }
 
                         prefs.edit().putString("watchfaceStackCache", gson.toJson(watchfaceArrayList).toString()).apply()
+                    }
+                }
+            }
+
+            PackageUtils(context, context.packageName).getPackageVersionBuild().let {
+                if (prefs.getInt("VERSION_CODE", 0) != it) {
+                    editor.apply {
+                        putInt("VERSION_CODE", it)
+                        remove("watchfaceStackCache")
+                        apply()
                     }
                 }
             }

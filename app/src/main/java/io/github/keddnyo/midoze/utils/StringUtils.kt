@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.utils
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
 import io.github.keddnyo.midoze.local.packages.PackageNames
 import io.github.keddnyo.midoze.local.packages.PackageVersions
@@ -33,14 +34,9 @@ object StringUtils {
     fun String.showAsToast(context: Context) =
         Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 
-    fun String.getPackageVersion(context: Context): String? = with(context) {
+    fun String.getPackageVersion(context: Context): String? {
         return try {
-            val eInfo = packageManager.getPackageInfo(
-                this@getPackageVersion, 0
-            )
-            val version = eInfo.versionName
-            val build = eInfo.versionCode
-            version + "_" + build
+            PackageUtils(context, context.packageName).getPackageVersionNameAndBuild()
         } catch (e: PackageManager.NameNotFoundException) {
             when (this@getPackageVersion) {
                 PackageNames.ZEPP_PACKAGE_NAME -> {

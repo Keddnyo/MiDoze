@@ -20,6 +20,7 @@ import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AppVersion
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.OnlineStatus
+import io.github.keddnyo.midoze.utils.PackageUtils
 import java.util.concurrent.Executors
 
 class DeviceStackActivity : AppCompatActivity() {
@@ -108,7 +109,7 @@ class DeviceStackActivity : AppCompatActivity() {
                 }
             }
 
-            AppVersion(context).code.let {
+            PackageUtils(context, context.packageName).getPackageVersionBuild().let {
                 if (prefs.getInt("VERSION_CODE", 0) != it) {
                     editor.apply {
                         putInt("VERSION_CODE", it)
