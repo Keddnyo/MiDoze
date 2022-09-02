@@ -7,9 +7,13 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
@@ -68,13 +72,22 @@ class RequestActivity : AppCompatActivity() {
         }
 
         // Get Intent
-        if (intent.hasExtra("deviceSource")) {
-            val deviceSourceValue = getIntentExtra("deviceSource")
-            val productionSourceValue = getIntentExtra("productionSource")
-            val appNameValue = getIntentExtra("appName")
-            val appVersionValue = getIntentExtra("appVersion")
-            val countryValue = getIntentExtra("country")
-            val langValue = getIntentExtra("lang")
+        if (intent.hasExtra("deviceArray")) {
+            val position = intent.getIntExtra("position", 0)
+
+            val deviceArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
+                intent.getStringExtra("deviceArray").toString(),
+                object : TypeToken<ArrayList<FirmwareData>>() {}.type
+            )
+
+            val device = deviceArray[position]
+
+            val deviceSourceValue = device.wearable.deviceSource
+            val productionSourceValue = device.wearable.productionSource
+            val appNameValue = device.wearable.application.name
+            val appVersionValue = device.wearable.application.version
+            val countryValue = device.wearable.region.country
+            val langValue = device.wearable.region.language
 
             requestDeviceSourceEditText.setText(deviceSourceValue)
             requestProductionSourceEditText.setText(productionSourceValue)
@@ -107,16 +120,14 @@ class RequestActivity : AppCompatActivity() {
                 val intent = Intent(context, FirmwarePreviewActivity::class.java)
 
                 if (firmwareResponse != null) {
-                    intent.putExtra("title", firmwareResponse.device.name)
-                    intent.putExtra("preview", firmwareResponse.device.image)
-                    intent.putExtra("data", firmwareResponse.firmware.toString())
+                    val gson = Gson()
 
-                    intent.putExtra("productionSource", firmwareResponse.wearable.productionSource)
-                    intent.putExtra("deviceSource", firmwareResponse.wearable.deviceSource)
-                    intent.putExtra("appName", firmwareResponse.wearable.application.name)
-                    intent.putExtra("appVersion", firmwareResponse.wearable.application.version)
-
-                    intent.putExtra("buildTime", firmwareResponse.buildTime)
+                    intent.putExtra("position", 0)
+                    intent.putExtra("deviceArray", gson.toJson(
+                        arrayListOf(
+                            firmwareResponse
+                        )
+                    ).toString())
 
                     context.startActivity(intent)
                 } else {

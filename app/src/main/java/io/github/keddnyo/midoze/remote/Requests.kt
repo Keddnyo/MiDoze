@@ -161,11 +161,18 @@ class Requests {
                 }).toString()
             }
 
+            val lang = if (firmwareData.has("lang")) {
+                get("lang")
+            } else {
+                null
+            }
+
             FirmwareData(
                 device = Device(deviceName, devicePreview),
                 wearable = wearable,
                 firmware = firmwareData,
                 firmwareVersion = firmwareData.getString("firmwareVersion"),
+                language = lang,
                 changeLog = get("changeLog"),
                 buildTime = Display().getLocaleFirmwareDate(get("buildTime"))
             )

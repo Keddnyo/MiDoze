@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.activities.request.RequestActivity
@@ -39,6 +40,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
         holder.image.setImageResource(deviceArray[position].device.image)
         holder.fwVersion.text = deviceArray[position].firmwareVersion
 
+        val gson = Gson()
+
         fun openFirmwareActivity(
             context: Context,
             custom: Boolean
@@ -49,19 +52,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
                 Intent(context, FirmwarePreviewActivity::class.java)
             }
 
-            intent.putExtra("title", deviceArray[position].device.name)
-            intent.putExtra("preview", deviceArray[position].device.image)
-            intent.putExtra("data", deviceArray[position].firmware.toString())
-
-            intent.putExtra("productionSource", deviceArray[position].wearable.productionSource)
-            intent.putExtra("deviceSource", deviceArray[position].wearable.deviceSource)
-            intent.putExtra("appName", deviceArray[position].wearable.application.name)
-            intent.putExtra("appVersion", deviceArray[position].wearable.application.version)
-
-            intent.putExtra("country", deviceArray[position].wearable.region.country)
-            intent.putExtra("lang", deviceArray[position].wearable.region.language)
-
-            intent.putExtra("buildTime", deviceArray[position].buildTime)
+            intent.putExtra("position", position)
+            intent.putExtra("deviceArray", gson.toJson(deviceArray).toString())
 
             context.startActivity(intent)
         }

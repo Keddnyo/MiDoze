@@ -5,12 +5,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.request.ResponseActivity
+import io.github.keddnyo.midoze.adapters.FirmwarePreviewAdapter
+import io.github.keddnyo.midoze.adapters.WatchfacePreviewAdapter
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.OnlineStatus
@@ -20,7 +26,8 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 
 class FirmwarePreviewActivity : AppCompatActivity() {
-    private var firmwareResponse = JSONObject()
+    private lateinit var shareTitle: String
+    private var downloadContent = JSONObject()
 
     private val responseFirmwareTagsArray = arrayOf(
         "firmwareUrl",
@@ -30,8 +37,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         "gpsUrl"
     )
 
-    private lateinit var title: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
@@ -39,60 +44,71 @@ class FirmwarePreviewActivity : AppCompatActivity() {
 
         val context = this@FirmwarePreviewActivity
 
-        fun openResponseActivity() {
-            val intent = Intent(context, ResponseActivity::class.java)
-            intent.putExtra("json", firmwareResponse.toString())
-            startActivity(intent)
-        }
+        if (intent.hasExtra("deviceArray")) {
+            val position = intent.getIntExtra("position", 0)
 
-        val deviceIconValue = intent.getIntExtra("preview", R.drawable.amazfit_bip)
-        firmwareResponse = JSONObject(intent.getStringExtra("data").toString())
-
-        if (intent.hasExtra("data")) {
-            title = intent.getStringExtra("title").toString().trim()
-            val subtitle = firmwareResponse.getString("firmwareVersion")
-
-            supportActionBar?.title = title
-            supportActionBar?.subtitle = subtitle
+            val deviceArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
+                intent.getStringExtra("deviceArray").toString(),
+                object : TypeToken<ArrayList<FirmwareData>>() {}.type
+            )
 
             val description: TextView =
                 findViewById(R.id.description)
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
-//            preview.setImageResource(
-//                deviceIconValue
-//            )
+            val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
+            val adapter = FirmwarePreviewAdapter(deviceArray, downloadContent.toString())
+            viewPager.adapter = adapter
 
-            if (firmwareResponse.has("changeLog")) {
-                description.text = firmwareResponse.getString("lang").toLanguageList()
-            } else {
-                description.visibility = View.GONE
-            }
+            viewPager.setCurrentItem(position, false)
+            fun initializeViewPager(position: Int) {
+                val device = deviceArray[position]
 
-            if (OnlineStatus(context).isOnline) {
-                download.isEnabled = true
-                download.setOnClickListener {
-                    runBlocking(Dispatchers.IO) {
-                        for (i in responseFirmwareTagsArray) {
-                            if (firmwareResponse.has(i)) {
-                                val urlString = firmwareResponse.getString(i)
-                                Requests().getFirmwareFile(
-                                    context,
-                                    urlString,
-                                    title,
-                                    getString(R.string.menu_firmwares)
-                                )
+                val deviceRepository = DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
+
+                supportActionBar?.title = deviceRepository.name
+                supportActionBar?.subtitle = device.firmwareVersion
+
+                shareTitle = deviceRepository.name
+                downloadContent = JSONObject(device.firmware.toString())
+
+                device.language.let { content ->
+                    if (content != null) {
+                        description.text = device.language?.toLanguageList()
+                    } else {
+                        description.visibility = View.GONE
+                    }
+                }
+
+                if (OnlineStatus(context).isOnline) {
+                    download.isEnabled = true
+                    download.setOnClickListener {
+                        runBlocking(Dispatchers.IO) {
+                            for (i in responseFirmwareTagsArray) {
+                                if (downloadContent.has(i)) {
+                                    val urlString = downloadContent.getString(i)
+                                    Requests().getFirmwareFile(
+                                        context,
+                                        urlString,
+                                        deviceRepository.name,
+                                        getString(R.string.menu_firmwares)
+                                    )
+                                }
                             }
                         }
                     }
                 }
             }
 
-//            preview.setOnLongClickListener {
-//                openResponseActivity()
-//                true
-//            }
+            initializeViewPager(position)
+
+            viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    initializeViewPager(position)
+                }
+            })
         } else {
             finish()
         }
@@ -102,12 +118,12 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val firmwareLinks = arrayListOf<String>()
 
         for (i in responseFirmwareTagsArray) {
-            if (firmwareResponse.has(i)) {
-                firmwareLinks.add(firmwareResponse.getString(i))
+            if (downloadContent.has(i)) {
+                firmwareLinks.add(downloadContent.getString(i))
             }
         }
 
-        val shareContent = StringBuilder().append(title)
+        val shareContent = StringBuilder().append(shareTitle)
             .append("\n")
             .append(firmwareLinks.joinToString("\n"))
             .append("\n")
@@ -122,7 +138,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             type = "text/plain"
         }
 
-        val shareIntent = Intent.createChooser(sendIntent, title)
+        val shareIntent = Intent.createChooser(sendIntent, shareTitle)
         startActivity(shareIntent)
     }
 

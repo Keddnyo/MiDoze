@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.PreviewAdapter
+import io.github.keddnyo.midoze.adapters.WatchfacePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
@@ -24,6 +24,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class WatchfacePreviewActivity : AppCompatActivity() {
+    private lateinit var shareTitle: String
     private lateinit var downloadContent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +47,8 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
-            supportActionBar?.subtitle = watchfaceArray[position].deviceName
-
             val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
-            val adapter = PreviewAdapter(watchfaceArray)
+            val adapter = WatchfacePreviewAdapter(watchfaceArray)
             viewPager.adapter = adapter
 
             viewPager.setCurrentItem(position, false)
@@ -58,6 +57,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
                 title = watchface.title.trim().capitalize(Locale.ROOT)
                 supportActionBar?.subtitle = watchface.categoryName.trim().capitalize(Locale.ROOT)
+                shareTitle = watchface.title
                 downloadContent = watchface.url
 
                 watchface.introduction.let { content ->
@@ -92,7 +92,6 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-
                     initializeViewPager(position)
                 }
             })
@@ -103,7 +102,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
     private fun shareContent() {
         val stringBuilder = StringBuilder()
-        val shareContent = stringBuilder.append(title)
+        val shareContent = stringBuilder.append(shareTitle)
             .append("\n")
             .append(downloadContent)
             .append("\n")
@@ -123,7 +122,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             type = "text/plain"
         }
 
-        val shareIntent = Intent.createChooser(sendIntent, title)
+        val shareIntent = Intent.createChooser(sendIntent, shareTitle)
         startActivity(shareIntent)
     }
 

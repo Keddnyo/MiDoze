@@ -7,6 +7,7 @@ data class FirmwareData(
     val wearable: Wearable,
     val firmware: JSONObject,
     val firmwareVersion: String,
-    val changeLog: String,
+    val language: String?,
+    val changeLog: String?,
     val buildTime: String
 )
