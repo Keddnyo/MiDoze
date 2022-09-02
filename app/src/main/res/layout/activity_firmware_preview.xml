@@ -8,7 +8,7 @@
         android:id="@+id/firmwarePreviewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintBottom_toTopOf="@+id/download"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:textSize="6pt"
+        android:textSize="5pt"
         app:layout_constraintBottom_toTopOf="@+id/download" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

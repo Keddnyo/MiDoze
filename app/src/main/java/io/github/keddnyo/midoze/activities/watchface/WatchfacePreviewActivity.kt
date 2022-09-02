@@ -7,21 +7,21 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.PagerAdapter
+import io.github.keddnyo.midoze.adapters.PreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
-import io.github.keddnyo.midoze.utils.BitmapCache
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WatchfacePreviewActivity : AppCompatActivity() {
     private lateinit var downloadContent: String
@@ -49,46 +49,51 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             supportActionBar?.subtitle = watchfaceArray[position].deviceName
 
             val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
-            val adapter = PagerAdapter(watchfaceArray)
+            val adapter = PreviewAdapter(watchfaceArray)
             viewPager.adapter = adapter
 
             viewPager.setCurrentItem(position, false)
-            title = watchfaceArray[position].title
+            fun initializeViewPager(position: Int) {
+                val watchface = watchfaceArray[position]
+
+                title = watchface.title.trim().capitalize(Locale.ROOT)
+                supportActionBar?.subtitle = watchface.categoryName.trim().capitalize(Locale.ROOT)
+                downloadContent = watchface.url
+
+                watchface.introduction.let { content ->
+                    if (content.isNotBlank() && content != "null") {
+                        description.text = content
+                    } else {
+                        description.visibility = View.GONE
+                    }
+                }
+
+                if (OnlineStatus(context).isOnline) {
+                    download.isEnabled = true
+                    download.setOnClickListener {
+                        runBlocking(Dispatchers.IO) {
+                            if (OnlineStatus(context).isOnline) {
+                                Requests().getFirmwareFile(
+                                    context,
+                                    watchface.url,
+                                    watchface.title,
+                                    getString(R.string.menu_watchface)
+                                )
+                            } else {
+                                getString(R.string.connectivity_error).showAsToast(context)
+                            }
+                        }
+                    }
+                }
+            }
+
+            initializeViewPager(position)
 
             viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
 
-                    val watchface = watchfaceArray[position]
-
-                    title = watchface.title
-                    downloadContent = watchface.url
-
-                    watchface.introduction.let { content ->
-                        if (content.isNotBlank() && content != "null") {
-                            description.text = content
-                        } else {
-                            description.visibility = View.GONE
-                        }
-                    }
-
-                    if (OnlineStatus(context).isOnline) {
-                        download.isEnabled = true
-                        download.setOnClickListener {
-                            runBlocking(Dispatchers.IO) {
-                                if (OnlineStatus(context).isOnline) {
-                                    Requests().getFirmwareFile(
-                                        context,
-                                        watchface.url,
-                                        watchface.title,
-                                        getString(R.string.menu_watchface)
-                                    )
-                                } else {
-                                    getString(R.string.connectivity_error).showAsToast(context)
-                                }
-                            }
-                        }
-                    }
+                    initializeViewPager(position)
                 }
             })
         } else {

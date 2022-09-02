@@ -88,6 +88,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                                 watchfaceArray.add(
                                                     Watchface(
                                                         title = getItem("display_name"),
+                                                        categoryName = data.getJSONObject(d).getString("tab_name"),
                                                         deviceName = a.deviceName,
                                                         deviceAlias = a.deviceAlias,
                                                         introduction = getItem("introduction"),
@@ -119,8 +120,6 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                                 watchfaceArrayList = it
                                             }
                                         }
-
-
                                     }
                                 }
                             }

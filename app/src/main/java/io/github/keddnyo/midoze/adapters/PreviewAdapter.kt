@@ -9,7 +9,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.utils.BitmapCache
 
-class PagerAdapter(private val watchfaceList: ArrayList<Watchface>) : RecyclerView.Adapter<PagerAdapter.PreviewViewHolder>() {
+class PreviewAdapter(private val watchfaceList: ArrayList<Watchface>) : RecyclerView.Adapter<PreviewAdapter.PreviewViewHolder>() {
     inner class PreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreviewViewHolder {
