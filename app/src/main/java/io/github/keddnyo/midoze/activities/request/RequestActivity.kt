@@ -3,7 +3,7 @@ package io.github.keddnyo.midoze.activities.request
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.textfield.TextInputEditText
@@ -47,9 +47,9 @@ class RequestActivity : AppCompatActivity() {
             findViewById(R.id.requestAppVersionEditText)
         val requestCountryEditText: TextInputEditText = findViewById(R.id.requestCountryEditText)
         val requestLangEditText: TextInputEditText = findViewById(R.id.requestLangEditText)
-        val submitButton: ImageView = findViewById(R.id.requestSubmitButton)
-        val appButton: ImageView = findViewById(R.id.request_app_button)
-        val importButton: ImageView = findViewById(R.id.requestImportButton)
+        val submitButton: Button = findViewById(R.id.requestSubmitButton)
+        val appButton: Button = findViewById(R.id.request_app_button)
+        val importButton: Button = findViewById(R.id.requestImportButton)
 
         val prefs =
             PreferenceManager.getDefaultSharedPreferences(context)

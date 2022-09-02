@@ -59,7 +59,8 @@
         <activity
             android:name=".activities.request.RequestActivity"
             android:exported="false"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Dialog"/>
         <activity
             android:name=".activities.request.ResponseActivity"
             android:exported="false"
