@@ -47,7 +47,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             val position = intent.getIntExtra("position", 0)
 
             val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
-                intent.getStringExtra("deviceArray").toString(),
+                intent.getStringExtra("firmwareArray").toString(),
                 object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
             )
 

@@ -120,7 +120,7 @@ class RequestActivity : AppCompatActivity() {
                     val gson = Gson()
 
                     intent.putExtra("position", 0)
-                    intent.putExtra("deviceArray", gson.toJson(
+                    intent.putExtra("firmwareArray", gson.toJson(
                         arrayListOf(
                             firmwareResponse
                         )

@@ -53,7 +53,7 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
             }
 
             intent.putExtra("position", position)
-            intent.putExtra("deviceArray", gson.toJson(deviceArray).toString())
+            intent.putExtra("firmwareArray", gson.toJson(deviceArray).toString())
 
             context.startActivity(intent)
         }
