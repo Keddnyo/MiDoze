@@ -13,11 +13,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.MainMenu
+import io.github.keddnyo.midoze.local.dataModels.Menu
 import io.github.keddnyo.midoze.utils.PackageUtils
 
 class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
-    private var appsArray = ArrayList<MainMenu>()
+    private var appsArray = ArrayList<Menu>()
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -104,7 +104,7 @@ class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
         return appsArray.size
     }
 
-    fun addItems(array: ArrayList<MainMenu>) {
+    fun addItems(array: ArrayList<Menu>) {
         appsArray = array
         notifyItemRangeInserted(0, array.size)
     }

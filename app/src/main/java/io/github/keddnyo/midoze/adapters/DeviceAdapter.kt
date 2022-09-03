@@ -11,12 +11,12 @@ import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
-import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.activities.firmware.request.RequestActivity
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 import kotlin.collections.ArrayList
 
 class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>() {
-    private var deviceArray = ArrayList<FirmwareData>()
+    private var deviceArray = ArrayList<Firmware>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView =
@@ -37,8 +37,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         holder.name.text = deviceArray[position].device.name
-        holder.image.setImageResource(deviceArray[position].device.image)
-        holder.fwVersion.text = deviceArray[position].firmwareVersion
+        holder.image.setImageResource(deviceArray[position].device.preview)
+        holder.fwVersion.text = deviceArray[position].firmwareData.getString("firmwareVersion")
 
         val gson = Gson()
 
@@ -78,7 +78,7 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
         return deviceArray.size
     }
 
-    fun addDevice(firmwareDataArray: ArrayList<FirmwareData>) {
-        deviceArray = firmwareDataArray
+    fun addDevice(firmwareArray: ArrayList<Firmware>) {
+        deviceArray = firmwareArray
     }
 }

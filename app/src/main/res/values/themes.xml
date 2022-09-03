@@ -15,7 +15,7 @@
     </style>
 
     <style name="Preview_Activity" parent="Theme.MiDoze">
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@color/gray</item>
     </style>
 
 </resources>

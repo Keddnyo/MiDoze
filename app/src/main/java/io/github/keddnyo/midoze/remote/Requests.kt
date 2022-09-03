@@ -9,12 +9,11 @@ import android.os.Environment
 import android.webkit.URLUtil
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Device
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
-import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
@@ -35,7 +34,7 @@ class Requests {
         val deviceArrayListArray: ArrayList<FirmwareDataStack> = arrayListOf()
 
         WearableRepository(context).wearables.forEach { wearableStack ->
-            val deviceArrayList: ArrayList<FirmwareData> = arrayListOf()
+            val deviceArrayList: ArrayList<Firmware> = arrayListOf()
             wearableStack.wearableStack.forEach { wearable ->
                 runBlocking(Dispatchers.IO) {
                     Requests().getFirmwareData(
@@ -81,7 +80,7 @@ class Requests {
     suspend fun getFirmwareData(
         context: Context,
         wearable: Wearable
-    ): FirmwareData? = with(context as Activity) {
+    ): Firmware? = with(context as Activity) {
         val client = HttpClient()
         val targetHost = OnlineStatus(context).getXiaomiHostReachable().toString()
         val response = client.get {
@@ -149,24 +148,12 @@ class Requests {
                 )
 
             val deviceName = device.name
-            val devicePreview = device.image
+            val devicePreview = device.preview
 
-            fun get(key: String): String {
-                return if (firmwareData.has(key)) {
-                    firmwareData.getString(key)
-                } else ({
-                    null
-                }).toString()
-            }
-
-            FirmwareData(
+            Firmware(
                 device = Device(deviceName, devicePreview),
                 wearable = wearable,
-                firmware = firmwareData,
-                firmwareVersion = firmwareData.getString("firmwareVersion"),
-                language = get("lang"),
-                changeLog = get("changeLog"),
-                buildTime = Display().getLocaleFirmwareDate(get("buildTime"))
+                firmwareData = firmwareData
             )
         } else {
             null

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main
+package io.github.keddnyo.midoze.activities.menu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import io.github.keddnyo.midoze.adapters.AppsAdapter
 import io.github.keddnyo.midoze.local.packages.PackageRepository
 import io.github.keddnyo.midoze.utils.Display
 
-class AppsActivity : AppCompatActivity() {
+class ApplicationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         title = getString(R.string.menu_apps)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

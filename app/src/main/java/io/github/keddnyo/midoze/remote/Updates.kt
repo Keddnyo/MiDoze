@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.OnlineStatus
-import io.github.keddnyo.midoze.utils.PackageUtils
 import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
 import org.json.JSONObject
 

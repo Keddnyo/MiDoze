@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
+import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.utils.Display
 
 class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.WatchfaceStackViewHolder>() {
@@ -42,7 +43,7 @@ class WatchfaceStackAdapter : RecyclerView.Adapter<WatchfaceStackAdapter.Watchfa
             } else {
                 GridLayoutManager(
                     holder.layout.context, Display()
-                        .getGridLayoutIndex(holder.layout.context, 225)
+                        .getGridLayoutIndex(holder.layout.context, CARD_GRID_WIDTH)
                 )
             }
 

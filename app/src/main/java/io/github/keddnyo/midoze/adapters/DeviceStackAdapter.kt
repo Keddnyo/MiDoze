@@ -33,7 +33,7 @@ class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareDataStack> = 
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.image.setImageResource(stackArray[position].deviceStack[0].device.image)
+        holder.image.setImageResource(stackArray[position].deviceStack[0].device.preview)
         holder.name?.text = stackArray[position].name
         stackArray[position].deviceStack.size.toString().let { deviceCount ->
             holder.count?.text = holder.container.context.getString(R.string.items, deviceCount)

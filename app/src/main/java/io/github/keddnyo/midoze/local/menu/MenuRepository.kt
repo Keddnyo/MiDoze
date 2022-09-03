@@ -2,41 +2,41 @@ package io.github.keddnyo.midoze.local.menu
 
 import android.content.Context
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.MainMenu
+import io.github.keddnyo.midoze.local.dataModels.Menu
 
 class MenuRepository(val context: Context) {
     val items = arrayListOf(
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_firmware,
             title = context.resources.getString(R.string.menu_firmwares),
             tag = "Firmwares"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_watchface,
             title = context.resources.getString(R.string.menu_watchface),
             tag = "Watchface"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_apps,
             title = context.resources.getString(R.string.menu_apps),
             tag = "Apps"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_request,
             title = context.resources.getString(R.string.menu_request),
             tag = "Request"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_download,
             title = context.resources.getString(R.string.menu_downloads),
             tag = "Downloads"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_info,
             title = context.resources.getString(R.string.menu_github),
             tag = "About"
         ),
-        MainMenu(
+        Menu(
             icon = R.drawable.ic_delete,
             title = context.resources.getString(R.string.menu_uninstall),
             tag = "Uninstall"

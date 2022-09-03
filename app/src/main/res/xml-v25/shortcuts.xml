@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/menu_request">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="io.github.keddnyo.midoze.activities.request.RequestActivity"
+            android:targetClass="io.github.keddnyo.midoze.activities.firmware.request.RequestActivity"
             android:targetPackage="io.github.keddnyo.midoze" />
     </shortcut>
 </shortcuts>

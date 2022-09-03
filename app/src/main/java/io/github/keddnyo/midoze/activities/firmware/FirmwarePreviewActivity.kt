@@ -12,9 +12,9 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.request.ResponseActivity
+import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
 import io.github.keddnyo.midoze.adapters.FirmwarePreviewAdapter
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
@@ -46,9 +46,9 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         if (intent.hasExtra("deviceArray")) {
             val position = intent.getIntExtra("position", 0)
 
-            val deviceArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("deviceArray").toString(),
-                object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
             )
 
             val description: TextView =
@@ -63,46 +63,46 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             viewPager.setCurrentItem(position, false)
             fun initializeViewPager(position: Int) {
                 val device = deviceArray[position]
-
                 val deviceRepository = DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
 
-                supportActionBar?.title = device.firmwareVersion
-                supportActionBar?.subtitle = deviceRepository.name
-
                 shareTitle = deviceRepository.name
-                downloadContent = JSONObject(device.firmware.toString())
+                supportActionBar?.title = shareTitle
+                downloadContent = JSONObject(device.firmwareData.toString())
 
-                device.language.let { content ->
-                    if (content != null) {
-                        description.text = device.language?.toLanguageList()
+                description.apply {
+                    if (device.firmwareData.has("lang")) {
+                        text = device.firmwareData.getString("lang").toLanguageList()
                     } else {
-                        description.visibility = View.GONE
+                        visibility = View.GONE
                     }
                 }
 
                 if (OnlineStatus(context).isOnline) {
-                    download.isEnabled = true
-                    download.setOnClickListener {
-                        runBlocking(Dispatchers.IO) {
-                            for (i in responseFirmwareTagsArray) {
-                                if (downloadContent.has(i)) {
-                                    val urlString = downloadContent.getString(i)
-                                    Requests().getFirmwareFile(
-                                        context,
-                                        urlString,
-                                        deviceRepository.name,
-                                        getString(R.string.menu_firmwares)
-                                    )
+                    download.apply {
+                        isEnabled = true
+                        text = device.firmwareData.getString("firmwareVersion")
+                        setOnClickListener {
+                            runBlocking(Dispatchers.IO) {
+                                for (i in responseFirmwareTagsArray) {
+                                    if (downloadContent.has(i)) {
+                                        val urlString = downloadContent.getString(i)
+                                        Requests().getFirmwareFile(
+                                            context,
+                                            urlString,
+                                            deviceRepository.name,
+                                            getString(R.string.menu_firmwares)
+                                        )
+                                    }
                                 }
                             }
                         }
-                    }
-                    download.setOnLongClickListener {
-                        val intent = Intent(context, ResponseActivity::class.java)
-                        intent.putExtra("json", downloadContent.toString())
-                        context.startActivity(intent)
-
-                        true
+                        setOnLongClickListener {
+                            Intent(context, ResponseActivity::class.java).let { intent->
+                                intent.putExtra("json", downloadContent.toString())
+                                context.startActivity(intent)
+                            }
+                            true
+                        }
                     }
                 }
             }

@@ -14,15 +14,15 @@ import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.watchface.WatchfaceStackActivity
 import io.github.keddnyo.midoze.activities.firmware.DeviceStackActivity
-import io.github.keddnyo.midoze.activities.main.AppsActivity
-import io.github.keddnyo.midoze.activities.request.RequestActivity
-import io.github.keddnyo.midoze.local.dataModels.MainMenu
+import io.github.keddnyo.midoze.activities.menu.ApplicationsActivity
+import io.github.keddnyo.midoze.activities.firmware.request.RequestActivity
+import io.github.keddnyo.midoze.local.dataModels.Menu
 import io.github.keddnyo.midoze.remote.Routes
 import io.github.keddnyo.midoze.utils.AndroidVersion
 import io.github.keddnyo.midoze.utils.PackageUtils
 
 class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
-    private var mainMenuArray = ArrayList<MainMenu>()
+    private var menuArray = ArrayList<Menu>()
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,13 +43,13 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         context = holder.layout.context
 
-        holder.title.text = mainMenuArray[position].title
-        holder.icon.setImageResource(mainMenuArray[position].icon)
+        holder.title.text = menuArray[position].title
+        holder.icon.setImageResource(menuArray[position].icon)
 
         holder.layout.setOnClickListener {
-            when (mainMenuArray[position].tag) {
+            when (menuArray[position].tag) {
                 "Apps" -> {
-                    startActivity(Intent(context, AppsActivity::class.java))
+                    startActivity(Intent(context, ApplicationsActivity::class.java))
                 }
                 "Firmwares" -> {
                     startActivity(Intent(context, DeviceStackActivity::class.java))
@@ -80,12 +80,12 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return mainMenuArray.size
+        return menuArray.size
     }
 
-    fun addItems(mainMenuArrayList: ArrayList<MainMenu>) {
-        mainMenuArray = mainMenuArrayList
-        notifyItemRangeInserted(0, mainMenuArrayList.size)
+    fun addItems(menuArrayList: ArrayList<Menu>) {
+        menuArray = menuArrayList
+        notifyItemRangeInserted(0, menuArrayList.size)
     }
 
     private fun startActivity(intent: Intent) = with(context) {

@@ -20,11 +20,9 @@ import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import java.util.*
-import kotlin.collections.ArrayList
 
 class WatchfacePreviewActivity : AppCompatActivity() {
-    private lateinit var shareTitle: String
+    private lateinit var watchfaceTitle: String
     private lateinit var downloadContent: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +35,9 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         if (intent.hasExtra("watchfaceArray")) {
             val position = intent.getIntExtra("position", 0)
 
-            val watchfaceArray: ArrayList<Watchface> = GsonBuilder().create().fromJson(
+            val watchfaceArray: ArrayList<Watchface.WatchfaceData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("watchfaceArray").toString(),
-                object : TypeToken<ArrayList<Watchface>>() {}.type
+                object : TypeToken<ArrayList<Watchface.WatchfaceData>>() {}.type
             )
 
             val description: TextView =
@@ -55,13 +53,12 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             fun initializeViewPager(position: Int) {
                 val watchface = watchfaceArray[position]
 
-                title = watchface.title.trim().replaceFirstChar { it.uppercase() }
-                supportActionBar?.subtitle = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
-                shareTitle = watchface.title
+                title = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
+                watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 downloadContent = watchface.url
 
                 watchface.introduction.let { content ->
-                    if (content.isNotBlank() && content != "null") {
+                    if (content.isNotBlank() && content != "null" && content.toCharArray().size > 200) {
                         description.text = content
                     } else {
                         description.visibility = View.GONE
@@ -69,18 +66,21 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 }
 
                 if (OnlineStatus(context).isOnline) {
-                    download.isEnabled = true
-                    download.setOnClickListener {
-                        runBlocking(Dispatchers.IO) {
-                            if (OnlineStatus(context).isOnline) {
-                                Requests().getFirmwareFile(
-                                    context,
-                                    watchface.url,
-                                    watchface.title,
-                                    getString(R.string.menu_watchface)
-                                )
-                            } else {
-                                getString(R.string.connectivity_error).showAsToast(context)
+                    download.apply {
+                        isEnabled = true
+                        text = watchfaceTitle
+                        setOnClickListener {
+                            runBlocking(Dispatchers.IO) {
+                                if (OnlineStatus(context).isOnline) {
+                                    Requests().getFirmwareFile(
+                                        context,
+                                        watchface.url,
+                                        watchface.title,
+                                        getString(R.string.menu_watchface)
+                                    )
+                                } else {
+                                    getString(R.string.connectivity_error).showAsToast(context)
+                                }
                             }
                         }
                     }
@@ -102,7 +102,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
     private fun shareContent() {
         val stringBuilder = StringBuilder()
-        val shareContent = stringBuilder.append(shareTitle)
+        val shareContent = stringBuilder.append(watchfaceTitle)
             .append("\n")
             .append(downloadContent)
             .append("\n")
@@ -122,7 +122,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             type = "text/plain"
         }
 
-        val shareIntent = Intent.createChooser(sendIntent, shareTitle)
+        val shareIntent = Intent.createChooser(sendIntent, watchfaceTitle)
         startActivity(shareIntent)
     }
 

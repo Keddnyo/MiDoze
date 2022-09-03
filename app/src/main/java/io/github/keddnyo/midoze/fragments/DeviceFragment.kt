@@ -11,7 +11,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.DeviceAdapter
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.utils.Display
 
 class DeviceFragment : Fragment() {
@@ -30,15 +31,15 @@ class DeviceFragment : Fragment() {
         deviceListRecyclerView.layoutManager =
             GridLayoutManager(
                 this, Display()
-                    .getGridLayoutIndex(this, 225)
+                    .getGridLayoutIndex(this, CARD_GRID_WIDTH)
             )
 
         val adapter = DeviceAdapter()
         deviceListRecyclerView.adapter = adapter
 
-        val firmwaresDataArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
+        val firmwaresDataArray: ArrayList<Firmware> = GsonBuilder().create().fromJson(
             arguments?.getString("deviceArray"),
-            object : TypeToken<ArrayList<FirmwareData>>() {}.type
+            object : TypeToken<ArrayList<Firmware>>() {}.type
         )
 
         adapter.addDevice(firmwaresDataArray)

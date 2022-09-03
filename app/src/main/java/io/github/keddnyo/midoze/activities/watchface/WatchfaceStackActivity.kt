@@ -14,9 +14,8 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.WatchfaceCommonAdapter
 import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
-import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
-import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
 import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceDeviceStack
+import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
@@ -44,15 +43,15 @@ class WatchfaceStackActivity : AppCompatActivity() {
                 override fun execute() {
                     super.execute()
 
-                    var watchfaceArrayList: ArrayList<WatchfaceCommonStack> = arrayListOf()
-                    val watchfaceArrayListSlot: ArrayList<WatchfaceCommonStack> = arrayListOf()
+                    var watchfaceArrayList: ArrayList<Watchface.WatchfaceDataArrayGlobal> = arrayListOf()
+                    val watchfaceArrayListSlot: ArrayList<Watchface.WatchfaceDataArrayGlobal> = arrayListOf()
 
                     Executors.newSingleThreadExecutor().execute {
                         prefs.getString("watchfaceStackCache", "").toString().let { watchfaceStackCache ->
                             if (watchfaceStackCache.isNotBlank() && watchfaceStackCache != "null") {
                                 watchfaceArrayList = GsonBuilder().create().fromJson(
                                     watchfaceStackCache,
-                                    object : TypeToken<ArrayList<WatchfaceCommonStack>>() {}.type
+                                    object : TypeToken<ArrayList<Watchface.WatchfaceDataArrayGlobal>>() {}.type
                                 )
                             } else if (isOnline) {
                                 if (watchfaceStackAdapter.itemCount == 0) {
@@ -68,11 +67,11 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                         val json = JSONObject(content)
                                         val data = json.getJSONArray("data")
 
-                                        val watchfaceArrayStack = arrayListOf<WatchfaceStack>()
+                                        val watchfaceArrayStack = arrayListOf<Watchface.WatchfaceDataArray>()
 
                                         for (d in 0 until data.length()) {
                                             val list = data.getJSONObject(d).getJSONArray("list")
-                                            val watchfaceArray = arrayListOf<Watchface>()
+                                            val watchfaceArray = arrayListOf<Watchface.WatchfaceData>()
 
                                             for (l in 0 until list.length()) {
                                                 val url = URL(list.getJSONObject(l).getString("icon"))
@@ -83,20 +82,19 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                                 BitmapCache(context).encode(a.deviceAlias, getItem("display_name"), preview)
 
                                                 watchfaceArray.add(
-                                                    Watchface(
+                                                    Watchface.WatchfaceData(
                                                         title = getItem("display_name"),
                                                         categoryName = data.getJSONObject(d).getString("tab_name"),
                                                         deviceName = a.deviceName,
                                                         deviceAlias = a.deviceAlias,
                                                         introduction = getItem("introduction"),
-                                                        url = getItem("config_file"),
-                                                        size = Display().bytesToHumanReadableSize(getItem("file_size").toDouble())
+                                                        url = getItem("config_file")
                                                     )
                                                 )
                                             }
 
                                             watchfaceArrayStack.add(
-                                                WatchfaceStack(
+                                                Watchface.WatchfaceDataArray(
                                                     title = data.getJSONObject(d).getString("tab_name"),
                                                     stack = watchfaceArray,
                                                     hasCategories = a.hasCategories
@@ -105,7 +103,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                         }
 
                                         arrayList.add(
-                                            WatchfaceCommonStack(
+                                            Watchface.WatchfaceDataArrayGlobal(
                                                 title = a.deviceName,
                                                 alias = a.deviceAlias,
                                                 stack = watchfaceArrayStack
@@ -126,7 +124,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                             findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).let { RecyclerView ->
                                 RecyclerView.layoutManager = GridLayoutManager(
                                     context, Display()
-                                        .getGridLayoutIndex(context, 225)
+                                        .getGridLayoutIndex(context, CARD_GRID_WIDTH)
                                 )
 
                                 WatchfaceCommonAdapter().let { adapter ->

@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
-import io.github.keddnyo.midoze.local.dataModels.WatchfaceStack
+import io.github.keddnyo.midoze.local.dataModels.Watchface
 
 class WatchfaceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +23,10 @@ class WatchfaceActivity : AppCompatActivity() {
             title = intent.getStringExtra("name")
             prefs.getString("WatchfaceStack", "").toString().let { WatchfaceCommonStackPreference ->
                 if (WatchfaceCommonStackPreference.isNotEmpty()) {
-                    val watchfaceArrayStack: ArrayList<WatchfaceStack> =
+                    val watchfaceArrayStack: ArrayList<Watchface.WatchfaceDataArray> =
                         GsonBuilder().create().fromJson(
                             WatchfaceCommonStackPreference,
-                            object : TypeToken<ArrayList<WatchfaceStack>>() {}.type
+                            object : TypeToken<ArrayList<Watchface.WatchfaceDataArray>>() {}.type
                         )
 
                     findViewById<RecyclerView>(R.id.watchfaceRecyclerView).let { RecyclerView ->

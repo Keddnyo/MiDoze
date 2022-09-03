@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.main
+package io.github.keddnyo.midoze.activities.menu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

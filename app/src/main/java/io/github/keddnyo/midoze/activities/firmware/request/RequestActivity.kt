@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.activities.request
+package io.github.keddnyo.midoze.activities.firmware.request
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.Application
-import io.github.keddnyo.midoze.local.dataModels.FirmwareData
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.local.dataModels.Region
 import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
@@ -75,9 +75,9 @@ class RequestActivity : AppCompatActivity() {
         if (intent.hasExtra("deviceArray")) {
             val position = intent.getIntExtra("position", 0)
 
-            val deviceArray: ArrayList<FirmwareData> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<Firmware> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("deviceArray").toString(),
-                object : TypeToken<ArrayList<FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<Firmware>>() {}.type
             )
 
             val device = deviceArray[position]
@@ -203,10 +203,6 @@ class RequestActivity : AppCompatActivity() {
             importButton.visibility = View.GONE
             true
         }
-    }
-    
-    private fun getIntentExtra(key: String): String {
-        return intent.getStringExtra(key).toString()
     }
 
     override fun onSupportNavigateUp(): Boolean {

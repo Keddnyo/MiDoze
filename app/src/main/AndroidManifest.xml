@@ -18,7 +18,7 @@
         <package android:name="com.mc.amazfit1" />
         <package android:name="com.mc.miband1" />
         <package android:name="blacknote.amazfitmaster" />
-        <package android:name="blacknote.amazfitmaster" />
+        <package android:name="blacknote.mibandmaster" />
         <package android:name="com.lumaticsoft.watchdroidassistant" />
         <package android:name="cz.zdenekhorak.amazfittools" />
         <package android:name="cz.zdenekhorak.mibandtools" />
@@ -35,7 +35,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".activities.main.MainActivity"
+            android:name=".activities.menu.MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -49,7 +49,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".activities.main.AppsActivity"
+            android:name=".activities.menu.ApplicationsActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
@@ -57,12 +57,12 @@
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.request.RequestActivity"
+            android:name="io.github.keddnyo.midoze.activities.firmware.request.RequestActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog"/>
         <activity
-            android:name=".activities.request.ResponseActivity"
+            android:name="io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
