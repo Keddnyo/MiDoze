@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.WatchfacePreviewAdapter
+import io.github.keddnyo.midoze.adapters.watchface.WatchfacePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
@@ -53,12 +53,13 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             fun initializeViewPager(position: Int) {
                 val watchface = watchfaceArray[position]
 
-                title = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
-                watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 downloadContent = watchface.url
+                watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
+                title = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
+                supportActionBar?.subtitle = watchfaceTitle
 
                 watchface.introduction.let { content ->
-                    if (content.isNotBlank() && content != "null" && content.toCharArray().size > 200) {
+                    if (content.isNotBlank() && content != "null" && content.toCharArray().size < 200) {
                         description.text = content
                     } else {
                         description.visibility = View.GONE
@@ -68,7 +69,6 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 if (OnlineStatus(context).isOnline) {
                     download.apply {
                         isEnabled = true
-                        text = watchfaceTitle
                         setOnClickListener {
                             runBlocking(Dispatchers.IO) {
                                 if (OnlineStatus(context).isOnline) {

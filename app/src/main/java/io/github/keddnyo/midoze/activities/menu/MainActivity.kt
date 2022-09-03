@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.MenuAdapter
+import io.github.keddnyo.midoze.adapters.menu.MenuAdapter
 import io.github.keddnyo.midoze.local.menu.MenuRepository
 import io.github.keddnyo.midoze.remote.Updates
 import io.github.keddnyo.midoze.utils.AndroidVersion

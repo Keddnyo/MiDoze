@@ -8,10 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import android.webkit.URLUtil
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Device
 import io.github.keddnyo.midoze.local.dataModels.Firmware
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
-import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.local.devices.WearableRepository
 import io.github.keddnyo.midoze.utils.DozeLocale
@@ -30,11 +27,11 @@ import java.net.URL
 class Requests {
     fun getFirmwareLatest(
         context: Context
-    ): ArrayList<FirmwareDataStack> = with(context as Activity) {
-        val deviceArrayListArray: ArrayList<FirmwareDataStack> = arrayListOf()
+    ): ArrayList<Firmware.FirmwareDataArray> = with(context as Activity) {
+        val deviceArrayListArray: ArrayList<Firmware.FirmwareDataArray> = arrayListOf()
 
         WearableRepository(context).wearables.forEach { wearableStack ->
-            val deviceArrayList: ArrayList<Firmware> = arrayListOf()
+            val deviceArrayList: ArrayList<Firmware.FirmwareData> = arrayListOf()
             wearableStack.wearableStack.forEach { wearable ->
                 runBlocking(Dispatchers.IO) {
                     Requests().getFirmwareData(
@@ -48,9 +45,9 @@ class Requests {
                 }
             }
             deviceArrayListArray.add(
-                FirmwareDataStack(
+                Firmware.FirmwareDataArray(
                     name = wearableStack.name,
-                    deviceStack = deviceArrayList
+                    firmwareData = deviceArrayList
                 )
             )
         }
@@ -79,8 +76,8 @@ class Requests {
 
     suspend fun getFirmwareData(
         context: Context,
-        wearable: Wearable
-    ): Firmware? = with(context as Activity) {
+        wearable: Firmware.Wearable
+    ): Firmware.FirmwareData? = with(context as Activity) {
         val client = HttpClient()
         val targetHost = OnlineStatus(context).getXiaomiHostReachable().toString()
         val response = client.get {
@@ -150,8 +147,8 @@ class Requests {
             val deviceName = device.name
             val devicePreview = device.preview
 
-            Firmware(
-                device = Device(deviceName, devicePreview),
+            Firmware.FirmwareData(
+                device = Firmware.Device(deviceName, devicePreview),
                 wearable = wearable,
                 firmwareData = firmwareData
             )

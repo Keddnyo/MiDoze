@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.firmware
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Watchface
-import io.github.keddnyo.midoze.utils.BitmapCache
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 
-class WatchfacePreviewAdapter(private val watchfaceList: ArrayList<Watchface.WatchfaceData>) : RecyclerView.Adapter<WatchfacePreviewAdapter.PreviewViewHolder>() {
+class FirmwarePreviewAdapter(private val deviceList: ArrayList<Firmware.FirmwareData>) : RecyclerView.Adapter<FirmwarePreviewAdapter.PreviewViewHolder>() {
     inner class PreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreviewViewHolder {
@@ -18,11 +17,14 @@ class WatchfacePreviewAdapter(private val watchfaceList: ArrayList<Watchface.Wat
     }
 
     override fun onBindViewHolder(holder: PreviewViewHolder, position: Int) {
-        val currentImage = BitmapCache(holder.itemView.context).decode(watchfaceList[position].deviceAlias, watchfaceList[position].title)
-        holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).setImageBitmap(currentImage)
+        holder.itemView.context.let {
+            deviceList[position].let { device ->
+                holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).setImageResource(device.device.preview)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return watchfaceList.size
+        return deviceList.size
     }
 }

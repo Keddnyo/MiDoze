@@ -21,8 +21,4 @@
         <item name="colorSurface">@color/black</item>
     </style>
 
-    <style name="Preview_Activity" parent="Theme.MiDoze">
-        <item name="android:windowBackground">@color/gray</item>
-    </style>
-
 </resources>

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.watchface
 
 import android.content.Context
 import android.content.Intent
@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.watchface.WatchfaceActivity
-import io.github.keddnyo.midoze.local.dataModels.WatchfaceCommonStack
-import io.github.keddnyo.midoze.utils.BitmapCache
+import io.github.keddnyo.midoze.local.dataModels.Watchface
 
 class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.DeviceListViewHolder>() {
-    private var watchfaceCommonStackArray = ArrayList<WatchfaceCommonStack>()
+    private var watchfaceDataStack = ArrayList<Watchface.WatchfaceDataStack>()
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,30 +36,25 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         context = holder.layout.context
 
-        val gson = Gson()
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val watchface = watchfaceCommonStackArray[position].stack[0].stack[0]
-
-        val preview = BitmapCache(context).decode(watchface.deviceAlias, watchface.title)
-
-        holder.title.text = watchfaceCommonStackArray[position].title
-        holder.icon.setImageBitmap(preview)
-
-        holder.layout.setOnClickListener {
-            val intent = Intent(context, WatchfaceActivity::class.java)
-            prefs.edit().putString("WatchfaceStack", gson.toJson(watchfaceCommonStackArray[position].stack).toString()).apply()
-            intent.putExtra("name", watchfaceCommonStackArray[position].title)
-            context.startActivity(intent)
+        holder.title.text = watchfaceDataStack[position].name
+        watchfaceDataStack[position].preview?.let {
+            holder.icon.setImageResource(it)
         }
 
+        holder.layout.setOnClickListener {
+            Intent(context, WatchfaceActivity::class.java).let { intent ->
+                intent.putExtra("device", Gson().toJson(watchfaceDataStack[position]).toString())
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return watchfaceCommonStackArray.size
+        return watchfaceDataStack.size
     }
 
-    fun addWatchfaceList(array: ArrayList<WatchfaceCommonStack>) {
-        watchfaceCommonStackArray = array
+    fun addWatchfaceList(array: ArrayList<Watchface.WatchfaceDataStack>) {
+        watchfaceDataStack = array
         notifyItemRangeInserted(0, array.size)
     }
 }

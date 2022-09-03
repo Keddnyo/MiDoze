@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
-import io.github.keddnyo.midoze.adapters.FirmwarePreviewAdapter
+import io.github.keddnyo.midoze.adapters.firmware.FirmwarePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
@@ -65,9 +65,10 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 val device = deviceArray[position]
                 val deviceRepository = DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
 
+                downloadContent = device.firmwareData
                 shareTitle = deviceRepository.name
-                supportActionBar?.title = shareTitle
-                downloadContent = JSONObject(device.firmwareData.toString())
+                title = shareTitle
+                supportActionBar?.subtitle = downloadContent.getString("firmwareVersion")
 
                 description.apply {
                     if (device.firmwareData.has("lang")) {
@@ -80,7 +81,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 if (OnlineStatus(context).isOnline) {
                     download.apply {
                         isEnabled = true
-                        text = device.firmwareData.getString("firmwareVersion")
                         setOnClickListener {
                             runBlocking(Dispatchers.IO) {
                                 for (i in responseFirmwareTagsArray) {

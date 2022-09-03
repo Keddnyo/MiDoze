@@ -14,8 +14,4 @@
         <item name="android:windowBackground">#00000000</item>
     </style>
 
-    <style name="Preview_Activity" parent="Theme.MiDoze">
-        <item name="android:windowBackground">@color/gray</item>
-    </style>
-
 </resources>

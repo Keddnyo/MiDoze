@@ -76,13 +76,11 @@
         <activity
             android:name=".activities.firmware.FirmwarePreviewActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Preview_Activity" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.watchface.WatchfacePreviewActivity"
             android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Preview_Activity" />
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

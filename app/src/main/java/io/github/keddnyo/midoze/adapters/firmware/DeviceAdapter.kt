@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.firmware
 
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,7 @@ import io.github.keddnyo.midoze.local.dataModels.Firmware
 import kotlin.collections.ArrayList
 
 class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>() {
-    private var deviceArray = ArrayList<Firmware>()
+    private var deviceArray = ArrayList<Firmware.FirmwareData>()
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView =
@@ -78,7 +78,7 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.DeviceListViewHolder>()
         return deviceArray.size
     }
 
-    fun addDevice(firmwareArray: ArrayList<Firmware>) {
+    fun addDevice(firmwareArray: ArrayList<Firmware.FirmwareData>) {
         deviceArray = firmwareArray
     }
 }

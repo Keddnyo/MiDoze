@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.firmware
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.fragments.DeviceContainer
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 
-class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareDataStack> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
+class DeviceStackAdapter(private var stackArray: ArrayList<Firmware.FirmwareDataArray> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val container: MaterialCardView =
@@ -33,9 +33,9 @@ class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareDataStack> = 
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
-        holder.image.setImageResource(stackArray[position].deviceStack[0].device.preview)
+        holder.image.setImageResource(stackArray[position].firmwareData[0].device.preview)
         holder.name?.text = stackArray[position].name
-        stackArray[position].deviceStack.size.toString().let { deviceCount ->
+        stackArray[position].firmwareData.size.toString().let { deviceCount ->
             holder.count?.text = holder.container.context.getString(R.string.items, deviceCount)
         }
 

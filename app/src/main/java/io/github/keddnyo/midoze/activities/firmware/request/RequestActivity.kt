@@ -12,10 +12,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
-import io.github.keddnyo.midoze.local.dataModels.Application
 import io.github.keddnyo.midoze.local.dataModels.Firmware
-import io.github.keddnyo.midoze.local.dataModels.Region
-import io.github.keddnyo.midoze.local.dataModels.Wearable
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
@@ -75,9 +72,9 @@ class RequestActivity : AppCompatActivity() {
         if (intent.hasExtra("deviceArray")) {
             val position = intent.getIntExtra("position", 0)
 
-            val deviceArray: ArrayList<Firmware> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("deviceArray").toString(),
-                object : TypeToken<ArrayList<Firmware>>() {}.type
+                object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
             )
 
             val device = deviceArray[position]
@@ -102,14 +99,14 @@ class RequestActivity : AppCompatActivity() {
                 val firmwareResponse = runBlocking {
                     Requests().getFirmwareData(
                         context,
-                        wearable = Wearable(
+                        wearable = Firmware.Wearable(
                             requestDeviceSourceEditText.text.toString().trim(),
                             requestProductionSourceEditText.text.toString().trim(),
-                            Application(
+                            Firmware.Application(
                                 requestAppNameEditText.text.toString().trim(),
                                 requestAppVersionEditText.text.toString().trim()
                             ),
-                            Region(
+                            Firmware.Region(
                                 requestCountryEditText.text.toString().trim(),
                                 requestLangEditText.text.toString().trim()
                             )

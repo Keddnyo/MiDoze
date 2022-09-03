@@ -4,16 +4,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 
 class DeviceContainer {
-    fun show(context: AppCompatActivity, stackArray: ArrayList<FirmwareDataStack>, position: Int) =
+    fun show(context: AppCompatActivity, stackArray: ArrayList<Firmware.FirmwareDataArray>, position: Int) =
         with(context) {
             DeviceFragment().let { deviceFragment ->
                 deviceFragment.arguments = Bundle().apply {
                     putString(
                         "deviceArray",
-                        Gson().toJson(stackArray[position].deviceStack)
+                        Gson().toJson(stackArray[position].firmwareData)
                     )
                 }
 

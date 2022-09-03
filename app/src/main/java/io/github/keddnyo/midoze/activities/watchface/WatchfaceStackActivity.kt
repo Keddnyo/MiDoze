@@ -11,10 +11,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.WatchfaceCommonAdapter
-import io.github.keddnyo.midoze.adapters.WatchfaceStackAdapter
+import io.github.keddnyo.midoze.adapters.watchface.WatchfaceCommonAdapter
 import io.github.keddnyo.midoze.local.dataModels.Watchface
-import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.watchfaceDeviceStack
+import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.DeviceStacks
 import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.*
@@ -35,7 +34,6 @@ class WatchfaceStackActivity : AppCompatActivity() {
         val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
-        val watchfaceStackAdapter = WatchfaceStackAdapter()
         val gson = Gson()
 
         OnlineStatus(context).run {
@@ -43,79 +41,56 @@ class WatchfaceStackActivity : AppCompatActivity() {
                 override fun execute() {
                     super.execute()
 
-                    var watchfaceArrayList: ArrayList<Watchface.WatchfaceDataArrayGlobal> = arrayListOf()
-                    val watchfaceArrayListSlot: ArrayList<Watchface.WatchfaceDataArrayGlobal> = arrayListOf()
+                    var watchfaceArrayStack: ArrayList<Watchface.WatchfaceDataStack> = arrayListOf()
 
                     Executors.newSingleThreadExecutor().execute {
                         prefs.getString("watchfaceStackCache", "").toString().let { watchfaceStackCache ->
                             if (watchfaceStackCache.isNotBlank() && watchfaceStackCache != "null") {
-                                watchfaceArrayList = GsonBuilder().create().fromJson(
+                                watchfaceArrayStack = GsonBuilder().create().fromJson(
                                     watchfaceStackCache,
-                                    object : TypeToken<ArrayList<Watchface.WatchfaceDataArrayGlobal>>() {}.type
+                                    object : TypeToken<ArrayList<Watchface.WatchfaceDataStack>>() {}.type
                                 )
                             } else if (isOnline) {
-                                if (watchfaceStackAdapter.itemCount == 0) {
-                                    watchfaceArrayList
-                                } else {
-                                    watchfaceArrayListSlot
-                                }.let { arrayList ->
-                                    for (a in watchfaceDeviceStack) {
-                                        val content = runBlocking(Dispatchers.IO) {
-                                            Requests().getWatchfaceData(a.deviceAlias)
-                                        }
+                                for (device in DeviceStacks) {
+                                    val watchfaceArray: ArrayList<Watchface.WatchfaceData> = arrayListOf()
 
-                                        val json = JSONObject(content)
-                                        val data = json.getJSONArray("data")
+                                    val content = runBlocking(Dispatchers.IO) {
+                                        Requests().getWatchfaceData(device.alias)
+                                    }
 
-                                        val watchfaceArrayStack = arrayListOf<Watchface.WatchfaceDataArray>()
+                                    val json = JSONObject(content)
+                                    val data = json.getJSONArray("data")
 
-                                        for (d in 0 until data.length()) {
-                                            val list = data.getJSONObject(d).getJSONArray("list")
-                                            val watchfaceArray = arrayListOf<Watchface.WatchfaceData>()
+                                    for (d in 0 until data.length()) {
+                                        val list = data.getJSONObject(d).getJSONArray("list")
 
-                                            for (l in 0 until list.length()) {
-                                                val url = URL(list.getJSONObject(l).getString("icon"))
-                                                val preview = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                                        for (l in 0 until list.length()) {
+                                            val url = URL(list.getJSONObject(l).getString("icon"))
+                                            val preview = BitmapFactory.decodeStream(url.openConnection().getInputStream())
 
-                                                fun getItem(name: String) = list.getJSONObject(l).getString(name)
+                                            fun getItem(name: String) = list.getJSONObject(l).getString(name)
 
-                                                BitmapCache(context).encode(a.deviceAlias, getItem("display_name"), preview)
+                                            BitmapCache(context).encode(device.alias, getItem("display_name"), preview)
 
-                                                watchfaceArray.add(
-                                                    Watchface.WatchfaceData(
-                                                        title = getItem("display_name"),
-                                                        categoryName = data.getJSONObject(d).getString("tab_name"),
-                                                        deviceName = a.deviceName,
-                                                        deviceAlias = a.deviceAlias,
-                                                        introduction = getItem("introduction"),
-                                                        url = getItem("config_file")
-                                                    )
-                                                )
-                                            }
-
-                                            watchfaceArrayStack.add(
-                                                Watchface.WatchfaceDataArray(
-                                                    title = data.getJSONObject(d).getString("tab_name"),
-                                                    stack = watchfaceArray,
-                                                    hasCategories = a.hasCategories
+                                            watchfaceArray.add(
+                                                Watchface.WatchfaceData(
+                                                    alias = device.alias,
+                                                    title = getItem("display_name"),
+                                                    categoryName = data.getJSONObject(d).getString("tab_name"),
+                                                    introduction = getItem("introduction"),
+                                                    url = getItem("config_file")
                                                 )
                                             )
-                                        }
-
-                                        arrayList.add(
-                                            Watchface.WatchfaceDataArrayGlobal(
-                                                title = a.deviceName,
-                                                alias = a.deviceAlias,
-                                                stack = watchfaceArrayStack
-                                            )
-                                        )
-
-                                        watchfaceArrayListSlot.let {
-                                            if (it.isNotEmpty() && it != watchfaceArrayList) {
-                                                watchfaceArrayList = it
-                                            }
                                         }
                                     }
+
+                                    watchfaceArrayStack.add(
+                                        Watchface.WatchfaceDataStack(
+                                            name = device.name,
+                                            preview = device.preview,
+                                            watchfaceData = watchfaceArray
+                                        )
+                                    )
                                 }
                             }
                         }
@@ -131,7 +106,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                     RecyclerView.adapter = adapter
 
                                     adapter.addWatchfaceList(
-                                        watchfaceArrayList
+                                        watchfaceArrayStack
                                     )
                                 }
                             }
@@ -139,7 +114,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                             refreshWatchfaceLayout.isRefreshing = false
                         }
 
-                        prefs.edit().putString("watchfaceStackCache", gson.toJson(watchfaceArrayList).toString()).apply()
+                        prefs.edit().putString("watchfaceStackCache", gson.toJson(watchfaceArrayStack).toString()).apply()
                     }
                 }
             }

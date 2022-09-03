@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.menu
 
 import android.app.DownloadManager
 import android.content.Context

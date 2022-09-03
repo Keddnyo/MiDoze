@@ -1,10 +1,7 @@
 package io.github.keddnyo.midoze.local.devices
 
 import android.content.Context
-import io.github.keddnyo.midoze.local.dataModels.Application
-import io.github.keddnyo.midoze.local.dataModels.Region
-import io.github.keddnyo.midoze.local.dataModels.Wearable
-import io.github.keddnyo.midoze.local.dataModels.WearableStack
+import io.github.keddnyo.midoze.local.dataModels.*
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
@@ -18,28 +15,28 @@ class WearableRepository(val context: Context) {
         productionSource: String,
         isZeppLife: Boolean,
         isChineseRegion: Boolean
-    ): Wearable {
-        return Wearable(
+    ): Firmware.Wearable {
+        return Firmware.Wearable(
             deviceSource = deviceSource,
             productionSource = productionSource,
             application = if (isZeppLife) {
-                Application(
+                Firmware.Application(
                     name = ZEPP_LIFE_NAME,
                     version = ZEPP_LIFE_PACKAGE_NAME.getPackageVersion(context)
                 )
             } else {
-                Application(
+                Firmware.Application(
                     name = ZEPP_NAME,
                     version = ZEPP_PACKAGE_NAME.getPackageVersion(context)
                 )
             },
             region = if (isChineseRegion) {
-                Region(
+                Firmware.Region(
                     country = "CH",
                     language = "zh_CH"
                 )
             } else {
-                Region(
+                Firmware.Region(
                     country = DozeLocale().currentCountry,
                     language = DozeLocale().currentLocaleString
                 )
@@ -49,7 +46,7 @@ class WearableRepository(val context: Context) {
 
     val wearables = arrayListOf(
         // Xiaomi Mi Band
-        WearableStack(
+        Firmware.WearableStack(
             name = "Xiaomi Mi Band",
             wearableStack = arrayListOf(
                 // Mi Band 3i / Zepp Life
@@ -151,7 +148,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Bands
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Band",
             wearableStack = arrayListOf(
                 // Amazfit Band 5 / Zepp
@@ -173,7 +170,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Ares
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Ares",
             wearableStack = arrayListOf(
                 // Amazfit Ares / Zepp
@@ -187,7 +184,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Bip
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Bip",
             wearableStack = arrayListOf(
                 // Amazfit Bip (CH) / Zepp Life
@@ -257,7 +254,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Pop
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Pop",
             wearableStack = arrayListOf(
                 // Amazfit Pop / Zepp
@@ -295,7 +292,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit GTR Watches
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit GTR",
             wearableStack = arrayListOf(
                 // Amazfit GTR 42 CH / Zepp
@@ -453,7 +450,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit GTS Watches
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit GTS",
             wearableStack = arrayListOf(
                 // Amazfit GTS CH / Zepp
@@ -571,7 +568,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Neo
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Neo",
             wearableStack = arrayListOf(
                 // Amazfit Neo / Zepp
@@ -585,7 +582,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit T-Rex
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit T-Rex",
             wearableStack = arrayListOf(
                 // Amazfit T-Rex / Zepp
@@ -631,7 +628,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Verge
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Verge",
             wearableStack = arrayListOf(
                 // Amazfit Verge Lie GL / Zepp (Zepp Life)
@@ -645,7 +642,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit X
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit X",
             wearableStack = arrayListOf(
                 // Amazfit X CH / Zepp
@@ -667,7 +664,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Zepp E
-        WearableStack(
+        Firmware.WearableStack(
             name = "Zepp E",
             wearableStack = arrayListOf(
                 // Zepp E Circle CH / Zepp
@@ -705,7 +702,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Zepp Z
-        WearableStack(
+        Firmware.WearableStack(
             name = "Zepp Z",
             wearableStack = arrayListOf(
                 // Zepp Z CH / Zepp
@@ -727,7 +724,7 @@ class WearableRepository(val context: Context) {
         ),
 
         // Amazfit Scale
-        WearableStack(
+        Firmware.WearableStack(
             name = "Amazfit Scale",
             wearableStack = arrayListOf(
                 // Amazfit Smart Scale / Zepp

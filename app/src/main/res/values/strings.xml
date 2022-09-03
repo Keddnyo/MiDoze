@@ -3,7 +3,7 @@
 
     <string name="menu_firmwares">Firmwares</string>
     <string name="menu_watchface">Watchfaces</string>
-    <string name="menu_apps">Apps</string>
+    <string name="menu_apps">Applications</string>
     <string name="menu_request">Request</string>
     <string name="menu_downloads">Downloads</string>
     <string name="menu_github" translatable="false">GitHub</string>

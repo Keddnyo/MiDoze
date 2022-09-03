@@ -13,9 +13,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.DeviceStackAdapter
+import io.github.keddnyo.midoze.adapters.firmware.DeviceStackAdapter
 import io.github.keddnyo.midoze.fragments.DeviceContainer
-import io.github.keddnyo.midoze.local.dataModels.FirmwareDataStack
+import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.OnlineStatus
@@ -51,7 +51,7 @@ class DeviceStackActivity : AppCompatActivity() {
 
         OnlineStatus(context).run {
             class GetDevices(val context: Context) : AsyncTask() {
-                var deviceArrayList: ArrayList<FirmwareDataStack> = arrayListOf()
+                var deviceArrayList: ArrayList<Firmware.FirmwareDataArray> = arrayListOf()
 
                 override fun execute() {
                     Executors.newSingleThreadExecutor().execute {
@@ -59,7 +59,7 @@ class DeviceStackActivity : AppCompatActivity() {
                             if (deviceStackCache.isNotBlank() && deviceStackCache != "null") {
                                 deviceArrayList = GsonBuilder().create().fromJson(
                                     deviceStackCache,
-                                    object : TypeToken<ArrayList<FirmwareDataStack>>() {}.type
+                                    object : TypeToken<ArrayList<Firmware.FirmwareDataArray>>() {}.type
                                 )
                             } else if (isOnline) {
                                 deviceArrayList = Requests().getFirmwareLatest(context)

@@ -1,118 +1,118 @@
 package io.github.keddnyo.midoze.local.devices
 
-import io.github.keddnyo.midoze.local.dataModels.WatchfaceDevice
+import io.github.keddnyo.midoze.local.dataModels.Watchface
 
 object WatchfaceRepository {
-    val watchfaceDeviceStack = arrayListOf(
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(25).name,
-            deviceAlias = "mijia.watch.band01",
-            hasCategories = false
+    val DeviceStacks = arrayListOf(
+        Watchface.Device(
+            name = DeviceRepository().getDeviceNameByCode(25).name,
+            preview = DeviceRepository().getDeviceNameByCode(25).preview,
+            alias = "mijia.watch.band01"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(59).name,
-            deviceAlias = "hmpace.bracelet.v5",
-            hasCategories = true
+        Watchface.Device(
+            name = DeviceRepository().getDeviceNameByCode(59).name,
+            preview = DeviceRepository().getDeviceNameByCode(59).preview,
+            alias = "hmpace.bracelet.v5"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(59).name,
-            deviceAlias = "hmpace.bracelet.v5h",
-            hasCategories = true
+//        Watchface.Device(
+//            name = DeviceRepository().getDeviceNameByCode(59).name,
+//            preview = DeviceRepository().getDeviceNameByCode(59).preview,
+//            alias = "hmpace.bracelet.v5h"
+//        ),
+        Watchface.Device(
+            name = DeviceRepository().getDeviceNameByCode(212).name,
+            preview = DeviceRepository().getDeviceNameByCode(212).preview,
+            alias = "hmpace.motion.v6"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(212).name,
-            deviceAlias = "hmpace.motion.v6",
-            hasCategories = true
+//        Watchface.Device(
+//            name = DeviceRepository().getDeviceNameByCode(211).name,
+//            preview = DeviceRepository().getDeviceNameByCode(211).preview,
+//            alias = "hmpace.motion.v6nfc"
+//        ),
+        Watchface.Device(
+            name = DeviceRepository().getDeviceNameByCode(263).name,
+            preview = DeviceRepository().getDeviceNameByCode(263).preview,
+            alias = "hmpace.watch.v7"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(211).name,
-            deviceAlias = "hmpace.motion.v6nfc",
-            hasCategories = true
+//        Watchface.Device(
+//            name = DeviceRepository().getDeviceNameByCode(260).name,
+//            preview = DeviceRepository().getDeviceNameByCode(260).preview,
+//            alias = "hmpace.watch.v7nfc"
+//        ),
+        Watchface.Device(
+            name = "hqbd3.watch.l67",
+            preview = null,
+            alias = "hqbd3.watch.l67"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(263).name,
-            deviceAlias = "hmpace.watch.v7",
-            hasCategories = true
+        Watchface.Device(
+            name = "hqbd3.watch.l67in",
+            preview = null,
+            alias = "hqbd3.watch.l67in"
         ),
-        WatchfaceDevice(
-            deviceName = DeviceRepository().getDeviceNameByCode(260).name,
-            deviceAlias = "hmpace.watch.v7nfc",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.ds",
+            preview = null,
+            alias = "midr.watch.ds"
         ),
-        WatchfaceDevice(
-            deviceName = "hqbd3.watch.l67",
-            deviceAlias = "hqbd3.watch.l67",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k62",
+            preview = null,
+            alias = "midr.watch.k62"
         ),
-        WatchfaceDevice(
-            deviceName = "hqbd3.watch.l67in",
-            deviceAlias = "hqbd3.watch.l67in",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k62a",
+            preview = null,
+            alias = "midr.watch.k62a"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.ds",
-            deviceAlias = "midr.watch.ds",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k63",
+            preview = null,
+            alias = "midr.watch.k63"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k62",
-            deviceAlias = "midr.watch.k62",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k63a",
+            preview = null,
+            alias = "midr.watch.k63a"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k62a",
-            deviceAlias = "midr.watch.k62a",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k65",
+            preview = null,
+            alias = "midr.watch.k65"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k63",
-            deviceAlias = "midr.watch.k63",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k65in",
+            preview = null,
+            alias = "midr.watch.k65in"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k63a",
-            deviceAlias = "midr.watch.k63a",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.k65w",
+            preview = null,
+            alias = "midr.watch.k65w"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k65",
-            deviceAlias = "midr.watch.k65",
-            hasCategories = false
+        Watchface.Device(
+            name = "mijia.watch.m69gl",
+            preview = null,
+            alias = "mijia.watch.m69gl"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k65in",
-            deviceAlias = "midr.watch.k65in",
-            hasCategories = true
+        Watchface.Device(
+            name = "mijia.watch.v1",
+            preview = null,
+            alias = "mijia.watch.v1"
         ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.k65w",
-            deviceAlias = "midr.watch.k65w",
-            hasCategories = true
+        Watchface.Device(
+            name = "midr.watch.sports",
+            preview = null,
+            alias = "midr.watch.sports"
         ),
-        WatchfaceDevice(
-            deviceName = "mijia.watch.m69gl",
-            deviceAlias = "mijia.watch.m69gl",
-            hasCategories = true
+        Watchface.Device(
+            name = "mijia.watch.l61",
+            preview = null,
+            alias = "mijia.watch.l61"
         ),
-        WatchfaceDevice(
-            deviceName = "mijia.watch.v1",
-            deviceAlias = "mijia.watch.v1",
-            hasCategories = true
-        ),
-        WatchfaceDevice(
-            deviceName = "midr.watch.sports",
-            deviceAlias = "midr.watch.sports",
-            hasCategories = true
-        ),
-        WatchfaceDevice(
-            deviceName = "mijia.watch.l61",
-            deviceAlias = "mijia.watch.l61",
-            hasCategories = true
-        ),
-        WatchfaceDevice(
-            deviceName = "Xiaomi Mi Watch",
-            deviceAlias = "xiaomi.watch.mars",
-            hasCategories = true
+        Watchface.Device(
+            name = "Xiaomi Mi Watch",
+            preview = null,
+            alias = "xiaomi.watch.mars"
         )
     )
 }

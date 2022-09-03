@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.adapters
+package io.github.keddnyo.midoze.adapters.watchface
 
 import android.content.Context
 import android.content.Intent
@@ -16,9 +16,8 @@ import io.github.keddnyo.midoze.local.dataModels.Watchface
 import io.github.keddnyo.midoze.utils.BitmapCache
 
 class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListViewHolder>() {
-    private var watchfaceArray = ArrayList<Watchface>()
+    private var watchfaceArray = ArrayList<Watchface.WatchfaceData>()
     private lateinit var context: Context
-    private var hasCategories: Boolean = true
 
     class WatchfaceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: CoordinatorLayout =
@@ -39,27 +38,20 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
         context = holder.layout.context
         val watchface = watchfaceArray[position]
 
-        val preview = BitmapCache(context).decode(watchface.deviceAlias, watchface.title)
+        val preview = BitmapCache(context).decode(watchface.alias, watchface.title)
 
         if (preview != null) {
             holder.title.text = watchface.title
             holder.preview.setImageBitmap(preview)
 
-            if (!hasCategories) {
-                holder.layout.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-                holder.preview.layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-            }
-
             if ((preview.height > (preview.width - (preview.width / 4))) && (preview.height < (preview.width + (preview.width / 4)))) {
                 holder.preview.layoutParams.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT
             }
 
-            val gson = Gson()
-
             holder.layout.setOnClickListener {
                 val intent = Intent(context, WatchfacePreviewActivity::class.java)
                 intent.putExtra("position", position)
-                intent.putExtra("watchfaceArray", gson.toJson(watchfaceArray).toString())
+                intent.putExtra("watchfaceArray", Gson().toJson(watchfaceArray).toString())
                 context.startActivity(intent)
             }
         }
@@ -69,11 +61,7 @@ class WatchfaceAdapter : RecyclerView.Adapter<WatchfaceAdapter.WatchfaceListView
         return watchfaceArray.size
     }
 
-    fun addWatchfaceList(watchfaceList: ArrayList<Watchface>) {
+    fun addWatchfaceList(watchfaceList: ArrayList<Watchface.WatchfaceData>) {
         watchfaceArray = watchfaceList
-    }
-
-    fun setHasCategories(bool: Boolean) {
-        hasCategories = bool
     }
 }
