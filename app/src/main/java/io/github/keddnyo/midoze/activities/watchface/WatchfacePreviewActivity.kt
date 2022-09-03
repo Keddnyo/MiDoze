@@ -55,14 +55,15 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
                 downloadContent = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
-                title = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
-                supportActionBar?.subtitle = watchfaceTitle
-
+                title = watchfaceTitle
+                supportActionBar?.subtitle = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
                 watchface.introduction.let { content ->
-                    if (content.isNotBlank() && content != "null" && content.toCharArray().size < 200) {
-                        description.text = content
+                    description.text = content
+
+                    description.textSize = if (content.toCharArray().size < 200) {
+                        12f
                     } else {
-                        description.visibility = View.GONE
+                        9f
                     }
                 }
 

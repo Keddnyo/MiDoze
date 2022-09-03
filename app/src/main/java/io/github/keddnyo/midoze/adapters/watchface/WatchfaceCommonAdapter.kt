@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.watchface.WatchfaceActivity
 import io.github.keddnyo.midoze.local.dataModels.Watchface
+import io.github.keddnyo.midoze.utils.BitmapCache
 
 class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.DeviceListViewHolder>() {
     private var watchfaceDataStack = ArrayList<Watchface.WatchfaceDataStack>()
@@ -37,8 +38,8 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
         context = holder.layout.context
 
         holder.title.text = watchfaceDataStack[position].name
-        watchfaceDataStack[position].preview?.let {
-            holder.icon.setImageResource(it)
+        BitmapCache(context).decode(watchfaceDataStack[position].watchfaceData[0].alias, watchfaceDataStack[position].watchfaceData[0].title).let {
+            holder.icon.setImageBitmap(it)
         }
 
         holder.layout.setOnClickListener {

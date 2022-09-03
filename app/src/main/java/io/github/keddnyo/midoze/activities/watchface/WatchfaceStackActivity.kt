@@ -87,7 +87,6 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                     watchfaceArrayStack.add(
                                         Watchface.WatchfaceDataStack(
                                             name = device.name,
-                                            preview = device.preview,
                                             watchfaceData = watchfaceArray
                                         )
                                     )

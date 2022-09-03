@@ -17,7 +17,6 @@ class Watchface {
 
     data class WatchfaceDataStack(
         val name: String,
-        val preview: Int?,
         val watchfaceData: ArrayList<WatchfaceData>
     )
 }

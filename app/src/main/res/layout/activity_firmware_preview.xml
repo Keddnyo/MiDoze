@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:textSize="6pt"
+        android:textSize="14sp"
+        android:text="English, Russian, Chinese, French"
         app:layout_constraintBottom_toTopOf="@+id/download" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

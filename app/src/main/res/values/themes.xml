@@ -9,9 +9,4 @@
         <item name="dialogCornerRadius">@dimen/corner_radius</item>
     </style>
 
-    <style name="Theme.Dialog.Firmware" parent="Theme.Material3.Light.Dialog.Alert">
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">#00000000</item>
-    </style>
-
 </resources>

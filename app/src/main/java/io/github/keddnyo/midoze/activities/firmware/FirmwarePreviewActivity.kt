@@ -43,7 +43,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
 
         val context = this@FirmwarePreviewActivity
 
-        if (intent.hasExtra("deviceArray")) {
+        if (intent.hasExtra("firmwareArray")) {
             val position = intent.getIntExtra("position", 0)
 
             val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
@@ -70,11 +70,15 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 title = shareTitle
                 supportActionBar?.subtitle = downloadContent.getString("firmwareVersion")
 
-                description.apply {
-                    if (device.firmwareData.has("lang")) {
-                        text = device.firmwareData.getString("lang").toLanguageList()
-                    } else {
-                        visibility = View.GONE
+                if (device.firmwareData.has("lang")) {
+                    device.firmwareData.getString("lang").toLanguageList().let { content ->
+                        description.text = content
+
+                        description.textSize = if (content.toCharArray().size < 200) {
+                            12f
+                        } else {
+                            9f
+                        }
                     }
                 }
 

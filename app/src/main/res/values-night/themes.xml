@@ -14,11 +14,4 @@
         <item name="android:colorBackground">@color/black</item>
     </style>
 
-    <style name="Theme.Dialog.Firmware" parent="Theme.Material3.Dark.Dialog.Alert">
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">#00000000</item>
-
-        <item name="colorSurface">@color/black</item>
-    </style>
-
 </resources>
