@@ -1,22 +1,20 @@
 package io.github.keddnyo.midoze.local.dataModels
 
-class Watchface {
+class WatchfaceData {
     data class Device(
         val name: String,
         val alias: String,
         val preview: Int?,
     )
 
-    data class WatchfaceData(
+    data class Watchface(
         val alias: String,
         val title: String,
-        val categoryName: String,
-        val introduction: String,
         val url: String
     )
 
-    data class WatchfaceDataStack(
+    data class WatchfaceArray(
         val name: String,
-        val watchfaceData: ArrayList<WatchfaceData>
+        val watchface: ArrayList<Watchface>
     )
 }

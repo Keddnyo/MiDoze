@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.watchface.WatchfaceActivity
-import io.github.keddnyo.midoze.local.dataModels.Watchface
+import io.github.keddnyo.midoze.activities.watchface.WatchfacePreviewActivity
+import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 import io.github.keddnyo.midoze.utils.BitmapCache
 
 class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.DeviceListViewHolder>() {
-    private var watchfaceDataStack = ArrayList<Watchface.WatchfaceDataStack>()
+    private var watchfaceDataStack = ArrayList<WatchfaceData.WatchfaceArray>()
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,13 +38,13 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
         context = holder.layout.context
 
         holder.title.text = watchfaceDataStack[position].name
-        BitmapCache(context).decode(watchfaceDataStack[position].watchfaceData[0].alias, watchfaceDataStack[position].watchfaceData[0].title).let {
+        BitmapCache(context).decode(watchfaceDataStack[position].watchface[0].alias, watchfaceDataStack[position].watchface[0].title).let {
             holder.icon.setImageBitmap(it)
         }
 
         holder.layout.setOnClickListener {
-            Intent(context, WatchfaceActivity::class.java).let { intent ->
-                intent.putExtra("device", Gson().toJson(watchfaceDataStack[position]).toString())
+            Intent(context, WatchfacePreviewActivity::class.java).let { intent ->
+                intent.putExtra("watchfaceArray", Gson().toJson(watchfaceDataStack[position]).toString())
                 context.startActivity(intent)
             }
         }
@@ -54,7 +54,7 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
         return watchfaceDataStack.size
     }
 
-    fun addWatchfaceList(array: ArrayList<Watchface.WatchfaceDataStack>) {
+    fun addWatchfaceList(array: ArrayList<WatchfaceData.WatchfaceArray>) {
         watchfaceDataStack = array
         notifyItemRangeInserted(0, array.size)
     }

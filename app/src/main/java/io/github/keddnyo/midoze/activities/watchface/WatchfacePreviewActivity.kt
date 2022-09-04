@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -13,7 +11,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.watchface.WatchfacePreviewAdapter
-import io.github.keddnyo.midoze.local.dataModels.Watchface
+import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.OnlineStatus
@@ -33,39 +31,26 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         val context = this@WatchfacePreviewActivity
 
         if (intent.hasExtra("watchfaceArray")) {
-            val position = intent.getIntExtra("position", 0)
 
-            val watchfaceArray: ArrayList<Watchface.WatchfaceData> = GsonBuilder().create().fromJson(
+            val watchfaceArray: WatchfaceData.WatchfaceArray = GsonBuilder().create().fromJson(
                 intent.getStringExtra("watchfaceArray").toString(),
-                object : TypeToken<ArrayList<Watchface.WatchfaceData>>() {}.type
+                object : TypeToken<WatchfaceData.WatchfaceArray>() {}.type
             )
 
-            val description: TextView =
-                findViewById(R.id.description)
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
             val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
-            val adapter = WatchfacePreviewAdapter(watchfaceArray)
+            val adapter = WatchfacePreviewAdapter(watchfaceArray.watchface)
             viewPager.adapter = adapter
 
-            viewPager.setCurrentItem(position, false)
             fun initializeViewPager(position: Int) {
-                val watchface = watchfaceArray[position]
+                val watchface = watchfaceArray.watchface[position]
 
                 downloadContent = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 title = watchfaceTitle
-                supportActionBar?.subtitle = watchface.categoryName.trim().replaceFirstChar { it.uppercase() }
-                watchface.introduction.let { content ->
-                    description.text = content
-
-                    description.textSize = if (content.toCharArray().size < 200) {
-                        12f
-                    } else {
-                        9f
-                    }
-                }
+                supportActionBar?.subtitle = watchfaceArray.name
 
                 if (OnlineStatus(context).isOnline) {
                     download.apply {
@@ -88,7 +73,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 }
             }
 
-            initializeViewPager(position)
+            initializeViewPager(0)
 
             viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

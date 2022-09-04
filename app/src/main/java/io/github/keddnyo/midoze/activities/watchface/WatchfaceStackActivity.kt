@@ -12,8 +12,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.watchface.WatchfaceCommonAdapter
-import io.github.keddnyo.midoze.local.dataModels.Watchface
-import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.DeviceStacks
+import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
+import io.github.keddnyo.midoze.local.devices.WatchfaceDataRepository.DeviceStacks
 import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.*
@@ -41,18 +41,18 @@ class WatchfaceStackActivity : AppCompatActivity() {
                 override fun execute() {
                     super.execute()
 
-                    var watchfaceArrayStack: ArrayList<Watchface.WatchfaceDataStack> = arrayListOf()
+                    var watchfaceArrayStack: ArrayList<WatchfaceData.WatchfaceArray> = arrayListOf()
 
                     Executors.newSingleThreadExecutor().execute {
                         prefs.getString("watchfaceStackCache", "").toString().let { watchfaceStackCache ->
                             if (watchfaceStackCache.isNotBlank() && watchfaceStackCache != "null") {
                                 watchfaceArrayStack = GsonBuilder().create().fromJson(
                                     watchfaceStackCache,
-                                    object : TypeToken<ArrayList<Watchface.WatchfaceDataStack>>() {}.type
+                                    object : TypeToken<ArrayList<WatchfaceData.WatchfaceArray>>() {}.type
                                 )
                             } else if (isOnline) {
                                 for (device in DeviceStacks) {
-                                    val watchfaceArray: ArrayList<Watchface.WatchfaceData> = arrayListOf()
+                                    val watchfaceArray: ArrayList<WatchfaceData.Watchface> = arrayListOf()
 
                                     val content = runBlocking(Dispatchers.IO) {
                                         Requests().getWatchfaceData(device.alias)
@@ -72,22 +72,24 @@ class WatchfaceStackActivity : AppCompatActivity() {
 
                                             BitmapCache(context).encode(device.alias, getItem("display_name"), preview)
 
-                                            watchfaceArray.add(
-                                                Watchface.WatchfaceData(
-                                                    alias = device.alias,
-                                                    title = getItem("display_name"),
-                                                    categoryName = data.getJSONObject(d).getString("tab_name"),
-                                                    introduction = getItem("introduction"),
-                                                    url = getItem("config_file")
-                                                )
-                                            )
+                                            WatchfaceData.Watchface(
+                                                alias = device.alias,
+                                                title = getItem("display_name"),
+                                                url = getItem("config_file")
+                                            ).let { watchface ->
+                                                if (watchface !in watchfaceArray) {
+                                                    watchfaceArray.add(
+                                                        watchface
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
 
                                     watchfaceArrayStack.add(
-                                        Watchface.WatchfaceDataStack(
+                                        WatchfaceData.WatchfaceArray(
                                             name = device.name,
-                                            watchfaceData = watchfaceArray
+                                            watchface = watchfaceArray
                                         )
                                     )
                                 }
