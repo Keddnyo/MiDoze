@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
 import io.github.keddnyo.midoze.adapters.watchface.WatchfacePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 import io.github.keddnyo.midoze.remote.Requests
@@ -21,7 +22,7 @@ import kotlinx.coroutines.runBlocking
 
 class WatchfacePreviewActivity : AppCompatActivity() {
     private lateinit var watchfaceTitle: String
-    private lateinit var downloadContent: String
+    private lateinit var watchfaceURL: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -47,7 +48,9 @@ class WatchfacePreviewActivity : AppCompatActivity() {
             fun initializeViewPager(position: Int) {
                 val watchface = watchfaceArray.watchface[position]
 
-                downloadContent = watchface.url
+                val downloadContent = watchface.watchfaceData
+
+                watchfaceURL = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 title = watchfaceArray.name
 
@@ -68,6 +71,13 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                                     getString(R.string.connectivity_error).showAsToast(context)
                                 }
                             }
+                        }
+                        setOnLongClickListener {
+                            Intent(context, ResponseActivity::class.java).let { intent ->
+                                intent.putExtra("json", downloadContent.toString())
+                                context.startActivity(intent)
+                            }
+                            true
                         }
                     }
                 }
@@ -90,7 +100,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         val stringBuilder = StringBuilder()
         val shareContent = stringBuilder.append(watchfaceTitle)
             .append("\n")
-            .append(downloadContent)
+            .append(watchfaceURL)
             .append("\n")
             .append(
                 getString(

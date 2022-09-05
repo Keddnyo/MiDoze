@@ -75,7 +75,8 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                             WatchfaceData.Watchface(
                                                 alias = device.alias,
                                                 title = getItem("display_name"),
-                                                url = getItem("config_file")
+                                                url = getItem("config_file"),
+                                                watchfaceData = list.getJSONObject(l)
                                             ).let { watchface ->
                                                 if (watchface !in watchfaceArray) {
                                                     watchfaceArray.add(
