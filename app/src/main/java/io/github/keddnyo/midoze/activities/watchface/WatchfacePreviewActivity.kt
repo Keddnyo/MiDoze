@@ -49,12 +49,12 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
                 downloadContent = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
-                title = watchfaceTitle
-                supportActionBar?.subtitle = watchfaceArray.name
+                title = watchfaceArray.name
 
                 if (OnlineStatus(context).isOnline) {
                     download.apply {
                         isEnabled = true
+                        text = watchfaceTitle
                         setOnClickListener {
                             runBlocking(Dispatchers.IO) {
                                 if (OnlineStatus(context).isOnline) {

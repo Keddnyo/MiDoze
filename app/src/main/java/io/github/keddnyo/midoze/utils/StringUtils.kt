@@ -8,24 +8,6 @@ import io.github.keddnyo.midoze.local.packages.PackageVersions
 import java.util.*
 
 object StringUtils {
-    fun String.toLanguageList(): String {
-        val arrayOfLanguageCodes = this.split(",").toTypedArray()
-        val arrayOfLanguageNames = arrayListOf<String>()
-        val currentLanguage = Locale(DozeLocale().currentLanguage)
-
-        for (i in arrayOfLanguageCodes) {
-            arrayOfLanguageNames.add(
-                Locale(i).getDisplayName(currentLanguage)
-            )
-        }
-
-        return arrayOfLanguageNames.toString()
-            .substring(1, arrayOfLanguageNames.toString().length - 1)
-            .replace(", pt-br", "")
-            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } +
-                "."
-    }
-
     fun String.toServerResponse(): String {
         return this.replace("\\/", "/")
     }

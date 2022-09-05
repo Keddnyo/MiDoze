@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -18,11 +17,13 @@ import io.github.keddnyo.midoze.local.dataModels.Firmware
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
-import io.github.keddnyo.midoze.utils.StringUtils.toLanguageList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FirmwarePreviewActivity : AppCompatActivity() {
     private lateinit var shareTitle: String
@@ -51,8 +52,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
             )
 
-            val description: TextView =
-                findViewById(R.id.description)
             val download: ExtendedFloatingActionButton =
                 findViewById(R.id.download)
 
@@ -63,28 +62,32 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             viewPager.setCurrentItem(position, false)
             fun initializeViewPager(position: Int) {
                 val device = deviceArray[position]
-                val deviceRepository = DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
+                val deviceRepository =
+                    DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
 
                 downloadContent = device.firmwareData
                 shareTitle = deviceRepository.name
                 title = shareTitle
-                supportActionBar?.subtitle = downloadContent.getString("firmwareVersion")
 
                 if (device.firmwareData.has("lang")) {
-                    device.firmwareData.getString("lang").toLanguageList().let { content ->
-                        description.text = content
-
-                        description.textSize = if (content.toCharArray().size < 200) {
-                            12f
-                        } else {
-                            9f
+                    device.firmwareData.getString("lang").split(",").toTypedArray()
+                        .let { localeArray ->
+                            DozeLocale().currentLanguage.let { locale ->
+                                supportActionBar?.setSubtitle(
+                                    if (locale in localeArray) {
+                                        getString(R.string.firmware_language_supported, Locale(locale).displayName)
+                                    } else {
+                                        null
+                                    }
+                                )
+                            }
                         }
-                    }
                 }
 
                 if (OnlineStatus(context).isOnline) {
                     download.apply {
                         isEnabled = true
+                        text = downloadContent.getString("firmwareVersion")
                         setOnClickListener {
                             runBlocking(Dispatchers.IO) {
                                 for (i in responseFirmwareTagsArray) {
@@ -101,7 +104,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                             }
                         }
                         setOnLongClickListener {
-                            Intent(context, ResponseActivity::class.java).let { intent->
+                            Intent(context, ResponseActivity::class.java).let { intent ->
                                 intent.putExtra("json", downloadContent.toString())
                                 context.startActivity(intent)
                             }
@@ -113,7 +116,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
 
             initializeViewPager(position)
 
-            viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     initializeViewPager(position)
