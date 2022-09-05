@@ -14,7 +14,7 @@ class ApplicationsActivity : AppCompatActivity() {
         title = getString(R.string.menu_apps)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_apps)
+        setContentView(R.layout.activity_applications)
 
         findViewById<RecyclerView>(R.id.appsRecyclerView).let { RecyclerView ->
             RecyclerView.layoutManager = GridLayoutManager(

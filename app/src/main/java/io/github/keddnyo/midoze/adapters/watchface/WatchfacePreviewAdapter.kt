@@ -13,7 +13,7 @@ class WatchfacePreviewAdapter(private val watchfaceList: ArrayList<WatchfaceData
     inner class PreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreviewViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_preview_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.preview, parent, false)
         return PreviewViewHolder(view)
     }
 

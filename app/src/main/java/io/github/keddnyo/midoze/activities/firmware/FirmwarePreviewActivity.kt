@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -40,13 +39,11 @@ class FirmwarePreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firmware_preview)
+        setContentView(R.layout.activity_preview)
 
         val context = this@FirmwarePreviewActivity
 
         if (intent.hasExtra("firmwareArray")) {
-            val position = intent.getIntExtra("position", 0)
-
             val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("firmwareArray").toString(),
                 object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
@@ -59,7 +56,6 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             val adapter = FirmwarePreviewAdapter(deviceArray)
             viewPager.adapter = adapter
 
-            viewPager.setCurrentItem(position, false)
             fun initializeViewPager(position: Int) {
                 val device = deviceArray[position]
                 val deviceRepository =
@@ -114,7 +110,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 }
             }
 
-            initializeViewPager(position)
+            initializeViewPager(0)
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
@@ -14,10 +14,11 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.firmware.DeviceStackAdapter
-import io.github.keddnyo.midoze.fragments.DeviceContainer
 import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.menu.Dimens
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AsyncTask
+import io.github.keddnyo.midoze.utils.Display
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.PackageUtils
 import java.util.concurrent.Executors
@@ -27,8 +28,9 @@ class DeviceStackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.menu_firmwares)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_device_stack)
+        setContentView(R.layout.activity_firmwares)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
@@ -37,17 +39,6 @@ class DeviceStackActivity : AppCompatActivity() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
-
-        deviceListRecyclerView.layoutManager =
-            resources.getBoolean(R.bool.isLeftSidePane).let { left ->
-                if (left) {
-                    LinearLayoutManager.VERTICAL
-                } else {
-                    LinearLayoutManager.HORIZONTAL
-                }.let { orientation ->
-                    LinearLayoutManager(this, orientation, false)
-                }
-            }
 
         OnlineStatus(context).run {
             class GetDevices(val context: Context) : AsyncTask() {
@@ -76,13 +67,19 @@ class DeviceStackActivity : AppCompatActivity() {
 
                         mainHandler.post {
                             DeviceStackAdapter(deviceArrayList).let { adapter ->
-                                deviceListRecyclerView.adapter = adapter
-
                                 if (adapter.itemCount == 0) {
                                     emptyResponse.visibility = View.VISIBLE
                                 } else {
                                     emptyResponse.visibility = View.GONE
-                                    DeviceContainer().show(this@DeviceStackActivity, deviceArrayList, 0)
+                                }
+
+                                deviceListRecyclerView.apply {
+                                    layoutManager =
+                                        GridLayoutManager(
+                                            context, Display()
+                                                .getGridLayoutIndex(context, Dimens.CARD_GRID_WIDTH)
+                                        )
+                                    this.adapter = adapter
                                 }
                             }
 

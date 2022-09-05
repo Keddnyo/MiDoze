@@ -21,16 +21,18 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =
-            itemView.findViewById(R.id.watchfaceCommonStackLayout)
+            itemView.findViewById(R.id.firmwareLayout)
         val title: TextView =
-            itemView.findViewById(R.id.watchfaceCommonStackTitle)
-        val icon: ImageView =
-            itemView.findViewById(R.id.watchfaceCommonStackIcon)
+            itemView.findViewById(R.id.firmwareTitle)
+        val preview: ImageView =
+            itemView.findViewById(R.id.firmwarePreview)
+        val count: TextView? =
+            itemView.findViewById(R.id.firmwareCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.watchface_common_stack, parent, false)
+            .inflate(R.layout.firmware, parent, false)
         return DeviceListViewHolder(view)
     }
 
@@ -39,7 +41,10 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
 
         holder.title.text = watchfaceDataStack[position].name
         BitmapCache(context).decode(watchfaceDataStack[position].watchface[0].alias, watchfaceDataStack[position].watchface[0].title).let {
-            holder.icon.setImageBitmap(it)
+            holder.preview.setImageBitmap(it)
+        }
+        watchfaceDataStack[position].watchface.size.toString().let { count ->
+            holder.count?.text = holder.layout.context.getString(R.string.items, count)
         }
 
         holder.layout.setOnClickListener {

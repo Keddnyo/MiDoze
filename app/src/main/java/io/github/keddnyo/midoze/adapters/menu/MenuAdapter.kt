@@ -36,7 +36,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.menu_item, parent, false)
+            .inflate(R.layout.menu, parent, false)
         return DeviceListViewHolder(view)
     }
 

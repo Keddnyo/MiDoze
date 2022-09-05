@@ -2,10 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/watchfaceCommonStackLayout"
+    android:id="@+id/firmwareLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/menu_layout_margin"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
@@ -14,30 +13,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp">
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <ImageView
-            android:id="@+id/watchfaceCommonStackIcon"
+            android:id="@+id/firmwarePreview"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/watchfaceCommonStackTitle"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:textSize="7pt"
-            android:textStyle="bold"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/watchfaceCommonStackIcon" />
+            app:layout_constraintTop_toBottomOf="@id/firmwarePreview">
+
+            <TextView
+                android:id="@+id/firmwareTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="7pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/firmwareCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="6pt" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

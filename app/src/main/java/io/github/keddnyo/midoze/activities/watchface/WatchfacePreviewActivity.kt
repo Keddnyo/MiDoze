@@ -26,7 +26,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firmware_preview)
+        setContentView(R.layout.activity_preview)
 
         val context = this@WatchfacePreviewActivity
 
