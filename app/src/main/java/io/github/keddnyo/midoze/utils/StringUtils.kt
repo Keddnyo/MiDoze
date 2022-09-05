@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import io.github.keddnyo.midoze.local.packages.PackageNames
 import io.github.keddnyo.midoze.local.packages.PackageVersions
-import java.util.*
 
 object StringUtils {
     fun String.toServerResponse(): String {
