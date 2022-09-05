@@ -65,7 +65,7 @@ class WatchfaceStackActivity : AppCompatActivity() {
                                         val list = data.getJSONObject(d).getJSONArray("list")
 
                                         for (l in 0 until list.length()) {
-                                            val url = URL(list.getJSONObject(l).getString("preview"))
+                                            val url = URL(list.getJSONObject(l).getString("icon"))
                                             val preview = BitmapFactory.decodeStream(url.openConnection().getInputStream())
 
                                             fun getItem(name: String) = list.getJSONObject(l).getString(name)
