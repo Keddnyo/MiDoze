@@ -14,8 +14,6 @@
     <string name="empty_response">Результат пуст</string>
     <string name="connectivity_error">Ошибка подключения</string>
 
-    <string name="firmware_download">Скачать</string>
-    <string name="firmware_languages">Языки</string>
     <string name="firmware_language_supported">Поддерживается %1$s язык</string>
     <string name="firmware_changelog">Список изменений</string>
     <string name="firmware_share">Отправить</string>

@@ -16,8 +16,6 @@
     <string name="empty_response">Empty response</string>
     <string name="connectivity_error">Connectivity error</string>
 
-    <string name="firmware_download">Download</string>
-    <string name="firmware_languages">Languages</string>
     <string name="firmware_language_supported">%1$s language supported</string>
     <string name="firmware_changelog">Changelog</string>
     <string name="firmware_share">Share</string>
