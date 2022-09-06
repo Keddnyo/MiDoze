@@ -17,7 +17,7 @@
     <string name="connectivity_error">Connectivity error</string>
 
     <string name="firmware_language_supported">%1$s language supported</string>
-    <string name="firmware_changelog">Changelog</string>
+    <string name="item_count">%1$d of %2$d</string>
     <string name="firmware_share">Share</string>
     <string name="firmware_share_get_it_on">Get it on %1$s</string>
     <string name="permission_not_granted">Permission not granted</string>

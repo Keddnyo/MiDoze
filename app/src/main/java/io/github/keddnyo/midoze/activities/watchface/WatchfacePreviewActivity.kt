@@ -53,6 +53,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 watchfaceURL = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 title = watchfaceArray.name
+                supportActionBar?.subtitle = getString(R.string.item_count, position + 1, watchfaceArray.watchface.size)
 
                 OnlineStatus(context).run {
                     download.apply {

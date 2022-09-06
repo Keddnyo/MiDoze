@@ -5,7 +5,7 @@ import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 object WatchfaceRepository {
     val DeviceStacks = arrayListOf(
         WatchfaceData.Device(
-            name = DeviceRepository().getDeviceNameByCode(25).name,
+            name = "Xiaomi Mi Band 4",
             preview = DeviceRepository().getDeviceNameByCode(25).preview,
             alias = "mijia.watch.band01"
         ),
