@@ -53,7 +53,7 @@
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activities.firmware.DeviceStackActivity"
+            android:name=".activities.firmware.FirmwareStackActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity

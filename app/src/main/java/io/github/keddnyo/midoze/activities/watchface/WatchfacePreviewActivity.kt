@@ -54,21 +54,25 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
                 title = watchfaceArray.name
 
-                if (OnlineStatus(context).isOnline) {
+                OnlineStatus(context).run {
                     download.apply {
-                        isEnabled = true
                         text = watchfaceTitle
-                        setOnClickListener {
-                            runBlocking(Dispatchers.IO) {
-                                if (OnlineStatus(context).isOnline) {
-                                    Requests().getFirmwareFile(
-                                        context,
-                                        watchface.url,
-                                        watchface.title,
-                                        getString(R.string.menu_watchface)
-                                    )
-                                } else {
-                                    getString(R.string.connectivity_error).showAsToast(context)
+                        if (isOnline) {
+                            isEnabled = true
+                            setOnClickListener {
+                                if (isOnline) {
+                                    runBlocking(Dispatchers.IO) {
+                                        if (OnlineStatus(context).isOnline) {
+                                            Requests().getFirmwareFile(
+                                                context,
+                                                watchface.url,
+                                                watchface.title,
+                                                getString(R.string.menu_watchface)
+                                            )
+                                        } else {
+                                            getString(R.string.connectivity_error).showAsToast(context)
+                                        }
+                                    }
                                 }
                             }
                         }

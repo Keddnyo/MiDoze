@@ -23,8 +23,8 @@ import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.PackageUtils
 import java.util.concurrent.Executors
 
-class DeviceStackActivity : AppCompatActivity() {
-    private val context = this@DeviceStackActivity
+class FirmwareStackActivity : AppCompatActivity() {
+    private val context = this@FirmwareStackActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

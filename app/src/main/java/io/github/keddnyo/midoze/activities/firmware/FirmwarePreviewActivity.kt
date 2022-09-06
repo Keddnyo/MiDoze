@@ -80,21 +80,25 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                         }
                 }
 
-                if (OnlineStatus(context).isOnline) {
+                OnlineStatus(context).run {
                     download.apply {
-                        isEnabled = true
                         text = downloadContent.getString("firmwareVersion")
-                        setOnClickListener {
-                            runBlocking(Dispatchers.IO) {
-                                for (i in responseFirmwareTagsArray) {
-                                    if (downloadContent.has(i)) {
-                                        val urlString = downloadContent.getString(i)
-                                        Requests().getFirmwareFile(
-                                            context,
-                                            urlString,
-                                            deviceRepository.name,
-                                            getString(R.string.menu_firmwares)
-                                        )
+                        if (isOnline) {
+                            isEnabled = true
+                            setOnClickListener {
+                                if (isOnline) {
+                                    runBlocking(Dispatchers.IO) {
+                                        for (i in responseFirmwareTagsArray) {
+                                            if (downloadContent.has(i)) {
+                                                val urlString = downloadContent.getString(i)
+                                                Requests().getFirmwareFile(
+                                                    context,
+                                                    urlString,
+                                                    deviceRepository.name,
+                                                    getString(R.string.menu_firmwares)
+                                                )
+                                            }
+                                        }
                                     }
                                 }
                             }

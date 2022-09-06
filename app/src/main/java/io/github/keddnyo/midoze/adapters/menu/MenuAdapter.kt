@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.watchface.WatchfaceStackActivity
-import io.github.keddnyo.midoze.activities.firmware.DeviceStackActivity
+import io.github.keddnyo.midoze.activities.firmware.FirmwareStackActivity
 import io.github.keddnyo.midoze.activities.menu.ApplicationsActivity
 import io.github.keddnyo.midoze.activities.firmware.request.RequestActivity
 import io.github.keddnyo.midoze.local.dataModels.Menu
@@ -52,7 +52,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.DeviceListViewHolder>() {
                     startActivity(Intent(context, ApplicationsActivity::class.java))
                 }
                 "Firmwares" -> {
-                    startActivity(Intent(context, DeviceStackActivity::class.java))
+                    startActivity(Intent(context, FirmwareStackActivity::class.java))
                 }
                 "Request" -> {
                     startActivity(Intent(context, RequestActivity::class.java))
