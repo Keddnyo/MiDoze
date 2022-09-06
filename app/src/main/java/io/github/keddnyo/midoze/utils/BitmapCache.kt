@@ -13,8 +13,7 @@ class BitmapCache(val context: Context) {
     private fun getFileDir(
         deviceName: String,
         dialName: String
-    ): String {
-        return File(
+    ) = File(
             cacheDir,
             StringBuilder()
                 .append(deviceName)
@@ -22,7 +21,6 @@ class BitmapCache(val context: Context) {
                 .append(dialName.replace(" ", "_"))
                 .toString()
         ).path
-    }
 
     private fun Bitmap.smallSize(): Bitmap {
         val maxSize = 550
