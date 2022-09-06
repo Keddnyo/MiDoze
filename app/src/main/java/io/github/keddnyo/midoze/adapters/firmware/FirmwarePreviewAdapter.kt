@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 
-class FirmwarePreviewAdapter(private val deviceList: ArrayList<Firmware.FirmwareData>) : RecyclerView.Adapter<FirmwarePreviewAdapter.PreviewViewHolder>() {
+class FirmwarePreviewAdapter(private val deviceList: ArrayList<FirmwareData.FirmwareData>) : RecyclerView.Adapter<FirmwarePreviewAdapter.PreviewViewHolder>() {
     inner class PreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreviewViewHolder {

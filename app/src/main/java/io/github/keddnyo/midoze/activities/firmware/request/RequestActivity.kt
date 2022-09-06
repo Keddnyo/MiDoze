@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
-import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
 import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
@@ -72,9 +72,9 @@ class RequestActivity : AppCompatActivity() {
         if (intent.hasExtra("deviceArray")) {
             val position = intent.getIntExtra("position", 0)
 
-            val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("deviceArray").toString(),
-                object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
             )
 
             val device = deviceArray[position]
@@ -96,17 +96,17 @@ class RequestActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             if (OnlineStatus(context).isOnline) {
-                val firmwareResponse = runBlocking {
+                val firmwareDataResponse = runBlocking {
                     Requests().getFirmwareData(
                         context,
-                        wearable = Firmware.Wearable(
+                        wearable = FirmwareData.Wearable(
                             requestDeviceSourceEditText.text.toString().trim(),
                             requestProductionSourceEditText.text.toString().trim(),
-                            Firmware.Application(
+                            FirmwareData.Application(
                                 requestAppNameEditText.text.toString().trim(),
                                 requestAppVersionEditText.text.toString().trim()
                             ),
-                            Firmware.Region(
+                            FirmwareData.Region(
                                 requestCountryEditText.text.toString().trim(),
                                 requestLangEditText.text.toString().trim()
                             )
@@ -116,13 +116,13 @@ class RequestActivity : AppCompatActivity() {
 
                 val intent = Intent(context, FirmwarePreviewActivity::class.java)
 
-                if (firmwareResponse != null) {
+                if (firmwareDataResponse != null) {
                     val gson = Gson()
 
                     intent.putExtra("position", 0)
                     intent.putExtra("firmwareArray", gson.toJson(
                         arrayListOf(
-                            firmwareResponse
+                            firmwareDataResponse
                         )
                     ).toString())
 

@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.local.dataModels
 
 import org.json.JSONObject
 
-class Firmware {
+class FirmwareData {
     data class Device(
         val name: String,
         val preview: Int

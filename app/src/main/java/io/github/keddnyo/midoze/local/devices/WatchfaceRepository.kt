@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.local.devices
 
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 
-object WatchfaceDataRepository {
+object WatchfaceRepository {
     val DeviceStacks = arrayListOf(
         WatchfaceData.Device(
             name = DeviceRepository().getDeviceNameByCode(25).name,
@@ -40,12 +40,12 @@ object WatchfaceDataRepository {
 //            alias = "hmpace.watch.v7nfc"
 //        ),
         WatchfaceData.Device(
-            name = "hqbd3.watch.l67",
+            name = "Xiaomi Smart Band 7 Pro",
             preview = null,
             alias = "hqbd3.watch.l67"
         ),
         WatchfaceData.Device(
-            name = "hqbd3.watch.l67in",
+            name = "Xiaomi Smart Band 7 Pro In",
             preview = null,
             alias = "hqbd3.watch.l67in"
         ),

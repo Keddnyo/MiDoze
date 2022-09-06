@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
 import io.github.keddnyo.midoze.adapters.firmware.FirmwarePreviewAdapter
-import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
@@ -44,9 +44,9 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val context = this@FirmwarePreviewActivity
 
         if (intent.hasExtra("firmwareArray")) {
-            val deviceArray: ArrayList<Firmware.FirmwareData> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("firmwareArray").toString(),
-                object : TypeToken<ArrayList<Firmware.FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
             )
 
             val download: ExtendedFloatingActionButton =

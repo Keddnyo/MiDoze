@@ -11,9 +11,9 @@ import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
-import io.github.keddnyo.midoze.local.dataModels.Firmware
+import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 
-class DeviceStackAdapter(private var stackArray: ArrayList<Firmware.FirmwareDataArray> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
+class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =

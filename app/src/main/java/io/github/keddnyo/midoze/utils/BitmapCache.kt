@@ -8,18 +8,24 @@ import java.io.FileOutputStream
 import java.lang.StringBuilder
 
 class BitmapCache(val context: Context) {
-    private fun getFileDir(deviceName: String, dialName: String): String {
-        val cacheDir = context.cacheDir
-        return StringBuilder()
-            .append(cacheDir)
-            .append(File.pathSeparator)
-            .append(deviceName)
-            .append(dialName)
-            .toString()
+    private val cacheDir = context.cacheDir
+
+    private fun getFileDir(
+        deviceName: String,
+        dialName: String
+    ): String {
+        return File(
+            cacheDir,
+            StringBuilder()
+                .append(deviceName)
+                .append("\\")
+                .append(dialName.replace(" ", "_"))
+                .toString()
+        ).path
     }
 
     private fun Bitmap.smallSize(): Bitmap {
-        val maxSize = 600
+        val maxSize = 550
         val outWidth: Int
         val outHeight: Int
         val inWidth = this.width
@@ -44,7 +50,7 @@ class BitmapCache(val context: Context) {
             val out = FileOutputStream(File(getFileDir(deviceName, dialName)))
             bitmap.smallSize().compress(Bitmap.CompressFormat.PNG, 0, out)
         } catch (e: Exception) {
-
+            return
         }
     }
 
@@ -55,4 +61,6 @@ class BitmapCache(val context: Context) {
             null
         }
     }
+
+    fun clearCache() = File(cacheDir.path).deleteRecursively()
 }
