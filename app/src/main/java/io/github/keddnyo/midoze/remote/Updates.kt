@@ -34,7 +34,7 @@ class Updates(val context: Context) : AsyncTask() {
                     releaseData.getJSONArray("assets").getJSONObject(0)
                         .getString("browser_download_url")
 
-                if (context.getPackageVersion() < latestVersion) {
+                if ((context.getPackageVersion() ?: "0") < latestVersion) {
                     val builder = AlertDialog.Builder(context)
                         .setTitle(context.getString(R.string.update_title, latestVersion))
                         .setMessage(releaseChangelog)

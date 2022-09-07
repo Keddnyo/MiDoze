@@ -14,7 +14,7 @@ object StringUtils {
     fun String.showAsToast(context: Context) =
         Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 
-    fun Context.getPackageVersion(): String = PackageUtils(this, this.packageName).getPackageVersionName()
+    fun Context.getPackageVersion(): String? = PackageUtils(this, this.packageName).getPackageVersionName()
 
     fun String.getPackageVersion(context: Context): String? {
         return try {
