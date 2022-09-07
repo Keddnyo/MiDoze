@@ -19,7 +19,7 @@ class FirmwarePreviewAdapter(private val deviceList: ArrayList<FirmwareData.Firm
     override fun onBindViewHolder(holder: PreviewViewHolder, position: Int) {
         holder.itemView.context.let {
             deviceList[position].let { device ->
-                holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).setImageResource(device.device.preview)
+                holder.itemView.findViewById<ImageView>(R.id.menuPreview).setImageResource(device.device.preview)
             }
         }
     }

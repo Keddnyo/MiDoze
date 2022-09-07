@@ -1,10 +1,12 @@
-package io.github.keddnyo.midoze.activities.firmware
+package io.github.keddnyo.midoze.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,14 +25,19 @@ import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.PackageUtils
 import java.util.concurrent.Executors
 
-class FirmwareStackActivity : AppCompatActivity() {
-    private val context = this@FirmwareStackActivity
+class FirmwareFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(
+        R.layout.fragment_firmware,
+        container,
+        false
+    )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.menu_firmwares)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firmwares)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
+        super.onViewCreated(view, savedInstanceState)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
@@ -40,7 +47,7 @@ class FirmwareStackActivity : AppCompatActivity() {
         val editor = prefs.edit()
         val gson = Gson()
 
-        OnlineStatus(context).run {
+        OnlineStatus(this).run {
             class GetDevices(val context: Context) : AsyncTask() {
                 var deviceArrayList: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()
 
@@ -92,9 +99,11 @@ class FirmwareStackActivity : AppCompatActivity() {
             PackageUtils(context, context.packageName).getPackageVersionBuild().let {
                 if (prefs.getInt("VERSION_CODE", 0) != it) {
                     editor.apply {
-                        putInt("VERSION_CODE", it)
-                        remove("deviceStackCache")
-                        apply()
+                        if (it != null) {
+                            putInt("VERSION_CODE", it)
+                            remove("deviceStackCache")
+                            apply()
+                        }
                     }
                 }
             }
@@ -115,10 +124,5 @@ class FirmwareStackActivity : AppCompatActivity() {
                 refreshLayout.isRefreshing = true
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/firmwarePreview"
+        android:id="@+id/menuPreview"
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:layout_gravity="center" />

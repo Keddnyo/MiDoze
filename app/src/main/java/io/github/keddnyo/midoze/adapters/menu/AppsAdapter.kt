@@ -22,24 +22,34 @@ class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =
-            itemView.findViewById(R.id.applicationLayout)
+            itemView.findViewById(R.id.menuLayout)
+        val preview: ImageView =
+            itemView.findViewById(R.id.menuPreview)
         val title: TextView =
-            itemView.findViewById(R.id.applicationTitle)
-        val icon: ImageView =
-            itemView.findViewById(R.id.applicationIcon)
+            itemView.findViewById(R.id.menuTitle)
+        val subtitle: TextView =
+            itemView.findViewById(R.id.menuSubtitle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.application, parent, false)
+            .inflate(R.layout.menu, parent, false)
         return DeviceListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DeviceListViewHolder, position: Int) {
         context = holder.layout.context
 
+        holder.preview.setImageResource(appsArray[position].icon)
         holder.title.text = appsArray[position].title
-        holder.icon.setImageResource(appsArray[position].icon)
+
+        appsArray.forEach { application ->
+            if (appsArray[position].tag == application.tag) {
+                holder.subtitle.text =
+                    PackageUtils(context, application.tag).getPackageVersionName()
+                        ?: context.getString(R.string.not_installed)
+            }
+        }
 
         holder.layout.setOnClickListener {
             appsArray.forEach { application ->

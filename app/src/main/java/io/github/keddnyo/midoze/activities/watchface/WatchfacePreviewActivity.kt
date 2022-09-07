@@ -128,13 +128,13 @@ class WatchfacePreviewActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_response, menu)
+        menuInflater.inflate(R.menu.menu_share, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_share_firmware -> {
+            R.id.menu_share -> {
                 shareContent()
             }
         }

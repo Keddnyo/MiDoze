@@ -21,18 +21,18 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =
-            itemView.findViewById(R.id.firmwareLayout)
+            itemView.findViewById(R.id.menuLayout)
         val title: TextView =
-            itemView.findViewById(R.id.firmwareTitle)
+            itemView.findViewById(R.id.menuTitle)
         val preview: ImageView =
-            itemView.findViewById(R.id.firmwarePreview)
+            itemView.findViewById(R.id.menuPreview)
         val count: TextView? =
-            itemView.findViewById(R.id.firmwareCount)
+            itemView.findViewById(R.id.menuSubtitle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.firmware, parent, false)
+            .inflate(R.layout.menu, parent, false)
         return DeviceListViewHolder(view)
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_firmware"
+        android:icon="@drawable/ic_firmware"
+        android:title="@string/menu_firmware" />
+
+    <item
+        android:id="@+id/menu_watchface"
+        android:icon="@drawable/ic_watchface"
+        android:title="@string/menu_watchface" />
+
+    <item
+        android:id="@+id/menu_application"
+        android:icon="@drawable/ic_application"
+        android:title="@string/menu_application" />
+
+</menu>

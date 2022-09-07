@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
 
-    <string name="menu_firmwares">ROMs</string>
+    <string name="menu_firmware">ROMs</string>
     <string name="menu_watchface">Dials</string>
-    <string name="menu_apps">Apps</string>
+    <string name="menu_application">Apps</string>
     <string name="menu_request">Request</string>
     <string name="menu_downloads">Downloads</string>
     <string name="menu_github" translatable="false">GitHub</string>
     <string name="menu_uninstall">Uninstall</string>
+    <string name="not_installed">Not installed</string>
 
     <string name="update_title">Update %1$s</string>
     <string name="update_button">Update</string>

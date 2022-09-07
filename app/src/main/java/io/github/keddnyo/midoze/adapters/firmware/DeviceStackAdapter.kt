@@ -17,19 +17,19 @@ class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareData.Firmware
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =
-            itemView.findViewById(R.id.firmwareLayout)
+            itemView.findViewById(R.id.menuLayout)
         val preview: ImageView =
-            itemView.findViewById(R.id.firmwarePreview)
+            itemView.findViewById(R.id.menuPreview)
         val title: TextView? =
-            itemView.findViewById(R.id.firmwareTitle)
+            itemView.findViewById(R.id.menuTitle)
         val count: TextView? =
-            itemView.findViewById(R.id.firmwareCount)
+            itemView.findViewById(R.id.menuSubtitle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListViewHolder {
         return DeviceListViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.firmware, parent, false)
+                .inflate(R.layout.menu, parent, false)
         )
     }
 

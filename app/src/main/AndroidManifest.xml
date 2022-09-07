@@ -49,24 +49,12 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".activities.menu.ApplicationsActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activities.firmware.FirmwareStackActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
-            android:name="io.github.keddnyo.midoze.activities.firmware.request.RequestActivity"
+            android:name=".activities.firmware.request.RequestActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Dialog"/>
         <activity
-            android:name="io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activities.watchface.WatchfaceStackActivity"
+            android:name=".activities.firmware.request.ResponseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity

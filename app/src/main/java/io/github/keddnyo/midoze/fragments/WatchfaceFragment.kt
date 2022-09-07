@@ -1,8 +1,11 @@
-package io.github.keddnyo.midoze.activities.watchface
+package io.github.keddnyo.midoze.fragments
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,20 +26,26 @@ import org.json.JSONObject
 import java.net.URL
 import java.util.concurrent.Executors
 
-class WatchfaceStackActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.menu_watchface)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watchfaces)
+class WatchfaceFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(
+        R.layout.fragment_watchface,
+        container,
+        false
+    )
 
-        val context = this@WatchfaceStackActivity
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
+        super.onViewCreated(view, savedInstanceState)
+
         val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
 
-        OnlineStatus(context).run {
+        OnlineStatus(this).run {
             class GetWatchfaceList : AsyncTask() {
                 override fun execute() {
                     super.execute()
@@ -126,9 +135,11 @@ class WatchfaceStackActivity : AppCompatActivity() {
             PackageUtils(context, context.packageName).getPackageVersionBuild().let {
                 if (prefs.getInt("VERSION_CODE", 0) != it) {
                     editor.apply {
-                        putInt("VERSION_CODE", it)
-                        remove("watchfaceStackCache")
-                        apply()
+                        if (it != null) {
+                            putInt("VERSION_CODE", it)
+                            remove("watchfaceStackCache")
+                            apply()
+                        }
                     }
                 }
             }
@@ -149,10 +160,5 @@ class WatchfaceStackActivity : AppCompatActivity() {
                 execute()
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

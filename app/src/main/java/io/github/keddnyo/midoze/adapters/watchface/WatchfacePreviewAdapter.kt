@@ -19,7 +19,7 @@ class WatchfacePreviewAdapter(private val watchfaceList: ArrayList<WatchfaceData
 
     override fun onBindViewHolder(holder: PreviewViewHolder, position: Int) {
         val currentImage = BitmapCache(holder.itemView.context).decode(watchfaceList[position].alias, watchfaceList[position].title)
-        holder.itemView.findViewById<ImageView>(R.id.firmwarePreview).setImageBitmap(currentImage)
+        holder.itemView.findViewById<ImageView>(R.id.menuPreview).setImageBitmap(currentImage)
     }
 
     override fun getItemCount(): Int {
