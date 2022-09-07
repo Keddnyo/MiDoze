@@ -177,7 +177,7 @@ class RequestActivity : AppCompatActivity() {
             } else {
                 setZeppAppData()
             }
-            false
+            true
         }
 
         importButton.setOnClickListener {
