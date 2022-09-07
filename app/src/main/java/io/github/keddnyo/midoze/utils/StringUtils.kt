@@ -17,19 +17,21 @@ object StringUtils {
     fun Context.getPackageVersion(): String? = PackageUtils(this, this.packageName).getPackageVersionName()
 
     fun String.getPackageVersion(context: Context): String? {
-        return try {
-            PackageUtils(context, this).getPackageVersionNameAndBuild()
-        } catch (e: PackageManager.NameNotFoundException) {
-            when (this@getPackageVersion) {
-                PackageNames.ZEPP_PACKAGE_NAME -> {
-                    PackageVersions.ZEPP_VERSION
+        return PackageUtils(context, this).getPackageVersionNameAndBuild().let { version ->
+            if (version == "null_null") {
+                when (this@getPackageVersion) {
+                    PackageNames.ZEPP_PACKAGE_NAME -> {
+                        PackageVersions.ZEPP_VERSION
+                    }
+                    PackageNames.ZEPP_LIFE_PACKAGE_NAME -> {
+                        PackageVersions.ZEPP_LIFE_VERSION
+                    }
+                    else -> {
+                        null
+                    }
                 }
-                PackageNames.ZEPP_LIFE_PACKAGE_NAME -> {
-                    PackageVersions.ZEPP_LIFE_VERSION
-                }
-                else -> {
-                    null
-                }
+            } else {
+                version
             }
         }
     }

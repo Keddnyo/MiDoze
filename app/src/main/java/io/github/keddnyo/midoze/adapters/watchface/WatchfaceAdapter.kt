@@ -15,8 +15,7 @@ import io.github.keddnyo.midoze.activities.watchface.WatchfacePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 import io.github.keddnyo.midoze.utils.BitmapCache
 
-class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.DeviceListViewHolder>() {
-    private var watchfaceDataStack = ArrayList<WatchfaceData.WatchfaceArray>()
+class WatchfaceAdapter(private val watchfaceDataStack: ArrayList<WatchfaceData.WatchfaceArray> = ArrayList()) : RecyclerView.Adapter<WatchfaceAdapter.DeviceListViewHolder>() {
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -57,10 +56,5 @@ class WatchfaceCommonAdapter : RecyclerView.Adapter<WatchfaceCommonAdapter.Devic
 
     override fun getItemCount(): Int {
         return watchfaceDataStack.size
-    }
-
-    fun addWatchfaceList(array: ArrayList<WatchfaceData.WatchfaceArray>) {
-        watchfaceDataStack = array
-        notifyItemRangeInserted(0, array.size)
     }
 }

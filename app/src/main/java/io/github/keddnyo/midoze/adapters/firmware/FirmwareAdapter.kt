@@ -13,7 +13,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 
-class DeviceStackAdapter(private var stackArray: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()) : RecyclerView.Adapter<DeviceStackAdapter.DeviceListViewHolder>() {
+class FirmwareAdapter(private var stackArray: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()) : RecyclerView.Adapter<FirmwareAdapter.DeviceListViewHolder>() {
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout: MaterialCardView =

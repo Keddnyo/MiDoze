@@ -27,19 +27,13 @@ class ApplicationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
         super.onViewCreated(view, savedInstanceState)
 
-        findViewById<RecyclerView>(R.id.appsRecyclerView).let { RecyclerView ->
-            RecyclerView.layoutManager = GridLayoutManager(
+        findViewById<RecyclerView>(R.id.appsRecyclerView).run {
+            layoutManager = GridLayoutManager(
                 context, Display()
-                    .getGridLayoutIndex(this, Dimens.CARD_GRID_WIDTH)
+                    .getGridLayoutIndex(this@with, Dimens.CARD_GRID_WIDTH)
             )
 
-            AppsAdapter().let { adapter ->
-                RecyclerView.adapter = adapter
-
-                adapter.addItems(
-                    PackageRepository().packages
-                )
-            }
+            adapter = AppsAdapter(PackageRepository().packages)
         }
     }
 }

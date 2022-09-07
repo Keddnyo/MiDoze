@@ -15,7 +15,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.adapters.firmware.DeviceStackAdapter
+import io.github.keddnyo.midoze.adapters.firmware.FirmwareAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.menu.Dimens
 import io.github.keddnyo.midoze.remote.Requests
@@ -41,7 +41,6 @@ class FirmwareFragment : Fragment() {
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
         val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
-        val deviceListRecyclerView: RecyclerView = findViewById(R.id.deviceStackRecyclerView)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
@@ -73,14 +72,14 @@ class FirmwareFragment : Fragment() {
                         }
 
                         mainHandler.post {
-                            DeviceStackAdapter(deviceArrayList).let { adapter ->
+                            FirmwareAdapter(deviceArrayList).let { adapter ->
                                 if (adapter.itemCount == 0) {
                                     emptyResponse.visibility = View.VISIBLE
                                 } else {
                                     emptyResponse.visibility = View.GONE
                                 }
 
-                                deviceListRecyclerView.apply {
+                                findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {
                                     layoutManager =
                                         GridLayoutManager(
                                             context, Display()

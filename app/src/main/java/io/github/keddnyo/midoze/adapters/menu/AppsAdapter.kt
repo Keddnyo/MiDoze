@@ -16,8 +16,8 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.Menu
 import io.github.keddnyo.midoze.utils.PackageUtils
 
-class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
-    private var appsArray = ArrayList<Menu>()
+class AppsAdapter(private val appsArray: ArrayList<Menu> = ArrayList()) : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
+
     private lateinit var context: Context
 
     class DeviceListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -112,11 +112,6 @@ class AppsAdapter : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
 
     override fun getItemCount(): Int {
         return appsArray.size
-    }
-
-    fun addItems(array: ArrayList<Menu>) {
-        appsArray = array
-        notifyItemRangeInserted(0, array.size)
     }
 
     private fun isPackageInstalled(packageName: String): Boolean = with(context) {
