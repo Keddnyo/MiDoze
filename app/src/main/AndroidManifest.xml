@@ -59,12 +59,10 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".activities.firmware.FirmwarePreviewActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
+            android:exported="false" />
         <activity
             android:name=".activities.watchface.WatchfacePreviewActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -5,9 +5,7 @@
     <string name="menu_watchface">Dials</string>
     <string name="menu_application">Apps</string>
     <string name="menu_request">Request</string>
-    <string name="menu_downloads">Downloads</string>
     <string name="menu_github" translatable="false">GitHub</string>
-    <string name="menu_uninstall">Uninstall</string>
     <string name="not_installed">Not installed</string>
 
     <string name="update_title">Update %1$s</string>
@@ -19,7 +17,8 @@
 
     <string name="firmware_language_supported">%1$s language supported</string>
     <string name="item_count">%1$d of %2$d</string>
-    <string name="firmware_share">Share</string>
+    <string name="share">Share</string>
+    <string name="download">Download</string>
     <string name="firmware_share_get_it_on">Get it on %1$s</string>
     <string name="permission_not_granted">Permission not granted</string>
 

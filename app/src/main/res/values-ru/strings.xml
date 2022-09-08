@@ -4,8 +4,6 @@
     <string name="menu_watchface">Циферблаты</string>
     <string name="menu_application">Приложения</string>
     <string name="menu_request">Запрос</string>
-    <string name="menu_downloads">Загрузки</string>
-    <string name="menu_uninstall">Деинсталляция</string>
     <string name="not_installed">Не установлено</string>
 
     <string name="update_title">Обновление %1$s</string>
@@ -17,7 +15,8 @@
 
     <string name="firmware_language_supported">Поддерживается %1$s язык</string>
     <string name="item_count">%1$d из %2$d</string>
-    <string name="firmware_share">Отправить</string>
+    <string name="share">Отправить</string>
+    <string name="download">Отправить</string>
     <string name="firmware_share_get_it_on">Доступно в %1$s</string>
     <string name="permission_not_granted">Нет разрешения</string>
 

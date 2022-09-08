@@ -131,8 +131,8 @@ class WatchfaceFragment : Fragment() {
 
                                 findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).apply {
                                     layoutManager = GridLayoutManager(
-                                        context, Display()
-                                            .getGridLayoutIndex(context, CARD_GRID_WIDTH)
+                                        requireContext(), Display()
+                                            .getGridLayoutIndex(requireContext(), CARD_GRID_WIDTH)
                                     )
                                     this.adapter = adapter
                                 }

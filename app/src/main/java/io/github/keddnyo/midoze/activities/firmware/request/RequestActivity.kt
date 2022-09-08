@@ -69,15 +69,15 @@ class RequestActivity : AppCompatActivity() {
         }
 
         // Get Intent
-        if (intent.hasExtra("deviceArray")) {
-            val position = intent.getIntExtra("position", 0)
+        if (intent.hasExtra("firmware")) {
+            importButton.visibility = View.VISIBLE
 
             val deviceArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
-                intent.getStringExtra("deviceArray").toString(),
+                intent.getStringExtra("firmware").toString(),
                 object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
             )
 
-            val device = deviceArray[position]
+            val device = deviceArray[0]
 
             val deviceSourceValue = device.wearable.deviceSource
             val productionSourceValue = device.wearable.productionSource

@@ -82,8 +82,8 @@ class FirmwareFragment : Fragment() {
                                 findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {
                                     layoutManager =
                                         GridLayoutManager(
-                                            context, Display()
-                                                .getGridLayoutIndex(context, Dimens.CARD_GRID_WIDTH)
+                                            requireContext(), Display()
+                                                .getGridLayoutIndex(requireContext(), Dimens.CARD_GRID_WIDTH)
                                         )
                                     this.adapter = adapter
                                 }

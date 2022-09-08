@@ -7,10 +7,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
+import io.github.keddnyo.midoze.activities.firmware.request.RequestActivity
 import io.github.keddnyo.midoze.adapters.firmware.FirmwarePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.devices.DeviceRepository
@@ -44,7 +45,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val context = this@FirmwarePreviewActivity
 
         if (intent.hasExtra("firmwareArray")) {
-            val deviceArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
+            val firmwareArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("firmwareArray").toString(),
                 object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
             )
@@ -53,11 +54,11 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 findViewById(R.id.download)
 
             val viewPager: ViewPager2 = findViewById(R.id.firmwarePreviewPager)
-            val adapter = FirmwarePreviewAdapter(deviceArray)
+            val adapter = FirmwarePreviewAdapter(firmwareArray)
             viewPager.adapter = adapter
 
             fun initializeViewPager(position: Int) {
-                val device = deviceArray[position]
+                val device = firmwareArray[position]
                 val deviceRepository =
                     DeviceRepository().getDeviceNameByCode(device.wearable.deviceSource.toInt())
 
@@ -102,13 +103,13 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                                     }
                                 }
                             }
-                        }
-                        setOnLongClickListener {
-                            Intent(context, ResponseActivity::class.java).let { intent ->
-                                intent.putExtra("json", downloadContent.toString())
-                                context.startActivity(intent)
+                            setOnLongClickListener {
+                                Intent(context, RequestActivity::class.java).run {
+                                    putExtra("firmware", Gson().toJson(arrayListOf(firmwareArray[position])).toString())
+                                    startActivity(this)
+                                }
+                                true
                             }
-                            true
                         }
                     }
                 }

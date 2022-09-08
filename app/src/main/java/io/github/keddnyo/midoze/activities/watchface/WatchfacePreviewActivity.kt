@@ -52,12 +52,11 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
                 watchfaceURL = watchface.url
                 watchfaceTitle = watchface.title.trim().replaceFirstChar { it.uppercase() }
-                title = watchfaceArray.name
+                title = watchfaceTitle
                 supportActionBar?.subtitle = getString(R.string.item_count, position + 1, watchfaceArray.watchface.size)
 
                 OnlineStatus(context).run {
                     download.apply {
-                        text = watchfaceTitle
                         if (isOnline) {
                             isEnabled = true
                             setOnClickListener {
@@ -76,13 +75,6 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                                     }
                                 }
                             }
-                        }
-                        setOnLongClickListener {
-                            Intent(context, ResponseActivity::class.java).let { intent ->
-                                intent.putExtra("json", downloadContent.toString())
-                                context.startActivity(intent)
-                            }
-                            true
                         }
                     }
                 }

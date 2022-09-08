@@ -29,8 +29,8 @@ class ApplicationFragment : Fragment() {
 
         findViewById<RecyclerView>(R.id.appsRecyclerView).run {
             layoutManager = GridLayoutManager(
-                context, Display()
-                    .getGridLayoutIndex(this@with, Dimens.CARD_GRID_WIDTH)
+                requireContext(), Display()
+                    .getGridLayoutIndex(requireContext(), Dimens.CARD_GRID_WIDTH)
             )
 
             adapter = AppsAdapter(PackageRepository().packages)
