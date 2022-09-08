@@ -84,10 +84,10 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                 OnlineStatus(context).run {
                     download.apply {
                         text = downloadContent.getString("firmwareVersion")
-                        if (isOnline) {
+                        if (isOnline()) {
                             isEnabled = true
                             setOnClickListener {
-                                if (isOnline) {
+                                if (isOnline()) {
                                     runBlocking(Dispatchers.IO) {
                                         for (i in responseFirmwareTagsArray) {
                                             if (downloadContent.has(i)) {

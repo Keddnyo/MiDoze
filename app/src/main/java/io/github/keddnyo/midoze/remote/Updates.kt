@@ -8,6 +8,7 @@ import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
 import org.json.JSONObject
+import java.net.URL
 
 class Updates(val context: Context) : AsyncTask() {
     override fun execute() {
@@ -15,7 +16,7 @@ class Updates(val context: Context) : AsyncTask() {
 
         val releaseData =
             OnlineStatus(context).run {
-                if (isOnline && isHostAvailable(Routes.API_GITHUB_RELEASE)) {
+                if (isOnline() && URL(Routes.API_GITHUB_RELEASE).isActive()) {
                     Requests().getAppReleaseData()
                 } else {
                     JSONObject("{}")

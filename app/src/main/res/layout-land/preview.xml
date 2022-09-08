@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/menuPreview"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="220dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:contentDescription="@string/download" />

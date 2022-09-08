@@ -63,7 +63,7 @@ class WatchfaceFragment : Fragment() {
                                         object :
                                             TypeToken<ArrayList<WatchfaceData.WatchfaceArray>>() {}.type
                                     )
-                                } else if (isOnline) {
+                                } else if (isOnline()) {
                                     BitmapCache(context).clearCache()
 
                                     for (device in DeviceStacks) {
@@ -131,8 +131,8 @@ class WatchfaceFragment : Fragment() {
 
                                 findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).apply {
                                     layoutManager = GridLayoutManager(
-                                        requireContext(), Display()
-                                            .getGridLayoutIndex(requireContext(), CARD_GRID_WIDTH)
+                                        requireActivity(), Display()
+                                            .getGridLayoutIndex(requireActivity(), CARD_GRID_WIDTH)
                                     )
                                     this.adapter = adapter
                                 }
@@ -164,7 +164,7 @@ class WatchfaceFragment : Fragment() {
 
             GetWatchfaceList().run {
                 refreshWatchfaceLayout.setOnRefreshListener {
-                    if (isOnline) {
+                    if (isOnline()) {
                         editor.apply {
                             remove("watchfaceStackCache")
                             apply()

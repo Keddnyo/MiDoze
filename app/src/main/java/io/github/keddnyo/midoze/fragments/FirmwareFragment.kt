@@ -58,7 +58,7 @@ class FirmwareFragment : Fragment() {
                                     deviceStackCache,
                                     object : TypeToken<ArrayList<FirmwareData.FirmwareDataArray>>() {}.type
                                 )
-                            } else if (isOnline) {
+                            } else if (isOnline()) {
                                 deviceArrayList = Requests().getFirmwareLatest(context)
 
                                 editor.apply {
@@ -82,8 +82,8 @@ class FirmwareFragment : Fragment() {
                                 findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {
                                     layoutManager =
                                         GridLayoutManager(
-                                            requireContext(), Display()
-                                                .getGridLayoutIndex(requireContext(), Dimens.CARD_GRID_WIDTH)
+                                            requireActivity(), Display()
+                                                .getGridLayoutIndex(requireActivity(), Dimens.CARD_GRID_WIDTH)
                                         )
                                     this.adapter = adapter
                                 }
@@ -109,7 +109,7 @@ class FirmwareFragment : Fragment() {
 
             GetDevices(context).run {
                 refreshLayout.setOnRefreshListener {
-                    if (isOnline) {
+                    if (isOnline()) {
                         editor.apply {
                             remove("deviceStackCache")
                             apply()

@@ -56,12 +56,12 @@ class WatchfacePreviewActivity : AppCompatActivity() {
 
                 OnlineStatus(context).run {
                     download.apply {
-                        if (isOnline) {
+                        if (isOnline()) {
                             isEnabled = true
                             setOnClickListener {
-                                if (isOnline) {
+                                if (isOnline()) {
                                     runBlocking(Dispatchers.IO) {
-                                        if (OnlineStatus(context).isOnline) {
+                                        if (OnlineStatus(context).isOnline()) {
                                             Requests().getFirmwareFile(
                                                 context,
                                                 watchface.url,
