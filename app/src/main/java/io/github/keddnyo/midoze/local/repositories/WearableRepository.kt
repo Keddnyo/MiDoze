@@ -1,11 +1,11 @@
-package io.github.keddnyo.midoze.local.devices
+package io.github.keddnyo.midoze.local.repositories
 
 import android.content.Context
 import io.github.keddnyo.midoze.local.dataModels.*
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_PACKAGE_NAME
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
 

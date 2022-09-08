@@ -1,10 +1,9 @@
 package io.github.keddnyo.midoze.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.widget.Toast
-import io.github.keddnyo.midoze.local.packages.PackageNames
-import io.github.keddnyo.midoze.local.packages.PackageVersions
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames
+import io.github.keddnyo.midoze.local.repositories.packages.PackageVersions
 
 object StringUtils {
     fun String.toServerResponse(): String {

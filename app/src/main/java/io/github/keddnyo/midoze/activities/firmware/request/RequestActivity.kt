@@ -13,12 +13,12 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.FirmwarePreviewActivity
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_NAME
-import io.github.keddnyo.midoze.local.packages.PackageNames.ZEPP_PACKAGE_NAME
-import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_LIFE_VERSION
-import io.github.keddnyo.midoze.local.packages.PackageVersions.ZEPP_VERSION
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_LIFE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_LIFE_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageNames.ZEPP_PACKAGE_NAME
+import io.github.keddnyo.midoze.local.repositories.packages.PackageVersions.ZEPP_LIFE_VERSION
+import io.github.keddnyo.midoze.local.repositories.packages.PackageVersions.ZEPP_VERSION
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.getPackageVersion
@@ -72,9 +72,9 @@ class RequestActivity : AppCompatActivity() {
         if (intent.hasExtra("firmware")) {
             importButton.visibility = View.VISIBLE
 
-            val deviceArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
+            val deviceArray: ArrayList<FirmwareData.Firmware> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("firmware").toString(),
-                object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<FirmwareData.Firmware>>() {}.type
             )
 
             val device = deviceArray[0]

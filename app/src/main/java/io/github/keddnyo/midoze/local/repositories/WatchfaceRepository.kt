@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.devices
+package io.github.keddnyo.midoze.local.repositories
 
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 

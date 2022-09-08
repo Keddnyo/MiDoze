@@ -14,7 +14,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.activities.firmware.request.RequestActivity
 import io.github.keddnyo.midoze.adapters.firmware.FirmwarePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.devices.DeviceRepository
+import io.github.keddnyo.midoze.local.repositories.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
 import io.github.keddnyo.midoze.utils.DozeLocale
@@ -45,9 +45,9 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val context = this@FirmwarePreviewActivity
 
         if (intent.hasExtra("firmwareArray")) {
-            val firmwareArray: ArrayList<FirmwareData.FirmwareData> = GsonBuilder().create().fromJson(
+            val firmwareArray: ArrayList<FirmwareData.Firmware> = GsonBuilder().create().fromJson(
                 intent.getStringExtra("firmwareArray").toString(),
-                object : TypeToken<ArrayList<FirmwareData.FirmwareData>>() {}.type
+                object : TypeToken<ArrayList<FirmwareData.Firmware>>() {}.type
             )
 
             val download: ExtendedFloatingActionButton =

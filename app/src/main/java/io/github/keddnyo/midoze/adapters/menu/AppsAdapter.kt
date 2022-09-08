@@ -13,10 +13,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.dataModels.Menu
+import io.github.keddnyo.midoze.local.dataModels.ApplicationData
 import io.github.keddnyo.midoze.utils.PackageUtils
 
-class AppsAdapter(private val appsArray: ArrayList<Menu> = ArrayList()) : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
+class AppsAdapter(private val appsArray: ArrayList<ApplicationData.Application> = ArrayList()) : RecyclerView.Adapter<AppsAdapter.DeviceListViewHolder>() {
 
     private lateinit var context: Context
 

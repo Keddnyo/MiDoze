@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.watchface.WatchfaceAdapter
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
-import io.github.keddnyo.midoze.local.devices.WatchfaceRepository.DeviceStacks
+import io.github.keddnyo.midoze.local.repositories.WatchfaceRepository.DeviceStacks
 import io.github.keddnyo.midoze.local.menu.Dimens.CARD_GRID_WIDTH
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.*

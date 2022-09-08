@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.packages
+package io.github.keddnyo.midoze.local.repositories.packages
 
 object PackageNames {
     const val ZEPP_NAME = "com.huami.midong"

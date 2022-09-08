@@ -9,8 +9,8 @@ import android.os.Environment
 import android.webkit.URLUtil
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
-import io.github.keddnyo.midoze.local.devices.DeviceRepository
-import io.github.keddnyo.midoze.local.devices.WearableRepository
+import io.github.keddnyo.midoze.local.repositories.DeviceRepository
+import io.github.keddnyo.midoze.local.repositories.WearableRepository
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
@@ -31,7 +31,7 @@ class Requests {
         val deviceArrayListArray: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()
 
         WearableRepository(context).wearables.forEach { wearableStack ->
-            val deviceArrayList: ArrayList<FirmwareData.FirmwareData> = arrayListOf()
+            val deviceArrayList: ArrayList<FirmwareData.Firmware> = arrayListOf()
             wearableStack.wearableStack.forEach { wearable ->
                 runBlocking(Dispatchers.IO) {
                     Requests().getFirmwareData(
@@ -77,7 +77,7 @@ class Requests {
     suspend fun getFirmwareData(
         context: Context,
         wearable: FirmwareData.Wearable
-    ): FirmwareData.FirmwareData? = with(context as Activity) {
+    ): FirmwareData.Firmware? = with(context as Activity) {
         val client = HttpClient()
         val targetHost = OnlineStatus(context).getXiaomiHostReachable().toString()
         val response = client.get {
@@ -147,7 +147,7 @@ class Requests {
             val deviceName = device.name
             val devicePreview = device.preview
 
-            FirmwareData.FirmwareData(
+            FirmwareData.Firmware(
                 device = FirmwareData.Device(deviceName, devicePreview),
                 wearable = wearable,
                 firmwareData = firmwareData

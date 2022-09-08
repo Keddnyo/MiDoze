@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.menu.AppsAdapter
 import io.github.keddnyo.midoze.local.menu.Dimens
-import io.github.keddnyo.midoze.local.packages.PackageRepository
+import io.github.keddnyo.midoze.local.repositories.packages.PackageRepository
 import io.github.keddnyo.midoze.utils.Display
 
 class ApplicationFragment : Fragment() {

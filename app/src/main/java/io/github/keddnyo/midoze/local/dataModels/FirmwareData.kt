@@ -30,7 +30,7 @@ class FirmwareData {
         val wearableStack: ArrayList<Wearable>
     )
 
-    data class FirmwareData(
+    data class Firmware(
         val device: Device,
         val wearable: Wearable,
         val firmwareData: JSONObject
@@ -38,6 +38,6 @@ class FirmwareData {
 
     data class FirmwareDataArray(
         val name: String,
-        val firmwareData: ArrayList<FirmwareData>
+        val firmwareData: ArrayList<Firmware>
     )
 }

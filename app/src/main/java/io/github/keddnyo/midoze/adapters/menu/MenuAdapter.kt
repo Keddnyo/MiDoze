@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import io.github.keddnyo.midoze.fragments.ApplicationFragment
 import io.github.keddnyo.midoze.fragments.FirmwareFragment
 import io.github.keddnyo.midoze.fragments.WatchfaceFragment
-import io.github.keddnyo.midoze.local.menu.MenuRepository
+import io.github.keddnyo.midoze.local.repositories.ApplicationRepository
 
 class MenuAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
@@ -24,6 +24,6 @@ class MenuAdapter(private val context: Context, fm: FragmentManager) : FragmentP
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return context.resources.getString(MenuRepository.TITLE_ARRAY[position])
+        return context.resources.getString(ApplicationRepository.TITLE_ARRAY[position])
     }
 }

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.packages
+package io.github.keddnyo.midoze.local.repositories.packages
 
 object PackageVersions {
     const val ZEPP_VERSION = "7.0.1-play_100802"
