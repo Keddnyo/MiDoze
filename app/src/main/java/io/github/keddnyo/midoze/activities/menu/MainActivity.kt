@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_github -> {
                 startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(Routes.GITHUB_APP_REPOSITORY))
+                    Intent(Intent.ACTION_VIEW, Uri.parse(Routes.GITHUB_REPOSITORY))
                 )
             }
         }

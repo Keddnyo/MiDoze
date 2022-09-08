@@ -16,7 +16,7 @@ import io.github.keddnyo.midoze.adapters.firmware.FirmwarePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.repositories.DeviceRepository
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.remote.Routes.GITHUB_REPOSITORY
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import kotlinx.coroutines.Dispatchers
@@ -143,7 +143,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
             .append("\n")
             .append(getString(R.string.firmware_share_get_it_on, getString(R.string.app_name)))
             .append("\n")
-            .append(GITHUB_APP_REPOSITORY)
+            .append(GITHUB_REPOSITORY)
             .toString()
 
         val sendIntent: Intent = Intent().apply {

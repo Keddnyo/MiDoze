@@ -33,12 +33,12 @@ class OnlineStatus(val context: Context) {
     }
 
     fun getXiaomiHostReachable(): String? {
-        return if (isHostAvailable("https://${Routes.XIAOMI_HOST_FIRST}")) {
-            Routes.XIAOMI_HOST_FIRST
-        } else if (isHostAvailable("https://${Routes.XIAOMI_HOST_SECOND}")) {
-            Routes.XIAOMI_HOST_SECOND
-        } else if (isHostAvailable("https://${Routes.XIAOMI_HOST_THIRD}")) {
-            Routes.XIAOMI_HOST_THIRD
+        return if (isHostAvailable("https://${Routes.API_AMAZFIT}")) {
+            Routes.API_AMAZFIT
+        } else if (isHostAvailable("https://${Routes.API_MIFIT_RU}")) {
+            Routes.API_MIFIT_RU
+        } else if (isHostAvailable("https://${Routes.API_MIFIT_US2}")) {
+            Routes.API_MIFIT_US2
         } else {
             null
         }

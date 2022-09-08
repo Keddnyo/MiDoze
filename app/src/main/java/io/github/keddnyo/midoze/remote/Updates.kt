@@ -15,7 +15,7 @@ class Updates(val context: Context) : AsyncTask() {
 
         val releaseData =
             OnlineStatus(context).run {
-                if (isOnline && isHostAvailable(Routes.GITHUB_RELEASE_DATA_PAGE)) {
+                if (isOnline && isHostAvailable(Routes.API_GITHUB_RELEASE)) {
                     Requests().getAppReleaseData()
                 } else {
                     JSONObject("{}")

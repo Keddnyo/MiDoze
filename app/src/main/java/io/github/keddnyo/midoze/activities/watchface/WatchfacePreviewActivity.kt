@@ -10,11 +10,10 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.activities.firmware.request.ResponseActivity
 import io.github.keddnyo.midoze.adapters.watchface.WatchfacePreviewAdapter
 import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 import io.github.keddnyo.midoze.remote.Requests
-import io.github.keddnyo.midoze.remote.Routes.GITHUB_APP_REPOSITORY
+import io.github.keddnyo.midoze.remote.Routes.GITHUB_REPOSITORY
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.StringUtils.showAsToast
 import kotlinx.coroutines.Dispatchers
@@ -106,7 +105,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 )
             )
             .append("\n")
-            .append(GITHUB_APP_REPOSITORY)
+            .append(GITHUB_REPOSITORY)
             .toString()
 
         val sendIntent: Intent = Intent().apply {

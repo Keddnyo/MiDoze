@@ -11,6 +11,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.repositories.DeviceRepository
 import io.github.keddnyo.midoze.local.repositories.WearableRepository
+import io.github.keddnyo.midoze.remote.Routes.API_WATCH_APPSTORE
 import io.github.keddnyo.midoze.utils.DozeLocale
 import io.github.keddnyo.midoze.utils.OnlineStatus
 import io.github.keddnyo.midoze.utils.Permissions
@@ -57,7 +58,7 @@ class Requests {
 
     suspend fun getWatchfaceData(deviceName: String): String {
         val client = HttpClient()
-        val targetHost = "watch-appstore.iot.mi.com"
+        val targetHost = API_WATCH_APPSTORE
         val country = DozeLocale().currentCountry
         val language = DozeLocale().currentLanguage
 
@@ -199,7 +200,7 @@ class Requests {
 
     fun getAppReleaseData(): JSONObject {
         return runBlocking(Dispatchers.IO) {
-            JSONObject(URL(Routes.GITHUB_RELEASE_DATA_PAGE).readText())
+            JSONObject(URL(Routes.API_GITHUB_RELEASE).readText())
         }
     }
 }
