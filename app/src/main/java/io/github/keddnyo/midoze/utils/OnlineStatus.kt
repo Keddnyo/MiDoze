@@ -23,7 +23,7 @@ class OnlineStatus(val context: Context) {
             Routes.API_AMAZFIT, Routes.API_MIFIT_RU, Routes.API_MIFIT_US2
         ).let { route ->
             for (i in route) {
-                if (URL(i).isActive()) {
+                if (URL("https://$i").isActive()) {
                     return i
                 }
             }

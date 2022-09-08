@@ -40,7 +40,7 @@ class FirmwareFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
-        val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
+        val firmwareEmptyResponse: ConstraintLayout = findViewById(R.id.firmwareEmptyResponse)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
@@ -74,9 +74,9 @@ class FirmwareFragment : Fragment() {
                         mainHandler.post {
                             FirmwareAdapter(deviceArrayList).let { adapter ->
                                 if (adapter.itemCount == 0) {
-                                    emptyResponse.visibility = View.VISIBLE
+                                    firmwareEmptyResponse.visibility = View.VISIBLE
                                 } else {
-                                    emptyResponse.visibility = View.GONE
+                                    firmwareEmptyResponse.visibility = View.GONE
                                 }
 
                                 findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {

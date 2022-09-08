@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/emptyResponse"
+            android:id="@+id/watchfaceEmptyResponse"
             layout="@layout/empty_response"
             android:visibility="gone" />
 

@@ -42,7 +42,7 @@ class WatchfaceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
-        val emptyResponse: ConstraintLayout = findViewById(R.id.emptyResponse)
+        val watchfaceEmptyResponse: ConstraintLayout = findViewById(R.id.watchfaceEmptyResponse)
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
@@ -124,9 +124,9 @@ class WatchfaceFragment : Fragment() {
                         mainHandler.post {
                             WatchfaceAdapter(watchfaceArrayStack).let { adapter ->
                                 if (adapter.itemCount == 0) {
-                                    emptyResponse.visibility = View.VISIBLE
+                                    watchfaceEmptyResponse.visibility = View.VISIBLE
                                 } else {
-                                    emptyResponse.visibility = View.GONE
+                                    watchfaceEmptyResponse.visibility = View.GONE
                                 }
 
                                 findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).apply {
