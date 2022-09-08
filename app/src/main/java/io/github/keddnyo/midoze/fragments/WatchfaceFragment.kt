@@ -165,7 +165,7 @@ class WatchfaceFragment : Fragment() {
             GetWatchfaceList().run {
                 refreshWatchfaceLayout.setOnRefreshListener {
                     if (isOnline()) {
-                        editor.apply {
+                        editor.run {
                             remove("watchfaceStackCache")
                             apply()
                         }

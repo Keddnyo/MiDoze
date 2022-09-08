@@ -110,7 +110,7 @@ class FirmwareFragment : Fragment() {
             GetDevices(context).run {
                 refreshLayout.setOnRefreshListener {
                     if (isOnline()) {
-                        editor.apply {
+                        editor.run {
                             remove("deviceStackCache")
                             apply()
                         }
