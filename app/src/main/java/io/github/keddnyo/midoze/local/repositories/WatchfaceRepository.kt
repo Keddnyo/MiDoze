@@ -41,8 +41,20 @@ object WatchfaceRepository {
             alias = "hqbd3.watch.l67in"
         ),
         WatchfaceData.Device(
-            name = "Xiaomi Mi Watch Color",
-            alias = "midr.watch.ds"
+            name = "Redmi Smart Band Pro",
+            alias = "mijia.watch.m69gl"
+        ),
+        WatchfaceData.Device(
+            name = "Poco Watch",
+            alias = "midr.watch.k65w"
+        ),
+        WatchfaceData.Device(
+            name = "Redmi Watch",
+            alias = "midr.watch.k65"
+        ),
+        WatchfaceData.Device(
+            name = "Redmi Watch 2",
+            alias = "midr.watch.k65in"
         ),
         WatchfaceData.Device(
             name = "Xiaomi Watch",
@@ -61,24 +73,16 @@ object WatchfaceRepository {
             alias = "midr.watch.k63a"
         ),
         WatchfaceData.Device(
-            name = "Redmi Watch",
-            alias = "midr.watch.k65"
-        ),
-        WatchfaceData.Device(
-            name = "Redmi Watch 2",
-            alias = "midr.watch.k65in"
-        ),
-        WatchfaceData.Device(
-            name = "Poco Watch",
-            alias = "midr.watch.k65w"
-        ),
-        WatchfaceData.Device(
-            name = "Redmi Smart Band Pro",
-            alias = "mijia.watch.m69gl"
+            name = "Xiaomi Mi Watch",
+            alias = "xiaomi.watch.mars"
         ),
         WatchfaceData.Device(
             name = "Xiaomi Mi Watch Lite",
             alias = "mijia.watch.v1"
+        ),
+        WatchfaceData.Device(
+            name = "Xiaomi Mi Watch Color",
+            alias = "midr.watch.ds"
         ),
         WatchfaceData.Device(
             name = "Xiaomi Mi Watch Color Sports",
@@ -87,10 +91,6 @@ object WatchfaceRepository {
         WatchfaceData.Device(
             name = "Xiaomi Mi Watch Global",
             alias = "mijia.watch.l61"
-        ),
-        WatchfaceData.Device(
-            name = "Xiaomi Mi Watch",
-            alias = "xiaomi.watch.mars"
         )
     )
 }
