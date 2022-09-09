@@ -36,7 +36,6 @@ class Requests {
             wearableStack.wearableStack.forEach { wearable ->
                 runBlocking(Dispatchers.IO) {
                     Requests().getFirmwareData(
-                        context = context,
                         wearable = wearable
                     )
                 }?.let { device ->
@@ -76,11 +75,10 @@ class Requests {
     }
 
     suspend fun getFirmwareData(
-        context: Context,
         wearable: FirmwareData.Wearable
-    ): FirmwareData.Firmware? = with(context as Activity) {
+    ): FirmwareData.Firmware? {
         val client = HttpClient()
-        val targetHost = OnlineStatus(context).getXiaomiHostReachable().toString()
+        val targetHost = OnlineStatus().getXiaomiHostReachable().toString()
         val response = client.get {
             url {
                 protocol = URLProtocol.HTTPS

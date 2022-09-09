@@ -81,13 +81,13 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                         }
                 }
 
-                OnlineStatus(context).run {
+                OnlineStatus().run {
                     download.apply {
                         text = downloadContent.getString("firmwareVersion")
-                        if (isOnline()) {
+                        if (isOnline(context)) {
                             isEnabled = true
                             setOnClickListener {
-                                if (isOnline()) {
+                                if (isOnline(context)) {
                                     runBlocking(Dispatchers.IO) {
                                         for (i in responseFirmwareTagsArray) {
                                             if (downloadContent.has(i)) {
@@ -105,7 +105,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                             }
                             setOnLongClickListener {
                                 Intent(context, RequestActivity::class.java).run {
-                                    putExtra("firmware", Gson().toJson(arrayListOf(firmwareArray[position])).toString())
+                                    putExtra("firmware", Gson().toJson(firmwareArray[position]).toString())
                                     startActivity(this)
                                 }
                                 true
@@ -140,6 +140,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
         val shareContent = StringBuilder().append(shareTitle)
             .append("\n")
             .append(firmwareLinks.joinToString("\n"))
+            .append("\n")
             .append("\n")
             .append(getString(R.string.firmware_share_get_it_on, getString(R.string.app_name)))
             .append("\n")

@@ -54,14 +54,14 @@ class WatchfacePreviewActivity : AppCompatActivity() {
                 title = watchfaceTitle
                 supportActionBar?.subtitle = getString(R.string.item_count, position + 1, watchfaceArray.watchface.size)
 
-                OnlineStatus(context).run {
+                OnlineStatus().run {
                     download.apply {
-                        if (isOnline()) {
+                        if (isOnline(context)) {
                             isEnabled = true
                             setOnClickListener {
-                                if (isOnline()) {
+                                if (isOnline(context)) {
                                     runBlocking(Dispatchers.IO) {
-                                        if (OnlineStatus(context).isOnline()) {
+                                        if (isOnline(context)) {
                                             Requests().getFirmwareFile(
                                                 context,
                                                 watchface.url,
@@ -97,6 +97,7 @@ class WatchfacePreviewActivity : AppCompatActivity() {
         val shareContent = stringBuilder.append(watchfaceTitle)
             .append("\n")
             .append(watchfaceURL)
+            .append("\n")
             .append("\n")
             .append(
                 getString(

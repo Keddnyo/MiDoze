@@ -8,8 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import java.net.URL
 
-class OnlineStatus(val context: Context) {
-    fun isOnline(): Boolean = runBlocking(Dispatchers.Default) {
+class OnlineStatus {
+    fun isOnline(context: Context): Boolean = runBlocking(Dispatchers.Default) {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val info = connectivityManager.allNetworkInfo

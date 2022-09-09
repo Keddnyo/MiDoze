@@ -50,7 +50,7 @@ class FirmwareFragment : Fragment() {
 
         refreshFirmwareLayout.setDistanceToTriggerSync(SWIPE_LAYOUT_REFRESH_LENGTH)
 
-        OnlineStatus(context).run {
+        OnlineStatus().run {
             class GetDevices : AsyncTask() {
                 var deviceArrayList: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()
 
@@ -62,7 +62,7 @@ class FirmwareFragment : Fragment() {
                                     deviceStackCache,
                                     object : TypeToken<ArrayList<FirmwareData.FirmwareDataArray>>() {}.type
                                 )
-                            } else if (isOnline()) {
+                            } else if (isOnline(context)) {
                                 deviceArrayList = Requests().getFirmwareLatest(context)
 
                                 editor.apply {
@@ -113,7 +113,7 @@ class FirmwareFragment : Fragment() {
 
             GetDevices().run {
                 refreshFirmwareLayout.setOnRefreshListener {
-                    if (isOnline()) {
+                    if (isOnline(context)) {
                         editor.run {
                             remove("deviceStackCache")
                             apply()

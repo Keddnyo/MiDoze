@@ -52,7 +52,7 @@ class WatchfaceFragment : Fragment() {
 
         refreshWatchfaceLayout.setDistanceToTriggerSync(SWIPE_LAYOUT_REFRESH_LENGTH)
 
-        OnlineStatus(context).run {
+        OnlineStatus().run {
             class GetWatchfaceList : AsyncTask() {
                 override fun execute() {
                     super.execute()
@@ -68,7 +68,7 @@ class WatchfaceFragment : Fragment() {
                                         object :
                                             TypeToken<ArrayList<WatchfaceData.WatchfaceArray>>() {}.type
                                     )
-                                } else if (isOnline()) {
+                                } else if (isOnline(context)) {
                                     BitmapCache(context).clearCache()
 
                                     for (device in DeviceStacks) {
@@ -169,7 +169,7 @@ class WatchfaceFragment : Fragment() {
 
             GetWatchfaceList().run {
                 refreshWatchfaceLayout.setOnRefreshListener {
-                    if (isOnline()) {
+                    if (isOnline(context)) {
                         editor.run {
                             remove("watchfaceStackCache")
                             apply()
