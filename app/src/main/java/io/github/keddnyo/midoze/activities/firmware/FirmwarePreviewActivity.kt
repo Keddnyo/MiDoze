@@ -72,7 +72,7 @@ class FirmwarePreviewActivity : AppCompatActivity() {
                             DozeLocale().currentLanguage.let { locale ->
                                 supportActionBar?.setSubtitle(
                                     if (locale in localeArray) {
-                                        getString(R.string.firmware_language_supported, Locale(locale).displayName.replaceFirstChar { it.uppercase() })
+                                        getString(R.string.firmware_language_supported, Locale(locale).displayName)
                                     } else {
                                         null
                                     }
