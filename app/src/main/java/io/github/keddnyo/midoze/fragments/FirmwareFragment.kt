@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.adapters.firmware.FirmwareAdapter
 import io.github.keddnyo.midoze.local.dataModels.FirmwareData
 import io.github.keddnyo.midoze.local.menu.Dimens
+import io.github.keddnyo.midoze.local.menu.Dimens.SWIPE_LAYOUT_REFRESH_LENGTH
 import io.github.keddnyo.midoze.remote.Requests
 import io.github.keddnyo.midoze.utils.AsyncTask
 import io.github.keddnyo.midoze.utils.Display
@@ -39,12 +41,14 @@ class FirmwareFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
         super.onViewCreated(view, savedInstanceState)
 
-        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
+        val refreshFirmwareLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
         val firmwareEmptyResponse: ConstraintLayout = findViewById(R.id.firmwareEmptyResponse)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = prefs.edit()
         val gson = Gson()
+
+        refreshFirmwareLayout.setDistanceToTriggerSync(SWIPE_LAYOUT_REFRESH_LENGTH)
 
         OnlineStatus(this).run {
             class GetDevices(val context: Context) : AsyncTask() {
@@ -89,7 +93,7 @@ class FirmwareFragment : Fragment() {
                                 }
                             }
 
-                            refreshLayout.isRefreshing = false
+                            refreshFirmwareLayout.isRefreshing = false
                         }
                     }
                 }
@@ -108,7 +112,7 @@ class FirmwareFragment : Fragment() {
             }
 
             GetDevices(context).run {
-                refreshLayout.setOnRefreshListener {
+                refreshFirmwareLayout.setOnRefreshListener {
                     if (isOnline()) {
                         editor.run {
                             remove("deviceStackCache")
@@ -120,7 +124,7 @@ class FirmwareFragment : Fragment() {
                 }
 
                 execute()
-                refreshLayout.isRefreshing = true
+                refreshFirmwareLayout.isRefreshing = true
             }
         }
     }

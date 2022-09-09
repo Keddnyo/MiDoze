@@ -5,8 +5,7 @@ import org.json.JSONObject
 class WatchfaceData {
     data class Device(
         val name: String,
-        val alias: String,
-        val preview: Int?,
+        val alias: String
     )
 
     data class Watchface(

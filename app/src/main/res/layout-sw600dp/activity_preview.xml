@@ -15,7 +15,7 @@
         android:id="@+id/download"
         android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:layout_margin="100dp"
+        android:layout_margin="50dp"
         android:enabled="false"
         android:text="@string/download"
         app:icon="@drawable/ic_download"
