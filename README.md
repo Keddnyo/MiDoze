@@ -4,7 +4,7 @@
 
 ## Features
 1. Firmwares
-2. Watchfaces
+2. Watch faces
 3. Applications
 4. Custom request
 5. Dark mode
