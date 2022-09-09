@@ -5,7 +5,7 @@ import io.github.keddnyo.midoze.local.dataModels.WatchfaceData
 object WatchfaceRepository {
     val DeviceStacks = arrayListOf(
         WatchfaceData.Device(
-            name = "Xiaomi Mi Band 4",
+            name = "Mi Smart Band 4C",
             alias = "mijia.watch.band01"
         ),
         WatchfaceData.Device(
@@ -41,15 +41,15 @@ object WatchfaceRepository {
             alias = "hqbd3.watch.l67in"
         ),
         WatchfaceData.Device(
-            name = "midr.watch.ds",
+            name = "Xiaomi Mi Watch Color",
             alias = "midr.watch.ds"
         ),
         WatchfaceData.Device(
-            name = "midr.watch.k62",
+            name = "Xiaomi Watch",
             alias = "midr.watch.k62"
         ),
         WatchfaceData.Device(
-            name = "midr.watch.k62a",
+            name = "Xiaomi Watch S",
             alias = "midr.watch.k62a"
         ),
         WatchfaceData.Device(
@@ -73,23 +73,23 @@ object WatchfaceRepository {
             alias = "midr.watch.k65w"
         ),
         WatchfaceData.Device(
-            name = "mijia.watch.m69gl",
+            name = "Redmi Smart Band Pro",
             alias = "mijia.watch.m69gl"
         ),
         WatchfaceData.Device(
-            name = "mijia.watch.v1",
+            name = "Xiaomi Mi Watch Lite",
             alias = "mijia.watch.v1"
         ),
         WatchfaceData.Device(
-            name = "midr.watch.sports",
+            name = "Xiaomi Mi Watch Color Sports",
             alias = "midr.watch.sports"
         ),
         WatchfaceData.Device(
-            name = "mijia.watch.l61",
+            name = "Xiaomi Mi Watch Global",
             alias = "mijia.watch.l61"
         ),
         WatchfaceData.Device(
-            name = "Xiaomi Mi Watch Lite",
+            name = "Xiaomi Mi Watch",
             alias = "xiaomi.watch.mars"
         )
     )

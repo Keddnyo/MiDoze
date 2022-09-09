@@ -38,20 +38,22 @@ class FirmwareFragment : Fragment() {
         false
     )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val refreshFirmwareLayout: SwipeRefreshLayout = findViewById(R.id.refreshFirmwareLayout)
-        val firmwareEmptyResponse: ConstraintLayout = findViewById(R.id.firmwareEmptyResponse)
+        val context = requireContext()
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val refreshFirmwareLayout: SwipeRefreshLayout = view.findViewById(R.id.refreshFirmwareLayout)
+        val firmwareEmptyResponse: ConstraintLayout = view.findViewById(R.id.firmwareEmptyResponse)
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = prefs.edit()
         val gson = Gson()
 
         refreshFirmwareLayout.setDistanceToTriggerSync(SWIPE_LAYOUT_REFRESH_LENGTH)
 
-        OnlineStatus(this).run {
-            class GetDevices(val context: Context) : AsyncTask() {
+        OnlineStatus(context).run {
+            class GetDevices : AsyncTask() {
                 var deviceArrayList: ArrayList<FirmwareData.FirmwareDataArray> = arrayListOf()
 
                 override fun execute() {
@@ -83,11 +85,11 @@ class FirmwareFragment : Fragment() {
                                     firmwareEmptyResponse.visibility = View.GONE
                                 }
 
-                                findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {
+                                view.findViewById<RecyclerView>(R.id.deviceStackRecyclerView).apply {
                                     layoutManager =
                                         GridLayoutManager(
-                                            requireActivity(), Display()
-                                                .getGridLayoutIndex(requireActivity(), Dimens.CARD_GRID_WIDTH)
+                                            context, Display()
+                                                .getGridLayoutIndex(context, Dimens.CARD_GRID_WIDTH)
                                         )
                                     this.adapter = adapter
                                 }
@@ -111,7 +113,7 @@ class FirmwareFragment : Fragment() {
                 }
             }
 
-            GetDevices(context).run {
+            GetDevices().run {
                 refreshFirmwareLayout.setOnRefreshListener {
                     if (isOnline()) {
                         editor.run {

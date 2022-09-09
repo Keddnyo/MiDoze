@@ -40,18 +40,20 @@ class WatchfaceFragment : Fragment() {
         false
     )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(requireActivity()) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val refreshWatchfaceLayout: SwipeRefreshLayout = findViewById(R.id.refreshWatchfaceLayout)
-        val watchfaceEmptyResponse: ConstraintLayout = findViewById(R.id.watchfaceEmptyResponse)
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val context = requireContext()
+
+        val refreshWatchfaceLayout: SwipeRefreshLayout = view.findViewById(R.id.refreshWatchfaceLayout)
+        val watchfaceEmptyResponse: ConstraintLayout = view.findViewById(R.id.watchfaceEmptyResponse)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = prefs.edit()
         val gson = Gson()
 
         refreshWatchfaceLayout.setDistanceToTriggerSync(SWIPE_LAYOUT_REFRESH_LENGTH)
 
-        OnlineStatus(this).run {
+        OnlineStatus(context).run {
             class GetWatchfaceList : AsyncTask() {
                 override fun execute() {
                     super.execute()
@@ -133,10 +135,10 @@ class WatchfaceFragment : Fragment() {
                                     watchfaceEmptyResponse.visibility = View.GONE
                                 }
 
-                                findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).apply {
+                                view.findViewById<RecyclerView>(R.id.watchfaceCommonRecyclerView).apply {
                                     layoutManager = GridLayoutManager(
-                                        requireActivity(), Display()
-                                            .getGridLayoutIndex(requireActivity(), CARD_GRID_WIDTH)
+                                        context, Display()
+                                            .getGridLayoutIndex(context, CARD_GRID_WIDTH)
                                     )
                                     this.adapter = adapter
                                 }
