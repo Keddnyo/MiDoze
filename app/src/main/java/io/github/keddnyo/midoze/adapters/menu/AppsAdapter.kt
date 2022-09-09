@@ -114,9 +114,9 @@ class AppsAdapter(private val appsArray: ArrayList<ApplicationData.Application> 
         return appsArray.size
     }
 
-    private fun isPackageInstalled(packageName: String): Boolean = with(context) {
+    private fun isPackageInstalled(packageName: String): Boolean {
         return try {
-            packageManager.getPackageInfo(packageName, 0)
+            context.packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false

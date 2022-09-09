@@ -43,12 +43,12 @@ class MainActivity : AppCompatActivity() {
 
                         when (position) {
                             0 -> {
-                                title = getString(R.string.menu_firmware)
-                                setItemChecked(R.id.menu_firmware)
-                            }
-                            1 -> {
                                 title = getString(R.string.menu_watchface)
                                 setItemChecked(R.id.menu_watchface)
+                            }
+                            1 -> {
+                                title = getString(R.string.menu_firmware)
+                                setItemChecked(R.id.menu_firmware)
                             }
                             2 -> {
                                 title = getString(R.string.menu_application)
@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
 
                 navigationBar.setOnNavigationItemSelectedListener { item->
                     currentItem = when (item.itemId) {
-                        R.id.menu_firmware -> 0
-                        R.id.menu_watchface -> 1
+                        R.id.menu_watchface -> 0
+                        R.id.menu_firmware -> 1
                         R.id.menu_application -> 2
                         else -> 0
                     }
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 title = getString(R.string.menu_firmware)
-                currentItem = 0
+                currentItem = 1
             }
         }
     }
