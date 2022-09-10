@@ -16,6 +16,16 @@ class PackageRepository {
             tag = "com.xiaomi.hm.health"
         ),
         ApplicationData.Application(
+            icon = R.drawable.ic_notify_amazfit,
+            title = "Notify for Amazfit",
+            tag = "com.mc.amazfit1"
+        ),
+        ApplicationData.Application(
+            icon = R.drawable.ic_notify_mi_band,
+            title = "Notify for Mi Band",
+            tag = "com.mc.miband1"
+        ),
+        ApplicationData.Application(
             icon = R.drawable.ic_notify_lite_mi_band,
             title = "Notify Lite for Mi Band",
             tag = "com.mc.mibandlite1"
@@ -24,16 +34,6 @@ class PackageRepository {
             icon = R.drawable.ic_notify_lite,
             title = "Notify Lite",
             tag = "com.mc.notify"
-        ),
-        ApplicationData.Application(
-            icon = R.drawable.ic_notify_mi_band,
-            title = "Notify for Mi Band",
-            tag = "com.mc.miband1"
-        ),
-        ApplicationData.Application(
-            icon = R.drawable.ic_notify_amazfit,
-            title = "Notify for Amazfit",
-            tag = "com.mc.amazfit1"
         ),
         ApplicationData.Application(
             icon = R.drawable.ic_mi_bandage,

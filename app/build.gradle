@@ -10,8 +10,8 @@ android {
         applicationId "io.github.keddnyo.midoze"
         minSdk 14
         targetSdk 32
-        versionCode 15
-        versionName "7.0.0"
+        versionCode 16
+        versionName "7.0.1"
         resConfigs 'en', 'ru'
         multiDexEnabled true
     }
