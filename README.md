@@ -8,8 +8,9 @@
 3. Applications
 4. Custom request
 5. Dark mode
-6. Shurtcuts
-7. English and Russian UI
+6. Offline mode
+7. Shurtcuts
+8. English and Russian UI
 
 ## Screenshots
 <p align="center">
