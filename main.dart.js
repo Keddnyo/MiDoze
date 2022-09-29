@@ -63745,7 +63745,16 @@ $1(a){var s,r,q=null,p="firmwareUrl",o=a.b
 if(o===200){s=B.be.Id(0,A.auI(A.asO(a.e).c.a.h(0,"charset")).dc(0,a.w),q)
 o=J.at(s)
 if(o.h(s,p)!=null){o.h(s,"firmwareVersion")
-this.a.nf(o.h(s,p))}}else{r=this.a.c.V(t.Pu)
+r=o.h(s,p)
+o.h(s,"resourceVersion")
+o.h(s,"resourceUrl")
+o.h(s,"baseResourceVersion")
+o.h(s,"baseResourceUrl")
+o.h(s,"fontVersion")
+o.h(s,"fontUrl")
+o.h(s,"gpsVersion")
+o.h(s,"gpsUrl")
+this.a.nf(r)}}else{r=this.a.c.V(t.Pu)
 r.toString
 r.f.Me(A.ahe(q,q,q,q,B.a9,A.n7("Download failed: "+o+".",q,q,q,q,q,q),B.lO,B.zX,q,q,q,q,q,q,q))}},
 $S:376}
