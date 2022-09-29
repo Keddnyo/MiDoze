@@ -61228,13 +61228,13 @@ s.f.sbl(0,"")
 s.r.sbl(0,"")},
 $S:0}
 A.a4H.prototype={
-$1(a){var s,r,q=this.a
+$1(a){var s,r,q="firmwareUrl"
 if(a.b===200){s=B.bp.Hd(0,A.aqu(A.aoE(a.e).c.a.h(0,"charset")).dK(0,a.w),null)
 r=J.ap(s)
-r.h(s,"firmwareVersion")
-q.mO(r.h(s,"firmwareUrl"))}else{q=q.c.T(t.Cu)
-q.toString
-q.f.L1(B.F5)}},
+if(r.h(s,q)!=null){r.h(s,"firmwareVersion")
+this.a.mO(r.h(s,q))}}else{r=this.a.c.T(t.Cu)
+r.toString
+r.f.L1(B.F5)}},
 $S:357}
 A.TA.prototype={}
 A.Du.prototype={
