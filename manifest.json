@@ -10,9 +10,9 @@
     "prefer_related_applications": false,
     "icons": [
         { "src": "/favicon.ico", "type": "image/x-icon", "sizes": "16x16 32x32" },
-        { "src": "/Icon-192.png", "type": "image/png", "sizes": "192x192" },
-        { "src": "/Icon-512.png", "type": "image/png", "sizes": "512x512" },
-        { "src": "/Icon-192-maskable.png", "type": "image/png", "sizes": "192x192", "purpose": "maskable" },
-        { "src": "/Icon-512-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+        { "src": "icons/Icon-192.png", "type": "image/png", "sizes": "192x192" },
+        { "src": "icons/Icon-512.png", "type": "image/png", "sizes": "512x512" },
+        { "src": "icons/Icon-192-maskable.png", "type": "image/png", "sizes": "192x192", "purpose": "maskable" },
+        { "src": "icons/Icon-512-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
       ]
 }
