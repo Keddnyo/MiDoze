@@ -12,11 +12,9 @@ const RESOURCES = {
 "assets/shaders/ink_sparkle.frag": "0a7766fd42d4e2a6d97ae20a7ea2c780",
 "favicon.ico": "cdffc3454ccd5ed64ea735332bf4c1f3",
 "icons/icon-192-maskable.png": "6a77c3bfb4b42e7849763686381fc51e",
-"icons/Icon-192.png": "a9d7c143e5e102a40056cd857033c50e",
 "icons/icon-512-maskable.png": "364697a213df392204861dd088c3cd32",
-"icons/Icon-512.png": "0eafac00e85ef99e80acb5032487c105",
-"index.html": "3301c60c685dc8894dfadc6c7b477654",
-"/": "3301c60c685dc8894dfadc6c7b477654",
+"index.html": "18e4a0342d3524d9b5e00223288099e1",
+"/": "18e4a0342d3524d9b5e00223288099e1",
 "main.dart.js": "9154cdd9e377f55e97ba58d7abb031ac",
 "manifest.json": "11b88c599dd4d576aac3578d7a5146dc",
 "version.json": "eb25b2f87ab0f7f2cb7e2a7dda5fab84"
