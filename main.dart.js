@@ -71862,7 +71862,7 @@ s=A.hR("MiDoze",q,q,q,q,q,q)
 r=A.a([A.Ge(q,B.AK,q,new A.ady(a),"Request"),A.Ge(q,B.AH,q,new A.adz(),"GitHub")],t.D)
 return new A.xu(new A.ty(s,r,new A.OW(q,q,1/0,56),q),this.a6G(),q)},
 a6G(){var s,r,q,p=null,o=J.an8(50,t.l7)
-for(s=0;s<50;++s)o[s]=new A.Dz(10,new A.cF(B.mM,new A.vd(A.axU(p,p,new A.tz("assets/images/Amazfit_Bip.png",p,p)),p),p),p)
+for(s=0;s<50;++s)o[s]=new A.Dz(10,new A.cF(B.mM,new A.vd(A.axU(p,p,new A.tz("assets/images/amazfit_bip.png",p,p)),p),p),p)
 r=A.aH([null,0],t.LO,t.S)
 q=!0
 q=q?B.wX:p
