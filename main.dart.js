@@ -44954,10 +44954,10 @@ if(!j.glM()){a5=m.r
 a5.toString
 a7=(4+0.75*a5)*A.ajF(b7)
 a5=b4.gam()
-if(a5.p4===!0)if(a1)a8=B.Ag
-else a8=B.Ad
+if(a5.p4===!0)if(a1)a8=B.Ah
+else a8=B.Ae
 else if(a1)a8=B.Ac
-else a8=B.A9}else{a8=a1?B.Ae:B.Af
+else a8=B.A9}else{a8=a1?B.Af:B.Ag
 a7=0}b4.gam()
 a5=b4.gam().CW
 a5.toString
@@ -71925,7 +71925,7 @@ r=A.a([A.Gg(q,B.AX,q,new A.adB(a),"Request"),A.Gg(q,B.AU,q,new A.adC(),"GitHub")
 return new A.xx(new A.tz(s,r,10,B.zp,new A.OX(q,q,1/0,56),q),this.a6I(),q)},
 a6I(){var s,r,q,p=null,o=J.an9(50,t.l7)
 for(s=t.D,r=0;r<50;++r){q=new A.b7(16,16)
-o[r]=new A.DC(10,new A.cb(new A.c2(q,q,q,q),B.lQ),new A.cA(B.Ah,A.UO(A.a([new A.uS(1,B.h1,new A.vf(A.axW(p,p,new A.tA("assets/images/amazfit_bip.png",p,p)),p),p),B.Gb],s),B.cK,B.d4,B.hH),p),p)}s=A.aH([null,0],t.LO,t.S)
+o[r]=new A.DC(10,new A.cb(new A.c2(q,q,q,q),B.lQ),new A.cA(B.Ad,A.UO(A.a([new A.uS(1,B.h1,new A.vf(A.axW(p,p,new A.tA("assets/images/amazfit_bip.png",p,p)),p),p),B.Gb],s),B.cK,B.d4,B.hH),p),p)}s=A.aH([null,0],t.LO,t.S)
 q=!0
 q=q?B.wY:p
 return new A.G7(new A.a7S(300,5,5,1),new A.a7O(!0,!0,!0,o,s),B.mP,B.ac,!1,p,p,q,!1,p,50,B.aH,B.GN,p,B.O,p)}}
@@ -75892,12 +75892,12 @@ B.Pp=new A.au(0,12,0,16)
 B.Aa=new A.au(0,14,0,14)
 B.Ab=new A.au(0,3,0,3)
 B.Ac=new A.au(0,8,0,8)
-B.Ad=new A.au(12,12,12,12)
-B.Ae=new A.au(12,20,12,12)
-B.Af=new A.au(12,24,12,16)
-B.Ag=new A.au(12,8,12,8)
+B.Ad=new A.au(10,10,10,10)
+B.Ae=new A.au(12,12,12,12)
+B.Af=new A.au(12,20,12,12)
+B.Ag=new A.au(12,24,12,16)
+B.Ah=new A.au(12,8,12,8)
 B.mN=new A.au(16,0,16,0)
-B.Ah=new A.au(16,16,16,16)
 B.Ai=new A.au(16,4,16,4)
 B.Aj=new A.au(18,16,18,16)
 B.mO=new A.au(20,0,20,3)
