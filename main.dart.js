@@ -42810,7 +42810,7 @@ A.Ls.prototype={}
 A.DD.prototype={
 I(a){var s,r,q,p,o,n,m,l,k=null,j=A.a4(a).xr
 A.a4(a)
-s=new A.ab3(a,B.F,k,k,k,1,B.Ab,B.eL)
+s=new A.ab3(a,B.F,k,k,k,1,B.Ac,B.eL)
 r=j.f
 if(r==null){r=s.f
 r.toString}q=j.b
@@ -43147,7 +43147,7 @@ n.toString
 j.push(n)
 m=new A.Gp(56,new A.eo(B.lU,A.UO(j,B.dO,B.d4,B.d5),l),l)
 if(s!=null)m=A.bR(l,m,!1,l,l,!0,l,l,l,l,s,l,l,!0,l,l,l,l,l,l,l,!0,l,l,l,l)
-return new A.F0(l,l,l,l,B.Aa,B.F,this.ax,l,m,l)}}
+return new A.F0(l,l,l,l,B.Ab,B.F,this.ax,l,m,l)}}
 A.uu.prototype={}
 A.Vz.prototype={
 $3(a,b,c){var s=new A.hk(this.a,null),r=new A.z4(this.b.a,s,null)
@@ -75933,9 +75933,9 @@ B.mQ=new A.aw(20,0,20,3)
 B.A8=new A.aw(20,20,20,20)
 B.Pg=new A.aw(24,24,24,0)
 B.A9=new A.aw(24,8,24,8)
-B.Aa=new A.aw(40,24,40,24)
+B.Ab=new A.aw(40,24,40,24)
 B.mR=new A.aw(4,0,4,0)
-B.Ab=new A.aw(4,4,4,4)
+B.Ac=new A.aw(4,4,4,4)
 B.Ph=new A.aw(4,4,4,5)
 B.mS=new A.aw(8,0,8,0)
 B.Ad=new A.aw(8,4,8,4)
@@ -77230,10 +77230,10 @@ B.FX=new A.wu(1,"landscape")
 B.lS=new A.cw(B.l,1,B.ay,-1)
 B.FY=new A.hH(4,B.cC,B.lS)
 B.FZ=new A.wv(null)
-B.Ac=new A.aw(5,5,5,5)
-B.L7=new A.t(!0,null,null,null,null,null,14,B.cc,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+B.Aa=new A.aw(3,3,3,3)
+B.L7=new A.t(!0,null,null,null,null,null,13,B.cc,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.Md=new A.nR("Amazfit Bip",null,B.L7,null,null,null,null,null,null)
-B.G_=new A.cA(B.Ac,B.Md,null)
+B.G_=new A.cA(B.Aa,B.Md,null)
 B.aC=new A.wA(0,"fill")
 B.a5=new A.wA(1,"stroke")
 B.G0=new A.lf(1/0)
