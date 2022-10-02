@@ -40041,7 +40041,7 @@ s=r.a(q).V$}}}
 A.RU.prototype={}
 A.ED.prototype={
 I(a){var s=this.d,r=s==null?1:0.7
-return A.amn(B.a4,null,this.c,B.mn,B.mn,44,s,B.A8,r)}}
+return A.amn(B.a4,null,this.c,B.mn,B.mn,44,s,B.A9,r)}}
 A.uj.prototype={
 gkR(){var s=this.c,r=this.a.a
 s=B.dQ.k(0,r)?B.wq:B.wq.dB(r)
@@ -47020,7 +47020,7 @@ a3=a2?l:a8
 a4=$.as5()
 o=A.a([$.arK()],o)
 B.c.N(o,n)
-b1=A.KC(b1,new A.pa(q,p,"\u2022",!1,!1,c,b,!0,!0,a0,d,!0,r,a8,B.bh,a8,B.Ix,k,h,B.cL,1,a8,!1,!1,a1,a3,a,a8,a8,a8,a8,a8,a7.gZQ(),a7.gZW(),a8,o,B.bp,!0,2,a8,e,f,i,g,B.c0,B.bm,s.a,B.A9,a2,B.aH,a8,a8,!0,a7,B.O,"editable",!0,B.f_,a4,a7.y))
+b1=A.KC(b1,new A.pa(q,p,"\u2022",!1,!1,c,b,!0,!0,a0,d,!0,r,a8,B.bh,a8,B.Ix,k,h,B.cL,1,a8,!1,!1,a1,a3,a,a8,a8,a8,a8,a8,a7.gZQ(),a7.gZW(),a8,o,B.bp,!0,2,a8,e,f,i,g,B.c0,B.bm,s.a,B.mQ,a2,B.aH,a8,a8,!0,a7,B.O,"editable",!0,B.f_,a4,a7.y))
 a7.a.toString
 a5=A.ja(new A.of(A.a([p,q],t.Eo)),new A.afm(a7,p,q),new A.hK(b1,a8))
 a7.a.toString
@@ -48453,7 +48453,7 @@ case 0:case 1:case 2:return 32}},
 XK(){var s=this.c
 s.toString
 switch(A.a4(s).r.a){case 4:case 3:case 5:return B.Ae
-case 0:case 1:case 2:return B.A7}},
+case 0:case 1:case 2:return B.A8}},
 GS(){var s=this.c
 s.toString
 switch(A.a4(s).r.a){case 4:case 3:case 5:return 12
@@ -71924,8 +71924,8 @@ s=A.hS("MiDoze",q,q,q,q,q,q)
 r=A.a([A.Gf(q,B.AN,q,new A.adB(a),"Request"),A.Gf(q,B.AK,q,new A.adC(),"GitHub")],t.D)
 return new A.xw(new A.tz(s,r,10,B.zf,new A.OX(q,q,1/0,56),q),this.a6I(),q)},
 a6I(){var s,r,q,p=null,o=J.an9(50,t.l7)
-for(s=t.D,r=0;r<50;++r){q=new A.b7(10,10)
-o[r]=new A.DB(10,new A.cb(new A.c2(q,q,q,q),B.lR),new A.cA(B.mQ,A.UO(A.a([new A.uS(1,B.h1,new A.vf(A.axW(p,p,new A.tA("assets/images/amazfit_bip.png",p,p)),p),p),B.G_],s),B.cK,B.d4,B.hH),p),p)}s=A.aH([null,0],t.LO,t.S)
+for(s=t.D,r=0;r<50;++r){q=new A.b7(16,16)
+o[r]=new A.DB(10,new A.cb(new A.c2(q,q,q,q),B.lR),new A.cA(B.A7,A.UO(A.a([new A.uS(1,B.h1,new A.vf(A.axW(p,p,new A.tA("assets/images/amazfit_bip.png",p,p)),p),p),B.G_],s),B.cK,B.d4,B.hH),p),p)}s=A.aH([null,0],t.LO,t.S)
 q=!0
 q=q?B.wY:p
 return new A.G6(new A.a7S(300,5,5,1),new A.a7O(!0,!0,!0,o,s),B.mQ,B.ac,!1,p,p,q,!1,p,50,B.aH,B.GB,p,B.O,p)}}
@@ -75897,13 +75897,13 @@ B.A4=new A.au(12,20,12,12)
 B.A5=new A.au(12,24,12,16)
 B.A6=new A.au(12,8,12,8)
 B.mO=new A.au(16,0,16,0)
-B.A7=new A.au(16,4,16,4)
-B.A8=new A.au(18,16,18,16)
+B.A7=new A.au(16,16,16,16)
+B.A8=new A.au(16,4,16,4)
+B.A9=new A.au(18,16,18,16)
 B.mP=new A.au(20,0,20,3)
-B.A9=new A.au(20,20,20,20)
+B.mQ=new A.au(20,20,20,20)
 B.Pe=new A.au(24,24,24,0)
 B.Aa=new A.au(24,8,24,8)
-B.mQ=new A.au(30,30,30,30)
 B.Ac=new A.au(40,24,40,24)
 B.mR=new A.au(4,0,4,0)
 B.Ad=new A.au(4,4,4,4)
