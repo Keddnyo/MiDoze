@@ -1,6 +1,6 @@
 package io.github.keddnyo.midoze.local.data_models
 
-data class AppCompanion(
-    val icon: Int,
+data class Application(
     val name: String,
+    val icon: Int,
 )

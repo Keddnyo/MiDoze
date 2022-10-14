@@ -1,63 +1,63 @@
 package io.github.keddnyo.midoze.ui.routes.apps
 
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.data_models.AppCompanion
+import io.github.keddnyo.midoze.local.data_models.Application
 
 object AppsContainer {
-    val wearableApps: ArrayList<AppCompanion> = arrayListOf(
-        AppCompanion(
+    val wearableApps: ArrayList<Application> = arrayListOf(
+        Application(
             icon = R.drawable.ic_zepp,
             name = "Zepp",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_zepp_life,
             name = "Zepp Life",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_notify_amazfit,
             name = "Notify for Amazfit",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_notify_mi_band,
             name = "Notify for Mi Band",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_notify_mi_band_lite,
             name = "Notify for Mi Band Lite",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_notify_lite,
             name = "Notify Lite",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_mi_bandage,
             name = "Mi Bandage",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_gadgetbridge,
             name = "Gadgetbridge",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_huafetcher,
             name = "Huafetcher",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_master_for_amazfit,
             name = "Master for Amazfit",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_master_for_mi_band,
             name = "Master for Mi Band",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_watch_droid_assistant,
             name = "Watch Droid Assistant",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_tools_and_amazfit,
             name = "Tools & Amazfit",
         ),
-        AppCompanion(
+        Application(
             icon = R.drawable.ic_tools_and_mi_band,
             name = "Tools & Mi Band",
         ),
