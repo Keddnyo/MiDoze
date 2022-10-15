@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.ui.routes.apps
 
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.data_models.Application
+import io.github.keddnyo.midoze.local.data_models.application.Application
 
 object AppsContainer {
     val wearableApps: ArrayList<Application> = arrayListOf(
