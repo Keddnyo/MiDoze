@@ -9,7 +9,7 @@
 4. Custom request
 5. Dark mode
 6. Offline mode
-7. Shurtcuts
+7. Shortcuts
 8. English and Russian UI
 
 ## Screenshots
