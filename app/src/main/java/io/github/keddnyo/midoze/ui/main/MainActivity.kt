@@ -14,19 +14,20 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var model: MyViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val model = MyViewModel()
+            model = ViewModelProvider(this)[MyViewModel::class.java]
 
             MiDozeTheme {
                 Surface(
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .align(Alignment.Center)
                         ) {
-                            if (model.isStateLoading()) {
+                            if (model.isLoading) {
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(10.dp),
-                                    text = model.getData(),
+                                    text = model.someData.value.toString(),
                                     style = TextStyle(fontSize = 72.sp),
                                     textAlign = TextAlign.Center,
                                 )
@@ -83,23 +84,15 @@ class MainActivity : ComponentActivity() {
 }
 
 class MyViewModel : ViewModel() {
-    private var _someData : Int by mutableStateOf(0)
-    private var isloading : Boolean by mutableStateOf(false)
+    var someData: MutableLiveData<Int> = MutableLiveData(0)
+    var isLoading : Boolean by mutableStateOf(false)
 
     fun updateData() {
         viewModelScope.launch(Dispatchers.IO) {
-            isloading = true
+            isLoading = true
             delay(3000)
-            _someData++
-            isloading = false
+            someData.postValue(someData.value?.plus(1))
+            isLoading = false
         }
-    }
-
-    fun getData(): String {
-        return _someData.toString()
-    }
-
-    fun isStateLoading(): Boolean {
-        return isloading
     }
 }
