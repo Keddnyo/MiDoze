@@ -29,51 +29,54 @@ class MainActivity : ComponentActivity() {
         setContent {
             model = ViewModelProvider(this)[MyViewModel::class.java]
 
-            MiDozeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
+            model.run {
+                MiDozeTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
                     ) {
-                        Column(
+                        Box(
                             modifier = Modifier
-                                .align(Alignment.Center)
+                                .fillMaxSize()
                         ) {
-                            if (model.isLoading) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                ) {
-                                    CircularProgressIndicator(
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                            .padding(10.dp)
-                                    )
-                                }
-                            } else {
+                            Column(
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                            ) {
                                 Text(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(10.dp),
-                                    text = model.someData.value.toString(),
+                                    text = getData(),
                                     style = TextStyle(fontSize = 72.sp),
                                     textAlign = TextAlign.Center,
                                 )
-                            }
-                            Button(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp),
-                                onClick = {
-                                    model.updateData()
+
+                                if (isLoading) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                    ) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier
+                                                .align(Alignment.Center)
+                                                .padding(10.dp)
+                                        )
+                                    }
+                                } else {
+                                    Button(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(10.dp),
+                                        onClick = {
+                                            updateData()
+                                        }
+                                    ) {
+                                        Text(
+                                            text = "Increase",
+                                        )
+                                    }
                                 }
-                            ) {
-                                Text(
-                                    text = "Increase",
-                                )
                             }
                         }
                     }
@@ -84,15 +87,19 @@ class MainActivity : ComponentActivity() {
 }
 
 class MyViewModel : ViewModel() {
-    var someData: MutableLiveData<Int> = MutableLiveData(0)
-    var isLoading : Boolean by mutableStateOf(false)
+    private var _someData by mutableStateOf(0)
+    var isLoading by mutableStateOf(false)
 
     fun updateData() {
         viewModelScope.launch(Dispatchers.IO) {
             isLoading = true
             delay(3000)
-            someData.postValue(someData.value?.plus(1))
+            _someData += 1
             isLoading = false
         }
+    }
+
+    fun getData() : String {
+        return _someData.toString()
     }
 }
