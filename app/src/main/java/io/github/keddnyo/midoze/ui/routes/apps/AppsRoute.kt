@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.github.keddnyo.midoze.local.data_models.Application
+import io.github.keddnyo.midoze.local.data_models.AppCompanion
 import io.github.keddnyo.midoze.ui.routes.apps.AppsContainer.wearableApps
 
 @Composable
@@ -25,7 +25,7 @@ fun AppsRoute() {
     ) {
         itemsIndexed(
             wearableApps
-        ) { _: Int, app: Application ->
+        ) { _: Int, app: AppCompanion ->
             Column(
                 modifier = Modifier
                     .padding(5.dp),
