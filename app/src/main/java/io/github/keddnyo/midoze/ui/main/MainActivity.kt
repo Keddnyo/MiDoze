@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(10.dp),
-                                    text = getData(),
+                                    text = firmwareList,
                                     style = TextStyle(fontSize = 72.sp),
                                     textAlign = TextAlign.Center,
                                 )
@@ -92,10 +92,10 @@ class MyViewModel : ViewModel() {
     var isFirmwareListLoading by mutableStateOf(false)
 
     // FirmwareList stores firmwares list
-    private var _firmwareList by mutableStateOf(0)
+    private var _firmwareList = MutableLiveData(0)
 
     // Returns firmware list formatted as String
-    fun getData(): String = _firmwareList.toString()
+    val firmwareList: String = _firmwareList.toString()
 
     // Firmware loading coroutine job
     fun updateData() {
@@ -109,7 +109,7 @@ class MyViewModel : ViewModel() {
             delay(3000)
 
             // Increases FirmwareList value
-            _firmwareList += 1
+            _firmwareList.value = _firmwareList.value?.plus(1)
 
             // Sets the state of firmware loading coroutine job to false
             isFirmwareListLoading = false
