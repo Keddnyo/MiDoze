@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                                     textAlign = TextAlign.Center,
                                 )
 
-                                if (isLoading) {
+                                if (isFirmwareListLoading) {
                                     Box(
                                         modifier = Modifier
                                             .fillMaxWidth()
@@ -87,19 +87,35 @@ class MainActivity : ComponentActivity() {
 }
 
 class MyViewModel : ViewModel() {
-    private var _someData by mutableStateOf(0)
-    var isLoading by mutableStateOf(false)
 
+    // Represents the state of firmware loading coroutine job
+    var isFirmwareListLoading by mutableStateOf(false)
+
+    // FirmwareList stores firmwares list
+    private var _firmwareList by mutableStateOf(0)
+
+    // Returns firmware list formatted as String
+    fun getData(): String = _firmwareList.toString()
+
+    // Firmware loading coroutine job
     fun updateData() {
+
         viewModelScope.launch(Dispatchers.IO) {
-            isLoading = true
+
+            // Sets the state of firmware loading coroutine job to true
+            isFirmwareListLoading = true
+
+            // Sets delay for 3000 millis
             delay(3000)
-            _someData += 1
-            isLoading = false
+
+            // Increases FirmwareList value
+            _firmwareList += 1
+
+            // Sets the state of firmware loading coroutine job to false
+            isFirmwareListLoading = false
+
         }
+
     }
 
-    fun getData() : String {
-        return _someData.toString()
-    }
 }
