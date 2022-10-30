@@ -4,6 +4,6 @@ import android.os.Handler
 import android.os.Looper
 
 abstract class AsyncTask {
-    val mainHandler = Handler(Looper.getMainLooper())
-    open fun run() {}
+    open val mainHandler = Handler(Looper.getMainLooper())
+    open fun execute() {}
 }

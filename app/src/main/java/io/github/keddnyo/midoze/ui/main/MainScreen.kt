@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.github.keddnyo.midoze.ui.routes.NavigationRoute
 import io.github.keddnyo.midoze.ui.routes.apps.AppsRoute
-import io.github.keddnyo.midoze.ui.routes.roms.ROMsRoute
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,10 +52,10 @@ fun MainScreen() {
                     }
                     composable(NavigationRoute.ROMs.path) {
                         title.value = NavigationRoute.ROMs.title
-                        ROMsRoute()
                     }
                     composable(NavigationRoute.Dials.path) {
                         title.value = NavigationRoute.Dials.title
+
                     }
                 }
             }

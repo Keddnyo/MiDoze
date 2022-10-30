@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.github.keddnyo.midoze.local.data_models.application.Application
+import io.github.keddnyo.midoze.local.data_models.Application
 import io.github.keddnyo.midoze.ui.routes.apps.AppsContainer.wearableApps
 
 @Composable
@@ -51,6 +51,12 @@ fun AppsRoute() {
                         .padding(5.dp),
                 )
             }
+        }
+        item {
+            Spacer(
+                modifier = Modifier
+                    .padding(50.dp)
+            )
         }
     }
 }

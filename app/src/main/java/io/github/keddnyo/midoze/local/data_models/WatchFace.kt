@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.data_models.watch_face
+package io.github.keddnyo.midoze.local.data_models
 
 data class WatchFace(
     val name: String?,

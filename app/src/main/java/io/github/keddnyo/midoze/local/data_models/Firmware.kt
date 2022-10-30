@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.data_models.firmware
+package io.github.keddnyo.midoze.local.data_models
 
 data class Firmware(
     val firmwareVersion: String?,
@@ -11,6 +11,7 @@ data class Firmware(
     val fontUrl: String?,
     val gpsVersion: String?,
     val gpsUrl: String?,
+
     val lang: String?,
     val changeLog: String?,
 )
