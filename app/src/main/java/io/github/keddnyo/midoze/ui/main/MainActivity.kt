@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                                     textAlign = TextAlign.Center,
                                 )
 
-                                if (isFirmwareListLoading()) {
+                                if (isFirmwareListLoading) {
                                     Box(
                                         modifier = Modifier
                                             .fillMaxWidth()

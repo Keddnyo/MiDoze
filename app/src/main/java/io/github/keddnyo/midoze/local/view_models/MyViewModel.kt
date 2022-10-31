@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 class MyViewModel : ViewModel() {
 
     // Represents the state of firmware loading coroutine job
-    private var _isFirmwareListLoading by mutableStateOf(false)
-    fun isFirmwareListLoading() = _isFirmwareListLoading
+    var isFirmwareListLoading by mutableStateOf(false)
+        private set
 
     // FirmwareList stores firmwares list
     private var _firmwareList = MutableLiveData(0)
@@ -26,7 +26,7 @@ class MyViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
 
             // Sets the state of firmware loading coroutine job to true
-            _isFirmwareListLoading = true
+            isFirmwareListLoading = true
 
             // Sets delay for 3000 millis
             delay(3000)
@@ -35,7 +35,7 @@ class MyViewModel : ViewModel() {
             _firmwareList.postValue(_firmwareList.value?.plus(1))
 
             // Sets the state of firmware loading coroutine job to false
-            _isFirmwareListLoading = false
+            isFirmwareListLoading = false
 
         }
 
