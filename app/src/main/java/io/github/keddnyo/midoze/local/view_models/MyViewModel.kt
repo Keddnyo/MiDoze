@@ -1,44 +1,18 @@
 package io.github.keddnyo.midoze.local.view_models
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import io.github.keddnyo.midoze.remote.FirmwareDataSource
 
 class MyViewModel : ViewModel() {
 
-    // Represents the state of firmware loading coroutine job
-    var isFirmwareListLoading by mutableStateOf(false)
-        private set
-
-    // FirmwareList stores firmwares list
-    private var _firmwareList = MutableLiveData(0)
-    fun firmwareList() = _firmwareList.value.toString()
-
-    // Firmware loading coroutine job
-    fun updateData() {
-
-        viewModelScope.launch(Dispatchers.IO) {
-
-            // Sets the state of firmware loading coroutine job to true
-            isFirmwareListLoading = true
-
-            // Sets delay for 3000 millis
-            delay(3000)
-
-            // Increases FirmwareList value
-            _firmwareList.postValue(_firmwareList.value?.plus(1))
-
-            // Sets the state of firmware loading coroutine job to false
-            isFirmwareListLoading = false
-
-        }
-
-    }
+    val firmwarePager = Pager(
+        PagingConfig(pageSize = 25)
+    ) {
+        FirmwareDataSource()
+    }.flow.cachedIn(viewModelScope)
 
 }
