@@ -5,4 +5,6 @@ data class FirmwareDataModel (
     val firmwareUrl: String? = null,
     val resourceVersion: String? = null,
     val resourceUrl: String? = null,
+    val changeLog: String? = null,
+    val buildTime: String? = null,
 )

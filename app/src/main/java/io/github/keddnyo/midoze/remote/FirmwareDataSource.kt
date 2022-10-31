@@ -12,8 +12,8 @@ class FirmwareDataSource: PagingSource<Int, FirmwareDataModel>() {
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FirmwareDataModel> {
-        val batchSize = 19
-        val maxSize = 300
+        val batchSize = 1
+        val maxSize = 1000
 
         val startIndex = params.key ?: 1
         val endIndex = startIndex + batchSize

@@ -10,7 +10,7 @@ import io.github.keddnyo.midoze.remote.FirmwareDataSource
 class MyViewModel : ViewModel() {
 
     val firmwarePager = Pager(
-        PagingConfig(pageSize = 25)
+        PagingConfig(pageSize = 1)
     ) {
         FirmwareDataSource()
     }.flow.cachedIn(viewModelScope)
