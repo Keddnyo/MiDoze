@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
 }
 
 android {
@@ -44,6 +46,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
@@ -64,4 +70,10 @@ dependencies {
     implementation "io.ktor:ktor-client-android:2.1.3"
     implementation "androidx.paging:paging-runtime:3.2.0-alpha03"
     implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-ktx:2.4.3"
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    kapt "com.google.dagger:hilt-android-compiler:2.44"
 }
