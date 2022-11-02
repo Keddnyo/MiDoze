@@ -37,6 +37,12 @@ class FirmwaresViewModel(application: Application) : AndroidViewModel(applicatio
             firmwareUrl = null,
             resourceVersion = null,
             resourceUrl = null,
+            baseResourceVersion = null,
+            baseResourceUrl = null,
+            fontVersion = null,
+            fontUrl = null,
+            gpsVersion = null,
+            gpsUrl = null,
             changeLog = null,
             buildTime = null,
         )

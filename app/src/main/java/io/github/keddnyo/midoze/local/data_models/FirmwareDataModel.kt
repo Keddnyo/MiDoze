@@ -11,6 +11,12 @@ data class FirmwareDataModel (
     val firmwareUrl: String? = null,
     val resourceVersion: String? = null,
     val resourceUrl: String? = null,
+    val baseResourceVersion: String? = null,
+    val baseResourceUrl: String? = null,
+    val fontVersion: String? = null,
+    val fontUrl: String? = null,
+    val gpsVersion: String? = null,
+    val gpsUrl: String? = null,
     val changeLog: String? = null,
     val buildTime: String? = null,
 )

@@ -84,6 +84,12 @@ suspend fun getFirmware(
         firmwareUrl = get("firmwareUrl"),
         resourceVersion = get("resourceVersion"),
         resourceUrl = get("resourceUrl"),
+        baseResourceVersion = get("baseResourceVersion"),
+        baseResourceUrl = get("baseResourceUrl"),
+        fontVersion = get("fontVersion"),
+        fontUrl = get("fontUrl"),
+        gpsVersion = get("gpsVersion"),
+        gpsUrl = get("gpsUrl"),
         changeLog = get("changeLog")?.substringBefore("###summary###"),
         buildTime = get("buildTime"),
     )

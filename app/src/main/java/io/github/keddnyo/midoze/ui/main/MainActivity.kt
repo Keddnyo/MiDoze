@@ -63,15 +63,11 @@ fun FirmwareList(
     ) {
         itemsIndexed(firmwareList) { index, firmware ->
             firmware.run {
-                OutlinedCard(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp),
-                    border = BorderStroke(
-                        width = 1.dp,
-                        color = Color.Gray
-                    ),
-                    elevation = CardDefaults.outlinedCardElevation(10.dp),
+                    elevation = CardDefaults.outlinedCardElevation(5.dp),
                 ) {
                     Row(
                         modifier = Modifier
@@ -81,10 +77,10 @@ fun FirmwareList(
                             painter = painterResource(R.drawable.amazfit_bip),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(64.dp)
+                                .size(48.dp)
                                 .border(
                                     border = BorderStroke(
-                                        1.dp,
+                                        0.5.dp,
                                         Color.Gray
                                     ),
                                     shape = RoundedCornerShape(50.dp)
@@ -93,7 +89,7 @@ fun FirmwareList(
                                     color = Color.White,
                                     shape = RoundedCornerShape(50.dp),
                                 )
-                                .padding(10.dp)
+                                .padding(5.dp)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(
@@ -104,57 +100,44 @@ fun FirmwareList(
                                 text = "Amazfit Bip",
                                 style = TextStyle(
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 18.sp,
+                                    fontSize = 16.sp,
                                 ),
                             )
                             buildTime?.let { buildTime ->
                                 Text(
-                                    text = buildTime
+                                    text = buildTime,
+                                    style = TextStyle(
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp,
+                                    ),
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.width(10.dp))
-                        IconButton(
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically),
-                            onClick = { /*TODO*/ },
-                        ) {
-                            Icon(
-                                Icons.Default.ArrowForwardIos,
-                                null
-                            )
-                        }
                     }
-//                    changeLog?.let { changeLog ->
-//                        Divider(
-//                            thickness = 1.dp,
-//                            color = Color.Gray
-//                        )
-//                        Text(
-//                            modifier = Modifier
-//                                .padding(10.dp),
-//                            text = changeLog,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                            ),
-//                        )
-//                    }
+                    changeLog?.let { changeLog ->
+                        Text(
+                            modifier = Modifier
+                                .padding(10.dp),
+                            text = changeLog
+                        )
+                    }
                     Divider(
-                        thickness = 1.dp,
+                        modifier = Modifier
+                            .padding(top = 10.dp, start = 10.dp, end = 10.dp),
+                        thickness = 0.5.dp,
                         color = Color.Gray
                     )
-                    Column(
+                    Row(
                         modifier = Modifier
-                            .padding(15.dp)
+                            .align(Alignment.End)
                     ) {
-                        firmwareVersion?.let { firmwareVersion ->
+                        Button(
+                            modifier = Modifier
+                                .padding(top = 10.dp, end = 10.dp, bottom = 10.dp),
+                            onClick = { /*TODO*/ },
+                        ) {
                             Text(
-                                text = "Firmware: $firmwareVersion",
-                            )
-                        }
-                        resourceVersion?.let { firmwareVersion ->
-                            Text(
-                                text = "Resource: $firmwareVersion",
+                                text = "Download"
                             )
                         }
                     }
