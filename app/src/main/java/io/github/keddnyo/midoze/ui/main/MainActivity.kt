@@ -10,11 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,49 +21,39 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import androidx.paging.compose.itemsIndexed
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
-import io.github.keddnyo.midoze.local.database.FirmwareRepository
-import io.github.keddnyo.midoze.local.view_models.FirmwaresViewModel
-import io.github.keddnyo.midoze.local.view_models.MyViewModel
+import io.github.keddnyo.midoze.local.room_data_base.FirmwareViewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<MyViewModel>()
-    private val firmwaresViewModel by viewModels<FirmwaresViewModel>()
+    private val firmwaresViewModel by viewModels<FirmwareViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FirmwareList(viewModel = viewModel, firmwaresViewModel = firmwaresViewModel)
+            FirmwareList(firmwaresViewModel = firmwaresViewModel)
         }
     }
 }
 
 @Composable
 fun FirmwareList(
-    viewModel: MyViewModel,
-    firmwaresViewModel: FirmwaresViewModel
+    firmwaresViewModel: FirmwareViewModel
 ) {
 
-//    val firmwareList = viewModel.firmwarePager.collectAsLazyPagingItems()
-    val firmwareList = firmwaresViewModel.firmwares.sortedBy { it.buildTime }.asReversed()
+    val firmwareList = firmwaresViewModel.readAll().collectAsLazyPagingItems()
 
-    LazyColumn(
-    ) {
-        itemsIndexed(firmwareList) { index, firmware ->
-            firmware.run {
+    LazyColumn {
+        itemsIndexed(firmwareList) { _, firmware ->
+            firmware?.run {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp),
-                    elevation = CardDefaults.outlinedCardElevation(5.dp),
+                    elevation = CardDefaults.outlinedCardElevation(3.dp),
                 ) {
                     Row(
                         modifier = Modifier
@@ -157,29 +143,29 @@ fun FirmwareList(
             }
         }
 
-//        when (firmwareList.loadState.append) {
-//            is LoadState.NotLoading -> Unit
-//            LoadState.Loading -> {
-//                item {
-//                    Box(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                    ) {
-//                        CircularProgressIndicator(
-//                            modifier = Modifier
-//                                .align(Alignment.Center)
-//                                .padding(5.dp)
-//                        )
-//                    }
-//                }
-//            }
-//            is LoadState.Error -> {
-//                item {
-//                    Text(
-//                        text = "Error"
-//                    )
-//                }
-//            }
-//        }
+        when (firmwareList.loadState.append) {
+            is LoadState.NotLoading -> Unit
+            LoadState.Loading -> {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .padding(5.dp)
+                        )
+                    }
+                }
+            }
+            is LoadState.Error -> {
+                item {
+                    Text(
+                        text = "Error"
+                    )
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,6 @@ class FirmwareDataSource: PagingSource<Int, FirmwareDataModel>() {
 
         val response = getFirmwareList(startIndex, endIndex)
 
-
         return try {
             LoadResult.Page(
                 data = response,

@@ -10,7 +10,7 @@ import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FirmwareDao {
+interface FirmwareDaoOld {
 
     @Query("SELECT * FROM firmwares ORDER BY id ASC")
     fun getFirmwares(): Flow<List<FirmwareDataModel>>
