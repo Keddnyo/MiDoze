@@ -64,13 +64,6 @@ fun FirmwareList(
                             contentDescription = null,
                             modifier = Modifier
                                 .size(48.dp)
-                                .border(
-                                    border = BorderStroke(
-                                        0.5.dp,
-                                        Color.Gray
-                                    ),
-                                    shape = RoundedCornerShape(50.dp)
-                                )
                                 .background(
                                     color = Color.White,
                                     shape = RoundedCornerShape(50.dp),
@@ -85,7 +78,6 @@ fun FirmwareList(
                             Text(
                                 text = "Amazfit Bip",
                                 style = TextStyle(
-                                    fontWeight = FontWeight.Bold,
                                     fontSize = 16.sp,
                                 ),
                             )
@@ -93,7 +85,6 @@ fun FirmwareList(
                                 Text(
                                     text = buildTime,
                                     style = TextStyle(
-                                        fontWeight = FontWeight.Bold,
                                         fontSize = 12.sp,
                                     ),
                                 )

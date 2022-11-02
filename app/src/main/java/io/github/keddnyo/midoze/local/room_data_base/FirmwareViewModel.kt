@@ -11,8 +11,10 @@ import io.github.keddnyo.midoze.remote.FirmwareDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class FirmwareViewModel(
     application: Application
@@ -55,6 +57,14 @@ class FirmwareViewModel(
         ) {
             remotePagingSource
         }.flow.cachedIn(viewModelScope)
+
+//        viewModelScope.launch {
+//            remotePager.onEach { pagingData ->
+//                pagingData.map { firmware ->
+//                    add(firmware)
+//                }
+//            }
+//        }
 
         return remotePager
 
