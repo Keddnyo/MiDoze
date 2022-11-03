@@ -2,19 +2,18 @@ package io.github.keddnyo.midoze.local.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
+import androidx.paging.*
 import io.github.keddnyo.midoze.remote.FirmwareDataSource
 
-class MyViewModel : ViewModel() {
+class FirmwareViewModel : ViewModel() {
 
-    val firmwarePager = Pager(
-        PagingConfig(pageSize = 1)
+    val firmwareList = Pager(
+        PagingConfig(
+            pageSize = 1,
+            prefetchDistance = 2,
+        )
     ) {
         FirmwareDataSource()
     }.flow.cachedIn(viewModelScope)
-
-
 
 }

@@ -80,6 +80,7 @@ suspend fun getFirmware(
     if (!firmwareData.has("firmwareVersion")) return null
 
     return FirmwareDataModel(
+        device = device,
         firmwareVersion = get("firmwareVersion"),
         firmwareUrl = get("firmwareUrl"),
         resourceVersion = get("resourceVersion"),
