@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,22 +23,44 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.view_models.FirmwareViewModel
+import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
 class MainActivity : ComponentActivity() {
 
     private val firmwaresViewModel by viewModels<FirmwareViewModel>()
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FirmwareList(firmwaresViewModel = firmwaresViewModel)
+            MiDozeTheme {
+                Scaffold(
+                    topBar = {
+                        CenterAlignedTopAppBar(
+                            title = {
+                                Text(
+                                    text = "MiDoze"
+                                )
+                            }
+                        )
+                    },
+                    content = { padding ->
+                        Box(
+                            modifier = Modifier
+                                .padding(padding)
+                        ) {
+                            FirmwareList(firmwaresViewModel = firmwaresViewModel)
+                        }
+                    }
+                )
+            }
         }
     }
 }
 
 @Composable
 fun FirmwareList(
-    firmwaresViewModel: FirmwareViewModel
+    firmwaresViewModel: FirmwareViewModel,
 ) {
 
     val firmwareList = firmwaresViewModel.firmwareList.collectAsLazyPagingItems()
@@ -73,7 +95,7 @@ fun FirmwareList(
                                 .align(Alignment.CenterVertically),
                         ) {
                             Text(
-                                text = "Amazfit Bip",
+                                text = "Unknown device",
                                 style = TextStyle(
                                     fontSize = 16.sp,
                                 ),

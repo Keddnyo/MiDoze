@@ -1,5 +1,7 @@
 package io.github.keddnyo.midoze.local.view_models
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
@@ -9,8 +11,7 @@ class FirmwareViewModel : ViewModel() {
 
     val firmwareList = Pager(
         PagingConfig(
-            pageSize = 1,
-            prefetchDistance = 2,
+            pageSize = 2,
         )
     ) {
         FirmwareDataSource()
