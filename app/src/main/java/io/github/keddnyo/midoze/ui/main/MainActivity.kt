@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
@@ -71,8 +74,15 @@ fun FirmwareList(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(10.dp),
-                    elevation = CardDefaults.outlinedCardElevation(3.dp),
+                        .padding(10.dp)
+                        .border(
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = Color.Gray
+                            ),
+                            shape = RoundedCornerShape(10.dp),
+                        ),
+                    elevation = CardDefaults.outlinedCardElevation(5.dp),
                 ) {
                     Row(
                         modifier = Modifier
@@ -82,12 +92,19 @@ fun FirmwareList(
                             painter = painterResource(R.drawable.amazfit_bip),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(48.dp)
+                                .size(56.dp)
                                 .background(
                                     color = Color.White,
                                     shape = RoundedCornerShape(50.dp),
                                 )
-                                .padding(5.dp)
+                                .border(
+                                    border = BorderStroke(
+                                        width = 1.dp,
+                                        color = Color.Gray
+                                    ),
+                                    shape = RoundedCornerShape(50.dp),
+                                )
+                                .padding(5.dp),
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(
@@ -97,39 +114,37 @@ fun FirmwareList(
                             Text(
                                 text = "Unknown device",
                                 style = TextStyle(
-                                    fontSize = 16.sp,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
                                 ),
                             )
-                            buildTime?.let { buildTime ->
+//                            buildTime?.let { buildTime ->
+//                                Text(
+//                                    text = buildTime,
+//                                    style = TextStyle(
+//                                        fontSize = 14.sp,
+//                                    ),
+//                                )
+//                            }
+                            firmwareVersion?.let { firmwareVersion ->
                                 Text(
-                                    text = buildTime,
+                                    text = "Firmware version: $firmwareVersion",
                                     style = TextStyle(
-                                        fontSize = 12.sp,
+                                        fontSize = 14.sp,
+                                    ),
+                                )
+                            }
+                            changeLog?.let { changeLog ->
+                                Text(
+                                    text = changeLog,
+                                    style = TextStyle(
+                                        fontSize = 14.sp,
                                     ),
                                 )
                             }
                         }
                     }
-                    changeLog?.let { changeLog ->
-                        Text(
-                            modifier = Modifier
-                                .padding(10.dp),
-                            text = changeLog
-                        )
-                    }
-                    device.run {
-                        Text(
-                            modifier = Modifier
-                                .padding(10.dp),
-                            text = "$deviceSource, $productionSource",
-                            style = TextStyle(
-                                fontSize = 8.sp,
-                            ),
-                        )
-                    }
                     Divider(
-                        modifier = Modifier
-                            .padding(top = 10.dp, start = 10.dp, end = 10.dp),
                         thickness = 0.5.dp,
                         color = Color.Gray
                     )
@@ -137,6 +152,17 @@ fun FirmwareList(
                         modifier = Modifier
                             .align(Alignment.End)
                     ) {
+                        device.run {
+                            Text(
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .align(Alignment.CenterVertically),
+                                text = "$deviceSource, $productionSource",
+                                style = TextStyle(
+                                    fontSize = 8.sp,
+                                ),
+                            )
+                        }
                         Button(
                             modifier = Modifier
                                 .padding(top = 10.dp, end = 10.dp, bottom = 10.dp),
@@ -148,18 +174,6 @@ fun FirmwareList(
                         }
                     }
                 }
-
-//                firmwaresViewModel.addFirmware(
-//                    FirmwareDataModel(
-//                        id = index,
-//                        firmwareVersion = firmwareVersion,
-//                        firmwareUrl = firmwareUrl,
-//                        resourceVersion = resourceVersion,
-//                        resourceUrl = resourceUrl,
-//                        changeLog = changeLog,
-//                        buildTime = buildTime,
-//                    )
-//                )
             }
         }
 

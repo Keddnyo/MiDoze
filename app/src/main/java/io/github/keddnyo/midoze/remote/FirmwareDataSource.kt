@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
 import io.github.keddnyo.midoze.remote.requests.getFirmwareList
+import kotlinx.coroutines.runBlocking
 
 class FirmwareDataSource: PagingSource<Int, FirmwareDataModel>() {
 

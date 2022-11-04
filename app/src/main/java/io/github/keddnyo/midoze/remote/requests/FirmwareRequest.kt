@@ -7,6 +7,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import org.json.JSONObject
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 suspend fun getFirmware(
     device: WearableDeviceDataModel
@@ -91,7 +94,15 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = get("gpsVersion"),
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("###summary###"),
-        buildTime = get("buildTime"),
+        changeLog = get("changeLog")?.substringBefore("###summary###")
+            ?: "- Fixed some known issues.",
+        buildTime = get("buildTime")?.getDate(),
     )
+}
+
+private fun String.getDate(): String {
+    val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault())
+    val firmwareDateFormatted = dateFormat.parse(this)
+    return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+        .format(firmwareDateFormatted!!)
 }
