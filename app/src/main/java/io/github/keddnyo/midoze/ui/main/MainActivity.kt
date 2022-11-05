@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemsIndexed
+import androidx.paging.compose.items
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.view_models.FirmwareViewModel
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
@@ -69,7 +69,7 @@ fun FirmwareList(
     val firmwareList = firmwaresViewModel.firmwareList.collectAsLazyPagingItems()
 
     LazyColumn {
-        itemsIndexed(firmwareList) { _, firmware ->
+        items(firmwareList) { firmware ->
             firmware?.run {
                 Card(
                     modifier = Modifier
@@ -134,15 +134,17 @@ fun FirmwareList(
                                     ),
                                 )
                             }
-                            changeLog?.let { changeLog ->
-                                Text(
-                                    text = changeLog,
-                                    style = TextStyle(
-                                        fontSize = 14.sp,
-                                    ),
-                                )
-                            }
                         }
+                    }
+                    changeLog?.let { changeLog ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+                            text = changeLog,
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                            ),
+                        )
                     }
                     Divider(
                         thickness = 0.5.dp,
@@ -165,7 +167,7 @@ fun FirmwareList(
                         }
                         Button(
                             modifier = Modifier
-                                .padding(top = 10.dp, end = 10.dp, bottom = 10.dp),
+                                .padding(10.dp),
                             onClick = { /*TODO*/ },
                         ) {
                             Text(
@@ -177,27 +179,42 @@ fun FirmwareList(
             }
         }
 
-        when (firmwareList.loadState.append) {
-            is LoadState.NotLoading -> Unit
-            LoadState.Loading -> {
-                item {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    ) {
-                        CircularProgressIndicator(
+        firmwareList.apply {
+            when {
+                loadState.refresh is LoadState.Loading -> {
+                    item {
+                        Box(
                             modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(5.dp)
-                        )
+                                .fillMaxWidth()
+                                .padding(15.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                            )
+                        }
                     }
                 }
-            }
-            is LoadState.Error -> {
-                item {
-                    Text(
-                        text = "Error"
-                    )
+                loadState.append is LoadState.Loading -> {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(15.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                            )
+                        }
+                    }
+                }
+                loadState.append is LoadState.Error -> {
+                    item {
+                        Text(
+                            text = "Error"
+                        )
+                    }
                 }
             }
         }
