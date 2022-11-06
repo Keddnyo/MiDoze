@@ -12,22 +12,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
+import io.github.keddnyo.midoze.local.data_models.firmware.Firmware
 
 @Composable
 fun FirmwarePostCard(
-    firmware: FirmwareDataModel?
+    firmware: Firmware?
 ) {
     firmware?.run {
         Card(
             modifier = Modifier
-                .widthIn(0.dp, 1000.dp)
-                .padding(10.dp)
+                .widthIn(min = 0.dp, max = 700.dp)
+                .padding(all = 10.dp)
                 .border(
                     border = BorderStroke(
                         width = 1.dp,
@@ -42,10 +43,10 @@ fun FirmwarePostCard(
                     .padding(start = 10.dp, top = 10.dp, end = 10.dp)
             ) {
                 Image(
-                    painter = painterResource(device.application.appProductIcon),
+                    painter = painterResource(device.application.instance.appProductIcon),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(56.dp)
+                        .size(size = 56.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column(
@@ -53,7 +54,7 @@ fun FirmwarePostCard(
                         .align(Alignment.CenterVertically),
                 ) {
                     Text(
-                        text = device.application.appProductName,
+                        text = stringResource(id = device.application.instance.appProductName),
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,

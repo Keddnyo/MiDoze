@@ -1,7 +1,7 @@
-package io.github.keddnyo.midoze.local.data_models
+package io.github.keddnyo.midoze.local.data_models.firmware
 
-data class FirmwareDataModel (
-    val device: WearableDeviceDataModel,
+data class Firmware (
+    val device: Device,
     val firmwareVersion: String?,
     val firmwareUrl: String?,
     val resourceVersion: String? = null,

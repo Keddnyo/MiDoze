@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.remote.requests
 
-import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
-import io.github.keddnyo.midoze.local.data_models.WearableDeviceDataModel
+import io.github.keddnyo.midoze.local.data_models.firmware.Firmware
+import io.github.keddnyo.midoze.local.data_models.firmware.Device
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 suspend fun getFirmware(
-    device: WearableDeviceDataModel
-): FirmwareDataModel? {
+    device: Device
+): Firmware? {
     val client = HttpClient()
     val targetHost = "api.amazfit.com"
     val response = client.get {
@@ -33,7 +33,7 @@ suspend fun getFirmware(
             parameter("deviceSource", device.deviceSource)
             parameter("fontVersion", "0")
             parameter("fontFlag", "0")
-            parameter("appVersion", device.application.appVersion)
+            parameter("appVersion", device.application.version)
             parameter("appid", "0")
             parameter("callid", "0")
             parameter("channel", "0")
@@ -61,10 +61,10 @@ suspend fun getFirmware(
             append("channel", "0")
             append("user-agent", "0")
             append("cv", "0")
-            append("appname", device.application.appName)
+            append("appname", device.application.instance.appPackageName)
             append("v", "0")
             append("apptoken", "0")
-            append("lang", device.region.lang)
+            append("lang", device.region.language)
             append("Host", targetHost)
             append("Connection", "Keep-Alive")
             append("accept-encoding", "gzip")
@@ -82,7 +82,7 @@ suspend fun getFirmware(
 
     if (!firmwareData.has("firmwareVersion")) return null
 
-    return FirmwareDataModel(
+    return Firmware(
         device = device,
         firmwareVersion = get("firmwareVersion"),
         firmwareUrl = get("firmwareUrl"),

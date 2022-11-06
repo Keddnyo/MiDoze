@@ -2,17 +2,16 @@ package io.github.keddnyo.midoze.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
+import io.github.keddnyo.midoze.local.data_models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.requests.getFirmwareList
-import kotlinx.coroutines.runBlocking
 
-class FirmwareDataSource: PagingSource<Int, FirmwareDataModel>() {
+class FirmwareDataSource: PagingSource<Int, Firmware>() {
 
-    override fun getRefreshKey(state: PagingState<Int, FirmwareDataModel>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Firmware>): Int? {
         return null
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FirmwareDataModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Firmware> {
         val maxSize = 1000
 
         val startIndex = params.key ?: 12
