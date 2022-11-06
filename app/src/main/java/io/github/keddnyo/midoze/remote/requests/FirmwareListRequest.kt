@@ -1,9 +1,7 @@
 package io.github.keddnyo.midoze.remote.requests
 
-import io.github.keddnyo.midoze.local.data_models.FirmwareDataModel
-import io.github.keddnyo.midoze.local.data_models.WearableApplicationDataModel
-import io.github.keddnyo.midoze.local.data_models.WearableDeviceDataModel
-import io.github.keddnyo.midoze.local.data_models.WearableRegionDataModel
+import io.github.keddnyo.midoze.R
+import io.github.keddnyo.midoze.local.data_models.*
 
 suspend fun getFirmwareList(
     indexRange: IntRange,
@@ -14,10 +12,14 @@ suspend fun getFirmwareList(
         WearableApplicationDataModel(
             appName = "com.xiaomi.hm.health",
             appVersion = "6.3.5_50638",
+            appProductIcon = R.drawable.ic_zepp_life,
+            appProductName = ZEPP_LIFE_APP_NAME,
         ),
         WearableApplicationDataModel(
             appName = "com.huami.midong",
             appVersion = "7.2.0-play_100865",
+            appProductIcon = R.drawable.ic_zepp,
+            appProductName = ZEPP_APP_NAME,
         ),
     )
 

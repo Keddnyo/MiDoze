@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     content = { padding ->
                         Box(
                             modifier = Modifier
-                                .padding(padding)
+                                .padding(padding),
                         ) {
                             FirmwareList(firmwaresViewModel = firmwaresViewModel)
                         }
@@ -68,12 +68,16 @@ fun FirmwareList(
 
     val firmwareList = firmwaresViewModel.firmwareList.collectAsLazyPagingItems()
 
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         items(firmwareList) { firmware ->
             firmware?.run {
                 Card(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .widthIn(0.dp, 1000.dp)
                         .padding(10.dp)
                         .border(
                             border = BorderStroke(
@@ -82,28 +86,17 @@ fun FirmwareList(
                             ),
                             shape = RoundedCornerShape(10.dp),
                         ),
-                    elevation = CardDefaults.outlinedCardElevation(5.dp),
+                    elevation = CardDefaults.outlinedCardElevation(3.dp),
                 ) {
                     Row(
                         modifier = Modifier
                             .padding(start = 10.dp, top = 10.dp, end = 10.dp)
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.ic_zepp_life),
+                            painter = painterResource(device.application.appProductIcon),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(48.dp)
-                                .background(
-                                    color = Color.White,
-                                    shape = RoundedCornerShape(50.dp),
-                                )
-                                .border(
-                                    border = BorderStroke(
-                                        width = 1.dp,
-                                        color = Color.Gray
-                                    ),
-                                    shape = RoundedCornerShape(50.dp),
-                                ),
+                                .size(56.dp)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(
@@ -111,15 +104,15 @@ fun FirmwareList(
                                 .align(Alignment.CenterVertically),
                         ) {
                             Text(
-                                text = "Zepp Life",
+                                text = device.application.appProductName,
                                 style = TextStyle(
-                                    fontSize = 14.sp,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold,
                                 ),
                             )
-                            buildTime?.let {
+                            buildTime?.let { buildTime ->
                                 Text(
-                                    text = "13.09.2022 16:48",
+                                    text = buildTime,
                                     style = TextStyle(
                                         fontSize = 14.sp,
                                     ),
@@ -132,7 +125,7 @@ fun FirmwareList(
                         contentDescription = null,
                         modifier = Modifier
                             .padding(10.dp)
-                            .size(196.dp)
+                            .size(192.dp)
                             .background(
                                 color = Color.White,
                             )
@@ -145,25 +138,15 @@ fun FirmwareList(
                             .padding(15.dp)
                             .align(Alignment.CenterHorizontally),
                     )
-                    firmwareVersion?.let { firmwareVersion ->
-                        changeLog?.let { changeLog ->
-                            val changeLogText = StringBuilder()
-                                .append("Unknown device")
-                                .append(System.getProperty("line.separator"))
-                                .append("Firmware version: $firmwareVersion")
-                                .append(System.getProperty("line.separator"))
-                                .append(changeLog)
-                                .toString()
-
-                            Text(
-                                modifier = Modifier
-                                    .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-                                text = changeLogText,
-                                style = TextStyle(
-                                    fontSize = 14.sp,
-                                ),
-                            )
-                        }
+                    changeLog?.let { changeLog ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 15.dp, end = 15.dp, bottom = 10.dp),
+                            text = changeLog,
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                            ),
+                        )
                     }
                     Divider(
                         thickness = 0.5.dp,

@@ -10,6 +10,8 @@ data class WearableDeviceDataModel(
 data class WearableApplicationDataModel (
     val appName: String,
     val appVersion: String,
+    val appProductIcon: Int,
+    val appProductName: String,
 )
 
 data class WearableRegionDataModel (

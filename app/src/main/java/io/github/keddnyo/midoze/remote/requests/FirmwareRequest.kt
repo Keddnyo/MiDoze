@@ -94,8 +94,10 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = get("gpsVersion"),
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("###summary###")
-            ?: "- Fixed some known issues.",
+        changeLog = getChangelog(
+            changeLog = get("changeLog"),
+            firmwareVersion = get("firmwareVersion")
+        ),
         buildTime = get("buildTime")?.getDate(),
     )
 }
@@ -103,6 +105,21 @@ suspend fun getFirmware(
 private fun String.getDate(): String {
     val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault())
     val firmwareDateFormatted = dateFormat.parse(this)
-    return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+    return DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault())
         .format(firmwareDateFormatted!!)
+}
+
+private fun getChangelog(changeLog: String?, firmwareVersion: String?): String {
+
+    val changeLogFix = changeLog?.substringBefore("###summary###")
+        ?: "- Fixed some known issues."
+
+    return StringBuilder()
+        .append("Unknown device")
+        .append(System.getProperty("line.separator"))
+        .append("Firmware version: $firmwareVersion")
+        .append(System.getProperty("line.separator"))
+        .append(changeLogFix)
+        .toString()
+
 }
