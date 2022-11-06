@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.remote.requests
 
 import io.github.keddnyo.midoze.local.data_models.firmware.Application
 import io.github.keddnyo.midoze.local.data_models.firmware.Device
-import io.github.keddnyo.midoze.local.data_models.firmware.Firmware
+import io.github.keddnyo.midoze.remote.data_models.firmware.Firmware
 import io.github.keddnyo.midoze.local.repository.WearableRegion
 import io.github.keddnyo.midoze.local.repository.WearableApplication
 

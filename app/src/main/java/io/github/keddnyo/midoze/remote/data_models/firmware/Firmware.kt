@@ -1,4 +1,6 @@
-package io.github.keddnyo.midoze.local.data_models.firmware
+package io.github.keddnyo.midoze.remote.data_models.firmware
+
+import io.github.keddnyo.midoze.local.data_models.firmware.Device
 
 data class Firmware (
     val device: Device,
