@@ -128,12 +128,14 @@ fun FirmwareList(
                             .size(192.dp)
                             .background(
                                 color = Color.White,
+                                shape = RoundedCornerShape(10.dp),
                             )
                             .border(
                                 border = BorderStroke(
                                     width = 1.dp,
                                     color = Color.Gray
                                 ),
+                                shape = RoundedCornerShape(10.dp),
                             )
                             .padding(15.dp)
                             .align(Alignment.CenterHorizontally),
