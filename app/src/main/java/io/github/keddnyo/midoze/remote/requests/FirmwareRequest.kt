@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.remote.requests
 
-import io.github.keddnyo.midoze.remote.data_models.firmware.Firmware
-import io.github.keddnyo.midoze.local.data_models.firmware.Device
+import io.github.keddnyo.midoze.remote.models.firmware.Firmware
+import io.github.keddnyo.midoze.local.models.firmware.Device
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

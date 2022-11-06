@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.main
+package io.github.keddnyo.midoze.ui.main.routes
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.view_models.FirmwareViewModel
+import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
 import io.github.keddnyo.midoze.ui.main.routes.feed.FeedRoute
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.view_models
+package io.github.keddnyo.midoze.local.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

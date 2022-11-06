@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.remote.data_models.firmware.Firmware
+import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 @Composable
 fun FirmwarePostCard(

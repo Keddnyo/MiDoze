@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import io.github.keddnyo.midoze.local.view_models.FirmwareViewModel
+import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
 
 @Composable
 fun FeedRoute(
