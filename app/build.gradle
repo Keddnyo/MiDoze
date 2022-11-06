@@ -13,8 +13,9 @@ android {
         applicationId "io.github.keddnyo.midoze"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 17
+        versionName "8.0.0"
+        resConfigs 'en', 'ru'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
