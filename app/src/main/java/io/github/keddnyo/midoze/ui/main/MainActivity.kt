@@ -86,13 +86,13 @@ fun FirmwareList(
                 ) {
                     Row(
                         modifier = Modifier
-                            .padding(10.dp)
+                            .padding(start = 10.dp, top = 10.dp, end = 10.dp)
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.amazfit_bip),
+                            painter = painterResource(R.drawable.ic_zepp_life),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(56.dp)
+                                .size(48.dp)
                                 .background(
                                     color = Color.White,
                                     shape = RoundedCornerShape(50.dp),
@@ -103,8 +103,7 @@ fun FirmwareList(
                                         color = Color.Gray
                                     ),
                                     shape = RoundedCornerShape(50.dp),
-                                )
-                                .padding(5.dp),
+                                ),
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column(
@@ -112,23 +111,15 @@ fun FirmwareList(
                                 .align(Alignment.CenterVertically),
                         ) {
                             Text(
-                                text = "Unknown device",
+                                text = "Zepp Life",
                                 style = TextStyle(
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.Bold,
                                 ),
                             )
-//                            buildTime?.let { buildTime ->
-//                                Text(
-//                                    text = buildTime,
-//                                    style = TextStyle(
-//                                        fontSize = 14.sp,
-//                                    ),
-//                                )
-//                            }
-                            firmwareVersion?.let { firmwareVersion ->
+                            buildTime?.let {
                                 Text(
-                                    text = "Firmware version: $firmwareVersion",
+                                    text = "13.09.2022 16:48",
                                     style = TextStyle(
                                         fontSize = 14.sp,
                                     ),
@@ -136,15 +127,43 @@ fun FirmwareList(
                             }
                         }
                     }
-                    changeLog?.let { changeLog ->
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-                            text = changeLog,
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                            ),
-                        )
+                    Image(
+                        painter = painterResource(R.drawable.amazfit_bip),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(196.dp)
+                            .background(
+                                color = Color.White,
+                            )
+                            .border(
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = Color.Gray
+                                ),
+                            )
+                            .padding(15.dp)
+                            .align(Alignment.CenterHorizontally),
+                    )
+                    firmwareVersion?.let { firmwareVersion ->
+                        changeLog?.let { changeLog ->
+                            val changeLogText = StringBuilder()
+                                .append("Unknown device")
+                                .append(System.getProperty("line.separator"))
+                                .append("Firmware version: $firmwareVersion")
+                                .append(System.getProperty("line.separator"))
+                                .append(changeLog)
+                                .toString()
+
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+                                text = changeLogText,
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                ),
+                            )
+                        }
                     }
                     Divider(
                         thickness = 0.5.dp,
@@ -185,7 +204,7 @@ fun FirmwareList(
                     item {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxSize()
                                 .padding(15.dp)
                         ) {
                             CircularProgressIndicator(
