@@ -33,7 +33,7 @@ suspend fun getFirmware(
             parameter("deviceSource", device.deviceSource)
             parameter("fontVersion", "0")
             parameter("fontFlag", "0")
-            parameter("appVersion", device.application.version)
+            parameter("appVersion", device.application.appVersion)
             parameter("appid", "0")
             parameter("callid", "0")
             parameter("channel", "0")
@@ -61,7 +61,7 @@ suspend fun getFirmware(
             append("channel", "0")
             append("user-agent", "0")
             append("cv", "0")
-            append("appname", device.application.instance.appPackageName)
+            append("appname", device.application.appName)
             append("v", "0")
             append("apptoken", "0")
             append("lang", device.region.language)
@@ -106,7 +106,7 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = gpsVersion,
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog"),
+        changeLog = get("changeLog")?.substringBefore("### Summary ###") ?: "- Fixed some known issues.",
         buildTime = get("buildTime")?.getDate(),
     )
 }

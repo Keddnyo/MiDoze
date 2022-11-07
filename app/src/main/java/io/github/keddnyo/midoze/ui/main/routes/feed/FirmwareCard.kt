@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -40,13 +39,25 @@ fun FirmwarePostCard(
         ) {
             Row(
                 modifier = Modifier
-                    .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+                    .padding(10.dp)
             ) {
                 Image(
-                    painter = painterResource(device.application.instance.appProductIcon),
+                    painter = painterResource(R.drawable.amazfit_band_7),
                     contentDescription = null,
                     modifier = Modifier
                         .size(size = 56.dp)
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(50.dp),
+                        )
+                        .border(
+                            BorderStroke(
+                                width = 0.5.dp,
+                                color = Color.Gray,
+                            ),
+                            shape = RoundedCornerShape(50.dp),
+                        )
+                        .padding(5.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column(
@@ -54,15 +65,15 @@ fun FirmwarePostCard(
                         .align(Alignment.CenterVertically),
                 ) {
                     Text(
-                        text = stringResource(id = device.application.instance.appProductName),
+                        text = "Unknown device",
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                         ),
                     )
-                    buildTime?.let { buildTime ->
+                    firmwareVersion?.let { firmwareVersion ->
                         Text(
-                            text = buildTime,
+                            text = "Firmware: $firmwareVersion",
                             style = TextStyle(
                                 fontSize = 14.sp,
                             ),
@@ -70,46 +81,12 @@ fun FirmwarePostCard(
                     }
                 }
             }
-            Image(
-                painter = painterResource(R.drawable.amazfit_bip),
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .size(192.dp)
-                    .background(
-                        color = Color.White,
-                        shape = RoundedCornerShape(10.dp),
-                    )
-                    .border(
-                        border = BorderStroke(
-                            width = 1.dp,
-                            color = Color.Gray
-                        ),
-                        shape = RoundedCornerShape(10.dp),
-                    )
-                    .padding(15.dp)
-                    .align(Alignment.CenterHorizontally),
-            )
-            Column(
-                modifier = Modifier
-                    .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
-                    .align(Alignment.CenterHorizontally),
-            ) {
+            changeLog?.let {
                 Text(
-                    text = "Unknown device",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                    ),
+                    modifier = Modifier
+                        .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+                    text = changeLog,
                 )
-                firmwareVersion?.let { firmwareVersion ->
-                    Text(
-                        text = "Firmware: $firmwareVersion",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                        ),
-                    )
-                }
             }
             Divider(
                 thickness = 0.5.dp,
