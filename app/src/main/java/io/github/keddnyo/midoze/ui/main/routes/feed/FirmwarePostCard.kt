@@ -90,15 +90,26 @@ fun FirmwarePostCard(
                     .padding(15.dp)
                     .align(Alignment.CenterHorizontally),
             )
-            changeLog?.let { changeLog ->
+            Column(
+                modifier = Modifier
+                    .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
+                    .align(Alignment.CenterHorizontally),
+            ) {
                 Text(
-                    modifier = Modifier
-                        .padding(start = 15.dp, end = 15.dp, bottom = 10.dp),
-                    text = changeLog,
+                    text = "Unknown device",
                     style = TextStyle(
-                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
                     ),
                 )
+                firmwareVersion?.let { firmwareVersion ->
+                    Text(
+                        text = "Firmware: $firmwareVersion",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                        ),
+                    )
+                }
             }
             Divider(
                 thickness = 0.5.dp,

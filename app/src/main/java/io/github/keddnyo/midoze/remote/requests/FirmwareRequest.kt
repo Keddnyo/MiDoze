@@ -106,14 +106,7 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = gpsVersion,
         gpsUrl = get("gpsUrl"),
-        changeLog = getChangelog(
-            changeLog = get("changeLog"),
-            firmwareVersion = firmwareVersion,
-            resourceVersion = resourceVersion,
-            baseResourceVersion = baseResourceVersion,
-            fontVersion = fontVersion,
-            gpsVersion = gpsVersion,
-        ),
+        changeLog = get("changeLog"),
         buildTime = get("buildTime")?.getDate(),
     )
 }
@@ -124,63 +117,3 @@ private fun String.getDate(): String {
     return DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault())
         .format(firmwareDateFormatted!!)
 }
-
-private fun getChangelog(
-    changeLog: String?,
-    firmwareVersion: String?,
-    resourceVersion: String?,
-    baseResourceVersion: String?,
-    fontVersion: String?,
-    gpsVersion: String?,
-): String {
-
-    val changeLogFix = changeLog?.substringBefore("###summary###")
-        ?: "- Fixed some known issues."
-
-    val changeLogBuilder = StringBuilder()
-
-    changeLogBuilder
-        .append(
-            "Unknown device"
-        )
-        .append(
-            appendString(firmwareVersion)
-        )
-        .append(
-            appendString(resourceVersion)
-        )
-        .append(
-            appendString(baseResourceVersion)
-        )
-        .append(
-            appendString(fontVersion)
-        )
-        .append(
-            appendString(gpsVersion)
-        )
-        .append(
-            lineSpacer
-        )
-        .append(
-            changeLogFix
-        )
-
-    return changeLogBuilder.toString()
-}
-
-fun appendString(entity: String?): String {
-    val lineSpacing = System.getProperty("line.separator")
-    val string = StringBuilder()
-
-    if (entity != null) {
-        string.apply {
-            append(lineSpacing)
-            append("Firmware version: $entity")
-        }
-    }
-
-    return string.toString()
-}
-
-private val lineSpacer =
-    System.getProperty("line.separator")
