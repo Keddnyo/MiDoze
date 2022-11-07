@@ -6,6 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,13 +41,14 @@ fun FirmwarePostCard(
         ) {
             Row(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
                     painter = painterResource(R.drawable.amazfit_band_7),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size = 56.dp)
+                        .size(size = 64.dp)
                         .background(
                             color = Color.White,
                             shape = RoundedCornerShape(50.dp),
@@ -57,13 +60,10 @@ fun FirmwarePostCard(
                             ),
                             shape = RoundedCornerShape(50.dp),
                         )
-                        .padding(5.dp)
+                        .padding(10.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically),
-                ) {
+                Column {
                     Text(
                         text = "Unknown device",
                         style = TextStyle(
@@ -79,43 +79,38 @@ fun FirmwarePostCard(
                             ),
                         )
                     }
+                    buildTime?.let { buildTime ->
+                        Text(
+                            text = buildTime,
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                            ),
+                        )
+                    }
                 }
-            }
-            changeLog?.let {
-                Text(
-                    modifier = Modifier
-                        .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
-                    text = changeLog,
-                )
+                Spacer(modifier = Modifier.weight(1F))
+                IconButton(
+                    onClick = { /*TODO*/ }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Download,
+                        contentDescription = null
+                    )
+                }
             }
             Divider(
                 thickness = 0.5.dp,
                 color = Color.Gray
             )
-            Row(
-                modifier = Modifier
-                    .align(Alignment.End)
-            ) {
-                device.run {
-                    Text(
-                        modifier = Modifier
-                            .padding(10.dp)
-                            .align(Alignment.CenterVertically),
-                        text = "$deviceSource, $productionSource",
-                        style = TextStyle(
-                            fontSize = 8.sp,
-                        ),
-                    )
-                }
-                Button(
+            changeLog?.let {
+                Text(
                     modifier = Modifier
                         .padding(10.dp),
-                    onClick = { /*TODO*/ },
-                ) {
-                    Text(
-                        text = "Download"
-                    )
-                }
+                    text = changeLog,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                    ),
+                )
             }
         }
     }

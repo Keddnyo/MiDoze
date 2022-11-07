@@ -106,7 +106,7 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = gpsVersion,
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("### Summary ###") ?: "- Fixed some known issues.",
+        changeLog = get("changeLog")?.substringBefore("###summary###") ?: "- Fixed some known issues.",
         buildTime = get("buildTime")?.getDate(),
     )
 }
