@@ -82,21 +82,31 @@ suspend fun getFirmware(
 
     if (!firmwareData.has("firmwareVersion")) return null
 
+    val firmwareVersion = get("firmwareVersion")
+    val resourceVersion = get("resourceVersion")
+    val baseResourceVersion = get("baseResourceVersion")
+    val fontVersion = get("fontVersion")
+    val gpsVersion = get("gpsVersion")
+
     return Firmware(
         device = device,
-        firmwareVersion = get("firmwareVersion"),
+        firmwareVersion = firmwareVersion,
         firmwareUrl = get("firmwareUrl"),
-        resourceVersion = get("resourceVersion"),
+        resourceVersion = resourceVersion,
         resourceUrl = get("resourceUrl"),
-        baseResourceVersion = get("baseResourceVersion"),
+        baseResourceVersion = baseResourceVersion,
         baseResourceUrl = get("baseResourceUrl"),
-        fontVersion = get("fontVersion"),
+        fontVersion = fontVersion,
         fontUrl = get("fontUrl"),
-        gpsVersion = get("gpsVersion"),
+        gpsVersion = gpsVersion,
         gpsUrl = get("gpsUrl"),
         changeLog = getChangelog(
             changeLog = get("changeLog"),
-            firmwareVersion = get("firmwareVersion")
+            firmwareVersion = firmwareVersion,
+            resourceVersion = resourceVersion,
+            baseResourceVersion = baseResourceVersion,
+            fontVersion = fontVersion,
+            gpsVersion = gpsVersion,
         ),
         buildTime = get("buildTime")?.getDate(),
     )
@@ -109,16 +119,33 @@ private fun String.getDate(): String {
         .format(firmwareDateFormatted!!)
 }
 
-private fun getChangelog(changeLog: String?, firmwareVersion: String?): String {
+private fun getChangelog(
+    changeLog: String?,
+    firmwareVersion: String?,
+    resourceVersion: String?,
+    baseResourceVersion: String?,
+    fontVersion: String?,
+    gpsVersion: String?,
+): String {
+
+    val lineSpacing = System.getProperty("line.separator")
 
     val changeLogFix = changeLog?.substringBefore("###summary###")
         ?: "- Fixed some known issues."
 
     return StringBuilder()
         .append("Unknown device")
-        .append(System.getProperty("line.separator"))
+        .append(lineSpacing)
         .append("Firmware version: $firmwareVersion")
-        .append(System.getProperty("line.separator"))
+        .append(lineSpacing)
+        .append("Resource version: $resourceVersion")
+        .append(lineSpacing)
+        .append("Base Resource version: $baseResourceVersion")
+        .append(lineSpacing)
+        .append("Font version: $fontVersion")
+        .append(lineSpacing)
+        .append("GPS version: $gpsVersion")
+        .append(lineSpacing)
         .append(changeLogFix)
         .toString()
 
