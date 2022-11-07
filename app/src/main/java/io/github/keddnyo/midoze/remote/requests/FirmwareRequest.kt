@@ -16,7 +16,7 @@ suspend fun getFirmware(
 ): Firmware? {
     val client = HttpClient()
     val targetHost = "api.amazfit.com"
-    val response = client.get {
+    val request: HttpResponse = client.get {
         url {
             protocol = URLProtocol.HTTPS
             host = targetHost
@@ -70,7 +70,13 @@ suspend fun getFirmware(
             append("accept-encoding", "gzip")
             append("accept", "*/*")
         }
-    }.bodyAsText()
+    }
+
+    val response: String = try {
+        request.bodyAsText()
+    } catch (e: Exception) {
+        null
+    } ?: return null
 
     val firmwareData = JSONObject(response)
 
@@ -128,25 +134,53 @@ private fun getChangelog(
     gpsVersion: String?,
 ): String {
 
-    val lineSpacing = System.getProperty("line.separator")
-
     val changeLogFix = changeLog?.substringBefore("###summary###")
         ?: "- Fixed some known issues."
 
-    return StringBuilder()
-        .append("Unknown device")
-        .append(lineSpacing)
-        .append("Firmware version: $firmwareVersion")
-        .append(lineSpacing)
-        .append("Resource version: $resourceVersion")
-        .append(lineSpacing)
-        .append("Base Resource version: $baseResourceVersion")
-        .append(lineSpacing)
-        .append("Font version: $fontVersion")
-        .append(lineSpacing)
-        .append("GPS version: $gpsVersion")
-        .append(lineSpacing)
-        .append(changeLogFix)
-        .toString()
+    val changeLogBuilder = StringBuilder()
 
+    changeLogBuilder
+        .append(
+            "Unknown device"
+        )
+        .append(
+            appendString(firmwareVersion)
+        )
+        .append(
+            appendString(resourceVersion)
+        )
+        .append(
+            appendString(baseResourceVersion)
+        )
+        .append(
+            appendString(fontVersion)
+        )
+        .append(
+            appendString(gpsVersion)
+        )
+        .append(
+            lineSpacer
+        )
+        .append(
+            changeLogFix
+        )
+
+    return changeLogBuilder.toString()
 }
+
+fun appendString(entity: String?): String {
+    val lineSpacing = System.getProperty("line.separator")
+    val string = StringBuilder()
+
+    if (entity != null) {
+        string.apply {
+            append(lineSpacing)
+            append("Firmware version: $entity")
+        }
+    }
+
+    return string.toString()
+}
+
+private val lineSpacer =
+    System.getProperty("line.separator")
