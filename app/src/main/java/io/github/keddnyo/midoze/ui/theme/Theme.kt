@@ -54,7 +54,6 @@ fun MiDozeTheme(
     if (!view.isInEditMode) {
         SideEffect {
             (view.context as Activity).window.let { window ->
-//                window.statusBarColor = colorScheme.primary.toArgb()
                 WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
                 WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
             }
