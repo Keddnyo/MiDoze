@@ -2,10 +2,9 @@ package io.github.keddnyo.midoze.remote.requests
 
 import io.github.keddnyo.midoze.local.models.firmware.Application
 import io.github.keddnyo.midoze.local.models.firmware.Device
+import io.github.keddnyo.midoze.local.repository.WearableApplication
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.local.repository.WearableRegion
-import io.github.keddnyo.midoze.local.repository.Zepp
-import io.github.keddnyo.midoze.local.repository.ZeppLife
 
 suspend fun getFirmwareList(
     indexRange: IntRange,
@@ -14,11 +13,11 @@ suspend fun getFirmwareList(
 
     val appArray = arrayOf(
         Application(
-            appName = Zepp,
+            instance = WearableApplication.Zepp,
             appVersion = "7.2.0-play_100865",
         ),
         Application(
-            appName = ZeppLife,
+            instance = WearableApplication.ZeppLife,
             appVersion = "6.3.5_50638",
         ),
     )

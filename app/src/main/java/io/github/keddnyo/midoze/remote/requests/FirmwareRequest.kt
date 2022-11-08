@@ -61,7 +61,7 @@ suspend fun getFirmware(
             append("channel", "0")
             append("user-agent", "0")
             append("cv", "0")
-            append("appname", device.application.appName)
+            append("appname", device.application.instance.name)
             append("v", "0")
             append("apptoken", "0")
             append("lang", device.region.language)

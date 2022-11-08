@@ -28,7 +28,7 @@ fun FeedCard(
     firmware?.run {
         Card(
             modifier = Modifier
-                .widthIn(min = 0.dp, max = 700.dp)
+                .widthIn(min = 0.dp, max = 600.dp)
                 .padding(all = 10.dp)
                 .border(
                     border = BorderStroke(
@@ -45,22 +45,10 @@ fun FeedCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painter = painterResource(R.drawable.amazfit_band_7),
+                    painter = painterResource(device.application.instance.icon),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size = 56.dp)
-                        .background(
-                            color = Color.White,
-                            shape = RoundedCornerShape(50.dp),
-                        )
-                        .border(
-                            BorderStroke(
-                                width = 0.5.dp,
-                                color = Color.Gray,
-                            ),
-                            shape = RoundedCornerShape(50.dp),
-                        )
-                        .padding(10.dp)
+                        .size(size = 56.dp),
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
