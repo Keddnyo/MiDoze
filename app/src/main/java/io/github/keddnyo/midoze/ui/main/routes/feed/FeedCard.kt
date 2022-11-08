@@ -22,7 +22,7 @@ import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 @Composable
-fun FirmwarePostCard(
+fun FeedCard(
     firmware: Firmware?
 ) {
     firmware?.run {
@@ -48,7 +48,7 @@ fun FirmwarePostCard(
                     painter = painterResource(R.drawable.amazfit_band_7),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size = 64.dp)
+                        .size(size = 56.dp)
                         .background(
                             color = Color.White,
                             shape = RoundedCornerShape(50.dp),
@@ -79,14 +79,14 @@ fun FirmwarePostCard(
                             ),
                         )
                     }
-                    buildTime?.let { buildTime ->
-                        Text(
-                            text = buildTime,
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                            ),
-                        )
-                    }
+//                    buildTime?.let { buildTime ->
+//                        Text(
+//                            text = buildTime,
+//                            style = TextStyle(
+//                                fontSize = 14.sp,
+//                            ),
+//                        )
+//                    }
                 }
                 Spacer(modifier = Modifier.weight(1F))
                 IconButton(

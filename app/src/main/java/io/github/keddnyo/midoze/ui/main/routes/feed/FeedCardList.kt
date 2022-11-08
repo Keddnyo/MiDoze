@@ -11,7 +11,7 @@ import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
 
 @Composable
-fun FirmwareList(
+fun FeedCardList(
     firmwaresViewModel: FirmwareViewModel,
 ) {
 
@@ -23,7 +23,7 @@ fun FirmwareList(
     ) {
         firmwareList.apply {
             items(this) { firmware ->
-                FirmwarePostCard(firmware)
+                FeedCard(firmware)
             }
 
             when {

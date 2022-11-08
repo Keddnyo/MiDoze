@@ -16,7 +16,7 @@ fun FeedRoute(
         modifier = Modifier
             .padding(padding),
     ) {
-        FirmwareList(
+        FeedCardList(
             firmwaresViewModel = viewModel
         )
     }
