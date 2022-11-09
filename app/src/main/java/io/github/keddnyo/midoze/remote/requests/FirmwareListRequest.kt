@@ -4,7 +4,6 @@ import io.github.keddnyo.midoze.local.models.firmware.Application
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import io.github.keddnyo.midoze.local.repository.WearableApplication
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
-import io.github.keddnyo.midoze.local.repository.WearableRegion
 
 suspend fun getFirmwareList(
     indexRange: IntRange,
@@ -22,26 +21,18 @@ suspend fun getFirmwareList(
         ),
     )
 
-    val regionArray = arrayOf(
-        WearableRegion.STATES, WearableRegion.CHINESE,
-    )
-
-    (indexRange).forEach { deviceSource ->
-        (256..265).forEach { productionSource ->
+    (indexRange).forEach deviceSource@ { deviceSource ->
+        (256..258).forEach { productionSource ->
             (appArray).forEach { application ->
-                (regionArray).forEach { region ->
-
-                    getFirmware(
-                        device = Device(
-                            deviceSource = deviceSource,
-                            productionSource = productionSource,
-                            application = application,
-                            region = region,
-                        )
-                    )?.let { firmware ->
-                        firmwareList.add(firmware)
-                    }
-
+                getFirmware(
+                    device = Device(
+                        deviceSource = deviceSource,
+                        productionSource = productionSource,
+                        application = application,
+                    )
+                )?.let { firmware ->
+                    firmwareList.add(firmware)
+                    return@deviceSource
                 }
             }
         }

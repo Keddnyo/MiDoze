@@ -2,7 +2,6 @@ package io.github.keddnyo.midoze.ui.main.routes.feed
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 @Composable
@@ -33,7 +31,7 @@ fun FeedCard(
                 .border(
                     border = BorderStroke(
                         width = 1.dp,
-                        color = Color.Gray
+                        color = Color.Gray,
                     ),
                     shape = RoundedCornerShape(10.dp),
                 ),
@@ -82,19 +80,29 @@ fun FeedCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Download,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             }
             Divider(
                 thickness = 0.5.dp,
-                color = Color.Gray
+                color = Color.Gray,
             )
             changeLog?.let {
                 Text(
                     modifier = Modifier
                         .padding(10.dp),
                     text = changeLog,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                    ),
+                )
+            }
+            device.run {
+                Text(
+                    modifier = Modifier
+                        .padding(10.dp),
+                    text = "$deviceSource, $productionSource",
                     style = TextStyle(
                         fontSize = 14.sp,
                     ),

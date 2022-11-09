@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.remote.requests
 
+import android.util.Log
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import io.ktor.client.*
@@ -15,8 +16,8 @@ suspend fun getFirmware(
     device: Device
 ): Firmware? {
     val client = HttpClient()
-    val targetHost = "api.amazfit.com"
-    val request: HttpResponse = client.get {
+    val targetHost = "api-mifit-us2.huami.com"
+    val request = client.get {
         url {
             protocol = URLProtocol.HTTPS
             host = targetHost
@@ -32,6 +33,7 @@ suspend fun getFirmware(
             parameter("userId", "0")
             parameter("deviceSource", device.deviceSource)
             parameter("fontVersion", "0")
+            parameter("diagnosticCode", "0")
             parameter("fontFlag", "0")
             parameter("appVersion", device.application.appVersion)
             parameter("appid", "0")
@@ -41,72 +43,78 @@ suspend fun getFirmware(
             parameter("cv", "0")
             parameter("device", "0")
             parameter("deviceType", "ALL")
-            parameter("device_type", "android_phone")
+            parameter("device_type", "0")
             parameter("firmwareVersion", "0")
             parameter("hardwareVersion", "0")
             parameter("lang", "0")
-            parameter("support8Bytes", "true")
+            parameter("support8Bytes", "0")
             parameter("timezone", "0")
             parameter("v", "0")
-            parameter("gpsVersion", "0")
-            parameter("baseResourceVersion", "0")
+//            parameter("gpsVersion", "0")
+//            parameter("baseResourceVersion", "0")
         }
         headers {
-            append("hm-privacy-diagnostics", "false")
-            append("country", device.region.country)
-            append("appplatform", "android_phone")
-            append("hm-privacy-ceip", "0")
-            append("x-request-id", "0")
-            append("timezone", "0")
-            append("channel", "0")
-            append("user-agent", "0")
-            append("cv", "0")
-            append("appname", device.application.instance.name)
-            append("v", "0")
-            append("apptoken", "0")
-            append("lang", device.region.language)
             append("Host", targetHost)
+            append("Hm-Privacy-Diagnostics", "false")
+            append("Country", "0")
+            append("Appplatform", "android_phone")
+            append("Hm-Privacy-Ceip", "false")
+            append("X-Request-Id", "0")
+            append("Timezone", "0")
+            append("Channel", "0")
+            append("User-Agent", "0")
+            append("Cv", "0")
+            append("Appname", device.application.instance.name)
+            append("V", "0")
+            append("Apptoken", "0")
+            append("Lang", "0")
             append("Connection", "Keep-Alive")
-            append("accept-encoding", "gzip")
-            append("accept", "*/*")
+            append("Accept-Encoding", "gzip, deflate")
         }
     }
 
-    val response: String = try {
+    Log.d(
+        "Firmware-request",
+        "deviceSource: ${device.deviceSource}, productionSource: ${device.productionSource}, status: ${request.status.value}"
+    )
+
+    if (request.status.value != 200) return null
+
+    val response = try {
         request.bodyAsText()
     } catch (e: Exception) {
-        null
-    } ?: return null
+        "{}"
+    }
 
     val firmwareData = JSONObject(response)
 
-    fun get(item: String): String? {
-        if (!firmwareData.has(item)) return null
+    if (!firmwareData.has("firmwareVersion")) return null else Log.d(
+        "Firmware-request",
+        "Firmware version: ${firmwareData.getString("firmwareVersion")}"
+    )
 
-        return firmwareData.getString(item)
-    }
-
-    if (!firmwareData.has("firmwareVersion")) return null
-
-    val firmwareVersion = get("firmwareVersion")
-    val resourceVersion = get("resourceVersion")
-    val baseResourceVersion = get("baseResourceVersion")
-    val fontVersion = get("fontVersion")
-    val gpsVersion = get("gpsVersion")
+    fun get(item: String) =
+        if (firmwareData.has(item)) {
+            firmwareData.getString(item)
+        } else {
+            null
+        }
 
     return Firmware(
         device = device,
-        firmwareVersion = firmwareVersion,
+        firmwareVersion = get("firmwareVersion"),
         firmwareUrl = get("firmwareUrl"),
-        resourceVersion = resourceVersion,
+        resourceVersion = get("resourceVersion"),
         resourceUrl = get("resourceUrl"),
-        baseResourceVersion = baseResourceVersion,
+        baseResourceVersion = get("baseResourceVersion"),
         baseResourceUrl = get("baseResourceUrl"),
-        fontVersion = fontVersion,
+        fontVersion = get("fontVersion"),
         fontUrl = get("fontUrl"),
-        gpsVersion = gpsVersion,
+        gpsVersion = get("gpsVersion"),
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("###summary###") ?: "- Fixed some known issues.",
+        changeLog = get("changeLog")
+            ?.substringBefore("###summary###")
+            ?: "- Fixed some known issues.",
         buildTime = get("buildTime")?.getDate(),
     )
 }

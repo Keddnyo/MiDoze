@@ -6,5 +6,4 @@ data class Device(
     val deviceSource: Int,
     val productionSource: Int,
     val application: Application,
-    val region: WearableRegion,
 )
