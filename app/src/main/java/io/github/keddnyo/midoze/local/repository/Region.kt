@@ -1,15 +1,15 @@
 package io.github.keddnyo.midoze.local.repository
 
-open class WearableRegion (
+open class Region (
     val country: String,
     val language: String,
 ) {
-    object CHINESE : WearableRegion(
+    object Chinese : Region(
         country = "CH",
         language = "zh_CH",
     )
 
-    object STATES : WearableRegion(
+    object UnitedStates : Region(
         country = "US",
         language = "en_US",
     )

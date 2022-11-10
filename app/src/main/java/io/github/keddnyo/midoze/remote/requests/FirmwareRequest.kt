@@ -39,14 +39,14 @@ suspend fun getFirmware(
             parameter("appid", "0")
             parameter("callid", "0")
             parameter("channel", "0")
-            parameter("country", "0")
+            parameter("country", device.region.country)
             parameter("cv", "0")
             parameter("device", "0")
             parameter("deviceType", "ALL")
             parameter("device_type", "0")
             parameter("firmwareVersion", "0")
             parameter("hardwareVersion", "0")
-            parameter("lang", "0")
+            parameter("lang", device.region.language)
             parameter("support8Bytes", "0")
             parameter("timezone", "0")
             parameter("v", "0")
@@ -56,27 +56,22 @@ suspend fun getFirmware(
         headers {
             append("Host", targetHost)
             append("Hm-Privacy-Diagnostics", "false")
-            append("Country", "0")
+            append("Country", device.region.country)
             append("Appplatform", "android_phone")
             append("Hm-Privacy-Ceip", "false")
             append("X-Request-Id", "0")
             append("Timezone", "0")
             append("Channel", "0")
             append("User-Agent", "0")
-            append("Cv", "0")
+            append("Cv", "2.0")
             append("Appname", device.application.instance.name)
             append("V", "0")
             append("Apptoken", "0")
-            append("Lang", "0")
+            append("Lang", device.region.language)
             append("Connection", "Keep-Alive")
             append("Accept-Encoding", "gzip, deflate")
         }
     }
-
-    Log.d(
-        "Firmware-request",
-        "deviceSource: ${device.deviceSource}, productionSource: ${device.productionSource}, status: ${request.status.value}"
-    )
 
     if (request.status.value != 200) return null
 
@@ -88,10 +83,14 @@ suspend fun getFirmware(
 
     val firmwareData = JSONObject(response)
 
-    if (!firmwareData.has("firmwareVersion")) return null else Log.d(
-        "Firmware-request",
-        "Firmware version: ${firmwareData.getString("firmwareVersion")}"
-    )
+    if (!firmwareData.has("firmwareVersion")) {
+        return null
+    } else {
+        Log.d(
+            "Firmware-request",
+            "deviceSource: ${device.deviceSource}, productionSource: ${device.productionSource}, status: ${request.status.value}, Firmware version: ${firmwareData.getString("firmwareVersion")}"
+        )
+    }
 
     fun get(item: String) =
         if (firmwareData.has(item)) {
@@ -112,9 +111,7 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = get("gpsVersion"),
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")
-            ?.substringBefore("###summary###")
-            ?: "- Fixed some known issues.",
+        changeLog = get("changeLog")?.substringBefore("###summary###"),
         buildTime = get("buildTime")?.getDate(),
     )
 }

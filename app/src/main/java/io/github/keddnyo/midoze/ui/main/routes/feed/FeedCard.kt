@@ -43,7 +43,9 @@ fun FeedCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painter = painterResource(device.application.instance.icon),
+                    painter = painterResource(
+                        device.devicePreview
+                    ),
                     contentDescription = null,
                     modifier = Modifier
                         .size(size = 56.dp),
@@ -51,7 +53,7 @@ fun FeedCard(
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
                     Text(
-                        text = "Unknown device",
+                        text = device.deviceName,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
@@ -65,14 +67,6 @@ fun FeedCard(
                             ),
                         )
                     }
-//                    buildTime?.let { buildTime ->
-//                        Text(
-//                            text = buildTime,
-//                            style = TextStyle(
-//                                fontSize = 14.sp,
-//                            ),
-//                        )
-//                    }
                 }
                 Spacer(modifier = Modifier.weight(1F))
                 IconButton(
@@ -84,11 +78,11 @@ fun FeedCard(
                     )
                 }
             }
-            Divider(
-                thickness = 0.5.dp,
-                color = Color.Gray,
-            )
             changeLog?.let {
+                Divider(
+                    thickness = 0.5.dp,
+                    color = Color.Gray,
+                )
                 Text(
                     modifier = Modifier
                         .padding(10.dp),
@@ -102,7 +96,7 @@ fun FeedCard(
                 Text(
                     modifier = Modifier
                         .padding(10.dp),
-                    text = "$deviceSource, $productionSource",
+                    text = "$deviceSource, $productionSource, ${region.country}, ${region.language}",
                     style = TextStyle(
                         fontSize = 14.sp,
                     ),
