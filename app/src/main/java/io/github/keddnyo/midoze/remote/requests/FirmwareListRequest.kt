@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.remote.requests
 
 import io.github.keddnyo.midoze.local.models.firmware.Device
-import io.github.keddnyo.midoze.local.models.firmware.deviceList
+import io.github.keddnyo.midoze.local.repository.deviceList
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 suspend fun getFirmwareList(

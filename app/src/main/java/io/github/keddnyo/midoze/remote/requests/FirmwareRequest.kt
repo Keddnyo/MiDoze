@@ -14,7 +14,7 @@ import java.util.*
 
 suspend fun getFirmware(
     device: Device
-): Firmware? {
+): Firmware? = withContext(Dispatchers.IO) {
     val host = "api-mifit-us2.huami.com"
 
     val request = StringBuilder()
@@ -39,14 +39,14 @@ suspend fun getFirmware(
         .append("appid=0&")
         .append("callid=0&")
         .append("channel=0&")
-        .append("country=0&")
+        .append("country=${device.region.country}&")
         .append("cv=0&")
         .append("device=0&")
         .append("deviceType=ALL&")
         .append("device_type=0&")
         .append("firmwareVersion=0&")
         .append("hardwareVersion=0&")
-        .append("lang=0&")
+        .append("lang=${device.region.language}&")
         .append("support8Bytes=0&")
         .append("timezone=0&")
         .append("v=0")
@@ -55,7 +55,7 @@ suspend fun getFirmware(
         .run {
             setRequestProperty("Host", host)
             setRequestProperty("Hm-Privacy-Diagnostics", "false")
-            setRequestProperty("Country", "0")
+            setRequestProperty("Country", device.region.country)
             setRequestProperty("Appplatform", "android_phone")
             setRequestProperty("Hm-Privacy-Ceip", "false")
             setRequestProperty("X-Request-Id", "0")
@@ -66,20 +66,18 @@ suspend fun getFirmware(
             setRequestProperty("Appname", device.application.instance.appName)
             setRequestProperty("V", "0")
             setRequestProperty("Apptoken", "0")
-            setRequestProperty("Lang", "0")
+            setRequestProperty("Lang", device.region.language)
             setRequestProperty("Connection", "Keep-Alive")
             setRequestProperty("Accept-Encoding", "identity")
 
-            withContext(Dispatchers.IO) {
-                inputStream
-            }
+            inputStream
         }
 
     val response = request.getContent()
 
     val firmwareData = JSONObject(response)
 
-    if (!firmwareData.has("firmwareVersion")) return null
+    if (!firmwareData.has("firmwareVersion")) return@withContext null
 
     fun get(item: String) =
         if (firmwareData.has(item)) {
@@ -88,7 +86,7 @@ suspend fun getFirmware(
             null
         }
 
-    return Firmware(
+    return@withContext Firmware(
         device = device,
         firmwareVersion = get("firmwareVersion"),
         firmwareUrl = get("firmwareUrl"),

@@ -6,8 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,22 +23,18 @@ fun FeedCard(
     firmware: Firmware?
 ) {
     firmware?.run {
+        val offset = 15.dp
+
         Card(
             modifier = Modifier
                 .widthIn(min = 0.dp, max = 600.dp)
-                .padding(all = 10.dp)
-                .border(
-                    border = BorderStroke(
-                        width = 1.dp,
-                        color = Color.Gray,
-                    ),
-                    shape = RoundedCornerShape(10.dp),
-                ),
-            elevation = CardDefaults.outlinedCardElevation(3.dp),
+                .padding(all = offset),
+            elevation = CardDefaults.outlinedCardElevation(2.dp),
         ) {
             Row(
                 modifier = Modifier
-                    .padding(10.dp),
+                    .fillMaxWidth()
+                    .padding(offset),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 val cornerShape = RoundedCornerShape(50.dp)
@@ -51,7 +45,7 @@ fun FeedCard(
                     ),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size = 56.dp)
+                        .size(size = 64.dp)
                         .background(
                             color = Color.White,
                             shape = cornerShape
@@ -65,53 +59,46 @@ fun FeedCard(
                         )
                         .padding(5.dp),
                 )
-                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(offset))
                 Column {
                     Text(
                         text = device.deviceName,
                         style = TextStyle(
-                            fontSize = 16.sp,
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                     )
                     firmwareVersion?.let { firmwareVersion ->
                         Text(
-                            text = "Firmware: $firmwareVersion",
+                            text = "FW: $firmwareVersion",
                             style = TextStyle(
                                 fontSize = 14.sp
                             )
                         )
                     }
-                    device.run {
+                    resourceVersion?.let { resourceVersion ->
                         Text(
-                            text = "$deviceSource, $productionSource, ${region.country}, ${region.language}",
+                            text = "RES: $resourceVersion",
                             style = TextStyle(
-                                fontSize = 12.sp
+                                fontSize = 14.sp
                             )
                         )
                     }
                 }
-                Spacer(modifier = Modifier.weight(1F))
-                IconButton(
-                    onClick = { /*TODO*/ }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Download,
-                        contentDescription = null
-                    )
-                }
             }
             changeLog?.let {
                 Divider(
+                    modifier = Modifier
+                        .padding(start = offset, end = offset),
                     thickness = 0.5.dp,
                     color = Color.Gray
                 )
                 Text(
                     modifier = Modifier
-                        .padding(10.dp),
+                        .padding(offset),
                     text = changeLog,
                     style = TextStyle(
-                        fontSize = 14.sp
+                        fontSize = 16.sp
                     )
                 )
             }

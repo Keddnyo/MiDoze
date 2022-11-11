@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import io.github.keddnyo.midoze.local.models.firmware.deviceList
+import io.github.keddnyo.midoze.local.repository.deviceList
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.requests.getFirmwareList
 
@@ -13,7 +13,7 @@ class FirmwareDataSource: PagingSource<Int, Firmware>() {
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Firmware> {
-        val maxSize = deviceList.size - 1
+        val maxSize = deviceList.lastIndex
         val key = params.key ?: 0
         val response = getFirmwareList(index = key)
 
