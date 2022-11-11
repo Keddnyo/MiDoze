@@ -39,18 +39,23 @@ class WatchfaceAdapter(private val watchfaceDataStack: ArrayList<WatchfaceData.W
         context = holder.layout.context
 
         holder.title.text = watchfaceDataStack[position].name
-        BitmapCache(context).decode(watchfaceDataStack[position].watchface[0].alias, watchfaceDataStack[position].watchface[0].title).let {
-            holder.preview.setImageBitmap(it)
-        }
-        watchfaceDataStack[position].watchface.size.toString().let { count ->
-            holder.count?.text = holder.layout.context.getString(R.string.items, count)
-        }
-
-        holder.layout.setOnClickListener {
-            Intent(context, WatchfacePreviewActivity::class.java).let { intent ->
-                intent.putExtra("watchfaceArray", Gson().toJson(watchfaceDataStack[position]).toString())
-                context.startActivity(intent)
+        try {
+            BitmapCache(context).decode(watchfaceDataStack[position].watchface[0].alias, watchfaceDataStack[position].watchface[0].title).let {
+                holder.preview.setImageBitmap(it)
             }
+            
+            watchfaceDataStack[position].watchface.size.toString().let { count ->
+                holder.count?.text = holder.layout.context.getString(R.string.items, count)
+            }
+
+            holder.layout.setOnClickListener {
+                Intent(context, WatchfacePreviewActivity::class.java).let { intent ->
+                    intent.putExtra("watchfaceArray", Gson().toJson(watchfaceDataStack[position]).toString())
+                    context.startActivity(intent)
+                }
+            }
+        } catch(e: Exception) {
+            e.printStackTrace()
         }
     }
 

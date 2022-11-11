@@ -71,7 +71,7 @@ class WatchfaceFragment : Fragment() {
                                 } else if (isOnline(context)) {
                                     BitmapCache(context).clearCache()
 
-                                    for (device in DeviceStacks) {
+                                    (DeviceStacks).forEach { device ->
                                         val watchfaceArray: ArrayList<WatchfaceData.Watchface> =
                                             arrayListOf()
 

@@ -40,10 +40,12 @@ object WatchfaceRepository {
             name = "Xiaomi Smart Band 7 Pro In",
             alias = "hqbd3.watch.l67in"
         ),
-        WatchfaceData.Device(
-            name = "Redmi Smart Band Pro",
-            alias = "mijia.watch.m69gl"
-        ),
+//        No longer available
+
+//        WatchfaceData.Device(
+//            name = "Redmi Smart Band Pro",
+//            alias = "mijia.watch.m69gl"
+//        ),
         WatchfaceData.Device(
             name = "Poco Watch",
             alias = "midr.watch.k65w"
