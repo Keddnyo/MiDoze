@@ -3,16 +3,16 @@ package io.github.keddnyo.midoze.local.repository
 import io.github.keddnyo.midoze.R
 
 open class AppName(
-    val icon: Int,
-    val name: String,
+    val appIcon: Int,
+    val appName: String,
 ) {
     object Zepp : AppName(
-        icon = R.drawable.ic_zepp,
-        name = "com.huami.midong"
+        appIcon = R.drawable.ic_zepp,
+        appName = "com.huami.midong"
     )
 
     object ZeppLife : AppName(
-        icon = R.drawable.ic_zepp_life,
-        name = "com.xiaomi.hm.health",
+        appIcon = R.drawable.ic_zepp_life,
+        appName = "com.xiaomi.hm.health",
     )
 }

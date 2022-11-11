@@ -22,7 +22,7 @@ open class Device(
 
     object XiaomiMiBand4GL : Device(
         deviceName = "Xiaomi Mi Band 4 GL",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_4,
         deviceSource = 25,
         productionSource = 257,
         application = Application.ZeppLife,
@@ -31,7 +31,7 @@ open class Device(
 
     object XiaomiMiBand4NFC : Device(
         deviceName = "Xiaomi Mi Band 4 NFC",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_4,
         deviceSource = 24,
         productionSource = 256,
         application = Application.ZeppLife,
@@ -40,7 +40,7 @@ open class Device(
 
     object XiaomiMiBand5 : Device(
         deviceName = "Xiaomi Mi Band 5",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 59,
         productionSource = 257,
         application = Application.ZeppLife,
@@ -49,7 +49,7 @@ open class Device(
 
     object XiaomiMiBand5NFC : Device(
         deviceName = "Xiaomi Mi Band 5 NFC",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 58,
         productionSource = 256,
         application = Application.ZeppLife,
@@ -58,7 +58,7 @@ open class Device(
 
     object XiaomiMiBand6GL : Device(
         deviceName = "Xiaomi Mi Band 6 GL",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_6,
         deviceSource = 212,
         productionSource = 257,
         application = Application.ZeppLife,
@@ -67,7 +67,7 @@ open class Device(
 
     object XiaomiMiBand6NFC : Device(
         deviceName = "Xiaomi Mi Band 6 NFC",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_6,
         deviceSource = 211,
         productionSource = 256,
         application = Application.ZeppLife,
@@ -76,7 +76,7 @@ open class Device(
 
     object XiaomiMiBand7var1 : Device(
         deviceName = "Xiaomi Mi Band 7",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_7,
         deviceSource = 260,
         productionSource = 256,
         application = Application.ZeppLife,
@@ -85,36 +85,36 @@ open class Device(
 
     object XiaomiMiBand7var2 : Device(
         deviceName = "Xiaomi Mi Band 7",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_7,
         deviceSource = 262,
-        productionSource = 256,
+        productionSource = 258,
         application = Application.ZeppLife,
         region = Region.UnitedStates,
     )
 
     object XiaomiMiBand7var3 : Device(
         deviceName = "Xiaomi Mi Band 7",
-        devicePreview = R.drawable.ic_zepp_life,
+        devicePreview = R.drawable.mi_band_7,
         deviceSource = 263,
-        productionSource = 256,
+        productionSource = 259,
         application = Application.ZeppLife,
         region = Region.UnitedStates,
     )
 
     object XiaomiMiBand7var4 : Device(
         deviceName = "Xiaomi Mi Band 7",
-        devicePreview = R.drawable.ic_zepp_life,
-        deviceSource = 211,
-        productionSource = 264,
+        devicePreview = R.drawable.mi_band_7,
+        deviceSource = 264,
+        productionSource = 260,
         application = Application.ZeppLife,
         region = Region.UnitedStates,
     )
 
     object XiaomiMiBand7var5 : Device(
         deviceName = "Xiaomi Mi Band 7",
-        devicePreview = R.drawable.ic_zepp_life,
-        deviceSource = 211,
-        productionSource = 265,
+        devicePreview = R.drawable.mi_band_7,
+        deviceSource = 265,
+        productionSource = 261,
         application = Application.ZeppLife,
         region = Region.UnitedStates,
     )

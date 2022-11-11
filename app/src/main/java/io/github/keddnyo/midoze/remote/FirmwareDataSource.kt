@@ -14,18 +14,14 @@ class FirmwareDataSource: PagingSource<Int, Firmware>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Firmware> {
         val maxSize = deviceList.size - 1
-
-        val startIndex = params.key ?: 0
-        val firmwareCount = params.loadSize
-        val endIndex = startIndex + firmwareCount
-
-        val response = getFirmwareList(startIndex..endIndex)
+        val key = params.key ?: 0
+        val response = getFirmwareList(index = key)
 
         return try {
             LoadResult.Page(
                 data = response,
                 prevKey = null,
-                nextKey = if (endIndex >= maxSize) null else endIndex + 1
+                nextKey = if (key == maxSize) null else key + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(e)

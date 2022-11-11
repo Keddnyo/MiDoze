@@ -1,13 +1,13 @@
 package io.github.keddnyo.midoze.remote.requests
 
-import android.util.Log
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.local.models.firmware.Device
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.io.InputStream
+import java.net.URL
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,82 +15,71 @@ import java.util.*
 suspend fun getFirmware(
     device: Device
 ): Firmware? {
-    val client = HttpClient()
-    val targetHost = "api-mifit-us2.huami.com"
-    val request = client.get {
-        url {
-            protocol = URLProtocol.HTTPS
-            host = targetHost
-            appendPathSegments("devices", "ALL", "hasNewVersion")
-            parameter("productId", "0")
-            parameter("vendorSource", "0")
-            parameter("resourceVersion", "0")
-            parameter("firmwareFlag", "0")
-            parameter("vendorId", "0")
-            parameter("resourceFlag", "0")
-            parameter("productionSource", device.productionSource)
-            parameter("userid", "0")
-            parameter("userId", "0")
-            parameter("deviceSource", device.deviceSource)
-            parameter("fontVersion", "0")
-            parameter("diagnosticCode", "0")
-            parameter("fontFlag", "0")
-            parameter("appVersion", device.application.appVersion)
-            parameter("appid", "0")
-            parameter("callid", "0")
-            parameter("channel", "0")
-            parameter("country", device.region.country)
-            parameter("cv", "0")
-            parameter("device", "0")
-            parameter("deviceType", "ALL")
-            parameter("device_type", "0")
-            parameter("firmwareVersion", "0")
-            parameter("hardwareVersion", "0")
-            parameter("lang", device.region.language)
-            parameter("support8Bytes", "0")
-            parameter("timezone", "0")
-            parameter("v", "0")
-//            parameter("gpsVersion", "0")
-//            parameter("baseResourceVersion", "0")
-        }
-        headers {
-            append("Host", targetHost)
-            append("Hm-Privacy-Diagnostics", "false")
-            append("Country", device.region.country)
-            append("Appplatform", "android_phone")
-            append("Hm-Privacy-Ceip", "false")
-            append("X-Request-Id", "0")
-            append("Timezone", "0")
-            append("Channel", "0")
-            append("User-Agent", "0")
-            append("Cv", "2.0")
-            append("Appname", device.application.instance.name)
-            append("V", "0")
-            append("Apptoken", "0")
-            append("Lang", device.region.language)
-            append("Connection", "Keep-Alive")
-            append("Accept-Encoding", "gzip, deflate")
-        }
-    }
+    val host = "api-mifit-us2.huami.com"
 
-    if (request.status.value != 200) return null
+    val request = StringBuilder()
+        .append("https")
+        .append("://")
+        .append(host)
+        .append("/devices/ALL/hasNewVersion?")
+        .append("productId=0&")
+        .append("vendorSource=0&")
+        .append("resourceVersion=0&")
+        .append("firmwareFlag=0&")
+        .append("vendorId=0&")
+        .append("resourceFlag=0&")
+        .append("productionSource=${device.productionSource}&")
+        .append("userid=0&")
+        .append("userId=0&")
+        .append("deviceSource=${device.deviceSource}&")
+        .append("fontVersion=0&")
+        .append("diagnosticCode=0&")
+        .append("fontFlag=0&")
+        .append("appVersion=${device.application.appVersion.appVersion}&")
+        .append("appid=0&")
+        .append("callid=0&")
+        .append("channel=0&")
+        .append("country=0&")
+        .append("cv=0&")
+        .append("device=0&")
+        .append("deviceType=ALL&")
+        .append("device_type=0&")
+        .append("firmwareVersion=0&")
+        .append("hardwareVersion=0&")
+        .append("lang=0&")
+        .append("support8Bytes=0&")
+        .append("timezone=0&")
+        .append("v=0")
+        .toURL()
+        .openConnection()
+        .run {
+            setRequestProperty("Host", host)
+            setRequestProperty("Hm-Privacy-Diagnostics", "false")
+            setRequestProperty("Country", "0")
+            setRequestProperty("Appplatform", "android_phone")
+            setRequestProperty("Hm-Privacy-Ceip", "false")
+            setRequestProperty("X-Request-Id", "0")
+            setRequestProperty("Timezone", "0")
+            setRequestProperty("Channel", "0")
+            setRequestProperty("User-Agent", "0")
+            setRequestProperty("Cv", "0")
+            setRequestProperty("Appname", device.application.instance.appName)
+            setRequestProperty("V", "0")
+            setRequestProperty("Apptoken", "0")
+            setRequestProperty("Lang", "0")
+            setRequestProperty("Connection", "Keep-Alive")
+            setRequestProperty("Accept-Encoding", "identity")
 
-    val response = try {
-        request.bodyAsText()
-    } catch (e: Exception) {
-        "{}"
-    }
+            withContext(Dispatchers.IO) {
+                inputStream
+            }
+        }
+
+    val response = request.getContent()
 
     val firmwareData = JSONObject(response)
 
-    if (!firmwareData.has("firmwareVersion")) {
-        return null
-    } else {
-        Log.d(
-            "Firmware-request",
-            "deviceSource: ${device.deviceSource}, productionSource: ${device.productionSource}, status: ${request.status.value}, Firmware version: ${firmwareData.getString("firmwareVersion")}"
-        )
-    }
+    if (!firmwareData.has("firmwareVersion")) return null
 
     fun get(item: String) =
         if (firmwareData.has(item)) {
@@ -111,10 +100,14 @@ suspend fun getFirmware(
         fontUrl = get("fontUrl"),
         gpsVersion = get("gpsVersion"),
         gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("###summary###"),
+        changeLog = get("changeLog")?.substringBefore("###summary###")?.trim(),
         buildTime = get("buildTime")?.getDate(),
     )
 }
+
+private fun StringBuilder.toURL() = URL(this.toString())
+
+private fun InputStream.getContent() = this.bufferedReader().readText()
 
 private fun String.getDate(): String {
     val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault())

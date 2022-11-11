@@ -2,6 +2,7 @@ package io.github.keddnyo.midoze.ui.main.routes.feed
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,13 +43,27 @@ fun FeedCard(
                     .padding(10.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                val cornerShape = RoundedCornerShape(50.dp)
+
                 Image(
                     painter = painterResource(
                         device.devicePreview
                     ),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(size = 56.dp),
+                        .size(size = 56.dp)
+                        .background(
+                            color = Color.White,
+                            shape = cornerShape
+                        )
+                        .border(
+                            BorderStroke(
+                                width = 0.5.dp,
+                                color = Color.Gray,
+                            ),
+                            shape = cornerShape
+                        )
+                        .padding(5.dp),
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Column {
@@ -56,15 +71,23 @@ fun FeedCard(
                         text = device.deviceName,
                         style = TextStyle(
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                        ),
+                            fontWeight = FontWeight.Bold
+                        )
                     )
                     firmwareVersion?.let { firmwareVersion ->
                         Text(
                             text = "Firmware: $firmwareVersion",
                             style = TextStyle(
-                                fontSize = 14.sp,
-                            ),
+                                fontSize = 14.sp
+                            )
+                        )
+                    }
+                    device.run {
+                        Text(
+                            text = "$deviceSource, $productionSource, ${region.country}, ${region.language}",
+                            style = TextStyle(
+                                fontSize = 12.sp
+                            )
                         )
                     }
                 }
@@ -74,32 +97,22 @@ fun FeedCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Download,
-                        contentDescription = null,
+                        contentDescription = null
                     )
                 }
             }
             changeLog?.let {
                 Divider(
                     thickness = 0.5.dp,
-                    color = Color.Gray,
+                    color = Color.Gray
                 )
                 Text(
                     modifier = Modifier
                         .padding(10.dp),
                     text = changeLog,
                     style = TextStyle(
-                        fontSize = 14.sp,
-                    ),
-                )
-            }
-            device.run {
-                Text(
-                    modifier = Modifier
-                        .padding(10.dp),
-                    text = "$deviceSource, $productionSource, ${region.country}, ${region.language}",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                    ),
+                        fontSize = 14.sp
+                    )
                 )
             }
         }
