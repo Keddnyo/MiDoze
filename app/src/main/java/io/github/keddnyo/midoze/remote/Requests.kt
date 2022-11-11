@@ -130,7 +130,7 @@ class Requests {
                 append("lang", wearable.region.language)
                 append("Host", targetHost)
                 append("Connection", "Keep-Alive")
-                append("accept-encoding", "gzip")
+                append("accept-encoding", "identity")
                 append("accept", "*/*")
             }
         }.bodyAsText()
