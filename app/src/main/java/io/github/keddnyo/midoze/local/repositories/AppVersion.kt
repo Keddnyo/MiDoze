@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.local.repository
+package io.github.keddnyo.midoze.local.repositories
 
 open class AppVersion(
     val appVersion: String

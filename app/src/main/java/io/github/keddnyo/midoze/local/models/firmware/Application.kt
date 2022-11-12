@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.local.models.firmware
 
-import io.github.keddnyo.midoze.local.repository.AppName
-import io.github.keddnyo.midoze.local.repository.AppVersion
+import io.github.keddnyo.midoze.local.repositories.AppName
+import io.github.keddnyo.midoze.local.repositories.AppVersion
 
 open class Application (
     val instance: AppName,

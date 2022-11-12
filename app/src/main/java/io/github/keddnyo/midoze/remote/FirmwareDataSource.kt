@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import io.github.keddnyo.midoze.local.repository.deviceList
+import io.github.keddnyo.midoze.local.repositories.deviceList
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.requests.getFirmwareList
 
