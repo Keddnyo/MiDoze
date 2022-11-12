@@ -1,10 +1,10 @@
 package io.github.keddnyo.midoze.ui.main.routes
 
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
@@ -22,10 +22,14 @@ fun MiDozeAppContent(
                 TopAppBar()
             },
             content = { padding ->
-                FeedRoute(
-                    padding = padding,
-                    viewModel = viewModel,
-                )
+                Box(
+                    modifier = Modifier
+                        .padding(padding),
+                ) {
+                    FeedRoute(
+                        viewModel = viewModel
+                    )
+                }
             }
         )
     }
