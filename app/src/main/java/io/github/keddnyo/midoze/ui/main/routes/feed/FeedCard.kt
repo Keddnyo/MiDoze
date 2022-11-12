@@ -57,7 +57,7 @@ fun FeedCard(
                             ),
                             shape = cornerShape
                         )
-                        .padding(5.dp),
+                        .padding(10.dp),
                 )
                 Spacer(modifier = Modifier.width(offset))
                 Column {
