@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.main.routes.feed
+package io.github.keddnyo.midoze.ui.presentation.feed
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn

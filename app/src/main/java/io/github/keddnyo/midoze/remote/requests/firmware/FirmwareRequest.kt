@@ -1,9 +1,8 @@
-package io.github.keddnyo.midoze.remote.requests
+package io.github.keddnyo.midoze.remote.requests.firmware
 
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.InputStream
@@ -70,6 +69,7 @@ suspend fun getFirmware(
             setRequestProperty("Connection", "Keep-Alive")
             setRequestProperty("Accept-Encoding", "identity")
 
+            // Return server response as text
             inputStream
         }
 
@@ -77,29 +77,32 @@ suspend fun getFirmware(
 
     val firmwareData = JSONObject(response)
 
+    // Return null if response hasn't firmwareVersion field
     if (!firmwareData.has("firmwareVersion")) return@withContext null
 
-    fun get(item: String) =
+    // Return field text or null by key
+    fun getOrNull(item: String) =
         if (firmwareData.has(item)) {
             firmwareData.getString(item)
         } else {
             null
         }
 
+    // Return firmware instance
     return@withContext Firmware(
         device = device,
-        firmwareVersion = get("firmwareVersion"),
-        firmwareUrl = get("firmwareUrl"),
-        resourceVersion = get("resourceVersion"),
-        resourceUrl = get("resourceUrl"),
-        baseResourceVersion = get("baseResourceVersion"),
-        baseResourceUrl = get("baseResourceUrl"),
-        fontVersion = get("fontVersion"),
-        fontUrl = get("fontUrl"),
-        gpsVersion = get("gpsVersion"),
-        gpsUrl = get("gpsUrl"),
-        changeLog = get("changeLog")?.substringBefore("###summary###")?.trim(),
-        buildTime = get("buildTime")?.getDate(),
+        firmwareVersion = getOrNull("firmwareVersion"),
+        firmwareUrl = getOrNull("firmwareUrl"),
+        resourceVersion = getOrNull("resourceVersion"),
+        resourceUrl = getOrNull("resourceUrl"),
+        baseResourceVersion = getOrNull("baseResourceVersion"),
+        baseResourceUrl = getOrNull("baseResourceUrl"),
+        fontVersion = getOrNull("fontVersion"),
+        fontUrl = getOrNull("fontUrl"),
+        gpsVersion = getOrNull("gpsVersion"),
+        gpsUrl = getOrNull("gpsUrl"),
+        changeLog = getOrNull("changeLog")?.substringBefore("###summary###")?.trim(),
+        buildTime = getOrNull("buildTime")?.getDate(),
     )
 }
 

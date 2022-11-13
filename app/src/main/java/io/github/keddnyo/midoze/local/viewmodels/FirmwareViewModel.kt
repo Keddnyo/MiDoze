@@ -3,7 +3,7 @@ package io.github.keddnyo.midoze.local.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import io.github.keddnyo.midoze.remote.FirmwareDataSource
+import io.github.keddnyo.midoze.remote.paging.FirmwarePagingSource
 
 class FirmwareViewModel : ViewModel() {
 
@@ -12,7 +12,7 @@ class FirmwareViewModel : ViewModel() {
             pageSize = 1,
         )
     ) {
-        FirmwareDataSource()
+        FirmwarePagingSource()
     }.flow.cachedIn(viewModelScope)
 
 }

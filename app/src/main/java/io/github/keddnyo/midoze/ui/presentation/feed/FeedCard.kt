@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.main.routes.feed
+package io.github.keddnyo.midoze.ui.presentation.feed
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

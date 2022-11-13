@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.main.routes
+package io.github.keddnyo.midoze.ui.activities
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
-import io.github.keddnyo.midoze.ui.main.routes.feed.FeedRoute
+import io.github.keddnyo.midoze.ui.presentation.feed.FeedRoute
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

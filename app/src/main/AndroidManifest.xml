@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MiDoze"
         tools:targetApi="33">
         <activity
-            android:name=".ui.main.activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MiDoze">
             <intent-filter>
