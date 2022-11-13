@@ -15,9 +15,10 @@ class FirmwarePagingSource: PagingSource<Int, Firmware>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Firmware> {
         val maxSize = deviceList.lastIndex
         val key = params.key ?: 0
-        val response = getFirmwareList(i = key)
 
         return try {
+            val response = getFirmwareList(i = key)
+
             LoadResult.Page(
                 data = response,
                 prevKey = null,

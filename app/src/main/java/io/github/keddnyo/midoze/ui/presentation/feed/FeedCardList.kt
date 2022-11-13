@@ -37,9 +37,18 @@ fun FeedCardList(
                         FeedLoadingBar()
                     }
                 }
+                loadState.refresh is LoadState.Error -> {
+                    item {
+                        FeedLoadingErrorMessage(
+                            message = (loadState.refresh as LoadState.Error).error.message.toString()
+                        )
+                    }
+                }
                 loadState.append is LoadState.Error -> {
                     item {
-                        FeedLoadingErrorMessage()
+                        FeedLoadingErrorMessage(
+                            message = (loadState.append as LoadState.Error).error.message.toString()
+                        )
                     }
                 }
             }

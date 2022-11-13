@@ -16,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.keddnyo.midoze.internal.CardContentOffset
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 @Composable
@@ -23,18 +24,16 @@ fun FeedCard(
     firmware: Firmware?
 ) {
     firmware?.run {
-        val offset = 15.dp
-
         Card(
             modifier = Modifier
                 .widthIn(min = 0.dp, max = 600.dp)
-                .padding(all = offset),
+                .padding(all = CardContentOffset),
             elevation = CardDefaults.outlinedCardElevation(2.dp),
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(offset),
+                    .padding(CardContentOffset),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 val cornerShape = RoundedCornerShape(50.dp)
@@ -59,7 +58,7 @@ fun FeedCard(
                         )
                         .padding(10.dp),
                 )
-                Spacer(modifier = Modifier.width(offset))
+                Spacer(modifier = Modifier.width(CardContentOffset))
                 Column {
                     Text(
                         text = device.deviceName,
@@ -89,13 +88,13 @@ fun FeedCard(
             changeLog?.let {
                 Divider(
                     modifier = Modifier
-                        .padding(start = offset, end = offset),
+                        .padding(start = CardContentOffset, end = CardContentOffset),
                     thickness = 0.5.dp,
                     color = Color.Gray
                 )
                 Text(
                     modifier = Modifier
-                        .padding(offset),
+                        .padding(CardContentOffset),
                     text = changeLog,
                     style = TextStyle(
                         fontSize = 16.sp
