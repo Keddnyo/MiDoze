@@ -11,7 +11,7 @@ import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
 
 @Composable
-fun FeedCardList(
+fun FeedFirmwareList(
     firmwaresViewModel: FirmwareViewModel,
 ) {
 
@@ -47,8 +47,6 @@ fun FeedCardList(
                                 }
                             )
                         }
-
-                        loadState.refresh
                     }
                 }
                 loadState.append is LoadState.Error -> {
@@ -61,8 +59,6 @@ fun FeedCardList(
                                 }
                             )
                         }
-
-                        loadState.append
                     }
                 }
             }

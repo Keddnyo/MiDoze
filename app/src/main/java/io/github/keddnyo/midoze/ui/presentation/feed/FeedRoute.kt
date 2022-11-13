@@ -7,7 +7,7 @@ import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
 fun FeedRoute(
     viewModel: FirmwareViewModel
 ) {
-    FeedCardList(
+    FeedFirmwareList(
         firmwaresViewModel = viewModel
     )
 }
