@@ -7,8 +7,10 @@ import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 suspend fun getFirmwareList(
     i: Int
-) = arrayListOf<Firmware>().run {
-    run loop@ {
+): ArrayList<Firmware> {
+    val array = arrayListOf<Firmware>()
+
+    array.run {
         routeArray.forEach { host ->
             // Making request
             getFirmware(
@@ -20,10 +22,10 @@ suspend fun getFirmwareList(
                 }
             )?.apply {
                 add(this)
-                return@loop
+                return@run
             }
         }
     }
-    // Return array
-    this
+
+    return array
 }
