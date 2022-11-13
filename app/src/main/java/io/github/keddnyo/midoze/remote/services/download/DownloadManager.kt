@@ -4,10 +4,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
-import io.github.keddnyo.midoze.remote.models.firmware.FirmwareType
-import io.github.keddnyo.midoze.utils.getFileName
 import java.io.File
 
 fun download(
@@ -23,7 +20,7 @@ fun download(
     request
         .setTitle("$deviceName — ${firmwareDownload.fileType.label} ${firmwareDownload.fileVersion}")
         .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName)
+        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, "$deviceName${File.separator}${firmwareDownload.fileType}_${firmwareDownload.fileVersion}")
         .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         .setAllowedOverRoaming(false)
 
