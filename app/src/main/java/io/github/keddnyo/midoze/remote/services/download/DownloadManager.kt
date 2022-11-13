@@ -14,12 +14,12 @@ fun download(
 ): DownloadStatus = with(context) {
     val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     val url = Uri.parse(firmwareDownload.address)
-    val fileName = File(url.path.toString()).name
     val request = DownloadManager.Request(url)
 
     request
         .setTitle("$deviceName — ${firmwareDownload.fileType.label} ${firmwareDownload.fileVersion}")
         .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        .setAllowedOverRoaming(false)
         .setDestinationInExternalPublicDir(
             Environment.DIRECTORY_DOCUMENTS,
             deviceName +
@@ -29,22 +29,11 @@ fun download(
                     firmwareDownload.fileVersion +
                     firmwareDownload.fileType.extension
         )
-        .setAllowedNetworkTypes(
-            DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE
-        )
-        .setAllowedOverRoaming(false)
 
     try {
-        val file = downloadManager.enqueue(request)
-//        val filePath = downloadManager.getUriForDownloadedFile(file)
-
-        return DownloadStatus.Successfully(
-            fileName = fileName,
-//            filePath = filePath
-        )
-    } catch (e: Exception) {
-        return DownloadStatus.Failed(
-            message = e.message.toString()
-        )
+        downloadManager.enqueue(request)
+        return DownloadStatus.Successfully
+    } catch (_: Exception) {
+        return DownloadStatus.Failed
     }
 }
