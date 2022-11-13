@@ -29,24 +29,24 @@ fun FeedCardList(
             when {
                 loadState.refresh is LoadState.Loading -> {
                     item {
-                        FeedLoadingBar()
+                        FeedProgressBar()
                     }
                 }
                 loadState.append is LoadState.Loading -> {
                     item {
-                        FeedLoadingBar()
+                        FeedProgressBar()
                     }
                 }
                 loadState.refresh is LoadState.Error -> {
                     item {
-                        FeedLoadingErrorMessage(
+                        FeedLoadingError(
                             message = (loadState.refresh as LoadState.Error).error.message.toString()
                         )
                     }
                 }
                 loadState.append is LoadState.Error -> {
                     item {
-                        FeedLoadingErrorMessage(
+                        FeedLoadingError(
                             message = (loadState.append as LoadState.Error).error.message.toString()
                         )
                     }
