@@ -20,8 +20,18 @@ fun download(
     request
         .setTitle("$deviceName — ${firmwareDownload.fileType.label} ${firmwareDownload.fileVersion}")
         .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, "$deviceName${File.separator}${firmwareDownload.fileType}_${firmwareDownload.fileVersion}")
-        .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+        .setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOCUMENTS,
+            deviceName +
+                    File.separator +
+                    firmwareDownload.fileType.label +
+                    "_" +
+                    firmwareDownload.fileVersion +
+                    firmwareDownload.fileType.extension
+        )
+        .setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE
+        )
         .setAllowedOverRoaming(false)
 
     try {
