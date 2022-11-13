@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.remote.requests.firmware
 
+import io.github.keddnyo.midoze.internal.FirmwareRoute1
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import kotlinx.coroutines.Dispatchers
@@ -12,10 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 suspend fun getFirmware(
+    host: String = FirmwareRoute1,
     device: Device
 ): Firmware? = withContext(Dispatchers.IO) {
-    val host = "api-mifit-us2.huami.com"
-
     val request = StringBuilder()
         .append("https")
         .append("://")

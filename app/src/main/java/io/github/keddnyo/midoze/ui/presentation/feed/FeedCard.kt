@@ -16,91 +16,94 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.internal.CardContentOffset
-import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedCard(
-    firmware: Firmware?
+    icon: Int = R.drawable.unknown,
+    title: String,
+    subtitle1: String? = null,
+    subtitle2: String? = null,
+    summary: String? = null,
+    onClick: () -> Unit
 ) {
-    firmware?.run {
-        Card(
+    Card(
+        modifier = Modifier
+            .widthIn(min = 0.dp, max = 600.dp)
+            .padding(all = CardContentOffset),
+        elevation = CardDefaults.outlinedCardElevation(2.dp),
+        onClick = onClick
+    ) {
+        Row(
             modifier = Modifier
-                .widthIn(min = 0.dp, max = 600.dp)
-                .padding(all = CardContentOffset),
-            elevation = CardDefaults.outlinedCardElevation(2.dp),
+                .fillMaxWidth()
+                .padding(CardContentOffset),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
+            val cornerShape = RoundedCornerShape(50.dp)
+            
+            Image(
+                painterResource(id = icon),
+                contentDescription = null,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(CardContentOffset),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                val cornerShape = RoundedCornerShape(50.dp)
-
-                Image(
-                    painter = painterResource(
-                        device.devicePreview
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(size = 64.dp)
-                        .background(
-                            color = Color.White,
-                            shape = cornerShape
-                        )
-                        .border(
-                            BorderStroke(
-                                width = 0.5.dp,
-                                color = Color.Gray,
-                            ),
-                            shape = cornerShape
-                        )
-                        .padding(10.dp),
+                    .size(size = 64.dp)
+                    .background(
+                        color = Color.White,
+                        shape = cornerShape
+                    )
+                    .border(
+                        BorderStroke(
+                            width = 0.5.dp,
+                            color = Color.Gray,
+                        ),
+                        shape = cornerShape
+                    )
+                    .padding(10.dp),
+            )
+            Spacer(modifier = Modifier.width(CardContentOffset))
+            Column {
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 )
-                Spacer(modifier = Modifier.width(CardContentOffset))
-                Column {
+                subtitle1?.run {
                     Text(
-                        text = device.deviceName,
+                        text = this,
                         style = TextStyle(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
+                            fontSize = 14.sp
                         )
                     )
-                    firmwareVersion?.let { firmwareVersion ->
-                        Text(
-                            text = "FW: $firmwareVersion",
-                            style = TextStyle(
-                                fontSize = 14.sp
-                            )
+                }
+                subtitle2?.run {
+                    Text(
+                        text = this,
+                        style = TextStyle(
+                            fontSize = 14.sp
                         )
-                    }
-                    resourceVersion?.let { resourceVersion ->
-                        Text(
-                            text = "RES: $resourceVersion",
-                            style = TextStyle(
-                                fontSize = 14.sp
-                            )
-                        )
-                    }
+                    )
                 }
             }
-            changeLog?.let {
-                Divider(
-                    modifier = Modifier
-                        .padding(start = CardContentOffset, end = CardContentOffset),
-                    thickness = 0.5.dp,
-                    color = Color.Gray
+        }
+        summary?.run {
+            Divider(
+                modifier = Modifier
+                    .padding(start = CardContentOffset, end = CardContentOffset),
+                thickness = 0.5.dp,
+                color = Color.Gray
+            )
+            Text(
+                modifier = Modifier
+                    .padding(CardContentOffset),
+                text = this,
+                style = TextStyle(
+                    fontSize = 16.sp
                 )
-                Text(
-                    modifier = Modifier
-                        .padding(CardContentOffset),
-                    text = changeLog,
-                    style = TextStyle(
-                        fontSize = 16.sp
-                    )
-                )
-            }
+            )
         }
     }
 }

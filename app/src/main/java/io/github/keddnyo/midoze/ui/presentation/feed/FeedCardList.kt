@@ -21,9 +21,9 @@ fun FeedCardList(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        firmwareList.apply {
+        firmwareList.run {
             items(this) { firmware ->
-                FeedCard(firmware)
+                FeedCardFirmware(firmware)
             }
 
             when {
@@ -39,16 +39,30 @@ fun FeedCardList(
                 }
                 loadState.refresh is LoadState.Error -> {
                     item {
-                        FeedLoadingError(
-                            message = (loadState.refresh as LoadState.Error).error.message.toString()
-                        )
+                        (loadState.refresh as LoadState.Error).error.run {
+                            FeedCardError(
+                                message = message.toString(),
+                                onClick = {
+                                    firmwareList.refresh()
+                                }
+                            )
+                        }
+
+                        loadState.refresh
                     }
                 }
                 loadState.append is LoadState.Error -> {
                     item {
-                        FeedLoadingError(
-                            message = (loadState.append as LoadState.Error).error.message.toString()
-                        )
+                        (loadState.append as LoadState.Error).error.run {
+                            FeedCardError(
+                                message = message.toString(),
+                                onClick = {
+                                    firmwareList.refresh()
+                                }
+                            )
+                        }
+
+                        loadState.append
                     }
                 }
             }

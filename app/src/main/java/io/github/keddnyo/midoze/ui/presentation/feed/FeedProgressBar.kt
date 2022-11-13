@@ -12,7 +12,7 @@ fun FeedProgressBar() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(15.dp)
+            .padding(45.dp)
     ) {
         CircularProgressIndicator(
             modifier = Modifier
