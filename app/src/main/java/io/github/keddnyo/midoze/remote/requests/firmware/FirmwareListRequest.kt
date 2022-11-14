@@ -17,7 +17,7 @@ suspend fun getFirmwareList(
                 host = host,
                 device = deviceList[i].run {
                     Device(
-                        deviceName, devicePreview, deviceSource, productionSource, application, region
+                        deviceName, devicePreview, deviceSource, productionSource, application
                     )
                 }
             )?.apply {

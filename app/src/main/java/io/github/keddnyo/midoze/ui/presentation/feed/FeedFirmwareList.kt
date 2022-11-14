@@ -41,6 +41,7 @@ fun FeedFirmwareList(
                     item {
                         (loadState.refresh as LoadState.Error).error.run {
                             FeedCardError(
+                                message = message,
                                 onClick = {
                                     firmwareList.refresh()
                                 }
@@ -52,6 +53,7 @@ fun FeedFirmwareList(
                     item {
                         (loadState.append as LoadState.Error).error.run {
                             FeedCardError(
+                                message = message,
                                 onClick = {
                                     firmwareList.refresh()
                                 }

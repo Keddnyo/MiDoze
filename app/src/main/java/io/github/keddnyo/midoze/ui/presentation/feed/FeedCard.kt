@@ -73,7 +73,7 @@ fun FeedCard(
                 Text(
                     text = title,
                     style = TextStyle(
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )

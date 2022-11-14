@@ -14,6 +14,5 @@ data class Firmware (
     val fontUrl: String? = null,
     val gpsVersion: String? = null,
     val gpsUrl: String? = null,
-    val changeLog: String? = null,
-    val buildTime: String? = null,
+    val changeLog: String? = null
 )

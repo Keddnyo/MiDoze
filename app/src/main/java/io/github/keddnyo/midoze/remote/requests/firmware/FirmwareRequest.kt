@@ -7,9 +7,6 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.InputStream
 import java.net.URL
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 suspend fun getFirmware(
     host: String,
@@ -45,8 +42,10 @@ suspend fun getFirmware(
             inputStream
         }
 
+    // Get response
     val response = request.getContent()
 
+    // Convert response to JSON object
     val firmwareData = JSONObject(response)
 
     // Return null if response hasn't firmwareVersion field
@@ -73,18 +72,12 @@ suspend fun getFirmware(
         fontUrl = getOrNull("fontUrl"),
         gpsVersion = getOrNull("gpsVersion"),
         gpsUrl = getOrNull("gpsUrl"),
-        changeLog = getOrNull("changeLog")?.substringBefore("###summary###")?.trim(),
-        buildTime = getOrNull("buildTime")?.getDate(),
+        changeLog = getOrNull("changeLog")
+            ?.substringBefore("###summary###")
+            ?.trim(),
     )
 }
 
 private fun StringBuilder.toURL() = URL(this.toString())
 
 private fun InputStream.getContent() = this.bufferedReader().readText()
-
-private fun String.getDate(): String {
-    val dateFormat = SimpleDateFormat("yyyyMMddhhmm", Locale.getDefault())
-    val firmwareDateFormatted = dateFormat.parse(this)
-    return DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault())
-        .format(firmwareDateFormatted!!)
-}
