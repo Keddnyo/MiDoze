@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.keddnyo.midoze.R
@@ -24,11 +25,10 @@ import io.github.keddnyo.midoze.internal.CardContentOffset
 
 @Composable
 fun FeedCard(
-    icon: Int = R.drawable.unknown,
     title: String,
+    subtitle: String? = null,
+    icon: Int = R.drawable.unknown,
     iconButton: ImageVector = Icons.Default.Refresh,
-    subtitle1: String? = null,
-    subtitle2: String? = null,
     summary: String? = null,
     onClick: () -> Unit
 ) {
@@ -54,7 +54,7 @@ fun FeedCard(
                 painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(size = 64.dp)
+                    .size(size = 56.dp)
                     .background(
                         color = Color.White,
                         shape = cornerShape
@@ -68,28 +68,25 @@ fun FeedCard(
                     )
                     .padding(10.dp),
             )
-            Spacer(modifier = Modifier.width(CardContentOffset))
-            Column {
+            Spacer(
+                modifier = Modifier
+                    .weight(1.0F)
+            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     text = title,
                     style = TextStyle(
-                        fontSize = 16.sp,
+                        fontSize = 17.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )
-                subtitle1?.run {
+                subtitle?.run {
                     Text(
                         text = this,
                         style = TextStyle(
-                            fontSize = 14.sp
-                        )
-                    )
-                }
-                subtitle2?.run {
-                    Text(
-                        text = this,
-                        style = TextStyle(
-                            fontSize = 14.sp
+                            fontSize = 15.sp
                         )
                     )
                 }

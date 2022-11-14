@@ -66,11 +66,10 @@ fun FeedCardFirmware(
         }
 
         FeedCard(
-            icon = device.devicePreview,
             title = device.deviceName,
+            subtitle = firmwareVersion,
+            icon = device.devicePreview,
             iconButton = Icons.Default.Download,
-            subtitle1 = firmwareVersion?.let { "FW: $it" },
-            subtitle2 = resourceVersion?.let { "RES: $it" },
             summary = changeLog,
             onClick = {
                 firmwareFileLinkArray.forEach { firmwareFile ->
