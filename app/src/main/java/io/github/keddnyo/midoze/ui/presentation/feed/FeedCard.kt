@@ -36,7 +36,11 @@ fun FeedCard(
         modifier = Modifier
             .widthIn(min = 0.dp, max = 600.dp)
             .padding(all = CardContentOffset),
-        elevation = CardDefaults.outlinedCardElevation(2.dp)
+        elevation = CardDefaults.outlinedCardElevation(2.dp),
+        border = BorderStroke(
+            0.5.dp,
+            Color.Gray
+        )
     ) {
         Row(
             modifier = Modifier
