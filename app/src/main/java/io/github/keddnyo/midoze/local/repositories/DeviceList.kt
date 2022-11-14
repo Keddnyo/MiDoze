@@ -32,7 +32,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Xiaomi Mi Band 5",
+        deviceName = "Xiaomi Mi Smart Band 5",
         devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 59,
         productionSource = 257,
@@ -40,7 +40,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Xiaomi Mi Band 5 NFC",
+        deviceName = "Xiaomi Mi Smart Band 5 NFC",
         devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 58,
         productionSource = 256,
@@ -48,7 +48,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Xiaomi Mi Band Smart 6 GL",
+        deviceName = "Xiaomi Mi Smart Band 6 GL",
         devicePreview = R.drawable.mi_band_6,
         deviceSource = 212,
         productionSource = 257,
@@ -56,7 +56,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Xiaomi Mi Band Smart 6 NFC",
+        deviceName = "Xiaomi Mi Smart Band 6 NFC",
         devicePreview = R.drawable.mi_band_6,
         deviceSource = 211,
         productionSource = 256,
@@ -134,7 +134,7 @@ val deviceList = arrayOf(
 
     // Amazfit Bip
     Device(
-        deviceName = "Amazfit Bip CH",
+        deviceName = "Amazfit Bip",
         devicePreview = R.drawable.amazfit_bip,
         deviceSource = 12,
         productionSource = 256,
@@ -142,7 +142,7 @@ val deviceList = arrayOf(
         region = Region.Chinese,
     ),
     Device(
-        deviceName = "Amazfit Bip Lite CH",
+        deviceName = "Amazfit Bip Lite",
         devicePreview = R.drawable.amazfit_bip,
         deviceSource = 39,
         productionSource = 256,
@@ -158,7 +158,7 @@ val deviceList = arrayOf(
         region = Region.Chinese,
     ),
     Device(
-        deviceName = "Amazfit Bip S CH",
+        deviceName = "Amazfit Bip S",
         devicePreview = R.drawable.amazfit_bip_s,
         deviceSource = 20,
         productionSource = 256,
@@ -174,7 +174,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit Bip S Lite GL",
+        deviceName = "Amazfit Bip S Lite",
         devicePreview = R.drawable.amazfit_bip_s,
         deviceSource = 29,
         productionSource = 259,
@@ -234,7 +234,7 @@ val deviceList = arrayOf(
 
     // Amazfit GTR
     Device(
-        deviceName = "Amazfit GTR 42 CH",
+        deviceName = "Amazfit GTR 42",
         devicePreview = R.drawable.amazfit_gtr_42,
         deviceSource = 37,
         productionSource = 256,
@@ -274,7 +274,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTR 47 CH",
+        deviceName = "Amazfit GTR 47",
         devicePreview = R.drawable.amazfit_gtr,
         deviceSource = 35,
         productionSource = 256,
@@ -306,7 +306,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTR 2 CH",
+        deviceName = "Amazfit GTR 2",
         devicePreview = R.drawable.amazfit_gtr_2,
         deviceSource = 63,
         productionSource = 256,
@@ -322,7 +322,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTR 2e CH",
+        deviceName = "Amazfit GTR 2e",
         devicePreview = R.drawable.amazfit_gtr_2e,
         deviceSource = 206,
         productionSource = 256,
@@ -346,7 +346,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTR 3 CH",
+        deviceName = "Amazfit GTR 3",
         devicePreview = R.drawable.amazfit_gtr_3,
         deviceSource = 226,
         productionSource = 256,
@@ -362,7 +362,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTR 3 Pro CH",
+        deviceName = "Amazfit GTR 3 Pro",
         devicePreview = R.drawable.amazfit_gtr_3,
         deviceSource = 229,
         productionSource = 256,
@@ -388,7 +388,7 @@ val deviceList = arrayOf(
 
     // Amazfit GTS
     Device(
-        deviceName = "Amazfit GTS CH",
+        deviceName = "Amazfit GTS",
         devicePreview = R.drawable.amazfit_gts,
         deviceSource = 40,
         productionSource = 256,
@@ -412,7 +412,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTS 2 CH",
+        deviceName = "Amazfit GTS 2",
         devicePreview = R.drawable.amazfit_gts_2,
         deviceSource = 77,
         productionSource = 256,
@@ -428,7 +428,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTS 2 Mini CH",
+        deviceName = "Amazfit GTS 2 Mini",
         devicePreview = R.drawable.amazfit_gts_2_mini,
         deviceSource = 91,
         productionSource = 256,
@@ -452,7 +452,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTS 2e CH",
+        deviceName = "Amazfit GTS 2e",
         devicePreview = R.drawable.amazfit_gts_2,
         deviceSource = 207,
         productionSource = 256,
@@ -468,7 +468,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTS 3 CH",
+        deviceName = "Amazfit GTS 3",
         devicePreview = R.drawable.amazfit_gts_3,
         deviceSource = 224,
         productionSource = 256,
@@ -484,7 +484,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit GTS 4 Mini CH",
+        deviceName = "Amazfit GTS 4 Mini",
         devicePreview = R.drawable.amazfit_gts_4_mini,
         deviceSource = 246,
         productionSource = 256,
@@ -520,7 +520,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit T-Rex 2 CH",
+        deviceName = "Amazfit T-Rex 2",
         devicePreview = R.drawable.amazfit_t_rex_2,
         deviceSource = 418,
         productionSource = 256,
@@ -536,7 +536,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Amazfit T-Rex Pro CH",
+        deviceName = "Amazfit T-Rex Pro",
         devicePreview = R.drawable.amazfit_t_rex_pro,
         deviceSource = 83,
         productionSource = 256,
@@ -564,7 +564,7 @@ val deviceList = arrayOf(
 
     // Amazfit X
     Device(
-        deviceName = "Amazfit X CH",
+        deviceName = "Amazfit X",
         devicePreview = R.drawable.amazfit_x,
         deviceSource = 53,
         productionSource = 256,
@@ -582,7 +582,7 @@ val deviceList = arrayOf(
 
     // Zepp E
     Device(
-        deviceName = "Zepp E Circle CH",
+        deviceName = "Zepp E Circle",
         devicePreview = R.drawable.zepp_e_circle,
         deviceSource = 57,
         productionSource = 256,
@@ -598,7 +598,7 @@ val deviceList = arrayOf(
         region = Region.Default,
     ),
     Device(
-        deviceName = "Zepp E Square CH",
+        deviceName = "Zepp E Square",
         devicePreview = R.drawable.zepp_e_square,
         deviceSource = 61,
         productionSource = 256,

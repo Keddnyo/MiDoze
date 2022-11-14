@@ -1,6 +1,8 @@
 package io.github.keddnyo.midoze.ui.presentation.feed
 
 import android.widget.Toast
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
@@ -66,6 +68,7 @@ fun FeedCardFirmware(
         FeedCard(
             icon = device.devicePreview,
             title = device.deviceName,
+            iconButton = Icons.Default.Download,
             subtitle1 = firmwareVersion?.let { "FW: $it" },
             subtitle2 = resourceVersion?.let { "RES: $it" },
             summary = changeLog,
@@ -79,7 +82,7 @@ fun FeedCardFirmware(
 
                     when (download) {
                         is DownloadStatus.Successfully -> {
-                            Toast.makeText(context, "Starting download", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Download in progress…", Toast.LENGTH_SHORT).show()
                         }
                         is DownloadStatus.Failed -> {
                             Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show()

@@ -6,11 +6,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -19,11 +22,11 @@ import androidx.compose.ui.unit.sp
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.internal.CardContentOffset
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedCard(
     icon: Int = R.drawable.unknown,
     title: String,
+    iconButton: ImageVector = Icons.Default.Refresh,
     subtitle1: String? = null,
     subtitle2: String? = null,
     summary: String? = null,
@@ -33,8 +36,7 @@ fun FeedCard(
         modifier = Modifier
             .widthIn(min = 0.dp, max = 600.dp)
             .padding(all = CardContentOffset),
-        elevation = CardDefaults.outlinedCardElevation(2.dp),
-        onClick = onClick
+        elevation = CardDefaults.outlinedCardElevation(2.dp)
     ) {
         Row(
             modifier = Modifier
@@ -87,6 +89,18 @@ fun FeedCard(
                         )
                     )
                 }
+            }
+            Spacer(
+                modifier = Modifier
+                    .weight(1.0F)
+            )
+            IconButton(
+                onClick = onClick
+            ) {
+                Icon(
+                    imageVector = iconButton,
+                    contentDescription =""
+                )
             }
         }
         summary?.run {

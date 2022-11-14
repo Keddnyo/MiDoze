@@ -4,13 +4,11 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun FeedCardError(
-    message: String,
     onClick: () -> Unit
 ) {
     FeedCard(
         title = "Something went wrong…",
-        subtitle1 = message,
-        subtitle2 = "Click to retry",
+        subtitle2 = "Top on \"Refresh\" icon to retry",
         onClick = onClick
     )
 }

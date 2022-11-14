@@ -26,18 +26,6 @@ class FirmwarePagingSource: PagingSource<Int, Firmware>() {
                 prevKey = null,
                 nextKey = if (key == maxSize) null else key + 1
             )
-        } catch (e: ConnectException) {
-            LoadResult.Error(
-                throwable = Throwable(
-                    message = "Can't connect to remote host",
-                )
-            )
-        } catch (e: UnknownHostException) {
-            LoadResult.Error(
-                throwable = Throwable(
-                    message = "The remote host is unreachable",
-                )
-            )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
