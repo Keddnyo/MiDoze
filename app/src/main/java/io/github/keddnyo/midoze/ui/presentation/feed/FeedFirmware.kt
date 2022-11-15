@@ -7,7 +7,7 @@ import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareType
 import io.github.keddnyo.midoze.remote.services.download.DownloadStatus
-import io.github.keddnyo.midoze.remote.services.download.download
+import io.github.keddnyo.midoze.remote.services.download.downloadFirmware
 
 @Composable
 fun FeedCardFirmware(
@@ -70,7 +70,7 @@ fun FeedCardFirmware(
             summary = changeLog,
             onClick = {
                 firmwareFileLinkArray.forEach { firmwareFile ->
-                    val download = download(
+                    val download = downloadFirmware(
                         context = context,
                         deviceName = device.deviceName,
                         firmwareDownload = firmwareFile

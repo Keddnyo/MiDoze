@@ -7,14 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.local.viewmodels.FirmwareViewModel
+import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
+import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
+import io.github.keddnyo.midoze.ui.presentation.dial.DialRoute
 import io.github.keddnyo.midoze.ui.presentation.feed.FeedRoute
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MiDozeAppContent(
-    viewModel: FirmwareViewModel
+    feedViewModel: FirmwareViewModel,
+    dialViewModel: WatchfaceViewModel
 ) {
     MiDozeTheme {
         Scaffold(
@@ -26,8 +29,11 @@ fun MiDozeAppContent(
                     modifier = Modifier
                         .padding(padding),
                 ) {
-                    FeedRoute(
-                        viewModel = viewModel
+//                    FeedRoute(
+//                        viewModel = feedViewModel
+//                    )
+                    DialRoute(
+                        viewModel = dialViewModel
                     )
                 }
             }

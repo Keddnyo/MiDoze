@@ -2,7 +2,7 @@ package io.github.keddnyo.midoze.utils;
 
 import java.util.Locale;
 
-public class DozeLocale {
+public class LocaleUtils {
     public Locale getCurrentLocale() {
         return Locale.getDefault();
     }
