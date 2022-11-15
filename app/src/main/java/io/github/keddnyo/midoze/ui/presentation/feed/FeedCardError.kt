@@ -9,7 +9,7 @@ fun FeedCardError(
 ) {
     FeedCard(
         title = "Something went wrong…",
-        subtitle = "Tap on refresh icon to retry",
+        subtitle = "Tap on this card to retry",
         summary = message,
         onClick = onClick
     )

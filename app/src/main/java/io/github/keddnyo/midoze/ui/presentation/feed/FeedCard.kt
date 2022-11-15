@@ -23,12 +23,12 @@ import androidx.compose.ui.unit.sp
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.internal.CardContentOffset
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedCard(
     title: String,
     subtitle: String? = null,
     icon: Int = R.drawable.unknown,
-    iconButton: ImageVector = Icons.Default.Refresh,
     summary: String? = null,
     onClick: () -> Unit
 ) {
@@ -40,7 +40,8 @@ fun FeedCard(
         border = BorderStroke(
             0.5.dp,
             Color.Gray
-        )
+        ),
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier
@@ -70,7 +71,7 @@ fun FeedCard(
             )
             Spacer(
                 modifier = Modifier
-                    .weight(1.0F)
+                    .width(CardContentOffset)
             )
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -90,18 +91,6 @@ fun FeedCard(
                         )
                     )
                 }
-            }
-            Spacer(
-                modifier = Modifier
-                    .weight(1.0F)
-            )
-            IconButton(
-                onClick = onClick
-            ) {
-                Icon(
-                    imageVector = iconButton,
-                    contentDescription =""
-                )
             }
         }
         summary?.run {

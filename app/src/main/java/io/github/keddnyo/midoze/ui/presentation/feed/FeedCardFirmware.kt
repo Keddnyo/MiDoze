@@ -1,8 +1,6 @@
 package io.github.keddnyo.midoze.ui.presentation.feed
 
 import android.widget.Toast
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
@@ -69,7 +67,6 @@ fun FeedCardFirmware(
             title = device.deviceName,
             subtitle = firmwareVersion,
             icon = device.devicePreview,
-            iconButton = Icons.Default.Download,
             summary = changeLog,
             onClick = {
                 firmwareFileLinkArray.forEach { firmwareFile ->
