@@ -25,7 +25,7 @@ fun DialRoute(
     viewModel: WatchfaceViewModel
 ) {
 
-    val watchfaceList = viewModel.getWatchfaceList()
+    val watchfaceList = viewModel.watchfaceList
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
