@@ -29,63 +29,63 @@ val deviceList = arrayOf(
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 5",
+        deviceName = "Xiaomi Mi Smart Band 5",
         devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 59,
         productionSource = 257,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 5 NFC",
+        deviceName = "Xiaomi Mi Smart Band 5 NFC",
         devicePreview = R.drawable.mi_band_5_nfc,
         deviceSource = 58,
         productionSource = 256,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 6 GL",
+        deviceName = "Xiaomi Mi Smart Band 6 GL",
         devicePreview = R.drawable.mi_band_6,
         deviceSource = 212,
         productionSource = 257,
         application = Application.ZeppLife
         ),
     Device(
-        deviceName = "Mi Smart Band 6 NFC",
+        deviceName = "Xiaomi Mi Smart Band 6 NFC",
         devicePreview = R.drawable.mi_band_6,
         deviceSource = 211,
         productionSource = 256,
         application = Application.ZeppLife
         ),
     Device(
-        deviceName = "Mi Smart Band 7",
+        deviceName = "Xiaomi Mi Smart Band 7",
         devicePreview = R.drawable.mi_band_7,
         deviceSource = 260,
         productionSource = 256,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 7",
+        deviceName = "Xiaomi Mi Smart Band 7",
         devicePreview = R.drawable.mi_band_7,
         deviceSource = 262,
         productionSource = 258,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 7",
+        deviceName = "Xiaomi Mi Smart Band 7",
         devicePreview = R.drawable.mi_band_7,
         deviceSource = 263,
         productionSource = 259,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 7",
+        deviceName = "Xiaomi Mi Smart Band 7",
         devicePreview = R.drawable.mi_band_7,
         deviceSource = 264,
         productionSource = 260,
         application = Application.ZeppLife
     ),
     Device(
-        deviceName = "Mi Smart Band 7",
+        deviceName = "Xiaomi Mi Smart Band 7",
         devicePreview = R.drawable.mi_band_7,
         deviceSource = 265,
         productionSource = 261,

@@ -55,7 +55,7 @@ fun FeedCard(
                 painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(size = 56.dp)
+                    .size(size = 64.dp)
                     .background(
                         color = Color.White,
                         shape = cornerShape
@@ -73,13 +73,11 @@ fun FeedCard(
                 modifier = Modifier
                     .width(CardContentOffset)
             )
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column {
                 Text(
                     text = title,
                     style = TextStyle(
-                        fontSize = 17.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -87,7 +85,7 @@ fun FeedCard(
                     Text(
                         text = this,
                         style = TextStyle(
-                            fontSize = 15.sp
+                            fontSize = 16.sp
                         )
                     )
                 }
