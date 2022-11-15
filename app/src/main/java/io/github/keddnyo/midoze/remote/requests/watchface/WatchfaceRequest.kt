@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 suspend fun getWatchface(
     deviceName: String
-): ArrayList<Watchface>? {
+): ArrayList<Watchface> {
     val country = LocaleUtils().currentCountry
     val language = LocaleUtils().currentLanguage
 
@@ -30,29 +30,32 @@ suspend fun getWatchface(
             .getJsonResponse()
     }
 
-    if (!response.has("data")) return null
-
     val watchfaceArray: ArrayList<Watchface> = arrayListOf()
 
     val data = response.getJSONArray("data")
 
-    for (d in 0..data.length()) {
+    for (d in 0 until data.length()) {
         val dataObject = data.getJSONObject(d)
+
+        val tabName = dataObject.getString("tab_name")
         val list = dataObject.getJSONArray("list")
 
-        for (l in 0..list.length()) {
+        for (l in 0 until list.length()) {
 
             list.getJSONObject(l).run {
 
                 val title = getOrNull("display_name")
                 val preview = getOrNull("icon")
+                val introduction = getOrNull("introduction")
                 val watchfaceLink = getOrNull("config_file")
 
                 if (title != null && preview != null && watchfaceLink != null) {
                     watchfaceArray.add(
                         Watchface(
+                            tabName = tabName,
                             title = title,
                             preview = preview,
+                            introduction = introduction,
                             watchfaceLink = watchfaceLink
                         )
                     )
