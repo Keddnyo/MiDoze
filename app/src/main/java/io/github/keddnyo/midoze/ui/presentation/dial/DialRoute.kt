@@ -84,7 +84,7 @@ fun DialRoute(
                             watchface.introduction?.let { introduction->
                                 Text(
                                     text = introduction,
-                                    fontSize = 10.sp
+                                    fontSize = 12.sp
                                 )
                             }
                         }
