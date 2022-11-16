@@ -55,7 +55,6 @@ suspend fun getWatchface(
                             tabName = tabName,
                             title = title,
                             preview = preview,
-                            introduction = introduction,
                             watchfaceLink = watchfaceLink
                         )
                     )

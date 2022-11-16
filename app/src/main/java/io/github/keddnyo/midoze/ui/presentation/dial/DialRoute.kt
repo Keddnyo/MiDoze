@@ -1,22 +1,18 @@
 package io.github.keddnyo.midoze.ui.presentation.dial
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import io.github.keddnyo.midoze.internal.CardContentOffset
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
 
@@ -48,12 +44,12 @@ fun DialRoute(
                             .fillMaxWidth()
                             .padding(CardContentOffset)
                     ) {
-                        AsyncImage(
-                            model = watchface.preview,
+                        Image(
+                            bitmap = watchface.imagePreview,
                             contentDescription = null,
                             modifier = Modifier
-                                .width(90.dp)
-                                .height(140.dp)
+                                .width(100.dp)
+                                .height(150.dp)
                         )
                         Spacer(
                             modifier = Modifier
@@ -81,10 +77,15 @@ fun DialRoute(
                                 thickness = 0.5.dp,
                                 color = Color.Gray
                             )
-                            watchface.introduction?.let { introduction->
+                            Button(
+                                onClick = {
+
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            ) {
                                 Text(
-                                    text = introduction,
-                                    fontSize = 12.sp
+                                    text = "Download"
                                 )
                             }
                         }
