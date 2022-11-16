@@ -14,14 +14,20 @@ suspend fun getFirmware(
 ): Firmware? {
 
     val response = withContext(Dispatchers.IO) {
+
+        val deviceSource = device.deviceSource
+        val productionSource = device.productionSource
+        val appVersion = device.application.appVersion.appVersion
+        val appName = device.application.instance.appName
+
         StringBuilder()
             .append("https")
             .append("://")
             .append(host)
             .append("/devices/ALL/hasNewVersion?")
-            .append("deviceSource=${device.deviceSource}&")
-            .append("productionSource=${device.productionSource}&")
-            .append("appVersion=${device.application.appVersion.appVersion}&")
+            .append("deviceSource=$deviceSource&")
+            .append("productionSource=$productionSource&")
+            .append("appVersion=$appVersion&")
             .append("firmwareVersion=0&")
             .append("resourceVersion=0&")
             .append("baseResourceVersion=0&")
@@ -34,11 +40,13 @@ suspend fun getFirmware(
             .openConnection()
             .run {
                 setRequestProperty("Appplatform", "android_phone")
-                setRequestProperty("Appname", device.application.instance.appName)
+                setRequestProperty("Appname", appName)
                 setRequestProperty("Apptoken", "0")
                 setRequestProperty("Lang", "0")
                 setRequestProperty("Connection", "Keep-Alive")
                 setRequestProperty("Accept-Encoding", "identity")
+                connectTimeout = 5000
+                readTimeout = 5000
                 inputStream
             }
             .getJsonResponse()

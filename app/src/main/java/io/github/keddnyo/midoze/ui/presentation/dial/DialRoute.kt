@@ -65,13 +65,13 @@ fun DialRoute(
                         ) {
                             Text(
                                 text = watchface.title,
-                                fontSize = 16.sp,
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center
                             )
                             Text(
                                 text = watchface.tabName,
-                                fontSize = 10.sp,
+                                fontSize = 12.sp,
                                 textAlign = TextAlign.Center
                             )
                             Divider(
