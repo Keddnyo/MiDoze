@@ -16,10 +16,3 @@ fun JSONObject.getStringOrNull(item: String) =
     } else {
         null
     }
-
-fun JSONObject.getJsonArrayOrNull(item: String) =
-    if (has(item)) {
-        getJSONArray(item)
-    } else {
-        null
-    }

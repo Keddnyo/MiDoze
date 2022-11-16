@@ -1,8 +1,8 @@
 package io.github.keddnyo.midoze.remote.requests.entities.firmware
 
 import io.github.keddnyo.midoze.internal.routeArray
-import io.github.keddnyo.midoze.local.models.firmware.Device
-import io.github.keddnyo.midoze.local.repositories.deviceList
+import io.github.keddnyo.midoze.local.models.firmware.FirmwareWearable
+import io.github.keddnyo.midoze.local.repositories.firmware.firmwareWearables
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 
 suspend fun getFirmwareList(
@@ -15,8 +15,8 @@ suspend fun getFirmwareList(
             // Making request
             getFirmware(
                 host = host,
-                device = deviceList[i].run {
-                    Device(
+                firmwareWearable = firmwareWearables[i].run {
+                    FirmwareWearable(
                         deviceName, devicePreview, deviceSource, productionSource, application
                     )
                 }

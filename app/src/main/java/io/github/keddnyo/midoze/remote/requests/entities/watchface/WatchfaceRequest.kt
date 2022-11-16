@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 suspend fun getWatchface(
-    deviceName: String
+    deviceCodeName: String
 ): ArrayList<Watchface> {
     val country = LocaleUtils().currentCountry
     val language = LocaleUtils().currentLanguage
@@ -17,11 +17,13 @@ suspend fun getWatchface(
             .append("://")
             .append("watch-appstore.iot.mi.com")
             .append("/api/watchface/prize/tabs?")
-            .append("model=$deviceName")
+            .append("model=$deviceCodeName")
             .toURL()
             .openConnection()
             .run {
                 setRequestProperty("Watch-Appstore-Common", "_locale=$country&_language=$language")
+                connectTimeout = 5000
+                readTimeout = 5000
                 inputStream
             }
             .getJsonResponse()

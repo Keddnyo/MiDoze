@@ -1,9 +1,7 @@
 package io.github.keddnyo.midoze.ui.presentation.feed
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareType
@@ -64,15 +62,15 @@ fun FeedCardFirmware(
         }
 
         FeedCard(
-            title = device.deviceName,
+            title = firmwareWearable.deviceName,
             subtitle = firmwareVersion,
-            icon = device.devicePreview,
+            icon = firmwareWearable.devicePreview,
             summary = changeLog,
             onClick = {
                 firmwareFileLinkArray.forEach { firmwareFile ->
                     downloadFirmware(
                         context = context,
-                        deviceName = device.deviceName,
+                        deviceName = firmwareWearable.deviceName,
                         firmwareDownload = firmwareFile
                     )
                 }

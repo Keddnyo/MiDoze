@@ -1,9 +1,9 @@
 package io.github.keddnyo.midoze.remote.models.firmware
 
-import io.github.keddnyo.midoze.local.models.firmware.Device
+import io.github.keddnyo.midoze.local.models.firmware.FirmwareWearable
 
 data class Firmware (
-    val device: Device,
+    val firmwareWearable: FirmwareWearable,
     val firmwareVersion: String?,
     val firmwareUrl: String?,
     val resourceVersion: String? = null,

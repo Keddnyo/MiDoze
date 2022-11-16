@@ -1,19 +1,16 @@
 package io.github.keddnyo.midoze.local.models.firmware
 
-import io.github.keddnyo.midoze.local.repositories.AppName
-import io.github.keddnyo.midoze.local.repositories.AppVersion
-
 open class Application (
-    val instance: AppName,
-    val appVersion: AppVersion,
+    val appName: String,
+    val appVersion: String,
 ) {
     object Zepp : Application(
-        instance = AppName.Zepp,
-        appVersion = AppVersion.Zepp,
+        appName = "com.huami.midong",
+        appVersion = "7.2.0-play_100865"
     )
 
     object ZeppLife : Application(
-        instance = AppName.ZeppLife,
-        appVersion = AppVersion.ZeppLife,
+        appName = "com.xiaomi.hm.health",
+        appVersion = "6.3.5_50638"
     )
 }

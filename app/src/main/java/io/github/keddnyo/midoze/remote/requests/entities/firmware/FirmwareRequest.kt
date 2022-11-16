@@ -1,6 +1,6 @@
 package io.github.keddnyo.midoze.remote.requests.entities.firmware
 
-import io.github.keddnyo.midoze.local.models.firmware.Device
+import io.github.keddnyo.midoze.local.models.firmware.FirmwareWearable
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.utils.getJsonResponse
 import io.github.keddnyo.midoze.utils.getStringOrNull
@@ -10,15 +10,15 @@ import kotlinx.coroutines.withContext
 
 suspend fun getFirmware(
     host: String,
-    device: Device
+    firmwareWearable: FirmwareWearable
 ): Firmware? {
 
     val response = withContext(Dispatchers.IO) {
 
-        val deviceSource = device.deviceSource
-        val productionSource = device.productionSource
-        val appVersion = device.application.appVersion.appVersion
-        val appName = device.application.instance.appName
+        val deviceSource = firmwareWearable.deviceSource
+        val productionSource = firmwareWearable.productionSource
+        val appVersion = firmwareWearable.application.appVersion
+        val appName = firmwareWearable.application.appName
 
         StringBuilder()
             .append("https")
@@ -56,7 +56,7 @@ suspend fun getFirmware(
 
     response.run {
         return Firmware(
-            device = device,
+            firmwareWearable = firmwareWearable,
             firmwareVersion = getStringOrNull("firmwareVersion"),
             firmwareUrl = getStringOrNull("firmwareUrl"),
             resourceVersion = getStringOrNull("resourceVersion"),

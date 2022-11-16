@@ -14,6 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import io.github.keddnyo.midoze.internal.CardContentOffset
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
 import io.github.keddnyo.midoze.remote.requests.download.downloadWatchface
@@ -24,75 +26,77 @@ fun DialRoute(
 ) {
 
     val context = LocalContext.current
-    val watchfaceList = viewModel.watchfaceList
+    val watchfaceList = viewModel.watchfaceList.collectAsLazyPagingItems()
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        watchfaceList.forEach { watchface ->
-            item {
-                Card(
-                    modifier = Modifier
-                        .widthIn(min = 0.dp, max = 600.dp)
-                        .padding(all = CardContentOffset),
-                    elevation = CardDefaults.outlinedCardElevation(2.dp),
-                    border = BorderStroke(
-                        0.5.dp,
-                        Color.Gray
-                    )
-                ) {
-                    Row(
+        watchfaceList.run {
+            items(this) { watchfaceList ->
+                watchfaceList?.watchfaceList?.let {
+                    Card(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(CardContentOffset)
+                            .widthIn(min = 0.dp, max = 600.dp)
+                            .padding(all = CardContentOffset),
+                        elevation = CardDefaults.outlinedCardElevation(2.dp),
+                        border = BorderStroke(
+                            0.5.dp,
+                            Color.Gray
+                        )
                     ) {
-                        Image(
-                            bitmap = watchface.preview,
-                            contentDescription = null,
+                        Row(
                             modifier = Modifier
-                                .width(100.dp)
-                                .height(150.dp)
-                        )
-                        Spacer(
-                            modifier = Modifier
-                                .width(CardContentOffset)
-                        )
-                        Column(
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                                .fillMaxWidth()
+                                .padding(CardContentOffset)
                         ) {
-                            Text(
-                                text = watchface.title,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold,
-                                textAlign = TextAlign.Center
-                            )
-                            Text(
-                                text = watchface.tabName,
-                                fontSize = 12.sp,
-                                textAlign = TextAlign.Center
-                            )
-                            Divider(
+                            Image(
+                                bitmap = it[0].preview,
+                                contentDescription = null,
                                 modifier = Modifier
-                                    .padding(CardContentOffset),
-                                thickness = 0.5.dp,
-                                color = Color.Gray
+                                    .width(100.dp)
+                                    .height(150.dp)
                             )
-                            Button(
-                                onClick = {
-                                    downloadWatchface(
-                                        context = context,
-                                        watchface = watchface
-                                    )
-                                },
+                            Spacer(
                                 modifier = Modifier
-                                    .fillMaxWidth()
+                                    .width(CardContentOffset)
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically),
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
-                                    text = "Download"
+                                    text = it[0].title,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Center
                                 )
+                                Text(
+                                    text = it[0].tabName,
+                                    fontSize = 12.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                                Divider(
+                                    modifier = Modifier
+                                        .padding(CardContentOffset),
+                                    thickness = 0.5.dp,
+                                    color = Color.Gray
+                                )
+                                Button(
+                                    onClick = {
+                                        downloadWatchface(
+                                            context = context,
+                                            watchface = it[0]
+                                        )
+                                    },
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = "Download"
+                                    )
+                                }
                             }
                         }
                     }
@@ -100,5 +104,4 @@ fun DialRoute(
             }
         }
     }
-
 }

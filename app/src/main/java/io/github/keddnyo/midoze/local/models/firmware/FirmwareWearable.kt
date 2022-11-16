@@ -1,6 +1,6 @@
 package io.github.keddnyo.midoze.local.models.firmware
 
-data class Device(
+data class FirmwareWearable(
     val deviceName: String,
     val devicePreview: Int,
     val deviceSource: Int,
