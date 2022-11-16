@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.remote.requests.watchface
+package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
 import android.graphics.BitmapFactory
 import androidx.compose.ui.graphics.ImageBitmap

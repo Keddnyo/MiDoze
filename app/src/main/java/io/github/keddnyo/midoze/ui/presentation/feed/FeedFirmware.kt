@@ -3,11 +3,11 @@ package io.github.keddnyo.midoze.ui.presentation.feed
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareType
-import io.github.keddnyo.midoze.remote.services.download.DownloadStatus
-import io.github.keddnyo.midoze.remote.services.download.downloadFirmware
+import io.github.keddnyo.midoze.remote.requests.download.downloadFirmware
 
 @Composable
 fun FeedCardFirmware(
@@ -22,7 +22,7 @@ fun FeedCardFirmware(
                 FirmwareDownload(
                     fileType = FirmwareType.Firmware,
                     fileVersion = firmwareVersion.toString(),
-                    address = firmwareUrl
+                    url = firmwareUrl
                 )
             )
         }
@@ -31,7 +31,7 @@ fun FeedCardFirmware(
                 FirmwareDownload(
                     fileType = FirmwareType.Resource,
                     fileVersion = resourceVersion.toString(),
-                    address = resourceUrl
+                    url = resourceUrl
                 )
             )
         }
@@ -40,7 +40,7 @@ fun FeedCardFirmware(
                 FirmwareDownload(
                     fileType = FirmwareType.BaseResource,
                     fileVersion = baseResourceVersion.toString(),
-                    address = baseResourceUrl
+                    url = baseResourceUrl
                 )
             )
         }
@@ -49,7 +49,7 @@ fun FeedCardFirmware(
                 FirmwareDownload(
                     fileType = FirmwareType.Font,
                     fileVersion = fontVersion.toString(),
-                    address = fontUrl
+                    url = fontUrl
                 )
             )
         }
@@ -58,7 +58,7 @@ fun FeedCardFirmware(
                 FirmwareDownload(
                     fileType = FirmwareType.Gps,
                     fileVersion = gpsVersion.toString(),
-                    address = gpsUrl
+                    url = gpsUrl
                 )
             )
         }
@@ -70,20 +70,11 @@ fun FeedCardFirmware(
             summary = changeLog,
             onClick = {
                 firmwareFileLinkArray.forEach { firmwareFile ->
-                    val download = downloadFirmware(
+                    downloadFirmware(
                         context = context,
                         deviceName = device.deviceName,
                         firmwareDownload = firmwareFile
                     )
-
-                    when (download) {
-                        is DownloadStatus.Successfully -> {
-                            Toast.makeText(context, "Download in progress…", Toast.LENGTH_SHORT).show()
-                        }
-                        is DownloadStatus.Failed -> {
-                            Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show()
-                        }
-                    }
                 }
             }
         )

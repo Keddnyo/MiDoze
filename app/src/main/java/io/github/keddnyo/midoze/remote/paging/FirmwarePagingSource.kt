@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import io.github.keddnyo.midoze.local.repositories.deviceList
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
-import io.github.keddnyo.midoze.remote.requests.firmware.getFirmwareList
+import io.github.keddnyo.midoze.remote.requests.entities.firmware.getFirmwareList
 
 class FirmwarePagingSource: PagingSource<Int, Firmware>() {
 

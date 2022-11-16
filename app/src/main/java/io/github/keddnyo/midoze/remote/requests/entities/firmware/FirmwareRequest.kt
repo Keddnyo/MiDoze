@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.remote.requests.firmware
+package io.github.keddnyo.midoze.remote.requests.entities.firmware
 
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware

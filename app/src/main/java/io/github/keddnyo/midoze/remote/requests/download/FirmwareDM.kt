@@ -1,8 +1,9 @@
-package io.github.keddnyo.midoze.remote.services.download
+package io.github.keddnyo.midoze.remote.requests.download
 
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
+import android.widget.Toast
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
 import java.io.File
@@ -11,7 +12,7 @@ fun downloadFirmware(
     context: Context,
     deviceName: String,
     firmwareDownload: FirmwareDownload
-): DownloadStatus = with(context) {
+) = with(context) {
 
     /**
      * **Processing the input URL**
@@ -35,13 +36,7 @@ fun downloadFirmware(
     val firmwareTitle = getString(R.string.firmwares)
     val firmwareDir = File(appDir, firmwareTitle).toString()
     val deviceDir = File(firmwareDir, deviceName).toString()
-    val fileName = firmwareDownload.run {
-        StringBuilder()
-            .append(fileType.label)
-            .append("_")
-            .append(fileVersion)
-            .append(fileType.extension)
-    }.toString()
+    val fileName = firmwareDownload.fileName
 
     /**
      * **Setting request parameters**
@@ -60,11 +55,7 @@ fun downloadFirmware(
             "$deviceName — ${firmwareDownload.fileType.label} ${firmwareDownload.fileVersion}"
         )
 
-    return try {
-        downloadManager.enqueue(request)
-        DownloadStatus.Successfully
-    } catch (_: Exception) {
-        DownloadStatus.Failed
-    }
+    downloadManager.enqueue(request)
+    Toast.makeText(context, context.getString(R.string.downloadInProgress), Toast.LENGTH_SHORT).show()
 
 }

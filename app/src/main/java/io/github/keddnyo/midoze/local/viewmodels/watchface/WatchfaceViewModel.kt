@@ -1,7 +1,7 @@
 package io.github.keddnyo.midoze.local.viewmodels.watchface
 
 import androidx.lifecycle.ViewModel
-import io.github.keddnyo.midoze.remote.requests.watchface.getWatchface
+import io.github.keddnyo.midoze.remote.requests.entities.watchface.getWatchface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 

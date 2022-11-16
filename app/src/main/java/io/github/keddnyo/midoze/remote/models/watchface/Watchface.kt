@@ -1,5 +1,6 @@
 package io.github.keddnyo.midoze.remote.models.watchface
 
+import android.net.Uri
 import androidx.compose.ui.graphics.ImageBitmap
 
 data class Watchface(
@@ -7,4 +8,13 @@ data class Watchface(
     val title: String,
     val preview: ImageBitmap,
     val watchfaceLink: String
-)
+) {
+    val watchfaceUrl: Uri
+        get() = Uri.parse(watchfaceLink)
+
+    val fileName = StringBuilder()
+        .append(title)
+        .append(".bin")
+        .toString()
+        .replace(" ", "_")
+}

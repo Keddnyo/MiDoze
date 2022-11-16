@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.remote.requests.watchface
+package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
 import io.github.keddnyo.midoze.remote.models.watchface.Watchface
 import io.github.keddnyo.midoze.utils.*
@@ -29,19 +29,20 @@ suspend fun getWatchface(
 
     val watchfaceArray: ArrayList<Watchface> = arrayListOf()
 
-    response.getJsonArrayOrNull("data") ?: return watchfaceArray
+    if (!response.has("data")) return watchfaceArray
 
     val data = response.getJSONArray("data")
 
-    (0..data.length()).forEach data@ { d ->
+    (0 until data.length()).forEach data@{ d ->
         val dataObject = data.getJSONObject(d)
 
         val tabName = dataObject.getString("tab_name")
 
-        response.getJsonArrayOrNull("list") ?: return@data
+        if (!dataObject.has("list")) return@data
+
         val list = dataObject.getJSONArray("list")
 
-        (0..list.length()).forEach list@ { l ->
+        (0 until list.length()).forEach list@{ l ->
 
             list.getJSONObject(l).run {
 
