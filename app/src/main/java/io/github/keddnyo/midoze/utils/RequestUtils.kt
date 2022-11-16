@@ -10,9 +10,16 @@ fun StringBuilder.toURL() =
 fun InputStream.getJsonResponse() =
     JSONObject(bufferedReader().readText())
 
-fun JSONObject.getOrNull(item: String) =
+fun JSONObject.getStringOrNull(item: String) =
     if (has(item)) {
         getString(item)
+    } else {
+        null
+    }
+
+fun JSONObject.getJsonArrayOrNull(item: String) =
+    if (has(item)) {
+        getJSONArray(item)
     } else {
         null
     }

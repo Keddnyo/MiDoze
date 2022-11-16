@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.presentation.feed
+package io.github.keddnyo.midoze.ui.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FeedProgressBar() {
+fun ProgressBar() {
     Box(
         modifier = Modifier
             .fillMaxSize()

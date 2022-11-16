@@ -1,16 +1,13 @@
 package io.github.keddnyo.midoze.remote.requests.watchface
 
 import io.github.keddnyo.midoze.remote.models.watchface.Watchface
-import io.github.keddnyo.midoze.utils.LocaleUtils
-import io.github.keddnyo.midoze.utils.getJsonResponse
-import io.github.keddnyo.midoze.utils.getOrNull
-import io.github.keddnyo.midoze.utils.toURL
+import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 suspend fun getWatchface(
     deviceName: String
-): ArrayList<Watchface> {
+): ArrayList<Watchface>? {
     val country = LocaleUtils().currentCountry
     val language = LocaleUtils().currentLanguage
 
@@ -30,35 +27,36 @@ suspend fun getWatchface(
             .getJsonResponse()
     }
 
+    response.getJsonArrayOrNull("data") ?: return null
+
     val watchfaceArray: ArrayList<Watchface> = arrayListOf()
 
     val data = response.getJSONArray("data")
 
-    for (d in 0 until data.length()) {
+    (0..data.length()).forEach data@ { d ->
         val dataObject = data.getJSONObject(d)
 
         val tabName = dataObject.getString("tab_name")
+
+        response.getJsonArrayOrNull("list") ?: return@data
         val list = dataObject.getJSONArray("list")
 
-        for (l in 0 until list.length()) {
+        (0..list.length()).forEach list@ { l ->
 
             list.getJSONObject(l).run {
 
-                val title = getOrNull("display_name")
-                val preview = getOrNull("icon")
-                val introduction = getOrNull("introduction")
-                val watchfaceLink = getOrNull("config_file")
+                val title = getStringOrNull("display_name") ?: return@list
+                val preview = getStringOrNull("icon")?.getImage() ?: return@list
+                val watchfaceLink = getStringOrNull("config_file") ?: return@list
 
-                if (title != null && preview != null && watchfaceLink != null) {
-                    watchfaceArray.add(
-                        Watchface(
-                            tabName = tabName,
-                            title = title,
-                            preview = preview,
-                            watchfaceLink = watchfaceLink
-                        )
+                watchfaceArray.add(
+                    Watchface(
+                        tabName = tabName,
+                        title = title,
+                        preview = preview,
+                        watchfaceLink = watchfaceLink
                     )
-                }
+                )
 
             }
         }

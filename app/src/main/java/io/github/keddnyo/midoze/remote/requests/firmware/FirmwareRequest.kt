@@ -3,7 +3,7 @@ package io.github.keddnyo.midoze.remote.requests.firmware
 import io.github.keddnyo.midoze.local.models.firmware.Device
 import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.utils.getJsonResponse
-import io.github.keddnyo.midoze.utils.getOrNull
+import io.github.keddnyo.midoze.utils.getStringOrNull
 import io.github.keddnyo.midoze.utils.toURL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -49,17 +49,17 @@ suspend fun getFirmware(
     response.run {
         return Firmware(
             device = device,
-            firmwareVersion = getOrNull("firmwareVersion"),
-            firmwareUrl = getOrNull("firmwareUrl"),
-            resourceVersion = getOrNull("resourceVersion"),
-            resourceUrl = getOrNull("resourceUrl"),
-            baseResourceVersion = getOrNull("baseResourceVersion"),
-            baseResourceUrl = getOrNull("baseResourceUrl"),
-            fontVersion = getOrNull("fontVersion"),
-            fontUrl = getOrNull("fontUrl"),
-            gpsVersion = getOrNull("gpsVersion"),
-            gpsUrl = getOrNull("gpsUrl"),
-            changeLog = getOrNull("changeLog")
+            firmwareVersion = getStringOrNull("firmwareVersion"),
+            firmwareUrl = getStringOrNull("firmwareUrl"),
+            resourceVersion = getStringOrNull("resourceVersion"),
+            resourceUrl = getStringOrNull("resourceUrl"),
+            baseResourceVersion = getStringOrNull("baseResourceVersion"),
+            baseResourceUrl = getStringOrNull("baseResourceUrl"),
+            fontVersion = getStringOrNull("fontVersion"),
+            fontUrl = getStringOrNull("fontUrl"),
+            gpsVersion = getStringOrNull("gpsVersion"),
+            gpsUrl = getStringOrNull("gpsUrl"),
+            changeLog = getStringOrNull("changeLog")
                 ?.substringAfterLast("###summary###")
                 ?.trim(),
         )
