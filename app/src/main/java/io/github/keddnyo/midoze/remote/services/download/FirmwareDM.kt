@@ -2,7 +2,6 @@ package io.github.keddnyo.midoze.remote.services.download
 
 import android.app.DownloadManager
 import android.content.Context
-import android.net.Uri
 import android.os.Environment
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload

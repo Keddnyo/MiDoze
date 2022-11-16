@@ -45,7 +45,7 @@ fun DialRoute(
                             .padding(CardContentOffset)
                     ) {
                         Image(
-                            bitmap = watchface.imagePreview,
+                            bitmap = watchface.preview,
                             contentDescription = null,
                             modifier = Modifier
                                 .width(100.dp)

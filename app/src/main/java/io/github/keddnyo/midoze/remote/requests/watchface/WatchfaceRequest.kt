@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 suspend fun getWatchface(
     deviceName: String
-): ArrayList<Watchface>? {
+): ArrayList<Watchface> {
     val country = LocaleUtils().currentCountry
     val language = LocaleUtils().currentLanguage
 
@@ -27,9 +27,9 @@ suspend fun getWatchface(
             .getJsonResponse()
     }
 
-    response.getJsonArrayOrNull("data") ?: return null
-
     val watchfaceArray: ArrayList<Watchface> = arrayListOf()
+
+    response.getJsonArrayOrNull("data") ?: return watchfaceArray
 
     val data = response.getJSONArray("data")
 
