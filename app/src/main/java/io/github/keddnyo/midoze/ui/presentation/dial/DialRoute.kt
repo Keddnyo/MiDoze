@@ -14,11 +14,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import io.github.keddnyo.midoze.internal.CardContentOffset
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
 import io.github.keddnyo.midoze.remote.requests.download.downloadWatchface
+import io.github.keddnyo.midoze.ui.presentation.ProgressBar
+import io.github.keddnyo.midoze.ui.presentation.feed.FeedCardError
 
 @Composable
 fun DialRoute(
@@ -34,70 +37,102 @@ fun DialRoute(
     ) {
         watchfaceList.run {
             items(this) { watchfaceList ->
-                watchfaceList?.watchfaceList?.let {
-                    Card(
+                Card(
+                    modifier = Modifier
+                        .widthIn(min = 0.dp, max = 600.dp)
+                        .padding(all = CardContentOffset),
+                    elevation = CardDefaults.outlinedCardElevation(2.dp),
+                    border = BorderStroke(
+                        0.5.dp,
+                        Color.Gray
+                    )
+                ) {
+                    Row(
                         modifier = Modifier
-                            .widthIn(min = 0.dp, max = 600.dp)
-                            .padding(all = CardContentOffset),
-                        elevation = CardDefaults.outlinedCardElevation(2.dp),
-                        border = BorderStroke(
-                            0.5.dp,
-                            Color.Gray
-                        )
+                            .fillMaxWidth()
+                            .padding(CardContentOffset)
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(CardContentOffset)
-                        ) {
+                        watchfaceList?.watchfaceList?.get(0)?.preview?.let {
                             Image(
-                                bitmap = it[0].preview,
+                                bitmap = it,
                                 contentDescription = null,
                                 modifier = Modifier
                                     .width(100.dp)
                                     .height(150.dp)
                             )
-                            Spacer(
-                                modifier = Modifier
-                                    .width(CardContentOffset)
-                            )
-                            Column(
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
+                        }
+                        Spacer(
+                            modifier = Modifier
+                                .width(CardContentOffset)
+                        )
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.CenterVertically),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            watchfaceList?.device?.deviceName?.let {
                                 Text(
-                                    text = it[0].title,
+                                    text = it,
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     textAlign = TextAlign.Center
                                 )
+                            }
+                            watchfaceList?.watchfaceList?.size?.let {
                                 Text(
-                                    text = it[0].tabName,
+                                    text = it.toString(),
                                     fontSize = 12.sp,
                                     textAlign = TextAlign.Center
                                 )
-                                Divider(
-                                    modifier = Modifier
-                                        .padding(CardContentOffset),
-                                    thickness = 0.5.dp,
-                                    color = Color.Gray
-                                )
-                                Button(
-                                    onClick = {
-                                        downloadWatchface(
-                                            context = context,
-                                            watchface = it[0]
-                                        )
-                                    },
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                ) {
-                                    Text(
-                                        text = "Download"
-                                    )
-                                }
                             }
+                            Divider(
+                                modifier = Modifier
+                                    .padding(CardContentOffset),
+                                thickness = 0.5.dp,
+                                color = Color.Gray
+                            )
+                            Button(
+                                onClick = {
+
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = "Download"
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            when {
+                loadState.refresh is LoadState.Loading -> {
+                    item {
+                        ProgressBar()
+                    }
+                }
+                loadState.append is LoadState.Loading -> {
+                    item {
+                        ProgressBar()
+                    }
+                }
+                loadState.refresh is LoadState.Error -> {
+                    item {
+                        (loadState.refresh as LoadState.Error).error.run {
+                            Text(
+                                text = message.toString()
+                            )
+                        }
+                    }
+                }
+                loadState.append is LoadState.Error -> {
+                    item {
+                        (loadState.append as LoadState.Error).error.run {
+                            Text(
+                                text = message.toString()
+                            )
                         }
                     }
                 }

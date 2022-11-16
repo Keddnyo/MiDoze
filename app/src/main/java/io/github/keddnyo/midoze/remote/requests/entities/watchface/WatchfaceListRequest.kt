@@ -2,6 +2,8 @@ package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
 import io.github.keddnyo.midoze.local.repositories.watchface.watchfaceWearables
 import io.github.keddnyo.midoze.remote.models.watchface.WatchfaceList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 suspend fun getWatchfaceList(
     i: Int
@@ -9,17 +11,19 @@ suspend fun getWatchfaceList(
     val array = arrayListOf<WatchfaceList>()
 
     array.run {
-        val deviceName = watchfaceWearables[i]
+        val device = watchfaceWearables[i]
 
-        getWatchface(
-            deviceCodeName = deviceName.deviceCodeName
-        ).let {
-            add(
-                WatchfaceList(
-                    device = deviceName,
-                    watchfaceList = it
+        runBlocking(Dispatchers.IO) {
+            getWatchface(
+                deviceCodeName = device.deviceCodeName
+            ).let {
+                add(
+                    WatchfaceList(
+                        device = device,
+                        watchfaceList = it
+                    )
                 )
-            )
+            }
         }
     }
 
