@@ -60,11 +60,11 @@ fun DialRoute(
                                     .width(100.dp)
                                     .height(150.dp)
                             )
+                            Spacer(
+                                modifier = Modifier
+                                    .width(CardContentOffset)
+                            )
                         }
-                        Spacer(
-                            modifier = Modifier
-                                .width(CardContentOffset)
-                        )
                         Column(
                             modifier = Modifier
                                 .align(Alignment.CenterVertically),

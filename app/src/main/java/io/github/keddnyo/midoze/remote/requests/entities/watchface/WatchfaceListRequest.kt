@@ -13,17 +13,15 @@ suspend fun getWatchfaceList(
     array.run {
         val device = watchfaceWearables[i]
 
-        runBlocking(Dispatchers.IO) {
-            getWatchface(
-                deviceCodeName = device.deviceCodeName
-            ).let {
-                add(
-                    WatchfaceList(
-                        device = device,
-                        watchfaceList = it
-                    )
+        getWatchface(
+            deviceCodeName = device.deviceCodeName
+        ).let {
+            add(
+                WatchfaceList(
+                    device = device,
+                    watchfaceList = it
                 )
-            }
+            )
         }
     }
 

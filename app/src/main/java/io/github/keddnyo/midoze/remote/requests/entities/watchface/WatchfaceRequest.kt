@@ -1,9 +1,13 @@
 package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
+import android.graphics.BitmapFactory
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import io.github.keddnyo.midoze.remote.models.watchface.Watchface
 import io.github.keddnyo.midoze.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.net.URL
 
 suspend fun getWatchface(
     deviceCodeName: String
@@ -36,6 +40,7 @@ suspend fun getWatchface(
     val data = response.getJSONArray("data")
 
     (0 until data.length()).forEach data@{ d ->
+
         val dataObject = data.getJSONObject(d)
 
         val tabName = dataObject.getString("tab_name")
@@ -66,4 +71,11 @@ suspend fun getWatchface(
     }
 
     return watchfaceArray
+}
+
+suspend fun String.getImage(): ImageBitmap = withContext(Dispatchers.IO) {
+    val url = URL(this@getImage)
+    val byteArray = url.openConnection().inputStream.readBytes()
+    val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    return@withContext bitmap.asImageBitmap()
 }
