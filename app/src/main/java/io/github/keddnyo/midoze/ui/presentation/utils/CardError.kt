@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.presentation
+package io.github.keddnyo.midoze.ui.presentation.utils
 
 import androidx.compose.runtime.Composable
 import io.github.keddnyo.midoze.ui.presentation.feed.FeedCard

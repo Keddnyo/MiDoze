@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.presentation
+package io.github.keddnyo.midoze.ui.presentation.utils
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
