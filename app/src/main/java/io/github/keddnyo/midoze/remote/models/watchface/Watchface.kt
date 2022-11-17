@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 data class Watchface(
     val tabName: String,
     val title: String,
-    val preview: ImageBitmap,
+    val preview: String,
     val watchfaceLink: String
 ) {
     val watchfaceUrl: Uri

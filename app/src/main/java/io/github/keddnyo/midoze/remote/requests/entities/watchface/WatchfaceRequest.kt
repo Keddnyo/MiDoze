@@ -54,7 +54,7 @@ suspend fun getWatchface(
             list.getJSONObject(l).run {
 
                 val title = getStringOrNull("display_name") ?: return@list
-                val preview = getStringOrNull("icon")?.getImage() ?: return@list
+                val preview = getStringOrNull("icon") ?: return@list
                 val watchfaceLink = getStringOrNull("config_file") ?: return@list
 
                 watchfaceArray.add(
@@ -71,11 +71,4 @@ suspend fun getWatchface(
     }
 
     return watchfaceArray
-}
-
-suspend fun String.getImage(): ImageBitmap = withContext(Dispatchers.IO) {
-    val url = URL(this@getImage)
-    val byteArray = url.openConnection().inputStream.readBytes()
-    val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-    return@withContext bitmap.asImageBitmap()
 }

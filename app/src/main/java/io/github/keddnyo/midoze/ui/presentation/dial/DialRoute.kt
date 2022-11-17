@@ -52,7 +52,7 @@ fun DialRoute(
                             .fillMaxWidth()
                             .padding(CardContentOffset)
                     ) {
-                        watchfaceList?.watchfaceList?.get(0)?.preview?.let {
+                        watchfaceList?.preview?.let {
                             Image(
                                 bitmap = it,
                                 contentDescription = null,
