@@ -9,6 +9,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
+import io.github.keddnyo.midoze.ui.presentation.FeedCardError
 import io.github.keddnyo.midoze.ui.presentation.ProgressBar
 
 @Composable

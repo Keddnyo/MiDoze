@@ -65,16 +65,15 @@ fun FeedCardFirmware(
             title = firmwareWearable.deviceName,
             subtitle = firmwareVersion,
             icon = firmwareWearable.devicePreview,
-            summary = changeLog,
-            onClick = {
-                firmwareFileLinkArray.forEach { firmwareFile ->
-                    downloadFirmware(
-                        context = context,
-                        deviceName = firmwareWearable.deviceName,
-                        firmwareDownload = firmwareFile
-                    )
-                }
+            summary = changeLog
+        ) {
+            firmwareFileLinkArray.forEach { firmwareFile ->
+                downloadFirmware(
+                    context = context,
+                    deviceName = firmwareWearable.deviceName,
+                    firmwareDownload = firmwareFile
+                )
             }
-        )
+        }
     }
 }

@@ -12,7 +12,7 @@ fun ProgressBar() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(64.dp)
+            .padding(56.dp)
     ) {
         CircularProgressIndicator(
             modifier = Modifier

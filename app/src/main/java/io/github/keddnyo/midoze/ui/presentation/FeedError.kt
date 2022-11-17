@@ -1,6 +1,7 @@
-package io.github.keddnyo.midoze.ui.presentation.feed
+package io.github.keddnyo.midoze.ui.presentation
 
 import androidx.compose.runtime.Composable
+import io.github.keddnyo.midoze.ui.presentation.feed.FeedCard
 
 @Composable
 fun FeedCardError(
