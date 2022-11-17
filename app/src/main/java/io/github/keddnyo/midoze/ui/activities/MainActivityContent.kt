@@ -29,12 +29,12 @@ fun MiDozeAppContent(
                     modifier = Modifier
                         .padding(padding),
                 ) {
-//                    FeedRoute(
-//                        viewModel = feedViewModel
-//                    )
-                    DialRoute(
-                        viewModel = dialViewModel
+                    FeedRoute(
+                        viewModel = feedViewModel
                     )
+//                    DialRoute(
+//                        viewModel = dialViewModel
+//                    )
                 }
             }
         )

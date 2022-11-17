@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.presentation.feed
+package io.github.keddnyo.midoze.ui.presentation.utils
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -16,7 +16,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.internal.CardContentOffset
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,8 +23,7 @@ import io.github.keddnyo.midoze.internal.CardContentOffset
 fun FeedCard(
     title: String,
     subtitle: String? = null,
-    icon: Int = R.drawable.unknown,
-    summary: String? = null,
+    icon: Int? = null,
     onClick: () -> Unit
 ) {
     Card(
@@ -47,29 +45,35 @@ fun FeedCard(
         ) {
             val cornerShape = RoundedCornerShape(50.dp)
             
-            Image(
-                painterResource(id = icon),
-                contentDescription = null,
+            icon?.let {
+                Image(
+                    painterResource(id = icon),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(size = 64.dp)
+                        .background(
+                            color = Color.White,
+                            shape = cornerShape
+                        )
+                        .border(
+                            BorderStroke(
+                                width = 0.5.dp,
+                                color = Color.Gray,
+                            ),
+                            shape = cornerShape
+                        )
+                        .padding(10.dp),
+                )
+                Spacer(
+                    modifier = Modifier
+                        .width(CardContentOffset)
+                )
+            }
+            Column(
                 modifier = Modifier
-                    .size(size = 64.dp)
-                    .background(
-                        color = Color.White,
-                        shape = cornerShape
-                    )
-                    .border(
-                        BorderStroke(
-                            width = 0.5.dp,
-                            color = Color.Gray,
-                        ),
-                        shape = cornerShape
-                    )
-                    .padding(10.dp),
-            )
-            Spacer(
-                modifier = Modifier
-                    .width(CardContentOffset)
-            )
-            Column {
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
                     text = title,
                     style = TextStyle(
@@ -86,22 +90,6 @@ fun FeedCard(
                     )
                 }
             }
-        }
-        summary?.run {
-            Divider(
-                modifier = Modifier
-                    .padding(start = CardContentOffset, end = CardContentOffset),
-                thickness = 0.5.dp,
-                color = Color.Gray
-            )
-            Text(
-                modifier = Modifier
-                    .padding(CardContentOffset),
-                text = this,
-                style = TextStyle(
-                    fontSize = 16.sp
-                )
-            )
         }
     }
 }

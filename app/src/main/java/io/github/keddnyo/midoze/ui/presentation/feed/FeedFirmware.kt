@@ -6,6 +6,7 @@ import io.github.keddnyo.midoze.remote.models.firmware.Firmware
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareType
 import io.github.keddnyo.midoze.remote.requests.download.downloadFirmware
+import io.github.keddnyo.midoze.ui.presentation.utils.FeedCard
 
 @Composable
 fun FeedCardFirmware(
@@ -64,8 +65,7 @@ fun FeedCardFirmware(
         FeedCard(
             title = firmwareWearable.deviceName,
             subtitle = firmwareVersion,
-            icon = firmwareWearable.devicePreview,
-            summary = changeLog
+            icon = firmwareWearable.devicePreview
         ) {
             firmwareFileLinkArray.forEach { firmwareFile ->
                 downloadFirmware(

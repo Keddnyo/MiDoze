@@ -42,24 +42,18 @@ fun FeedRoute(
                 loadState.refresh is LoadState.Error -> {
                     item {
                         (loadState.refresh as LoadState.Error).error.run {
-                            FeedCardError(
-                                message = message,
-                                onClick = {
-                                    firmwareList.refresh()
-                                }
-                            )
+                            FeedCardError(message) {
+                                firmwareList.refresh()
+                            }
                         }
                     }
                 }
                 loadState.append is LoadState.Error -> {
                     item {
                         (loadState.append as LoadState.Error).error.run {
-                            FeedCardError(
-                                message = message,
-                                onClick = {
-                                    firmwareList.refresh()
-                                }
-                            )
+                            FeedCardError(message) {
+                                firmwareList.refresh()
+                            }
                         }
                     }
                 }
