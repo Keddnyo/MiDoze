@@ -58,7 +58,7 @@ suspend fun getFirmware(
 
     val firmwareEntityArray: ArrayList<FirmwareEntity> = arrayListOf()
 
-    val firmwareVersion = response.getStringOrNull("firmwareUrl")
+    val firmwareVersion = response.getStringOrNull("firmwareVersion")
     val firmwareUrl = response.getStringOrNull("firmwareUrl")
     val resourceVersion = response.getStringOrNull("resourceVersion")
     val resourceUrl = response.getStringOrNull("resourceUrl")

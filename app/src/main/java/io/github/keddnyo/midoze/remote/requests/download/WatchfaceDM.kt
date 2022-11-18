@@ -21,10 +21,9 @@ fun downloadWatchface(
 
     val downloadsDir = Environment.DIRECTORY_DOWNLOADS
     val appName = getString(R.string.app_name)
-    val appDir = File(downloadsDir, appName).toString()
     val watchfaceTitle = getString(R.string.watchfaces)
-    val watchfaceDir = File(appDir, watchfaceTitle).toString()
-    val fileName = watchface.fileName
+    val watchfaceDir = "$appName/$watchfaceTitle"
+    val fileName = "$watchfaceDir/${watchface.fileName}"
 
     val request = DownloadManager.Request(url)
         .setAllowedOverRoaming(
@@ -40,7 +39,12 @@ fun downloadWatchface(
             watchface.title
         )
 
-    downloadManager.enqueue(request)
-    Toast.makeText(context, context.getString(R.string.downloadInProgress), Toast.LENGTH_SHORT).show()
-
+    try {
+        downloadManager.enqueue(request)
+        Toast.makeText(context, context.getString(R.string.downloadInProgress), Toast.LENGTH_SHORT)
+            .show()
+    } catch (e: Exception) {
+        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT)
+            .show()
+    }
 }

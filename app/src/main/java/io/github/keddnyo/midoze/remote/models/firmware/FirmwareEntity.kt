@@ -11,9 +11,10 @@ data class FirmwareEntity(
         get() = Uri.parse(firmwareUrl)
 
     val fileName = StringBuilder()
-        .append(firmwareLabel)
+        .append(firmwareLabel.label)
         .append("_")
         .append(firmwareVersion)
+        .append(".")
         .append(
             firmwareUrl.substringAfterLast(".")
         )

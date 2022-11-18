@@ -20,42 +20,39 @@ fun downloadFirmware(
     val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     val url = firmwareEntity.firmwareUri
 
-    /** **Declaring downloading file path.**
-     *
+    /**
      * File will be downloaded in:
      *
      * '/storage/emulated/0/Downloads/MiDoze/Firmwares/DeviceName/FileName.extension'
-     *
-     * Example:
-     *
-     * '/storage/emulated/0/Downloads/MiDoze/Firmwares/Amazfit Bip/Firmware_1.1.6.34.fw'
-    */
+     */
     val downloadsDir = Environment.DIRECTORY_DOWNLOADS
     val appName = getString(R.string.app_name)
-    val appDir = File(downloadsDir, appName).toString()
     val firmwareTitle = getString(R.string.firmwares)
-    val firmwareDir = File(appDir, firmwareTitle).toString()
-    val deviceDir = File(firmwareDir, deviceName).toString()
-    val fileName = firmwareEntity.fileName
+    val firmwareDir = "$appName/$firmwareTitle"
+    val deviceDir = "$firmwareDir/$deviceName"
+    val fileName = "$deviceDir/${firmwareEntity.fileName}"
 
-    /**
-     * **Setting request parameters**
-     */
-    val request = DownloadManager.Request(url)
-        .setAllowedOverRoaming(
-            false
-        )
-        .setDestinationInExternalPublicDir(
-            deviceDir, fileName
-        )
-        .setNotificationVisibility(
-            DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
-        )
-        .setTitle(
-            "$deviceName — ${firmwareEntity.firmwareLabel.label} ${firmwareEntity.firmwareVersion}"
-        )
+    try {
+        val request = DownloadManager.Request(url)
+            .setAllowedOverRoaming(
+                false
+            )
+            .setDestinationInExternalPublicDir(
+                downloadsDir, fileName
+            )
+            .setNotificationVisibility(
+                DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+            )
+            .setTitle(
+                "$deviceName — ${firmwareEntity.firmwareLabel.label} ${firmwareEntity.firmwareVersion}"
+            )
 
-    downloadManager.enqueue(request)
-    Toast.makeText(context, context.getString(R.string.downloadInProgress), Toast.LENGTH_SHORT).show()
 
+        downloadManager.enqueue(request)
+        Toast.makeText(context, context.getString(R.string.downloadInProgress), Toast.LENGTH_SHORT)
+            .show()
+    } catch (e: Exception) {
+        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT)
+            .show()
+    }
 }

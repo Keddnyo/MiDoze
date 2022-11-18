@@ -3,4 +3,5 @@
     <string name="firmwares">Firmwares</string>
     <string name="watchfaces">Dials</string>
     <string name="downloadInProgress">Download in progress…</string>
+    <string name="somethingWentWrong">Something went wrong</string>
 </resources>
