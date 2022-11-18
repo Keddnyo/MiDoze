@@ -3,7 +3,6 @@ package io.github.keddnyo.midoze.ui.presentation.dial
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.invalidateGroupsWithKey
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
@@ -12,7 +11,7 @@ import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
 import io.github.keddnyo.midoze.ui.presentation.utils.FeedCard
 import io.github.keddnyo.midoze.ui.presentation.utils.ProgressBar
-import io.github.keddnyo.midoze.ui.presentation.utils.FeedCardError
+import io.github.keddnyo.midoze.ui.presentation.utils.FeedLoadingError
 
 @Composable
 fun DialRoute(
@@ -52,7 +51,7 @@ fun DialRoute(
                 loadState.refresh is LoadState.Error -> {
                     item {
                         (loadState.refresh as LoadState.Error).error.run {
-                            FeedCardError(message) {
+                            FeedLoadingError(message) {
                                 watchfaceList.refresh()
                             }
                         }
@@ -61,7 +60,7 @@ fun DialRoute(
                 loadState.append is LoadState.Error -> {
                     item {
                         (loadState.append as LoadState.Error).error.run {
-                            FeedCardError(message) {
+                            FeedLoadingError(message) {
                                 watchfaceList.refresh()
                             }
                         }

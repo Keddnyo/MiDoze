@@ -1,7 +1,6 @@
 package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
 import android.graphics.BitmapFactory
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import io.github.keddnyo.midoze.local.repositories.watchface.watchfaceWearables
 import io.github.keddnyo.midoze.remote.models.watchface.WatchfaceList

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import io.github.keddnyo.midoze.internal.CardContentOffset
 
 @Composable
-fun FeedCardError(
+fun FeedLoadingError(
     message: String?,
     onClick: () -> Unit
 ) {

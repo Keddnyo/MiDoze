@@ -1,13 +1,12 @@
 package io.github.keddnyo.midoze.remote.requests.entities.watchface
 
-import android.graphics.BitmapFactory
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import io.github.keddnyo.midoze.remote.models.watchface.Watchface
-import io.github.keddnyo.midoze.utils.*
+import io.github.keddnyo.midoze.utils.LocaleUtils
+import io.github.keddnyo.midoze.utils.getJsonResponse
+import io.github.keddnyo.midoze.utils.getStringOrNull
+import io.github.keddnyo.midoze.utils.toURL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.net.URL
 
 suspend fun getWatchface(
     deviceCodeName: String

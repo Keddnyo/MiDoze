@@ -5,20 +5,20 @@ import android.content.Context
 import android.os.Environment
 import android.widget.Toast
 import io.github.keddnyo.midoze.R
-import io.github.keddnyo.midoze.remote.models.firmware.FirmwareDownload
+import io.github.keddnyo.midoze.remote.models.firmware.FirmwareEntity
 import java.io.File
 
 fun downloadFirmware(
     context: Context,
     deviceName: String,
-    firmwareDownload: FirmwareDownload
+    firmwareEntity: FirmwareEntity
 ) = with(context) {
 
     /**
      * **Processing the input URL**
      */
     val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-    val url = firmwareDownload.firmwareUrl
+    val url = firmwareEntity.firmwareUri
 
     /** **Declaring downloading file path.**
      *
@@ -36,7 +36,7 @@ fun downloadFirmware(
     val firmwareTitle = getString(R.string.firmwares)
     val firmwareDir = File(appDir, firmwareTitle).toString()
     val deviceDir = File(firmwareDir, deviceName).toString()
-    val fileName = firmwareDownload.fileName
+    val fileName = firmwareEntity.fileName
 
     /**
      * **Setting request parameters**
@@ -52,7 +52,7 @@ fun downloadFirmware(
             DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
         )
         .setTitle(
-            "$deviceName — ${firmwareDownload.fileType.label} ${firmwareDownload.fileVersion}"
+            "$deviceName — ${firmwareEntity.firmwareLabel.label} ${firmwareEntity.firmwareVersion}"
         )
 
     downloadManager.enqueue(request)
