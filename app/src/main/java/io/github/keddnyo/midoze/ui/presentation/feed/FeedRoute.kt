@@ -11,7 +11,6 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
 import io.github.keddnyo.midoze.remote.requests.download.downloadFirmware
-import io.github.keddnyo.midoze.ui.presentation.utils.FeedCard
 import io.github.keddnyo.midoze.ui.presentation.utils.FeedLoadingError
 import io.github.keddnyo.midoze.ui.presentation.utils.ProgressBar
 

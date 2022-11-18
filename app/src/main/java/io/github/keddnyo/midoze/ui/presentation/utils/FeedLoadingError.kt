@@ -17,7 +17,7 @@ fun FeedLoadingError(
         onClick = onClick
     ) {
         Text(
-            text = "Try again"
+            text = "Retry"
         )
     }
 }

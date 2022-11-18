@@ -9,7 +9,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
-import io.github.keddnyo.midoze.ui.presentation.utils.FeedCard
+import io.github.keddnyo.midoze.ui.presentation.feed.FeedCard
 import io.github.keddnyo.midoze.ui.presentation.utils.ProgressBar
 import io.github.keddnyo.midoze.ui.presentation.utils.FeedLoadingError
 
@@ -27,9 +27,10 @@ fun DialRoute(
         watchfaceList.run {
             items(this) { watchfaceList ->
                 watchfaceList?.let {
-                    FeedCard(
+                    DialCard(
                         title = watchfaceList.device.deviceName,
-                        subtitle = "${watchfaceList.watchfaceList.size} items"
+                        subtitle = "${watchfaceList.watchfaceList.size} items",
+                        preview = watchfaceList.watchfaceList[0].preview
                     ) {
 
                     }

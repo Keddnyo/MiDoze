@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
+import io.github.keddnyo.midoze.ui.presentation.dial.DialRoute
 import io.github.keddnyo.midoze.ui.presentation.feed.FeedRoute
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
@@ -28,12 +29,12 @@ fun MiDozeAppContent(
                     modifier = Modifier
                         .padding(padding),
                 ) {
-                    FeedRoute(
-                        viewModel = feedViewModel
-                    )
-//                    DialRoute(
-//                        viewModel = dialViewModel
+//                    FeedRoute(
+//                        viewModel = feedViewModel
 //                    )
+                    DialRoute(
+                        viewModel = dialViewModel
+                    )
                 }
             }
         )
