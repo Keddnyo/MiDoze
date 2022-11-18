@@ -44,7 +44,7 @@ fun FeedCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             val cornerShape = RoundedCornerShape(50.dp)
-            
+
             icon?.let {
                 Image(
                     painterResource(id = icon),
