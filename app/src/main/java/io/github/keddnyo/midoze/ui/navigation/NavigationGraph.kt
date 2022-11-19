@@ -9,7 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
-import io.github.keddnyo.midoze.ui.presentation.dial.DialRoute
+import io.github.keddnyo.midoze.ui.presentation.apps.AppsRoute
+import io.github.keddnyo.midoze.ui.presentation.dials.DialRoute
 import io.github.keddnyo.midoze.ui.presentation.feed.FeedRoute
 import kotlinx.coroutines.CoroutineScope
 
@@ -26,11 +27,7 @@ fun NavigationGraph(
         startDestination = NavigationItem.Apps.route
     ) {
         composable(NavigationItem.Apps.route) {
-            Text(
-                text = stringResource(
-                    id = NavigationItem.Apps.title
-                )
-            )
+            AppsRoute()
         }
         composable(NavigationItem.Feed.route) {
             FeedRoute(

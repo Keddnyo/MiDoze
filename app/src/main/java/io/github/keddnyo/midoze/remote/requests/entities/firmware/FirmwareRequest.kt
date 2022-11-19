@@ -19,8 +19,8 @@ suspend fun getFirmware(
 
         val deviceSource = firmwareWearable.deviceSource
         val productionSource = firmwareWearable.productionSource
-        val appVersion = firmwareWearable.application.appVersion
-        val appName = firmwareWearable.application.appName
+        val appVersion = firmwareWearable.firmwareApplication.appVersion
+        val appName = firmwareWearable.firmwareApplication.appName
 
         StringBuilder()
             .append("https")

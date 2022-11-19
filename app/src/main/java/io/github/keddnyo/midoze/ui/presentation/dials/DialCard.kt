@@ -1,8 +1,7 @@
-package io.github.keddnyo.midoze.ui.presentation.dial
+package io.github.keddnyo.midoze.ui.presentation.dials
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment

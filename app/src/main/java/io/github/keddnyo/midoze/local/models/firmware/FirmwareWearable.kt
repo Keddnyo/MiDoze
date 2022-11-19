@@ -5,5 +5,5 @@ data class FirmwareWearable(
     val devicePreview: Int,
     val deviceSource: Int,
     val productionSource: Int,
-    val application: Application
+    val firmwareApplication: FirmwareApplication
 )

@@ -1,4 +1,4 @@
-package io.github.keddnyo.midoze.ui.presentation.dial
+package io.github.keddnyo.midoze.ui.presentation.dials
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

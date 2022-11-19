@@ -17,7 +17,7 @@ suspend fun getFirmwareList(
                 host = host,
                 firmwareWearable = firmwareWearables[i].run {
                     FirmwareWearable(
-                        deviceName, devicePreview, deviceSource, productionSource, application
+                        deviceName, devicePreview, deviceSource, productionSource, firmwareApplication
                     )
                 }
             )?.apply {
