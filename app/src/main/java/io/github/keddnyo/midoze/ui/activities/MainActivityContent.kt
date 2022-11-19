@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import io.github.keddnyo.midoze.R
@@ -20,24 +22,35 @@ fun MiDozeAppContent(
     dialViewModel: WatchfaceViewModel
 ) {
     MiDozeTheme {
+        val snackBarHostState = remember { SnackbarHostState() }
+        val scope = rememberCoroutineScope()
+
         Scaffold(
             topBar = {
                 TopAppBar()
             },
-            content = { padding ->
-                Box(
-                    modifier = Modifier
-                        .padding(padding),
-                ) {
-//                    FeedRoute(
-//                        viewModel = feedViewModel
-//                    )
-                    DialRoute(
-                        viewModel = dialViewModel
-                    )
-                }
+            snackbarHost = {
+                SnackbarHost(
+                    hostState = snackBarHostState
+                )
             }
-        )
+        ) { padding ->
+            Box(
+                modifier = Modifier
+                    .padding(padding),
+            ) {
+                FeedRoute(
+                    viewModel = feedViewModel,
+                    snackBarHost = snackBarHostState,
+                    coroutineScope = scope
+                )
+//                DialRoute(
+//                    viewModel = dialViewModel,
+//                    snackBarHost = snackBarHostState,
+//                    coroutineScope = scope
+//                )
+            }
+        }
     }
 }
 
