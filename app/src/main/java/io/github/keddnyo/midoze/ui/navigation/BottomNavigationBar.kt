@@ -13,8 +13,8 @@ fun BottomNavigationBar(
     snackBarHostState: SnackbarHostState
 ) {
     val items = listOf(
-        NavigationItem.Feed,
         NavigationItem.Apps,
+        NavigationItem.Feed,
         NavigationItem.Dials
     )
 
@@ -33,12 +33,9 @@ fun BottomNavigationBar(
                     navController.navigate(item.route) {
 
                         navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
-                            }
+                            popUpTo(route)
                         }
                         launchSingleTop = true
-                        restoreState = true
                     }
                 },
                 icon = {

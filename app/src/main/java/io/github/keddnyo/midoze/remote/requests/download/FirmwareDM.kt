@@ -6,7 +6,6 @@ import android.os.Environment
 import android.widget.Toast
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.firmware.FirmwareEntity
-import java.io.File
 
 fun downloadFirmware(
     context: Context,
@@ -27,7 +26,7 @@ fun downloadFirmware(
      */
     val downloadsDir = Environment.DIRECTORY_DOWNLOADS
     val appName = getString(R.string.app_name)
-    val firmwareTitle = getString(R.string.firmwares)
+    val firmwareTitle = getString(R.string.roms)
     val firmwareDir = "$appName/$firmwareTitle"
     val deviceDir = "$firmwareDir/$deviceName"
     val fileName = "$deviceDir/${firmwareEntity.fileName}"

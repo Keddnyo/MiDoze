@@ -6,7 +6,6 @@ import android.os.Environment
 import android.widget.Toast
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.remote.models.watchface.Watchface
-import java.io.File
 
 fun downloadWatchface(
     context: Context,
@@ -21,7 +20,7 @@ fun downloadWatchface(
 
     val downloadsDir = Environment.DIRECTORY_DOWNLOADS
     val appName = getString(R.string.app_name)
-    val watchfaceTitle = getString(R.string.watchfaces)
+    val watchfaceTitle = getString(R.string.dials)
     val watchfaceDir = "$appName/$watchfaceTitle"
     val fileName = "$watchfaceDir/${watchface.fileName}"
 

@@ -23,20 +23,20 @@ fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavigationItem.Feed.route
+        startDestination = NavigationItem.Apps.route
     ) {
+        composable(NavigationItem.Apps.route) {
+            Text(
+                text = stringResource(
+                    id = NavigationItem.Apps.title
+                )
+            )
+        }
         composable(NavigationItem.Feed.route) {
             FeedRoute(
                 viewModel = feedViewModel,
                 snackBarHostState = snackBarHostState,
                 coroutineScope = coroutineScope
-            )
-        }
-        composable(NavigationItem.Apps.route) {
-            Text(
-                text = stringResource(
-                    id = NavigationItem.Dials.title
-                )
             )
         }
         composable(NavigationItem.Dials.route) {

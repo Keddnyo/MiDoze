@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">MiDoze</string>
-    <string name="firmwares">Firmwares</string>
-    <string name="watchfaces">Dials</string>
-    <string name="downloadInProgress">Download in progress…</string>
-    <string name="somethingWentWrong">Something went wrong</string>
-    <string name="feed">Feed</string>
-    <string name="dials">Dials</string>
+    <string name="app_name" translatable="false">MiDoze</string>
+
     <string name="apps">Apps</string>
+    <string name="roms">ROMs</string>
+    <string name="dials">Dials</string>
+
+    <string name="something_went_wrong">Что-то пошло не так…</string>
+    <string name="retry">Retry</string>
+
+    <string name="downloadInProgress">Download in progress…</string>
 </resources>
