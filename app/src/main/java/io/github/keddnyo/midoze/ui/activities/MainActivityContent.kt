@@ -8,11 +8,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.rememberNavController
 import io.github.keddnyo.midoze.R
 import io.github.keddnyo.midoze.local.viewmodels.firmware.FirmwareViewModel
 import io.github.keddnyo.midoze.local.viewmodels.watchface.WatchfaceViewModel
-import io.github.keddnyo.midoze.ui.presentation.dial.DialRoute
-import io.github.keddnyo.midoze.ui.presentation.feed.FeedRoute
+import io.github.keddnyo.midoze.ui.navigation.BottomNavigationBar
+import io.github.keddnyo.midoze.ui.navigation.NavigationGraph
 import io.github.keddnyo.midoze.ui.theme.MiDozeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,12 +23,19 @@ fun MiDozeAppContent(
     dialViewModel: WatchfaceViewModel
 ) {
     MiDozeTheme {
+        val navController = rememberNavController()
         val snackBarHostState = remember { SnackbarHostState() }
         val scope = rememberCoroutineScope()
 
         Scaffold(
             topBar = {
                 TopAppBar()
+            },
+            bottomBar = {
+                BottomNavigationBar(
+                    navController = navController,
+                    snackBarHostState = snackBarHostState
+                )
             },
             snackbarHost = {
                 SnackbarHost(
@@ -39,16 +47,13 @@ fun MiDozeAppContent(
                 modifier = Modifier
                     .padding(padding),
             ) {
-                FeedRoute(
-                    viewModel = feedViewModel,
-                    snackBarHost = snackBarHostState,
+                NavigationGraph(
+                    navController = navController,
+                    feedViewModel = feedViewModel,
+                    dialViewModel = dialViewModel,
+                    snackBarHostState = snackBarHostState,
                     coroutineScope = scope
                 )
-//                DialRoute(
-//                    viewModel = dialViewModel,
-//                    snackBarHost = snackBarHostState,
-//                    coroutineScope = scope
-//                )
             }
         }
     }

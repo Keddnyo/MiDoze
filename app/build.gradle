@@ -69,6 +69,8 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation 'androidx.paging:paging-runtime:3.2.0-alpha03'
     implementation 'androidx.paging:paging-compose:1.0.0-alpha17'
+    implementation "com.google.accompanist:accompanist-pager:0.22.0-rc"
     implementation 'com.google.accompanist:accompanist-systemuicontroller:0.27.1'
     implementation 'io.coil-kt:coil-compose:2.2.2'
+
 }

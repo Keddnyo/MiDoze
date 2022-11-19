@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun DialRoute(
     viewModel: WatchfaceViewModel,
-    snackBarHost: SnackbarHostState,
+    snackBarHostState: SnackbarHostState,
     coroutineScope: CoroutineScope
 ) {
 
@@ -62,12 +62,12 @@ fun DialRoute(
                 item {
                     Spacer(
                         modifier = Modifier
-                            .padding(64.dp)
+                            .padding(32.dp)
                     )
                 }
                 coroutineScope.launch {
-                    val snackBarResult = snackBarHost.showSnackbar(
-                        message = "Something went wrong…",
+                    val snackBarResult = snackBarHostState.showSnackbar(
+                        message = "Error loading dials…",
                         actionLabel = "Retry",
                         duration = SnackbarDuration.Indefinite
                     )

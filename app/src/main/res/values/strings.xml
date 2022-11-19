@@ -4,4 +4,7 @@
     <string name="watchfaces">Dials</string>
     <string name="downloadInProgress">Download in progress…</string>
     <string name="somethingWentWrong">Something went wrong</string>
+    <string name="feed">Feed</string>
+    <string name="dials">Dials</string>
+    <string name="apps">Apps</string>
 </resources>
