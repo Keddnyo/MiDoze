@@ -6,6 +6,7 @@
 1. Firmwares
 2. Dark mode
 3. English and Russian UI
+4. Designed with Jetpack Compose
 
 ## Screenshots
 <p align="center">
