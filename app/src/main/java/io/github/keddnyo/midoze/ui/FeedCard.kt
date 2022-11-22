@@ -71,6 +71,8 @@ fun FeedCard(
                 )
             }
             Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
