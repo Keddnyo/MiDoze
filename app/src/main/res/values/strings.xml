@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">MiDoze</string>
 
-    <string name="apps">Apps</string>
-    <string name="roms">ROMs</string>
-    <string name="dials">Dials</string>
-
-    <string name="something_went_wrong">Что-то пошло не так…</string>
-    <string name="retry">Retry</string>
-
-    <string name="downloadInProgress">Download in progress…</string>
+    <string name="error">Something went wrong…</string>
+    <string name="retry">Tap to retry</string>
+    <string name="download">Downloading…</string>
 </resources>
