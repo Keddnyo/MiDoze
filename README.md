@@ -4,13 +4,8 @@
 
 ## Features
 1. Firmwares
-2. Watch faces
-3. Applications
-4. Custom request
-5. Dark mode
-6. Offline mode
-7. Shortcuts
-8. English and Russian UI
+2. Dark mode
+3. English and Russian UI
 
 ## Screenshots
 <p align="center">
