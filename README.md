@@ -7,6 +7,7 @@
 2. Dark mode
 3. English and Russian UI
 4. Designed with Jetpack Compose
+5. Android 5.0+
 
 ## Screenshots
 <p align="center">
