@@ -10,11 +10,8 @@
 
 ## Скриншоты
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/65981689/189423175-c022af59-6292-4fae-8037-c1e9664f4d89.png" max-width="100%" width="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/189423179-fcddb2a6-f5e7-497d-98dc-9d64d75a07bf.png" max-width="100%" width="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/189423180-a9d87b26-234a-4607-bed6-4e06c30db8c3.png" max-width="100%" width="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/189423181-5bbe7a7e-986d-4608-93ac-3c8d4d61fedc.png" max-width="100%" width="33%">
-  <img src="https://user-images.githubusercontent.com/65981689/189423182-befed866-96ed-43b2-836e-6051e83c69ad.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/203433099-e4eda0cf-c55d-40f3-86fb-dc3b62914d44.png" max-width="100%" width="33%">
+  <img src="https://user-images.githubusercontent.com/65981689/203433105-b393532e-2b7c-44da-8971-d71c5200d9b4.png" max-width="100%" width="33%">
 </p>
 
 [Show on English](https://github.com/Keddnyo/MiDoze/blob/master/README.md)
