@@ -1,4 +1,4 @@
-# <a href="https://github.com/Keddnyo/MiDoze/releases/latest">MiDoze 7.0.2</a>
+# <a href="https://github.com/Keddnyo/MiDoze/releases/latest">MiDoze 8.0.0</a>
 
 <a href="https://github.com/Keddnyo/MiDoze/releases"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/total?style=for-the-badge"></a>
 
