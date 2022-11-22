@@ -2,67 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-
-    <queries>
-        <package android:name="com.xiaomi.hm.health" />
-        <package android:name="com.huami.watch.hmwatchmanager" />
-        <package android:name="com.xiaomi.wearable" />
-        <package android:name="com.mc.mibandlite1" />
-        <package android:name="com.mc.notify" />
-        <package android:name="com.mc.amazfit1" />
-        <package android:name="com.mc.miband1" />
-        <package android:name="blacknote.amazfitmaster" />
-        <package android:name="blacknote.mibandmaster" />
-        <package android:name="com.lumaticsoft.watchdroidassistant" />
-        <package android:name="cz.zdenekhorak.amazfittools" />
-        <package android:name="cz.zdenekhorak.mibandtools" />
-        <package android:name="hu.tiborsosdevs.mibandage" />
-        <package android:name="nodomain.freeyourgadget.gadgetbridge" />
-        <package android:name="nodomain.nopackage.huafetcher" />
-    </queries>
 
     <application
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:theme="@style/Theme.MiDoze"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        tools:targetApi="33">
         <activity
-            android:name=".activities.menu.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:theme="@style/Theme.MiDoze">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
-        <activity
-            android:name=".activities.firmware.request.RequestActivity"
-            android:exported="false"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Dialog"/>
-        <activity
-            android:name=".activities.firmware.request.ResponseActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activities.firmware.FirmwarePreviewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.watchface.WatchfacePreviewActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
