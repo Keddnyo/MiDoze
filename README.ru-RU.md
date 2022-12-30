@@ -1,7 +1,7 @@
 # <a href="https://github.com/Keddnyo/MiDoze/releases/latest">MiDoze 8.0.0</a>
 
 <a href="https://github.com/Keddnyo/MiDoze/releases"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/total?style=for-the-badge"></a>
-<a href="https://github.com/Keddnyo/MiDoze/releases/latest"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/latest/total?label=Latest%20version&style=for-the-badge"></a>
+<a href="https://github.com/Keddnyo/MiDoze/releases/latest"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/latest/total?label=Latest%20downloads&style=for-the-badge"></a>
 
 ## Возможности
 1. Прошивки
