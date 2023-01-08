@@ -11,7 +11,6 @@ class ViewModel : ViewModel() {
         PagingConfig(1)
     ) {
         Paging()
-    }
-        .flow.cachedIn(viewModelScope)
+    }.flow.cachedIn(viewModelScope)
 
 }

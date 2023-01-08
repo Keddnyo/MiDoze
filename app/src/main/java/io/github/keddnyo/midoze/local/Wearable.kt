@@ -14,11 +14,11 @@ open class Application (
 ) {
     object Zepp : Application(
         appName = "com.huami.midong",
-        appVersion = "7.2.8-play_100895"
+        appVersion = "7.4.1-play_100950"
     )
 
     object ZeppLife : Application(
         appName = "com.xiaomi.hm.health",
-        appVersion = "6.4.1_50651"
+        appVersion = "6.5.5_50677"
     )
 }
