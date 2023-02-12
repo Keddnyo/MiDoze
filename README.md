@@ -1,4 +1,14 @@
-# <a href="https://github.com/Keddnyo/MiDoze/releases/latest">MiDoze 8.0.0</a>
+# MiDoze
+
+MiDoze is the easiest way to download firmwares for Xiaomi wearables. You can even use it with older Android devices: it supports at least Android 4 (aka Ice Cream Sandwich), though for full compatibility you'll need at least Android 5.
+
+## Download
+
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+     alt="Get it on IzzyOnDroid"
+     height="80">](https://apt.izzysoft.de/fdroid/index/apk/io.github.keddnyo.midoze)
+
+Or get the latest APK from the [Releases Section](https://github.com/Keddnyo/MiDoze/releases/latest).
 
 <a href="https://github.com/Keddnyo/MiDoze/releases"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/total?style=for-the-badge"></a>
 <a href="https://github.com/Keddnyo/MiDoze/releases/latest"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/latest/total?label=Latest%20downloads&style=for-the-badge"></a>
