@@ -7,7 +7,7 @@ Firmwares for Huami wearables
      alt="Get it on IzzyOnDroid"
      height="80">](https://apt.izzysoft.de/fdroid/index/apk/io.github.keddnyo.midoze)
 
-Or get the latest APK from the [Releases section](https://github.com/Keddnyo/MiDoze/releases/latest).
+Or get the latest APK from the [Releases](https://github.com/Keddnyo/MiDoze/releases/latest) section.
 
 <a href="https://github.com/Keddnyo/MiDoze/releases"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/total?style=for-the-badge"></a>
 <a href="https://github.com/Keddnyo/MiDoze/releases/latest"><img src="https://img.shields.io/github/downloads/keddnyo/midoze/latest/total?label=Latest%20downloads&style=for-the-badge"></a>
